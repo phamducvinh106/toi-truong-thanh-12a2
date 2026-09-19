@@ -840,15 +840,36 @@
     }
 
     .origami-ribbon-spire {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       border-left: 3px solid var(--neon-primary);
       padding: 1.8rem 1.6rem;
       background: linear-gradient(90deg, rgba(255, 119, 0, 0.12) 0%, transparent 100%);
-      text-align: left;
       font-size: var(--font-statement);
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.35;
+      line-height: 1.45;
       box-shadow: 0 0 35px rgba(255, 119, 0, 0.25);
+    }
+
+    .origami-ribbon-spire .telemetry-tag {
+      margin: 0 auto 1.1rem auto;
+      justify-content: center;
+      text-align: center;
+      width: fit-content;
+      flex-shrink: 0;
+    }
+
+    .origami-ribbon-text {
+      width: 100%;
+      text-align: center;
+      font-size: var(--font-statement);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.45;
     }
 
     /* Slide 16: Vũ Điệu Siêu Tân Tinh Rực Rỡ */
@@ -3401,16 +3422,16 @@
 
           <div class="origami-ribbons-grid">
             <div class="origami-ribbon-spire" style="border-color: #ff7700;">
-              <div class="telemetry-tag" style="color: #ff7700; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 01</div>
-              "Cảm ơn vì đã không bỏ cuộc giữa những áp lực."
+              <div class="telemetry-tag" style="color: #ff7700;">// THÔNG ĐIỆP 01</div>
+              <div class="origami-ribbon-text">"Cảm ơn vì đã không bỏ cuộc giữa những áp lực."</div>
             </div>
             <div class="origami-ribbon-spire" style="border-color: #ff3366;">
-              <div class="telemetry-tag" style="color: #ff3366; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 02</div>
-              "Xin lỗi vì đã từng quá khắt khe với chính mình."
+              <div class="telemetry-tag" style="color: #ff3366;">// THÔNG ĐIỆP 02</div>
+              <div class="origami-ribbon-text">"Xin lỗi vì đã từng quá khắt khe với chính mình."</div>
             </div>
             <div class="origami-ribbon-spire" style="border-color: #e0aaff;">
-              <div class="telemetry-tag" style="color: #e0aaff; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 03</div>
-              "Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"
+              <div class="telemetry-tag" style="color: #e0aaff;">// THÔNG ĐIỆP 03</div>
+              <div class="origami-ribbon-text">"Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"</div>
             </div>
           </div>
 
@@ -5901,9 +5922,9 @@ tilt_y = -6.5
           if (data.SLIDE_15.nav_title) s15.setAttribute('data-title', data.SLIDE_15.nav_title);
           setTxt(s15.querySelector('h1'), data.SLIDE_15.title);
           const spires = s15.querySelectorAll('.origami-ribbon-spire');
-          if (spires[0]) setHtml(spires[0], `<div class="telemetry-tag" style="color: #ff7700; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon1_tag || ''}</div>${data.SLIDE_15.ribbon1_text || ''}`);
-          if (spires[1]) setHtml(spires[1], `<div class="telemetry-tag" style="color: #ff3366; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon2_tag || ''}</div>${data.SLIDE_15.ribbon2_text || ''}`);
-          if (spires[2]) setHtml(spires[2], `<div class="telemetry-tag" style="color: #e0aaff; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon3_tag || ''}</div>${data.SLIDE_15.ribbon3_text || ''}`);
+          if (spires[0]) setHtml(spires[0], `<div class="telemetry-tag" style="color: #ff7700;">${data.SLIDE_15.ribbon1_tag || ''}</div><div class="origami-ribbon-text">${data.SLIDE_15.ribbon1_text || ''}</div>`);
+          if (spires[1]) setHtml(spires[1], `<div class="telemetry-tag" style="color: #ff3366;">${data.SLIDE_15.ribbon2_tag || ''}</div><div class="origami-ribbon-text">${data.SLIDE_15.ribbon2_text || ''}</div>`);
+          if (spires[2]) setHtml(spires[2], `<div class="telemetry-tag" style="color: #e0aaff;">${data.SLIDE_15.ribbon3_tag || ''}</div><div class="origami-ribbon-text">${data.SLIDE_15.ribbon3_text || ''}</div>`);
           setTxt(s15.querySelector('.hud-bracket-container p'), data.SLIDE_15.quote);
         }
       }
