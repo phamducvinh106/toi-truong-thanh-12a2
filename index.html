@@ -1505,7 +1505,7 @@
     <div style="display: flex; align-items: center; gap: 1.2rem;">
       <span id="txt-source-status" style="font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #39ff14; background: rgba(57,255,20,0.12); border: 1px solid rgba(57,255,20,0.3); padding: 0.25rem 0.75rem; border-radius: 4px; display: none; transition: opacity 0.3s ease;"></span>
       <div class="stage-mode-indicator">
-        <span id="top-mode-indicator-text">CONTINUOUS DIGITAL SCENOGRAPHY • 4K 60FPS</span>
+        <span id="top-mode-indicator-text">THPT SÓC SƠN</span>
       </div>
     </div>
   </header>
@@ -1898,7 +1898,7 @@
             </div>
             <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(8, 'B')">
               <div class="node-reticle-glyph">B</div>
-              <div class="node-statement-text">BIẾT CHỊU TRÁCH NHIỆM VỚI LỰA CHỌN CỦA MÌNH</div>
+              <div class="node-statement-text">Biết chịu trách nhiệm với lựa chọn của mình</div>
             </div>
             <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(8, 'C')">
               <div class="node-reticle-glyph">C</div>
@@ -1948,7 +1948,7 @@
             </div>
             <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(9, 'D')">
               <div class="node-reticle-glyph">D</div>
-              <div class="node-statement-text">NHÌN LẠI, RÚT KINH NGHIỆM VÀ THỬ LẠI</div>
+              <div class="node-statement-text">Nhìn lại, rút kinh nghiệm và thử lại</div>
             </div>
           </div>
 
@@ -1986,7 +1986,7 @@
             </div>
             <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(10, 'C')">
               <div class="node-reticle-glyph">C</div>
-              <div class="node-statement-text">THỪA NHẬN SAI LẦM VÀ TÌM CÁCH SỬA CHỮA</div>
+              <div class="node-statement-text">Thừa nhận sai lầm và tìm cách sửa chữa</div>
             </div>
             <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(10, 'D')">
               <div class="node-reticle-glyph">D</div>
@@ -2028,7 +2028,7 @@
             </div>
             <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(11, 'C')">
               <div class="node-reticle-glyph">C</div>
-              <div class="node-statement-text">BIẾT LẮNG NGHE, TỰ QUYẾT ĐỊNH VÀ CHỊU TRÁCH NHIỆM</div>
+              <div class="node-statement-text">Biết lắng nghe, tự quyết định và chịu trách nhiệm</div>
             </div>
             <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(11, 'D')">
               <div class="node-reticle-glyph">D</div>
@@ -2070,7 +2070,7 @@
             </div>
             <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(12, 'C')">
               <div class="node-reticle-glyph">C</div>
-              <div class="node-statement-text">CÂN NHẮC, LẮNG NGHE NHƯNG VẪN TỰ CHỊU TRÁCH NHIỆM</div>
+              <div class="node-statement-text">Cân nhắc, lắng nghe nhưng vẫn tự chịu trách nhiệm</div>
             </div>
             <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(12, 'D')">
               <div class="node-reticle-glyph">D</div>
@@ -2112,7 +2112,7 @@
             </div>
             <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(13, 'C')">
               <div class="node-reticle-glyph">C</div>
-              <div class="node-statement-text">LUÔN PHẢI MẠNH MẼ VÀ KHÔNG ĐƯỢC YẾU LÒNG</div>
+              <div class="node-statement-text">Luôn phải mạnh mẽ và không được yếu lòng</div>
             </div>
             <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(13, 'D')">
               <div class="node-reticle-glyph">D</div>
@@ -3925,7 +3925,8 @@
        ========================================================================== -->
   <script>
     // Built-in fallback copy of external content.txt
-    const DEFAULT_CONTENT_TXT = `# ==============================================================================
+    const DEFAULT_CONTENT_TXT = `
+# ==============================================================================
 # KỊCH BẢN NỘI DUNG SÂN KHẤU: "TÔI TRƯỞNG THÀNH" — TẬP THỂ 12A2
 # Tệp văn bản nguồn độc lập (content.txt)
 # 
@@ -3936,12 +3937,24 @@
 # ==============================================================================
 
 # ==============================================================================
-# CẤU HÌNH HIỆU ỨNG KHÔNG GIAN 3D & TILTING (3D SPATIAL TILTING)
-# Điều chỉnh độ nghiêng và cảm giác chiều sâu 3D của các slide tại đây:
+# CẤU HÌNH HIỆU ỨNG KHÔNG GIAN 3D & KHUNG KÍNH MỜ (SCENOGRAPHY SETTINGS)
+# 
+# 1. Hiệu ứng nghiêng 3D (Spatial Tilting):
 # - tilt_max_deg: Góc nghiêng tối đa (độ) — khuyến nghị 7.0 đến 12.0 để thấy rõ chiều sâu 3D
 # - tilt_multiplier: Hệ số nhạy theo camera 3D Three.js (khuyến nghị 18 đến 25)
 # - perspective_px: Tiêu cự phối cảnh (px) — càng nhỏ hiệu ứng 3D càng sâu (khuyến nghị 1500 đến 1850)
 # (Bạn cũng có thể tùy chỉnh tilt_x và tilt_y ở từng [SLIDE_X] bên dưới)
+# 
+# 2. Khung kính mờ duy nhất bảo vệ nội dung (Single Frosted Glass Backdrop):
+# Tạo một khung kính mờ duy nhất bao quanh toàn bộ nội dung, trong suốt vừa phải
+# để nhìn thấy chuyển động 3D phía sau nhưng vẫn giữ chữ rõ nét:
+# - glass_enabled: true (bật khung kính) / false (tắt)
+# - glass_alpha: Độ mờ đục/trong suốt (0.0 = trong suốt hoàn toàn, 1.0 = đục đặc)
+#                Khuyến nghị: 0.15 đến 0.35 để thấy rõ các vì sao, chùm sáng 3D chuyển động phía sau
+# - glass_blur_px: Độ mờ nhòe của kính (px) — khuyến nghị 8 đến 20 (càng nhỏ càng trong)
+# - glass_border_glow: Độ sáng viền quang học (0.0 đến 1.0, khuyến nghị 0.2 đến 0.5)
+# - glass_width_vw: Độ rộng khung kính (% màn hình, mặc định 94)
+# - glass_height_vh: Chiều cao khung kính (% màn hình, mặc định 82)
 # ==============================================================================
 [SETTINGS]
 tilt_max_deg = 12
@@ -3953,19 +3966,30 @@ glass_blur_px = 14
 glass_border_glow = 0.30
 glass_width_vw = 94
 glass_height_vh = 82
+
+# ==============================================================================
+# CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
+# Tùy chỉnh phát nhạc nền từ file âm thanh bên ngoài (mp3, wav, ogg):
+# - bgm_file: Tên hoặc đường dẫn file nhạc nền (ví dụ: bgm.mp3, audio/ambient.mp3)
+#             (Bạn có thể để file nhạc cùng thư mục hoặc kéo thả trực tiếp file nhạc vào màn hình)
+# - bgm_volume: Âm lượng nhạc nền (0.0 đến 1.0, khuyến nghị 0.25 đến 0.50)
+# - bgm_loop: true (lặp lại liên tục) / false
+# - synth_drone_enabled: false (tắt tiếng u u synth nhân tạo để không bị ồn) / true
+# - synth_drone_volume: Âm lượng tiếng synth nhân tạo (khuyến nghị 0.0 hoặc 0.015)
+# ==============================================================================
 bgm_file = bgm.mp3
-bgm_volume = 0.35
+bgm_volume = 0.025
 bgm_loop = true
 synth_drone_enabled = false
 synth_drone_volume = 0.0
 
 [TOP_HUD]
 telemetry = CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH
-indicator = CONTINUOUS DIGITAL SCENOGRAPHY • 4K 60FPS
+indicator = THPT SÓC SƠN
 
 [SLIDE_1]
 nav_title = Khai Màn: Tôi Trưởng Thành
-telemetry = [ CHUYÊN ĐỀ SÂN KHẤU TRƯỜNG HỌC • LỚP 12A2 ]
+telemetry = [ CHUYÊN ĐỀ • LỚP 12A2 ]
 title = TÔI TRƯỞNG THÀNH
 quote = "DÁM ƯỚC MƠ • DÁM THỬ SỨC • DÁM BẮT ĐẦU LẠI"
 tilt_x = 0.0
@@ -3980,7 +4004,7 @@ quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
 music_file = audio/ho_vuon_minh.mp3
 tilt_x = -3.5
-tilt_y = 0.0
+tilt_y = 3.0
 
 [SLIDE_3]
 nav_title = Định Nghĩa Trưởng Thành
@@ -4011,8 +4035,8 @@ title = TÔI CỦA NGÀY HÔM QUA
 subtitle = Áp Lực Học Tập • Kỳ Vọng Gia Đình • Lựa Chọn Tuổi Trẻ
 quote = "NẾU ĐƯỢC QUAY LẠI, BẠN CÓ CHỌN KHÁC ĐI?"
 video_file = video/tieu_pham.mp4
-tilt_x = -8.5
-tilt_y = 7.5
+tilt_x = 0
+tilt_y = 0
 
 [SLIDE_6]
 nav_title = Bài Học Sau Vấp Ngã
@@ -4020,7 +4044,7 @@ subtitle = "Trưởng thành không đo bằng việc chúng ta đã đi đượ
 quote_lead = "MÀ LÀ SAU MỖI LẦN VẤP NGÃ,
 quote_highlight = CHÚNG TA ĐÃ HỌC ĐƯỢC ĐIỀU GÌ."
 tilt_x = 4.5
-tilt_y = 0.0
+tilt_y = 3.0
 
 [SLIDE_7]
 nav_title = Khởi Động Minigame
@@ -4034,9 +4058,9 @@ tilt_y = 0.0
 nav_title = Câu Hỏi 01: Dấu Hiệu Trưởng Thành
 telemetry = // THỬ THÁCH 01 / 06
 question = "ĐIỀU GÌ LÀ DẤU HIỆU RÕ NHẤT CỦA SỰ TRƯỞNG THÀNH?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Không còn phụ thuộc vào người khác
-choice_b = BIẾT CHỊU TRÁCH NHIỆM VỚI LỰA CHỌN CỦA MÌNH
+choice_b = Biết chịu trách nhiệm với lựa chọn của mình
 choice_c = Có thể tự kiếm tiền
 choice_d = Không bao giờ mắc sai lầm
 correct = B
@@ -4051,11 +4075,11 @@ tilt_y = -3.5
 nav_title = Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?
 telemetry = // THỬ THÁCH 02 / 06
 question = "KHI THẤT BẠI, BẠN THƯỜNG LÀM GÌ?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Đổ lỗi cho hoàn cảnh
 choice_b = Bỏ cuộc vì nghĩ mình không đủ khả năng
 choice_c = Giấu cảm xúc và coi như không có chuyện gì
-choice_d = NHÌN LẠI, RÚT KINH NGHIỆM VÀ THỬ LẠI
+choice_d = Nhìn lại, rút kinh nghiệm và thử lại
 correct = D
 insight_tag = ● CHUYỂN HƯỚNG TƯ DUY: ĐÁP ÁN D
 insight_lead = "Chuyển từ câu hỏi: 'Tại sao mình lại gặp chuyện này?' sang 
@@ -4068,10 +4092,10 @@ tilt_y = 3.5
 nav_title = Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai
 telemetry = // THỬ THÁCH 03 / 06
 question = "KHI NHẬN RA MÌNH ĐÃ LỰA CHỌN SAI, BẠN SẼ LÀM GÌ?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Cố gắng che giấu để không bị đánh giá
 choice_b = Đổ lỗi cho hoàn cảnh
-choice_c = THỪA NHẬN SAI LẦM VÀ TÌM CÁCH SỬA CHỮA
+choice_c = Thừa nhận sai lầm và tìm cách sửa chữa
 choice_d = Bỏ qua vì chuyện đã xảy ra rồi
 correct = C
 insight_tag = ● BẢN LĨNH BẢN THÂN: ĐÁP ÁN C
@@ -4085,10 +4109,10 @@ tilt_y = 0.0
 nav_title = Câu Hỏi 04: Biểu Hiện Trưởng Thành
 telemetry = // THỬ THÁCH 04 / 06
 question = "ĐIỀU NÀO DƯỚI ĐÂY THỂ HIỆN MỘT NGƯỜI ĐANG TRƯỞNG THÀNH?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Luôn cố gắng làm hài lòng tất cả mọi người
 choice_b = Không bao giờ cho phép bản thân mắc sai lầm
-choice_c = BIẾT LẮNG NGHE, TỰ QUYẾT ĐỊNH VÀ CHỊU TRÁCH NHIỆM
+choice_c = Biết lắng nghe, tự quyết định và chịu trách nhiệm
 choice_d = Luôn tự mình giải quyết mọi vấn đề, không cần đến ai
 correct = C
 insight_tag = ● TỰ CHỦ CUỘC ĐỜI: ĐÁP ÁN C
@@ -4102,10 +4126,10 @@ tilt_y = 0.0
 nav_title = Câu Hỏi 05: Khi Người Khác Thất Vọng
 telemetry = // THỬ THÁCH 05 / 06
 question = "NẾU LỰA CHỌN CỦA BẠN KHIẾN NGƯỜI KHÁC THẤT VỌNG?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Từ bỏ lựa chọn của mình ngay
 choice_b = Làm theo ý mọi người để không bị trách
-choice_c = CÂN NHẮC, LẮNG NGHE NHƯNG VẪN TỰ CHỊU TRÁCH NHIỆM
+choice_c = Cân nhắc, lắng nghe nhưng vẫn tự chịu trách nhiệm
 choice_d = Không quan tâm đến bất kỳ ai
 correct = C
 insight_tag = ● GIỮ VỮNG LẬP TRƯỜNG: ĐÁP ÁN C
@@ -4119,10 +4143,10 @@ tilt_y = -4.5
 nav_title = Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?
 telemetry = // THỬ THÁCH 06 / 06
 question = "ĐIỀU NÀO KHÔNG ĐỒNG NGHĨA VỚI TRƯỞNG THÀNH?"
-status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+status = [   ]
 choice_a = Biết xin lỗi khi mình sai
 choice_b = Biết lắng nghe người khác
-choice_c = LUÔN PHẢI MẠNH MẼ VÀ KHÔNG ĐƯỢC YẾU LÒNG
+choice_c = Luôn phải mạnh mẽ và không được yếu lòng
 choice_d = Biết chịu trách nhiệm
 correct = C
 insight_tag = ● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C
