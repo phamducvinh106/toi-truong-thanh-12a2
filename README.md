@@ -1,7 +1,8 @@
 # 3D CYBER-NEON CONTINUOUS DIGITAL SCENOGRAPHY — "TÔI TRƯỞNG THÀNH" (LỚP 12A2)
 
 > **Trải Nghiệm Thị Giác Sân Khấu Liền Mạch (Continuous Cinematic Scenography)**  
-> Dành cho toàn thể Thầy Cô và Học sinh toàn trường theo dõi trên Màn hình LED 4K từ khoảng cách **30 – 50 mét**.
+> Dành cho toàn thể Thầy Cô và Học sinh toàn trường theo dõi trên Màn hình LED 4K từ khoảng cách **30 – 50 mét**.  
+> 🌐 **Website Trực Tuyến (Live Demo):** [https://phamducvinh106.github.io/toi-truong-thanh-12a2/](https://phamducvinh106.github.io/toi-truong-thanh-12a2/)
 
 ---
 
