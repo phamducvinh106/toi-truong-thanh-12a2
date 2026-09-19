@@ -1,0 +1,4675 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TÔI TRƯỞNG THÀNH — Chuyên Đề 12A2 (Continuous Digital Scenography)</title>
+  
+  <!-- Core Libraries (100% Offline Independence with CDN Fallback) -->
+  <script src="lib/three.min.js"></script>
+  <script src="lib/gsap.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+    if (typeof gsap === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"><\/script>');
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       1. CONTINUOUS DIGITAL SCENOGRAPHY DESIGN SYSTEM (ZERO ROUNDED CARDS)
+       ========================================================================== */
+    :root {
+      --bg-abyss: #020306;
+      --neon-primary: #00f3ff;
+      --neon-secondary: #ff007f;
+      --neon-tertiary: #8a00ff;
+      --neon-glow: rgba(0, 243, 255, 0.65);
+      
+      /* Organic Breathing Math Variables (Driven by JS Math Engine) */
+      --breathe-scale: 1;
+      --breathe-glow: 26px;
+      
+      /* Spatial Camera Tilt (Dynamically Injected via JS from 3D Camera / content.txt) */
+      --cam-tilt-x: 0deg;
+      --cam-tilt-y: 0deg;
+      --stage-perspective: 1700px;
+      
+      /* Single Frosted Glass Monolith Backdrop (Configurable via content.txt) */
+      --glass-alpha: 0.25;
+      --glass-opacity: 0.25;
+      --glass-blur: 14px;
+      --glass-border-opacity: 0.30;
+      --glass-width: min(94vw, 1600px);
+      --glass-height: min(82vh, 660px);
+      
+      /* Monumental Stage Typography Hierarchy (Balanced, Zero Overflow, Legible 30 - 50m) */
+      --font-monumental: clamp(52px, 7vw, 105px);
+      --font-hero: clamp(36px, 4.5vw, 70px);
+      --font-title: clamp(24px, 3vw, 44px);
+      --font-statement: clamp(19px, 2vw, 30px);
+      --font-body-large: clamp(16px, 1.6vw, 24px);
+      --font-hud: clamp(11px, 1.1vw, 15px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-abyss);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      position: relative;
+    }
+
+    /* Ambient Giant Photon Laser Emitters */
+    #ambient-photon-field {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .photon-emitter {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(160px);
+      opacity: 0.65;
+      mix-blend-mode: screen;
+      will-change: transform;
+      transition: background 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #emitter-alpha {
+      width: 90vw;
+      height: 90vw;
+      top: -30vw;
+      left: -20vw;
+      background: radial-gradient(circle, var(--neon-primary) 0%, transparent 70%);
+    }
+
+    #emitter-beta {
+      width: 85vw;
+      height: 85vw;
+      bottom: -30vw;
+      right: -20vw;
+      background: radial-gradient(circle, var(--neon-secondary) 0%, transparent 70%);
+    }
+
+    /* Anamorphic Horizontal Lens Flare Streak */
+    .anamorphic-flare {
+      position: absolute;
+      top: 50%;
+      left: -10%;
+      width: 120%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-primary), #ffffff, var(--neon-primary), transparent);
+      box-shadow: 0 0 35px var(--neon-primary), 0 0 70px var(--neon-primary);
+      opacity: 0.35;
+      transform: translateY(-50%) rotate(-3deg);
+      pointer-events: none;
+      z-index: 3;
+      animation: flareDrift 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes flareDrift {
+      0% { transform: translateY(-50%) rotate(-3deg) scaleY(1); opacity: 0.25; }
+      50% { transform: translateY(-30%) rotate(2deg) scaleY(1.8); opacity: 0.55; }
+      100% { transform: translateY(-70%) rotate(-2deg) scaleY(1); opacity: 0.3; }
+    }
+
+    /* Hyperdrive Warp Speed Flash Overlay */
+    #warp-flash-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.85) 0%, var(--neon-primary) 40%, transparent 75%);
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0;
+      mix-blend-mode: screen;
+      transform: scale(1);
+    }
+
+    /* Three.js 3D WebGL Canvas */
+    #webgl-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Top Stage HUD & Telemetry */
+    header.stage-top-hud {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 4.5rem 0.3rem 4.5rem;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .telemetry-tag {
+      font-size: var(--font-hud);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .telemetry-beacon {
+      width: 12px;
+      height: 12px;
+      background: var(--neon-primary);
+      box-shadow: 0 0 18px var(--neon-primary);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      animation: beaconPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes beaconPulse {
+      0%, 100% { transform: scale(0.85); opacity: 0.5; }
+      50% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 12px var(--neon-primary)); }
+    }
+
+    .stage-mode-indicator {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--neon-primary);
+      border-left: 2px solid var(--neon-primary);
+      padding-left: 0.8rem;
+    }
+
+    /* ==========================================================================
+       2. 3D SPATIAL FUSION: TEXT TILTED & LOCKED TO 3D CAMERA COORDINATES
+       ========================================================================== */
+    main#stage-screen-viewport {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      width: 100%;
+      max-width: 1850px;
+      margin: 0 auto;
+      padding: 0.5rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: var(--stage-perspective, 1700px);
+      perspective-origin: 50% 50%;
+      overflow: visible;
+    }
+
+    /* 3D Spatial Fusion Wrapper - Directly Reacts to 3D Camera Rotation (Gentle Depth) */
+    .spatial-3d-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      transform: rotateX(var(--cam-tilt-x)) rotateY(var(--cam-tilt-y));
+      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Single Monolithic Frosted Glass Backdrop (Protects Content Contrast with Translucency) */
+    .stage-glass-monolith {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateZ(-8px);
+      width: var(--glass-width, min(94vw, 1600px));
+      height: var(--glass-height, min(82vh, 660px));
+      backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
+      -webkit-backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
+      background: linear-gradient(135deg, rgba(8, 16, 32, var(--glass-alpha, 0.25)) 0%, rgba(2, 5, 14, var(--glass-alpha, 0.25)) 100%);
+      box-shadow: 
+        0 15px 45px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 243, 255, calc(var(--glass-border-opacity, 0.3) * 0.25)),
+        inset 0 0 25px rgba(255, 255, 255, 0.03);
+      clip-path: polygon(
+        18px 0, 
+        calc(100% - 18px) 0, 
+        100% 18px, 
+        100% calc(100% - 18px), 
+        calc(100% - 18px) 100%, 
+        18px 100%, 
+        0 calc(100% - 18px), 
+        0 18px
+      );
+      pointer-events: none;
+      z-index: 1;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stage-glass-monolith::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border: 1.5px solid var(--neon-primary);
+      opacity: var(--glass-border-opacity, 0.32);
+      clip-path: inherit;
+      pointer-events: none;
+      transition: border-color 0.6s ease, opacity 0.6s ease;
+    }
+
+    .glass-corner {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-color: var(--neon-primary);
+      border-style: solid;
+      pointer-events: none;
+      opacity: calc(var(--glass-border-opacity, 0.32) * 1.6);
+      filter: drop-shadow(0 0 10px var(--neon-primary));
+      transition: border-color 0.6s ease, opacity 0.6s ease;
+    }
+    .glass-corner-tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+    .glass-corner-tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+    .glass-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+    .glass-corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+    .glass-top-accent {
+      position: absolute;
+      top: 0;
+      left: 20%;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
+      box-shadow: 0 0 15px var(--neon-primary);
+      opacity: var(--glass-border-opacity, 0.32);
+      transition: background 0.6s ease, opacity 0.6s ease;
+    }
+
+    .scenography-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      transform: scale(0.95) translateZ(-50px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0.8rem 1.5rem;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scenography-slide.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      transform: scale(1) translateZ(0);
+      pointer-events: all;
+    }
+
+    /* Monumental Typography with Chromatic Laser Edge */
+    .monumental-text {
+      font-size: var(--font-monumental);
+      font-weight: 900;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      line-height: 0.95;
+      color: #ffffff;
+      text-shadow: 
+        3px 0 0 rgba(255, 0, 127, 0.7),
+        -3px 0 0 rgba(0, 243, 255, 0.7),
+        0 0 35px var(--neon-primary),
+        0 0 70px var(--neon-primary);
+      animation: textLaserBreathe 4s infinite ease-in-out;
+    }
+
+    @keyframes textLaserBreathe {
+      0%, 100% { filter: drop-shadow(0 0 20px var(--neon-primary)); }
+      50% { filter: drop-shadow(0 0 45px var(--neon-primary)) drop-shadow(0 0 80px var(--neon-secondary)); }
+    }
+
+    .hero-sub-statement {
+      font-size: var(--font-statement);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 0 25px var(--neon-primary);
+      margin-top: 1rem;
+    }
+
+    /* Architectural Laser Blade Rails */
+    .laser-blade-rail {
+      position: relative;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 5%, var(--neon-primary) 30%, #ffffff 50%, var(--neon-secondary) 70%, transparent 95%);
+      box-shadow: 0 0 20px var(--neon-primary), 0 0 40px var(--neon-primary);
+      margin: 1.8rem 0;
+      overflow: visible;
+    }
+
+    .laser-blade-rail::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: #ffffff;
+      box-shadow: 0 0 15px #ffffff;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    /* HUD Corner Calipers (Zero Rounded Cards) */
+    .hud-bracket-container {
+      position: relative;
+      padding: 2.5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hud-bracket-container::before,
+    .hud-bracket-container::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--neon-primary);
+      box-shadow: 0 0 20px var(--neon-primary);
+      pointer-events: none;
+    }
+
+    .hud-bracket-container::before {
+      top: 0;
+      left: 0;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .hud-bracket-container::after {
+      bottom: 0;
+      right: 0;
+      border-left: none;
+      border-top: none;
+    }
+
+    .hud-bracket-tr,
+    .hud-bracket-bl {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--neon-primary);
+      box-shadow: 0 0 20px var(--neon-primary);
+      pointer-events: none;
+    }
+
+    .hud-bracket-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+    .hud-bracket-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+
+    /* ==========================================================================
+       3. 17 UNIQUE SPATIAL SCENOGRAPHY LAYOUTS
+       ========================================================================== */
+
+    /* Slide 01: Cổng Vòm Hố Đen Thời Gian */
+    .layout-portal-singularity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.4rem;
+    }
+
+    /* Slide 02: Dải Lụa Âm Thanh & Cánh Phượng Hoàng */
+    .layout-phoenix-soundscape {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.5rem;
+    }
+
+    /* Slide 03: Bậc Thang Ba Ngôi Khúc Xạ */
+    .layout-helix-trinity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.8rem;
+      text-align: center;
+    }
+
+    .trinity-pillars-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      width: 100%;
+      max-width: 1550px;
+    }
+
+    .trinity-laser-spire {
+      position: relative;
+      padding: 1.8rem 1.6rem;
+      border-top: 3px solid var(--neon-primary);
+      border-bottom: 3px solid var(--neon-primary);
+      background: linear-gradient(180deg, rgba(0, 243, 255, 0.08) 0%, transparent 50%, rgba(0, 243, 255, 0.08) 100%);
+      box-shadow: 0 0 35px rgba(0, 243, 255, 0.2);
+    }
+
+    /* Slide 04: Mặt Nạ Bản Ngã & Vết Nứt Kính Lỏng */
+    .layout-anamorphic-split {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.6rem;
+      position: relative;
+    }
+
+    .anamorphic-rift-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #ff0055, #00ffc4, transparent);
+      box-shadow: 0 0 30px #ff0055, 0 0 60px #00ffc4;
+      transform: translateX(-50%) rotate(4deg);
+      pointer-events: none;
+    }
+
+    /* Slide 05: Mê Cung Ký Ức Đa Chiều */
+    .layout-isometric-labyrinth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.6rem;
+    }
+
+    /* Slide 06: Sen Ngọc Tái Sinh Kintsugi */
+    .layout-kintsugi-rebirth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.8rem;
+    }
+
+    .kintsugi-gold-manifesto {
+      position: relative;
+      border: 2px solid #ffd700;
+      padding: 2rem 3.5rem;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 80%);
+      box-shadow: 0 0 60px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.15);
+      clip-path: polygon(4% 0%, 96% 0%, 100% 12%, 100% 88%, 96% 100%, 4% 100%, 0% 88%, 0% 12%);
+    }
+
+    /* Slide 07: Đĩa Quay Không Gian Hologram */
+    .layout-orbital-hub {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.8rem;
+    }
+
+    /* ==========================================================================
+       4. OVERHAULED HOLOGRAPHIC TARGET NODES (MINIGAME SLIDES 08 - 13)
+       ========================================================================== */
+    .stage-minigame-arena {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.1rem;
+    }
+
+    .target-question-header {
+      position: relative;
+      text-align: center;
+      max-width: 1550px;
+    }
+
+    .target-nodes-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      width: 100%;
+      max-width: 1550px;
+    }
+
+    .holo-target-node {
+      position: relative;
+      background: rgba(8, 14, 28, 0.75);
+      border: 2px solid rgba(0, 243, 255, 0.35);
+      padding: 1.05rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      cursor: pointer;
+      backdrop-filter: blur(25px);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
+      text-align: left;
+    }
+
+    .holo-target-node::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--neon-primary);
+      box-shadow: 0 0 15px var(--neon-primary);
+      transition: all 0.3s ease;
+    }
+
+    .holo-target-node:hover {
+      border-color: #ffffff;
+      transform: scale(1.025) translateZ(20px);
+      box-shadow: 0 0 40px var(--neon-glow);
+    }
+
+    .holo-target-node:hover::before {
+      background: #ffffff;
+      box-shadow: 0 0 25px #ffffff;
+    }
+
+    .node-reticle-glyph {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--neon-primary);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 22px;
+      color: #ffffff;
+      background: rgba(0, 243, 255, 0.1);
+      box-shadow: 0 0 20px var(--neon-primary);
+      transition: all 0.35s ease;
+    }
+
+    .node-statement-text {
+      font-size: var(--font-body-large);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      letter-spacing: 0.5px;
+    }
+
+    /* MINIGAME INTERACTIVE STATUS TELEMETRY */
+    .target-status-line {
+      font-size: var(--font-hud);
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+      min-height: 22px;
+      color: rgba(255, 255, 255, 0.75);
+      transition: all 0.3s ease;
+    }
+
+    .target-status-line.status-wrong {
+      color: #ff0044 !important;
+      text-shadow: 0 0 20px #ff0044;
+      animation: statusBlinkRed 0.6s infinite alternate;
+    }
+
+    .target-status-line.status-correct {
+      color: #39ff14 !important;
+      text-shadow: 0 0 22px #39ff14;
+    }
+
+    @keyframes statusBlinkRed {
+      0% { opacity: 0.75; transform: scale(0.99); }
+      100% { opacity: 1; transform: scale(1.01); }
+    }
+
+    /* Interactive Feedback Badge on Node */
+    .node-feedback-badge {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      display: none;
+      z-index: 5;
+    }
+
+    /* RIGHT ANSWER: HIGH-VOLTAGE LASER LOCK-ON STATE (EMERALD & GOLD) */
+    .holo-target-node.laser-correct {
+      border-color: #39ff14 !important;
+      background: rgba(57, 255, 20, 0.24) !important;
+      box-shadow: 0 0 65px rgba(57, 255, 20, 0.85), inset 0 0 35px rgba(57, 255, 20, 0.35) !important;
+      transform: scale(1.04) translateZ(35px) !important;
+    }
+
+    .holo-target-node.laser-correct::before {
+      background: #39ff14 !important;
+      box-shadow: 0 0 30px #39ff14 !important;
+      width: 8px !important;
+    }
+
+    .holo-target-node.laser-correct .node-reticle-glyph {
+      background: #39ff14 !important;
+      color: #020306 !important;
+      border-color: #39ff14 !important;
+      box-shadow: 0 0 35px #39ff14 !important;
+    }
+
+    .holo-target-node.laser-correct .node-feedback-badge {
+      display: block;
+      background: #39ff14;
+      color: #020306;
+      box-shadow: 0 0 25px #39ff14;
+    }
+
+    /* WRONG ANSWER: CRIMSON RED REJECTION STATE & GLITCH SHAKE */
+    .holo-target-node.laser-wrong {
+      border-color: #ff0044 !important;
+      background: rgba(255, 0, 68, 0.22) !important;
+      box-shadow: 0 0 55px rgba(255, 0, 68, 0.8), inset 0 0 30px rgba(255, 0, 68, 0.3) !important;
+      animation: targetGlitchShake 0.45s ease !important;
+    }
+
+    .holo-target-node.laser-wrong::before {
+      background: #ff0044 !important;
+      box-shadow: 0 0 30px #ff0044 !important;
+      width: 8px !important;
+    }
+
+    .holo-target-node.laser-wrong .node-reticle-glyph {
+      background: #ff0044 !important;
+      color: #ffffff !important;
+      border-color: #ff0044 !important;
+      box-shadow: 0 0 35px #ff0044 !important;
+    }
+
+    .holo-target-node.laser-wrong .node-feedback-badge {
+      display: block;
+      background: #ff0044;
+      color: #ffffff;
+      box-shadow: 0 0 25px #ff0044;
+    }
+
+    @keyframes targetGlitchShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-12px); }
+      40% { transform: translateX(10px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(4px); }
+    }
+
+    /* Dimmed state for other nodes when correct is chosen */
+    .holo-target-node.laser-dimmed {
+      opacity: 0.3 !important;
+      filter: grayscale(85%) !important;
+      pointer-events: none !important;
+    }
+
+    .revealed-insight-beam {
+      position: relative;
+      width: 100%;
+      max-width: 1550px;
+      border-top: 2.5px solid #39ff14;
+      border-bottom: 2.5px solid #39ff14;
+      padding: 1.1rem 3rem;
+      background: linear-gradient(90deg, transparent 0%, rgba(57, 255, 20, 0.22) 50%, transparent 100%);
+      box-shadow: 0 0 50px rgba(57, 255, 20, 0.45);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px) scale(0.97);
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .revealed-insight-beam.active-beam {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Slide 14: Buồng Sóng Âm Vọng Vô Tận */
+    .layout-sonic-vortex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.8rem;
+    }
+
+    /* Slide 15: Trái Tim Origami & Bức Thư Ánh Sáng */
+    .layout-origami-telemetry {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.6rem;
+      text-align: center;
+    }
+
+    .origami-ribbons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+      width: 100%;
+      max-width: 1550px;
+    }
+
+    .origami-ribbon-spire {
+      border-left: 3px solid var(--neon-primary);
+      padding: 1.8rem 1.6rem;
+      background: linear-gradient(90deg, rgba(255, 119, 0, 0.12) 0%, transparent 100%);
+      text-align: left;
+      font-size: var(--font-statement);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      box-shadow: 0 0 35px rgba(255, 119, 0, 0.25);
+    }
+
+    /* Slide 16: Vũ Điệu Siêu Tân Tinh Rực Rỡ */
+    .layout-supernova-blast {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.5rem;
+    }
+
+    .supernova-kinetic-hero {
+      font-size: clamp(65px, 9vw, 140px);
+      font-weight: 900;
+      letter-spacing: 12px;
+      line-height: 0.95;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ff0055, #ff9900, #ffe600, #00ff66, #00f3ff, #7b2cbf, #ff007f);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: hyperSpectrumShift 6s infinite ease;
+      filter: drop-shadow(0 0 50px rgba(255, 0, 127, 0.75));
+    }
+
+    @keyframes hyperSpectrumShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Slide 17: Dải Mobius Vĩnh Cửu & Bình Minh */
+    .layout-mobius-infinity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-height: 100%;
+      gap: 1.6rem;
+    }
+
+    /* ==========================================================================
+       5. STREAMLINED STAGE BOTTOM HUD (CLOCK & PROGRESS BAR ONLY, KEYBOARD-FIRST)
+       ========================================================================== */
+    footer.stage-bottom-hud {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 2rem 0.65rem 2rem;
+      width: 100%;
+      background: linear-gradient(0deg, rgba(2,3,6,0.95) 0%, transparent 100%);
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    .stage-laser-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stage-laser-progress-fill {
+      height: 100%;
+      width: 5.88%;
+      background: linear-gradient(90deg, var(--neon-primary), #ffffff, var(--neon-secondary));
+      box-shadow: 0 0 20px var(--neon-primary);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hud-stage-clock {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: rgba(255, 255, 255, 0.65);
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      user-select: none;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+    }
+
+    .clock-beacon {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-primary);
+      box-shadow: 0 0 10px var(--neon-primary);
+      animation: clockBeaconPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes clockBeaconPulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 15px var(--neon-primary); }
+    }
+
+    /* Modal Button Styling (Used inside Modals) */
+    .hud-action-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 0.65rem 1.4rem;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+      transition: all 0.25s ease;
+      pointer-events: auto;
+    }
+
+    .hud-action-btn:hover {
+      border-color: var(--neon-primary);
+      box-shadow: 0 0 25px var(--neon-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Shortcuts Cheatsheet Modal */
+    #scenography-help-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 3, 6, 0.95);
+      backdrop-filter: blur(40px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    #scenography-help-modal.open {
+      display: flex;
+    }
+
+    .shortcuts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .shortcut-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 1.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .shortcut-row:hover {
+      background: rgba(0, 243, 255, 0.08);
+      border-color: rgba(0, 243, 255, 0.3);
+    }
+
+    .shortcut-keys {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .key-badge {
+      display: inline-block;
+      padding: 0.22rem 0.65rem;
+      background: rgba(0, 243, 255, 0.12);
+      border: 1px solid var(--neon-primary);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+    }
+
+    .shortcut-desc {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: right;
+    }
+
+    
+    /* Modal 17 Slides Holographic Grid */
+    #scenography-nav-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 3, 6, 0.95);
+      backdrop-filter: blur(40px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+    }
+
+    #scenography-nav-modal.open {
+      display: flex;
+    }
+
+    .nav-holo-panel {
+      max-width: 1400px;
+      width: 100%;
+      border: 2px solid var(--neon-primary);
+      background: rgba(6, 10, 18, 0.92);
+      padding: 3rem;
+      box-shadow: 0 0 70px var(--neon-glow);
+    }
+
+    .nav-holo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.4rem;
+      max-height: 65vh;
+      overflow-y: auto;
+      padding-right: 0.8rem;
+    }
+
+    .nav-holo-tile {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1.2rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.2s ease;
+      clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    }
+
+    .nav-holo-tile:hover, .nav-holo-tile.active-tile {
+      border-color: var(--neon-primary);
+      background: rgba(0, 243, 255, 0.16);
+      box-shadow: 0 0 25px var(--neon-glow);
+      transform: scale(1.03);
+    }
+
+    /* ==========================================================================
+       10. FUTURISTIC TRIANGULAR PLAY TRIGGER & PERFORMANCE MEDIA PLAYERS
+       ========================================================================== */
+    .play-trigger-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      z-index: 10;
+    }
+
+    .stage-play-trigger-btn {
+      position: relative;
+      background: rgba(8, 16, 32, 0.75);
+      border: 2px solid var(--neon-primary);
+      border-radius: 50%;
+      width: 78px;
+      height: 78px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 
+        0 0 35px var(--neon-glow),
+        inset 0 0 20px rgba(0, 243, 255, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+    }
+
+    .stage-play-trigger-btn::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: -8px; right: -8px; bottom: -8px;
+      border: 1.5px dashed var(--neon-primary);
+      border-radius: 50%;
+      opacity: 0.55;
+      animation: spinPlayRing 14s linear infinite;
+    }
+
+    @keyframes spinPlayRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .stage-play-trigger-btn:hover {
+      transform: scale(1.15) translateY(-3px);
+      border-color: #ffffff;
+      box-shadow: 
+        0 0 55px var(--neon-primary),
+        0 0 90px var(--neon-glow);
+    }
+
+    .stage-play-trigger-btn .triangle-play-icon {
+      font-size: 30px;
+      color: #ffffff;
+      margin-left: 5px; /* optical alignment */
+      text-shadow: 0 0 15px var(--neon-primary);
+      transition: all 0.25s ease;
+      line-height: 1;
+    }
+
+    .stage-play-trigger-btn:hover .triangle-play-icon {
+      transform: scale(1.2);
+      color: var(--neon-primary);
+    }
+
+    .play-trigger-label {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--neon-primary);
+      text-shadow: 0 0 15px var(--neon-glow);
+    }
+
+    /* Cyber Music Player Panel */
+    .stage-music-player-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(92vw, 1100px);
+      background: rgba(6, 12, 24, 0.94);
+      border: 2px solid var(--neon-primary);
+      box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.92),
+        0 0 50px var(--neon-glow),
+        inset 0 0 40px rgba(0, 243, 255, 0.08);
+      border-radius: 8px;
+      padding: 2.2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      z-index: 50;
+      backdrop-filter: blur(30px);
+      animation: playerPanelPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes playerPanelPop {
+      0% { opacity: 0; transform: translate(-50%, -46%) scale(0.92); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .player-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 1.2rem;
+    }
+
+    .player-body-deck {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding: 0.5rem 0;
+    }
+
+    .player-vinyl-wrap {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .player-vinyl-disc {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #020306 20%, #151c2e 22%, #080d1a 45%, #182238 48%, #080d1a 70%, #1a2744 72%, #03060f 100%);
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 0 30px var(--neon-glow),
+        inset 0 0 25px rgba(0, 0, 0, 0.9);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+    }
+
+    .player-vinyl-disc.spinning {
+      animation: vinylSpin 4.5s linear infinite;
+    }
+
+    @keyframes vinylSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .player-vinyl-center {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--neon-primary) 0%, #030612 80%);
+      border: 2px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px #ffffff;
+    }
+
+    .cyber-eq-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 32px;
+      margin-top: 1.2rem;
+    }
+
+    .cyber-eq-bar {
+      width: 6px;
+      background: var(--neon-primary);
+      box-shadow: 0 0 10px var(--neon-primary);
+      height: 6px;
+      transition: height 0.15s ease;
+      border-radius: 2px;
+    }
+
+    .cyber-eq-bar.active {
+      animation: eqBarJump 0.5s infinite alternate ease-in-out;
+    }
+
+    .cyber-eq-bar:nth-child(2) { animation-delay: 0.1s; }
+    .cyber-eq-bar:nth-child(3) { animation-delay: 0.25s; }
+    .cyber-eq-bar:nth-child(4) { animation-delay: 0.15s; }
+    .cyber-eq-bar:nth-child(5) { animation-delay: 0.3s; }
+    .cyber-eq-bar:nth-child(6) { animation-delay: 0.05s; }
+    .cyber-eq-bar:nth-child(7) { animation-delay: 0.2s; }
+    .cyber-eq-bar:nth-child(8) { animation-delay: 0.35s; }
+    .cyber-eq-bar:nth-child(9) { animation-delay: 0.12s; }
+    .cyber-eq-bar:nth-child(10) { animation-delay: 0.28s; }
+
+    @keyframes eqBarJump {
+      0% { height: 6px; }
+      100% { height: 32px; }
+    }
+
+    .player-timeline-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    .player-time-text {
+      font-family: monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 1px;
+      min-width: 50px;
+    }
+
+    .player-slider-rail {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .player-slider-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--neon-secondary), var(--neon-primary));
+      box-shadow: 0 0 15px var(--neon-primary);
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+
+    .player-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .player-main-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--neon-primary);
+      color: #020306;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 30px var(--neon-primary);
+      transition: all 0.2s ease;
+    }
+
+    .player-main-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 45px var(--neon-primary);
+      background: #ffffff;
+    }
+
+    .player-secondary-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 0.5rem 1.1rem;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .player-secondary-btn:hover {
+      border-color: var(--neon-primary);
+      color: var(--neon-primary);
+      box-shadow: 0 0 15px var(--neon-glow);
+    }
+
+    /* Cyber Video Player Panel (Near edge-to-edge, strictly preserves original aspect ratio) */
+    .stage-video-player-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(96vw, 1750px);
+      height: min(88vh, 880px);
+      background: #000000;
+      border: 2px solid var(--neon-primary);
+      box-shadow: 
+        0 25px 90px rgba(0, 0, 0, 0.95),
+        0 0 60px var(--neon-glow);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 50;
+      animation: playerPanelPop 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .video-viewport-wrapper {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      cursor: pointer;
+    }
+
+    .video-viewport-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Preserves exact native video aspect ratio! */
+      outline: none;
+    }
+
+    .video-overlay-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.2rem 2rem;
+      background: linear-gradient(180deg, rgba(2, 4, 10, 0.88) 0%, transparent 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      transition: opacity 0.4s ease;
+      pointer-events: all;
+    }
+
+    .video-overlay-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.6rem 2rem 1.2rem 2rem;
+      background: linear-gradient(0deg, rgba(2, 4, 10, 0.94) 0%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      z-index: 10;
+      transition: opacity 0.4s ease;
+    }
+
+    .stage-video-player-panel:hover .video-overlay-header,
+    .stage-video-player-panel:hover .video-overlay-footer {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .video-standby-placeholder {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 2.5rem;
+      background: rgba(10, 15, 30, 0.88);
+      border: 1px dashed rgba(255, 255, 255, 0.35);
+      border-radius: 8px;
+      backdrop-filter: blur(15px);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Giant Photon Emitters -->
+  <div id="ambient-photon-field">
+    <div id="emitter-alpha" class="photon-emitter"></div>
+    <div id="emitter-beta" class="photon-emitter"></div>
+  </div>
+
+  <!-- Anamorphic Horizontal Lens Flare Streak -->
+  <div class="anamorphic-flare"></div>
+
+  <!-- Hyperdrive Warp Speed Flash Overlay -->
+  <div id="warp-flash-overlay"></div>
+
+  <!-- Three.js 3D Volumetric Stage Canvas -->
+  <canvas id="webgl-stage"></canvas>
+
+  <!-- Top Stage Telemetry HUD -->
+  <header class="stage-top-hud">
+    <div class="telemetry-tag">
+      <div class="telemetry-beacon"></div>
+      <span id="top-telemetry-text">CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1.2rem;">
+      <span id="txt-source-status" style="font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #39ff14; background: rgba(57,255,20,0.12); border: 1px solid rgba(57,255,20,0.3); padding: 0.25rem 0.75rem; border-radius: 4px; display: none; transition: opacity 0.3s ease;"></span>
+      <div class="stage-mode-indicator">
+        <span id="top-mode-indicator-text">CONTINUOUS DIGITAL SCENOGRAPHY • 4K 60FPS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main 17 Stage Slides with 3D Spatial Fusion -->
+  <main id="stage-screen-viewport">
+    <div class="spatial-3d-wrapper" id="spatial-3d-wrapper">
+
+      <!-- Single Monolithic Frosted Glass Backdrop Frame (Configurable in content.txt) -->
+      <div id="stage-glass-monolith" class="stage-glass-monolith">
+        <div class="glass-corner glass-corner-tl"></div>
+        <div class="glass-corner glass-corner-tr"></div>
+        <div class="glass-corner glass-corner-bl"></div>
+        <div class="glass-corner glass-corner-br"></div>
+        <div class="glass-top-accent"></div>
+      </div>
+
+      <!-- SLIDE 01: KHAI MÀN CHUYÊN ĐỀ -->
+      <section class="scenography-slide active" id="slide-1" data-index="1"
+        data-title="Khai Màn: Tôi Trưởng Thành"
+        data-cam="0,0,22" data-cam-rot="0,0,0"
+        data-neon-p="#00f3ff" data-neon-s="#ff007f" data-neon-t="#8a00ff">
+        <div class="layout-portal-singularity">
+          <div class="telemetry-tag" style="color: var(--neon-primary);">
+            <span>[ CHUYÊN ĐỀ SÂN KHẤU TRƯỜNG HỌC • LỚP 12A2 ]</span>
+          </div>
+          
+          <h1 class="monumental-text">TÔI TRƯỞNG THÀNH</h1>
+
+          <div class="laser-blade-rail" style="max-width: 1400px;"></div>
+
+          <div class="hero-sub-statement">
+            "DÁM ƯỚC MƠ • DÁM THỬ SỨC • DÁM BẮT ĐẦU LẠI"
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 02: TIẾT MỤC “HÒ VƯƠN MÌNH” -->
+      <section class="scenography-slide" id="slide-2" data-index="2"
+        data-title="Tiết Mục: Hò Vươn Mình"
+        data-cam="0,4,18" data-cam-rot="-0.15,0,0"
+        data-neon-p="#39ff14" data-neon-s="#ffe600" data-neon-t="#00ffa3">
+        
+        <!-- Standard Slide View -->
+        <div class="layout-phoenix-soundscape" id="slide-2-view">
+          <div class="telemetry-tag" style="color: #39ff14;">
+            <span>[ TIẾT MỤC BIỂU DIỄN KHAI MÀN ]</span>
+          </div>
+
+          <h1 class="monumental-text" style="color: #ffffff; text-shadow: 0 0 50px #39ff14;">
+            HÒ VƯƠN MÌNH
+          </h1>
+
+          <h2 style="font-size: var(--font-title); color: #ffe600; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 30px #ffe600;">
+            MASHUP: HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
+          </h2>
+
+          <div class="laser-blade-rail" style="max-width: 1300px;"></div>
+
+          <p style="font-size: var(--font-statement); font-weight: 800; color: #ffffff; letter-spacing: 2px;">
+            "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
+          </p>
+
+          <div class="telemetry-tag" style="color: rgba(255,255,255,0.7); margin-top: 0.5rem;">
+            <span>BIỂU DIỄN: TẬP THỂ LỚP 12A2</span>
+          </div>
+
+          <!-- Triangular Play Trigger -->
+          <div class="play-trigger-wrap">
+            <button class="stage-play-trigger-btn" onclick="openPerformanceMusicPlayer(2)" title="Khởi động Trình phát nhạc tiết mục">
+              <span class="triangle-play-icon">▶</span>
+            </button>
+            <span class="play-trigger-label">PHÁT TIẾT MỤC ÂM NHẠC</span>
+          </div>
+        </div>
+
+        <!-- Music Player View -->
+        <div class="stage-music-player-panel" id="music-player-2" style="display: none;">
+          <audio id="perf-audio-2" preload="metadata"></audio>
+
+          <div class="player-header-bar">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <div class="telemetry-beacon" style="background: #39ff14; box-shadow: 0 0 18px #39ff14;"></div>
+              <span class="telemetry-tag" style="color: #39ff14; font-size: 13px;">
+                // TRÌNH PHÁT NHẠC TIẾT MỤC BIỂU DIỄN
+              </span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(2)" title="Trở về slide [Esc]">
+                <span>✕ Đóng [Esc]</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="player-body-deck">
+            <div class="player-vinyl-wrap">
+              <div class="player-vinyl-disc" id="vinyl-disc-2">
+                <div class="player-vinyl-center">
+                  <span style="font-size: 20px;">🎵</span>
+                </div>
+              </div>
+              <div class="cyber-eq-bars" id="eq-bars-2">
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+              </div>
+            </div>
+
+            <div class="player-track-info" style="flex: 1; text-align: left;">
+              <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.5rem;" id="perf-status-badge-2">
+                ● SẴN SÀNG PHÁT
+              </div>
+              <h2 style="font-size: 34px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px rgba(57,255,20,0.6);" id="perf-track-title-2">
+                HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
+              </h2>
+              <p style="font-size: 16px; color: #ffe600; font-weight: 800; margin-top: 0.4rem;">
+                Tiết Mục Khai Màn Chuyên Đề
+              </p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 0.4rem;">
+                Biểu diễn: Tập thể lớp 12A2
+              </p>
+
+            </div>
+          </div>
+
+          <div class="player-bottom-deck">
+            <div class="player-timeline-wrap">
+              <span class="player-time-text" id="perf-cur-time-2">00:00</span>
+              <div class="player-slider-rail" id="perf-slider-rail-2" onclick="seekPerfMusic(2, event)">
+                <div class="player-slider-fill" id="perf-slider-fill-2"></div>
+              </div>
+              <span class="player-time-text" id="perf-dur-time-2">00:00</span>
+            </div>
+
+            <div class="player-controls-row">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="player-secondary-btn" onclick="skipPerfMusic(2, -10)" title="Lùi 10s">
+                  <span>⏪ 10s</span>
+                </button>
+                <button class="player-main-btn" id="perf-play-btn-2" onclick="togglePerfMusicPlay(2)" title="Phát / Tạm dừng [Space]">
+                  <span id="perf-play-icon-2">▶</span>
+                </button>
+                <button class="player-secondary-btn" onclick="skipPerfMusic(2, 10)" title="Tiến 10s">
+                  <span>10s ⏩</span>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 16px;">🔊</span>
+                <input type="range" min="0" max="1" step="0.05" value="0.85" style="width: 110px; accent-color: #39ff14; cursor: pointer;" oninput="setPerfMusicVolume(2, this.value)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 03: ĐỊNH NGHĨA TRƯỞNG THÀNH -->
+      <section class="scenography-slide" id="slide-3" data-index="3"
+        data-title="Định Nghĩa Trưởng Thành"
+        data-cam="8,5,18" data-cam-rot="-0.1,-0.3,0"
+        data-neon-p="#ff5e00" data-neon-s="#ffb700" data-neon-t="#0044ff">
+        <div class="layout-helix-trinity">
+          <h1 style="font-size: var(--font-hero); font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 40px #ff5e00;">
+            BAO GIỜ CHÚNG TA THỰC SỰ TRƯỞNG THÀNH?
+          </h1>
+
+          <div class="trinity-pillars-row">
+            <div class="trinity-laser-spire" style="border-color: #ff5e00;">
+              <div class="telemetry-tag" style="color: #ff5e00; margin-bottom: 1rem;">// CHÂN LÝ 01</div>
+              <p style="font-size: var(--font-statement); font-weight: 800; line-height: 1.35;">
+                "Biết Đứng Dậy Sau Những Lần Yếu Lòng"
+              </p>
+            </div>
+
+            <div class="trinity-laser-spire" style="border-color: #ffb700;">
+              <div class="telemetry-tag" style="color: #ffb700; margin-bottom: 1rem;">// CHÂN LÝ 02</div>
+              <p style="font-size: var(--font-statement); font-weight: 800; line-height: 1.35;">
+                "Biết Sửa Đổi & Chịu Trách Nhiệm Với Lựa Chọn"
+              </p>
+            </div>
+
+            <div class="trinity-laser-spire" style="border-color: #00f3ff;">
+              <div class="telemetry-tag" style="color: #00f3ff; margin-bottom: 1rem;">// CHÂN LÝ 03</div>
+              <p style="font-size: var(--font-statement); font-weight: 800; line-height: 1.35;">
+                "Biết Mình Muốn Trở Thành Người Như Thế Nào"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 04: GIỚI THIỆU CHUYÊN ĐỀ -->
+      <section class="scenography-slide" id="slide-4" data-index="4"
+        data-title="Hành Trình Soi Rọi Chính Mình"
+        data-cam="-6,2,20" data-cam-rot="0,0.2,-0.05"
+        data-neon-p="#ff0055" data-neon-s="#5f00ff" data-neon-t="#00ffc4">
+        <div class="layout-anamorphic-split">
+          <div class="anamorphic-rift-line"></div>
+
+          <div class="telemetry-tag" style="color: #ff0055;">// CHUYÊN ĐỀ CHIÊM NGHIỆM</div>
+
+          <h1 style="font-size: var(--font-hero); font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 45px #ff0055;">
+            HÀNH TRÌNH TỰ SOI RỌI CHÍNH MÌNH
+          </h1>
+
+          <div class="hud-bracket-container" style="max-width: 1450px;">
+            <div class="hud-bracket-tr"></div>
+            <div class="hud-bracket-bl"></div>
+            <p style="font-size: var(--font-hero); font-weight: 900; line-height: 1.3; color: #ffffff;">
+              "À, MÌNH CỦA NGÀY HÔM NAY ĐÃ KHÁC MÌNH CỦA NGÀY HÔM QUA THẬT RỒI!"
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 4rem; text-transform: uppercase; font-size: var(--font-title); font-weight: 900;">
+            <span style="color: #ff0055; text-shadow: 0 0 25px #ff0055;">[ NHÌN LẠI ĐỂ THẤU HIỂU ]</span>
+            <span style="color: #00ffc4; text-shadow: 0 0 25px #00ffc4;">[ BƯỚC TIẾP ĐỂ VƯƠN XA ]</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 05: TIỂU PHẨM KỊCH -->
+      <section class="scenography-slide" id="slide-5" data-index="5"
+        data-title="Tiểu Phẩm Kịch: Tôi Của Ngày Hôm Qua"
+        data-cam="12,14,18" data-cam-rot="-0.5,0.4,0.2"
+        data-neon-p="#ff0033" data-neon-s="#ffcc00" data-neon-t="#3b0066">
+        
+        <!-- Standard Slide View -->
+        <div class="layout-isometric-labyrinth" id="slide-5-view">
+          <div class="telemetry-tag" style="color: #ff0033;">// TIỂU PHẨM SÂN KHẤU</div>
+
+          <h1 class="monumental-text" style="text-shadow: 0 0 50px #ff0033;">
+            TÔI CỦA NGÀY HÔM QUA
+          </h1>
+
+          <p style="font-size: var(--font-title); color: #ffcc00; font-weight: 800; letter-spacing: 2px;">
+            Áp Lực Học Tập • Kỳ Vọng Gia Đình • Lựa Chọn Tuổi Trẻ
+          </p>
+
+          <div class="hud-bracket-container" style="max-width: 1400px; border-top: 2px solid #ff0033; border-bottom: 2px solid #ff0033;">
+            <div class="hud-bracket-tr" style="border-color: #ff0033;"></div>
+            <div class="hud-bracket-bl" style="border-color: #ff0033;"></div>
+            <p style="font-size: var(--font-hero); font-weight: 900; color: #ffffff;">
+              "NẾU ĐƯỢC QUAY LẠI, BẠN CÓ CHỌN KHÁC ĐI?"
+            </p>
+          </div>
+
+          <!-- Triangular Play Trigger -->
+          <div class="play-trigger-wrap">
+            <button class="stage-play-trigger-btn" style="border-color: #ff0033; box-shadow: 0 0 35px rgba(255,0,51,0.5);" onclick="openDramaVideoPlayer(5)" title="Khởi động Trình phát video tiểu phẩm">
+              <span class="triangle-play-icon" style="text-shadow: 0 0 15px #ff0033;">▶</span>
+            </button>
+            <span class="play-trigger-label" style="color: #ff0033; text-shadow: 0 0 12px rgba(255,0,51,0.6);">PHÁT VIDEO TIỂU PHẨM KỊCH</span>
+          </div>
+        </div>
+
+        <!-- Video Player View (Near edge-to-edge, native aspect ratio) -->
+        <div class="stage-video-player-panel" id="video-player-5" style="display: none; border-color: #ff0033; box-shadow: 0 25px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(255,0,51,0.5);">
+          <!-- Top Overlay Bar -->
+          <div class="video-overlay-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <div class="telemetry-beacon" style="background: #ff0033; box-shadow: 0 0 18px #ff0033;"></div>
+              <span class="telemetry-tag" style="color: #ff0033; font-size: 14px; font-weight: 900;">
+                // TIỂU PHẨM SÂN KHẤU: TÔI CỦA NGÀY HÔM QUA
+              </span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn" onclick="closeDramaVideoPlayer(5)" title="Đóng video [Esc]">
+                <span>✕ Đóng Video [Esc]</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
+          <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(5)">
+            <video id="perf-video-5" preload="metadata" playsinline></video>
+
+            <!-- Standby screen if video not loaded yet -->
+            <div class="video-standby-placeholder" id="video-standby-5" style="display: flex;">
+              <div style="font-size: 48px; color: #ff0033; text-shadow: 0 0 30px #ff0033;">🎬</div>
+              <h3 style="font-size: 22px; font-weight: 900; color: #ffffff; letter-spacing: 2px;">
+                TRÌNH PHÁT VIDEO TIỂU PHẨM KỊCH
+              </h3>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.5;">
+                Video phát tràn viền theo đúng tỉ lệ khung hình gốc.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Overlay Bar -->
+          <div class="video-overlay-footer">
+            <div class="player-timeline-wrap">
+              <span class="player-time-text" id="video-cur-time-5">00:00</span>
+              <div class="player-slider-rail" id="video-slider-rail-5" onclick="event.stopPropagation(); seekDramaVideo(5, event)">
+                <div class="player-slider-fill" id="video-slider-fill-5" style="background: linear-gradient(90deg, #ffcc00, #ff0033); box-shadow: 0 0 15px #ff0033;"></div>
+              </div>
+              <span class="player-time-text" id="video-dur-time-5">00:00</span>
+            </div>
+
+            <div class="player-controls-row">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(5, -10)" title="Lùi 10s">
+                  <span>⏪ 10s</span>
+                </button>
+                <button class="player-main-btn" id="video-play-btn-5" style="background: #ff0033; box-shadow: 0 0 30px #ff0033;" onclick="event.stopPropagation(); toggleDramaVideoPlay(5)" title="Phát / Dừng">
+                  <span id="video-play-icon-5">▶</span>
+                </button>
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(5, 10)" title="Tiến 10s">
+                  <span>10s ⏩</span>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1.2rem;">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="font-size: 16px;">🔊</span>
+                  <input type="range" min="0" max="1" step="0.05" value="0.9" style="width: 100px; accent-color: #ff0033; cursor: pointer;" onclick="event.stopPropagation()" oninput="setDramaVideoVolume(5, this.value)">
+                </div>
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); toggleDramaVideoFullscreen(5)" title="Toàn màn hình">
+                  <span>⛶ Toàn Màn Hình</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 06: BÀI HỌC SAU TIỂU PHẨM -->
+      <section class="scenography-slide" id="slide-6" data-index="6"
+        data-title="Bài Học Sau Vấp Ngã"
+        data-cam="0,-3,19" data-cam-rot="0.2,0,0"
+        data-neon-p="#00ff88" data-neon-s="#00e5ff" data-neon-t="#ffd700">
+        <div class="layout-kintsugi-rebirth">
+          <p style="font-size: var(--font-title); font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 2px;">
+            "Trưởng thành không đo bằng việc chúng ta đã đi được bao xa..."
+          </p>
+
+          <div class="kintsugi-gold-manifesto">
+            <p style="font-size: var(--font-hero); font-weight: 900; line-height: 1.35; color: #ffffff;">
+              "MÀ LÀ SAU MỖI LẦN VẤP NGÃ,<br>
+              <span style="color: #ffd700; text-shadow: 0 0 45px #ffd700;">CHÚNG TA ĐÃ HỌC ĐƯỢC ĐIỀU GÌ."</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 07: KHỞI ĐỘNG MINIGAME TOÀN TRƯỜNG -->
+      <section class="scenography-slide" id="slide-7" data-index="7"
+        data-title="Khởi Động Minigame"
+        data-cam="0,0,24" data-cam-rot="0,0,0"
+        data-neon-p="#ff007f" data-neon-s="#00f3ff" data-neon-t="#ffff00">
+        <div class="layout-orbital-hub">
+          <div class="telemetry-tag" style="color: #ff007f;">[ GIAO LƯU SÂN KHẤU TOÀN TRƯỜNG ]</div>
+
+          <h1 class="monumental-text" style="text-shadow: 0 0 50px #ff007f;">
+            ĐỨNG TRƯỚC LỰA CHỌN
+          </h1>
+
+          <div class="laser-blade-rail" style="max-width: 1400px;"></div>
+
+          <p style="font-size: var(--font-statement); font-weight: 800; color: #00f3ff; letter-spacing: 3px;">
+            GIƠ TAY PHÁT BIỂU • NHẬN QUÀ LƯU NIỆM ĐẶC BIỆT TỪ 12A2
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 08: CÂU HỎI 1 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-8" data-index="8"
+        data-title="Câu Hỏi 01: Dấu Hiệu Trưởng Thành"
+        data-cam="4,-2,20" data-cam-rot="0.1,-0.15,0"
+        data-neon-p="#00f3ff" data-neon-s="#39ff14" data-neon-t="#002266">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: var(--neon-primary); margin-bottom: 0.8rem;">// THỬ THÁCH 01 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "ĐIỀU GÌ LÀ DẤU HIỆU RÕ NHẤT CỦA SỰ TRƯỞNG THÀNH?"
+            </h2>
+            <div class="target-status-line" id="status-line-8">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="B">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(8, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Không còn phụ thuộc vào người khác</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(8, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">BIẾT CHỊU TRÁCH NHIỆM VỚI LỰA CHỌN CỦA MÌNH</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(8, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">Có thể tự kiếm tiền</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(8, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">Không bao giờ mắc sai lầm</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-8">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● KHÓA MỤC TIÊU: ĐÁP ÁN B</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "Trưởng thành không phải là không sai, mà là <span style="color: #39ff14;">DÁM CHỊU TRÁCH NHIỆM</span> với điều mình đã chọn!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 09: CÂU HỎI 2 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-9" data-index="9"
+        data-title="Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?"
+        data-cam="-4,3,19" data-cam-rot="-0.1,0.15,0"
+        data-neon-p="#ff9966" data-neon-s="#c77dff" data-neon-t="#39ff14">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: #ff9966; margin-bottom: 0.8rem;">// THỬ THÁCH 02 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "KHI THẤT BẠI, BẠN THƯỜNG LÀM GÌ?"
+            </h2>
+            <div class="target-status-line" id="status-line-9">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="D">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(9, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Đổ lỗi cho hoàn cảnh</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(9, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">Bỏ cuộc vì nghĩ mình không đủ khả năng</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(9, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">Giấu cảm xúc và coi như không có chuyện gì</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(9, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">NHÌN LẠI, RÚT KINH NGHIỆM VÀ THỬ LẠI</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-9">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● CHUYỂN HƯỚNG TƯ DUY: ĐÁP ÁN D</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "Chuyển từ câu hỏi: <em>'Tại sao mình lại gặp chuyện này?'</em> sang <span style="color: #39ff14;">'MÌNH CÓ THỂ LÀM GÌ ĐỂ TỐT HƠN?'</span>"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: CÂU HỎI 3 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-10" data-index="10"
+        data-title="Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai"
+        data-cam="0,5,17" data-cam-rot="-0.2,0,0"
+        data-neon-p="#ff3c00" data-neon-s="#55ffcc" data-neon-t="#9933ff">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: #ff3c00; margin-bottom: 0.8rem;">// THỬ THÁCH 03 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "KHI NHẬN RA MÌNH ĐÃ LỰA CHỌN SAI, BẠN SẼ LÀM GÌ?"
+            </h2>
+            <div class="target-status-line" id="status-line-10">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="C">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(10, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Cố gắng che giấu để không bị đánh giá</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(10, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">Đổ lỗi cho hoàn cảnh</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(10, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">THỪA NHẬN SAI LẦM VÀ TÌM CÁCH SỬA CHỮA</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(10, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">Bỏ qua vì chuyện đã xảy ra rồi</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-10">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● BẢN LĨNH BẢN THÂN: ĐÁP ÁN C</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "Dũng cảm <span style="color: #39ff14;">nhận sai và sửa đổi</span> là biểu hiện cao nhất của sự bản lĩnh!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CÂU HỎI 4 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-11" data-index="11"
+        data-title="Câu Hỏi 04: Biểu Hiện Trưởng Thành"
+        data-cam="0,0,21" data-cam-rot="0,0,0.1"
+        data-neon-p="#0066ff" data-neon-s="#ffd700" data-neon-t="#ffffff">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: #0066ff; margin-bottom: 0.8rem;">// THỬ THÁCH 04 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "ĐIỀU NÀO DƯỚI ĐÂY THỂ HIỆN MỘT NGƯỜI ĐANG TRƯỞNG THÀNH?"
+            </h2>
+            <div class="target-status-line" id="status-line-11">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="C">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(11, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Luôn cố gắng làm hài lòng tất cả mọi người</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(11, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">Không bao giờ cho phép bản thân mắc sai lầm</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(11, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">BIẾT LẮNG NGHE, TỰ QUYẾT ĐỊNH VÀ CHỊU TRÁCH NHIỆM</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(11, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">Luôn tự mình giải quyết mọi vấn đề, không cần đến ai</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-11">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● TỰ CHỦ CUỘC ĐỜI: ĐÁP ÁN C</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "<span style="color: #39ff14;">Lắng nghe xung quanh</span> nhưng luôn làm chủ tay lái cuộc đời mình!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: CÂU HỎI 5 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-12" data-index="12"
+        data-title="Câu Hỏi 05: Khi Người Khác Thất Vọng"
+        data-cam="5,-3,19" data-cam-rot="0.1,-0.2,0"
+        data-neon-p="#ffaa00" data-neon-s="#ff0099" data-neon-t="#1a0033">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: #ffaa00; margin-bottom: 0.8rem;">// THỬ THÁCH 05 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "NẾU LỰA CHỌN CỦA BẠN KHIẾN NGƯỜI KHÁC THẤT VỌNG?"
+            </h2>
+            <div class="target-status-line" id="status-line-12">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="C">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(12, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Từ bỏ lựa chọn của mình ngay</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(12, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">Làm theo ý mọi người để không bị trách</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(12, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">CÂN NHẮC, LẮNG NGHE NHƯNG VẪN TỰ CHỊU TRÁCH NHIỆM</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(12, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">Không quan tâm đến bất kỳ ai</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-12">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● GIỮ VỮNG LẬP TRƯỜNG: ĐÁP ÁN C</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "Trưởng thành là <span style="color: #39ff14;">giữ vững lập trường</span> mà không cực đoan, tiếp thu mà không đánh mất mình!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: CÂU HỎI 6 (MINIGAME) -->
+      <section class="scenography-slide" id="slide-13" data-index="13"
+        data-title="Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?"
+        data-cam="0,0,18" data-cam-rot="0,0,-0.1"
+        data-neon-p="#ff0044" data-neon-s="#9d4edd" data-neon-t="#80d8ff">
+        <div class="stage-minigame-arena">
+          <div class="target-question-header">
+            <div class="telemetry-tag" style="color: #ff0044; margin-bottom: 0.8rem;">// THỬ THÁCH 06 / 06</div>
+            <h2 style="font-size: var(--font-title); font-weight: 900; letter-spacing: 1px;">
+              "ĐIỀU NÀO KHÔNG ĐỒNG NGHĨA VỚI TRƯỞNG THÀNH?"
+            </h2>
+            <div class="target-status-line" id="status-line-13">[ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]</div>
+          </div>
+
+          <div class="target-nodes-matrix" data-correct="C">
+            <div class="holo-target-node" data-choice="A" onclick="engageHoloTarget(13, 'A')">
+              <div class="node-reticle-glyph">A</div>
+              <div class="node-statement-text">Biết xin lỗi khi mình sai</div>
+            </div>
+            <div class="holo-target-node" data-choice="B" onclick="engageHoloTarget(13, 'B')">
+              <div class="node-reticle-glyph">B</div>
+              <div class="node-statement-text">Biết lắng nghe người khác</div>
+            </div>
+            <div class="holo-target-node" data-choice="C" onclick="engageHoloTarget(13, 'C')">
+              <div class="node-reticle-glyph">C</div>
+              <div class="node-statement-text">LUÔN PHẢI MẠNH MẼ VÀ KHÔNG ĐƯỢC YẾU LÒNG</div>
+            </div>
+            <div class="holo-target-node" data-choice="D" onclick="engageHoloTarget(13, 'D')">
+              <div class="node-reticle-glyph">D</div>
+              <div class="node-statement-text">Biết chịu trách nhiệm</div>
+            </div>
+          </div>
+
+          <div class="revealed-insight-beam" id="insight-13">
+            <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.4rem;">● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C</div>
+            <p style="font-size: var(--font-statement); font-weight: 900; color: #ffffff;">
+              "<span style="color: #39ff14;">TRƯỞNG THÀNH ĐƯỢC PHÉP YẾU LÒNG</span> — Quan trọng là biết đứng lên sau khi lau khô nước mắt!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: CÂU HỎI MỞ SÂN KHẤU -->
+      <section class="scenography-slide" id="slide-14" data-index="14"
+        data-title="Câu Hỏi Mở Sân Khấu"
+        data-cam="-8,2,20" data-cam-rot="0,0.3,0"
+        data-neon-p="#480048" data-neon-s="#ff007f" data-neon-t="#ffffff">
+        <div class="layout-sonic-vortex">
+          <div class="telemetry-tag" style="color: var(--neon-secondary);">// GIAO LƯU TRỰC TIẾP KHÁN GIẢ</div>
+
+          <h1 class="monumental-text" style="font-size: clamp(52px, 7vw, 110px); text-shadow: 0 0 50px var(--neon-secondary);">
+            "BẠN NGHĨ MÌNH ĐÃ TRƯỞNG THÀNH CHƯA?"
+          </h1>
+
+          <div class="laser-blade-rail" style="max-width: 1400px;"></div>
+
+          <p style="font-size: var(--font-statement); font-weight: 700; color: rgba(255,255,255,0.85);">
+            "Nếu hôm nay bạn vẫn chưa có câu trả lời... Không sao cả."
+          </p>
+
+          <p style="font-size: var(--font-hero); font-weight: 900; color: #39ff14; text-shadow: 0 0 40px #39ff14;">
+            CHÚNG TA ĐỀU ĐANG TRƯỞNG THÀNH TỪNG NGÀY!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: LỜI NHẮN CHO CHÍNH MÌNH -->
+      <section class="scenography-slide" id="slide-15" data-index="15"
+        data-title="Lời Nhắn Gửi Bản Thân"
+        data-cam="0,1,16" data-cam-rot="0.05,0,0"
+        data-neon-p="#ff7700" data-neon-s="#ff3366" data-neon-t="#e0aaff">
+        <div class="layout-origami-telemetry">
+          <h1 style="font-size: var(--font-hero); font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 45px #ff7700;">
+            LỜI NHẮN GỬI TÔI CỦA NGÀY MAI
+          </h1>
+
+          <div class="origami-ribbons-grid">
+            <div class="origami-ribbon-spire" style="border-color: #ff7700;">
+              <div class="telemetry-tag" style="color: #ff7700; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 01</div>
+              "Cảm ơn vì đã không bỏ cuộc giữa những áp lực."
+            </div>
+            <div class="origami-ribbon-spire" style="border-color: #ff3366;">
+              <div class="telemetry-tag" style="color: #ff3366; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 02</div>
+              "Xin lỗi vì đã từng quá khắt khe với chính mình."
+            </div>
+            <div class="origami-ribbon-spire" style="border-color: #e0aaff;">
+              <div class="telemetry-tag" style="color: #e0aaff; margin-bottom: 0.8rem;">// THÔNG ĐIỆP 03</div>
+              "Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"
+            </div>
+          </div>
+
+          <div class="hud-bracket-container" style="max-width: 1200px;">
+            <p style="font-size: var(--font-statement); font-weight: 800; color: #ff3366;">
+              "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là một hành trình!"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: TIẾT MỤC KẾT: “RỰC RỠ” -->
+      <section class="scenography-slide" id="slide-16" data-index="16"
+        data-title="Tiết Mục Kết: Rực Rỡ"
+        data-cam="0,0,12" data-cam-rot="0,0,0.2"
+        data-neon-p="#ff0055" data-neon-s="#00f3ff" data-neon-t="#ffe600">
+        
+        <!-- Standard Slide View -->
+        <div class="layout-supernova-blast" id="slide-16-view">
+          <h1 class="supernova-kinetic-hero">RỰC RỠ</h1>
+
+          <h2 style="font-size: var(--font-title); font-weight: 900; color: #ffe600; text-shadow: 0 0 35px #ffe600; letter-spacing: 4px;">
+            TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+          </h2>
+
+          <div class="laser-blade-rail" style="max-width: 1500px;"></div>
+
+          <p style="font-size: var(--font-statement); font-weight: 800; color: #ffffff; letter-spacing: 2px;">
+            "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
+          </p>
+
+          <p style="font-size: var(--font-title); font-weight: 900; color: #39ff14; letter-spacing: 6px; text-shadow: 0 0 30px #39ff14;">
+            CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
+          </p>
+
+          <!-- Triangular Play Trigger -->
+          <div class="play-trigger-wrap">
+            <button class="stage-play-trigger-btn" onclick="openPerformanceMusicPlayer(16)" title="Khởi động Trình phát nhạc bài hát">
+              <span class="triangle-play-icon">▶</span>
+            </button>
+            <span class="play-trigger-label">PHÁT BÀI HÁT: RỰC RỠ</span>
+          </div>
+        </div>
+
+        <!-- Music Player View -->
+        <div class="stage-music-player-panel" id="music-player-16" style="display: none;">
+          <audio id="perf-audio-16" preload="metadata"></audio>
+
+          <div class="player-header-bar">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <div class="telemetry-beacon"></div>
+              <span class="telemetry-tag" style="color: var(--neon-primary); font-size: 13px;">
+                // TRÌNH PHÁT BÀI HÁT BẾ MẠC
+              </span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(16)" title="Trở về slide [Esc]">
+                <span>✕ Đóng [Esc]</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="player-body-deck">
+            <div class="player-vinyl-wrap">
+              <div class="player-vinyl-disc" id="vinyl-disc-16">
+                <div class="player-vinyl-center">
+                  <span style="font-size: 20px;">🌟</span>
+                </div>
+              </div>
+              <div class="cyber-eq-bars" id="eq-bars-16">
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+                <div class="cyber-eq-bar"></div>
+              </div>
+            </div>
+
+            <div class="player-track-info" style="flex: 1; text-align: left;">
+              <div class="telemetry-tag" style="color: #ff0055; margin-bottom: 0.5rem;" id="perf-status-badge-16">
+                ● SẴN SÀNG PHÁT
+              </div>
+              <h2 style="font-size: 36px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px var(--neon-glow);" id="perf-track-title-16">
+                RỰC RỠ
+              </h2>
+              <p style="font-size: 18px; color: #ffe600; font-weight: 800; margin-top: 0.4rem;" id="perf-track-sub-16">
+                TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+              </p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 0.4rem;">
+                Cùng hát • Cùng cảm nhận • Cùng rực rỡ
+              </p>
+
+            </div>
+          </div>
+
+          <div class="player-bottom-deck">
+            <div class="player-timeline-wrap">
+              <span class="player-time-text" id="perf-cur-time-16">00:00</span>
+              <div class="player-slider-rail" id="perf-slider-rail-16" onclick="seekPerfMusic(16, event)">
+                <div class="player-slider-fill" id="perf-slider-fill-16"></div>
+              </div>
+              <span class="player-time-text" id="perf-dur-time-16">00:00</span>
+            </div>
+
+            <div class="player-controls-row">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="player-secondary-btn" onclick="skipPerfMusic(16, -10)" title="Lùi 10s">
+                  <span>⏪ 10s</span>
+                </button>
+                <button class="player-main-btn" id="perf-play-btn-16" onclick="togglePerfMusicPlay(16)" title="Phát / Tạm dừng [Space]">
+                  <span id="perf-play-icon-16">▶</span>
+                </button>
+                <button class="player-secondary-btn" onclick="skipPerfMusic(16, 10)" title="Tiến 10s">
+                  <span>10s ⏩</span>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 16px;">🔊</span>
+                <input type="range" min="0" max="1" step="0.05" value="0.85" style="width: 110px; accent-color: var(--neon-primary); cursor: pointer;" oninput="setPerfMusicVolume(16, this.value)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: BẾ MẠC & TRI ÂN TOÀN TRƯỜNG -->
+      <section class="scenography-slide" id="slide-17" data-index="17"
+        data-title="Bế Mạc & Tri Ân"
+        data-cam="8,5,20" data-cam-rot="0.1,-0.3,0"
+        data-neon-p="#00f5d4" data-neon-s="#ff70a6" data-neon-t="#ffd166">
+        <div class="layout-mobius-infinity">
+          <h2 style="font-size: var(--font-title); font-weight: 800; color: #ffd166; letter-spacing: 3px;">
+            "NẾU CẢ ĐỜI NÀY KHÔNG RỰC RỠ THÌ SAO?"
+          </h2>
+
+          <h1 style="font-size: var(--font-hero); font-weight: 900; color: #00f5d4; text-shadow: 0 0 45px #00f5d4; letter-spacing: 2px;">
+            "Không sao cả, vì ngày mai vẫn đến và sương mù sẽ tan!"
+          </h1>
+
+          <div class="laser-blade-rail" style="max-width: 1400px;"></div>
+
+          <p style="font-size: var(--font-title); font-weight: 900; color: #ffffff;">
+            TẬP THỂ 12A2 TRÂN TRỌNG CẢM ƠN QUÝ THẦY CÔ VÀ CÁC BẠN!
+          </p>
+
+          <p style="font-size: var(--font-statement); font-weight: 700; color: #ffd166;">
+            Chúc toàn trường một tuần mới tràn đầy năng lượng & hạnh phúc!
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Bottom Stage HUD Bar (Streamlined: Real-time Clock & Laser Progress Only) -->
+  <footer class="stage-bottom-hud">
+    <div class="stage-laser-progress">
+      <div class="stage-laser-progress-fill" id="stage-laser-progress-fill"></div>
+    </div>
+
+    <div class="hud-stage-clock">
+      <div class="clock-beacon"></div>
+      <span id="hud-stage-clock-time">00:00:00</span>
+    </div>
+  </footer>
+
+  <!-- Hidden File Input for Shortcut [T] Reload -->
+  <input type="file" id="txt-file-input" accept=".txt" style="display: none;" onchange="handleCustomTxtUpload(this.files[0])">
+
+  <!-- Modal 17 Slides Holographic Grid -->
+  <div id="scenography-nav-modal" onclick="handleNavModalClick(event)">
+    <div class="nav-holo-panel" onclick="event.stopPropagation()">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 3px;">
+          DANH MỤC 17 CẢNH DIỄN SÂN KHẤU 12A2
+        </h2>
+        <button class="hud-action-btn" onclick="toggleHoloNavModal()">✕ Đóng [Esc]</button>
+      </div>
+      <div class="nav-holo-grid" id="nav-holo-grid"></div>
+    </div>
+  </div>
+
+  <!-- Modal Keyboard Shortcuts Cheatsheet [H / ?] -->
+  <div id="scenography-help-modal" onclick="handleHelpModalClick(event)">
+    <div class="nav-holo-panel" onclick="event.stopPropagation()" style="max-width: 860px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 1.2rem;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div class="telemetry-beacon"></div>
+          <h2 style="font-size: 20px; font-weight: 900; color: var(--neon-primary); letter-spacing: 2px;">
+            HỆ THỐNG PHÍM TẮT ĐIỀU KHIỂN SÂN KHẤU
+          </h2>
+        </div>
+        <button class="hud-action-btn" onclick="toggleHelpModal()">✕ Đóng [Esc]</button>
+      </div>
+
+      <div class="shortcuts-grid">
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">Space</span> <span class="key-badge">➔</span> <span class="key-badge">🠗</span> <span class="key-badge">PageDown</span> <span class="key-badge">Enter</span></div>
+          <div class="shortcut-desc">Chuyển sang Slide tiếp theo (Tương thích Clicker trình chiếu)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">🠔</span> <span class="key-badge">🠕</span> <span class="key-badge">PageUp</span> <span class="key-badge">Backspace</span></div>
+          <div class="shortcut-desc">Quay lại Slide liền trước</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">O</span> <span class="key-badge">G</span> <span class="key-badge">Tab</span></div>
+          <div class="shortcut-desc">Bật / Tắt danh mục toàn bộ 17 phân cảnh diễn</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">M</span></div>
+          <div class="shortcut-desc">Bật / Tắt hệ thống âm thanh sân khấu (Ambient + Sound FX)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">F</span> <span class="key-badge">F11</span></div>
+          <div class="shortcut-desc">Bật / Tắt chế độ toàn màn hình LED sân khấu</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">T</span></div>
+          <div class="shortcut-desc">Chọn và nạp lại tệp kịch bản ngoài (content.txt)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">A</span> <span class="key-badge">B</span> <span class="key-badge">C</span> <span class="key-badge">D</span> / <span class="key-badge">1</span> <span class="key-badge">2</span> <span class="key-badge">3</span> <span class="key-badge">4</span></div>
+          <div class="shortcut-desc">Khóa mục tiêu tương tác Minigame đúng / sai (Slide 8 – 13)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">Home</span> / <span class="key-badge">End</span></div>
+          <div class="shortcut-desc">Nhảy nhanh về Cảnh đầu tiên (Khai màn) / Cảnh cuối (Bế mạc)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">H</span> / <span class="key-badge">?</span></div>
+          <div class="shortcut-desc">Bật / Tắt bảng hướng dẫn phím tắt này</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       6. CONCERT AUDIO ENGINE • EXTERNAL BGM PLAYER & LASER SYNTHESIZER
+       ========================================================================== -->
+  <script>
+    class ConcertAudioEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.droneGain = null;
+        this.droneOsc1 = null;
+        this.droneOsc2 = null;
+        this.droneFilter = null;
+        this.synthDroneEnabled = false; // Default false to prevent unwanted noise
+        this.synthDroneVolume = 0.0;
+
+        // External Audio Background Music (BGM)
+        this.bgmAudio = new Audio();
+        this.bgmAudio.loop = true;
+        this.bgmAudio.crossOrigin = 'anonymous';
+        this.bgmAudio.preload = 'auto';
+        this.bgmVolume = 0.35;
+        this.bgmAudio.volume = this.bgmVolume;
+        this.currentBgmSrc = '';
+
+        this.bgmAudio.addEventListener('error', () => {
+          // Graceful fallback if external audio file is not present or inaccessible
+          console.log('BGM note: Audio file not found or not yet loaded.');
+        });
+      }
+
+      ensureContext() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+          if (this.synthDroneEnabled && this.synthDroneVolume > 0) {
+            this.startPersistentDrone();
+          }
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      setSynthDrone(enabled, volume = 0.0) {
+        this.synthDroneEnabled = enabled;
+        this.synthDroneVolume = volume;
+        if (!this.ctx && enabled && volume > 0) {
+          this.ensureContext();
+        }
+        if (this.droneGain && this.ctx) {
+          this.droneGain.gain.setValueAtTime((this.enabled && enabled) ? volume : 0.0, this.ctx.currentTime);
+        } else if (enabled && volume > 0 && this.ctx) {
+          this.startPersistentDrone();
+        }
+      }
+
+      startPersistentDrone() {
+        if (!this.ctx || this.droneGain || !this.synthDroneEnabled || this.synthDroneVolume <= 0) return;
+        try {
+          // Low Cosmic Resonance Drone
+          this.droneOsc1 = this.ctx.createOscillator();
+          this.droneOsc2 = this.ctx.createOscillator();
+          this.droneOsc1.type = 'triangle';
+          this.droneOsc2.type = 'sine';
+          this.droneOsc1.frequency.setValueAtTime(55, this.ctx.currentTime);
+          this.droneOsc2.frequency.setValueAtTime(55.4, this.ctx.currentTime);
+
+          this.droneFilter = this.ctx.createBiquadFilter();
+          this.droneFilter.type = 'lowpass';
+          this.droneFilter.frequency.setValueAtTime(180, this.ctx.currentTime);
+          this.droneFilter.Q.setValueAtTime(2.0, this.ctx.currentTime);
+
+          this.droneGain = this.ctx.createGain();
+          this.droneGain.gain.setValueAtTime(this.enabled ? this.synthDroneVolume : 0.0, this.ctx.currentTime);
+
+          this.droneOsc1.connect(this.droneFilter);
+          this.droneOsc2.connect(this.droneFilter);
+          this.droneFilter.connect(this.droneGain);
+          this.droneGain.connect(this.ctx.destination);
+
+          this.droneOsc1.start();
+          this.droneOsc2.start();
+        } catch (e) {
+          console.warn('Drone note:', e);
+        }
+      }
+
+      loadBgm(fileUrl, volume = 0.35, loop = true) {
+        if (!fileUrl) return;
+        this.bgmVolume = Math.max(0, Math.min(1, volume));
+        this.bgmAudio.volume = this.bgmVolume;
+        this.bgmAudio.loop = loop;
+
+        if (this.currentBgmSrc !== fileUrl) {
+          this.currentBgmSrc = fileUrl;
+          this.bgmAudio.src = fileUrl;
+          if (this.enabled) {
+            this.bgmAudio.play().catch(() => {
+              // Waiting for user gesture, will resume on first click/key
+            });
+          }
+        }
+      }
+
+      resumeBgm() {
+        if (this.enabled && this.bgmAudio && this.bgmAudio.src && this.bgmAudio.paused) {
+          this.bgmAudio.play().catch(() => {});
+        }
+      }
+
+      toggleAudio() {
+        this.enabled = !this.enabled;
+        if (this.droneGain && this.ctx) {
+          this.droneGain.gain.setValueAtTime((this.enabled && this.synthDroneEnabled) ? this.synthDroneVolume : 0.0, this.ctx.currentTime);
+        }
+        if (this.bgmAudio) {
+          if (this.enabled) {
+            if (this.bgmAudio.src) this.bgmAudio.play().catch(() => {});
+          } else {
+            this.bgmAudio.pause();
+          }
+        }
+        return this.enabled;
+      }
+
+      playSubBassImpact() {
+        if (!this.enabled) return;
+        this.ensureContext();
+        const now = this.ctx.currentTime;
+
+        // Sub-bass Drop (Rumble)
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(30, now + 0.7);
+        gain.gain.setValueAtTime(0.38, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.7);
+
+        // White Noise Laser Warp Swoosh
+        const bufferSize = this.ctx.sampleRate * 0.55;
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(450, now);
+        filter.frequency.exponentialRampToValueAtTime(2400, now + 0.22);
+        filter.frequency.exponentialRampToValueAtTime(220, now + 0.55);
+        const noiseGain = this.ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.14, now);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        noise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(this.ctx.destination);
+        noise.start(now);
+
+        // Modulate drone filter frequency during warp
+        if (this.droneFilter) {
+          this.droneFilter.frequency.setValueAtTime(350, now);
+          this.droneFilter.frequency.exponentialRampToValueAtTime(180, now + 1.2);
+        }
+      }
+
+      playErrorDissonance() {
+        if (!this.enabled) return;
+        this.ensureContext();
+        const now = this.ctx.currentTime;
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc1.type = 'sawtooth';
+        osc2.type = 'sawtooth';
+        osc1.frequency.setValueAtTime(175, now);
+        osc1.frequency.exponentialRampToValueAtTime(75, now + 0.35);
+        osc2.frequency.setValueAtTime(247, now);
+        osc2.frequency.exponentialRampToValueAtTime(105, now + 0.35);
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(950, now);
+        filter.frequency.exponentialRampToValueAtTime(160, now + 0.35);
+        gain.gain.setValueAtTime(0.32, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 0.35);
+        osc2.stop(now + 0.35);
+      }
+
+      playLaserLockOn() {
+        if (!this.enabled) return;
+        this.ensureContext();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(1500, now);
+        osc.frequency.exponentialRampToValueAtTime(160, now + 0.25);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+
+      playCelestialHarmonics() {
+        if (!this.enabled) return;
+        this.ensureContext();
+        const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        chords.forEach((freq, idx) => {
+          const now = this.ctx.currentTime + idx * 0.07;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.85);
+        });
+      }
+
+      playHudClick() {
+        if (!this.enabled) return;
+        this.ensureContext();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(900, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(450, this.ctx.currentTime + 0.035);
+        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.035);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.035);
+      }
+
+      toggleAudio() {
+        this.enabled = !this.enabled;
+        if (this.droneGain && this.ctx) {
+          this.droneGain.gain.setValueAtTime((this.enabled && this.synthDroneEnabled) ? this.synthDroneVolume : 0.0, this.ctx.currentTime);
+        }
+        if (this.bgmAudio) {
+          if (this.enabled) {
+            if (this.bgmAudio.src) this.bgmAudio.play().catch(() => {});
+          } else {
+            this.bgmAudio.pause();
+          }
+        }
+        return this.enabled;
+      }
+    }
+
+    const stageAudio = new ConcertAudioEngine();
+  </script>
+
+  <!-- ==========================================================================
+       7. THREE.JS 3D ENGINE • CONTINUOUS ENERGY SPINE • HYPERDRIVE WARP
+       ========================================================================== -->
+  <script>
+    const stageCanvas = document.getElementById('webgl-stage');
+    let renderer, scene, camera;
+    let sceneObjects = [];
+    let currentSlideIdx = 1;
+    let particleNebula;
+    let continuousEnergySpine; // Unbroken 3D visual thread weaving through all 17 slides
+    const totalSlides = 17;
+
+    function initStage3D() {
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: stageCanvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 22);
+
+        // Volumetric Cyber Dust Nebula (Becomes Hyperdrive Streaks during Warp)
+        createVolumetricNebula();
+
+        // Continuous 3D Energy Spine that connects all slides seamlessly
+        createContinuousEnergySpine();
+
+        // 17 Procedural Wireframe Architectures (100% Outline Only)
+        build17Scenographies();
+
+        window.addEventListener('resize', onStageResize);
+      } catch (err) {
+        console.warn('Three.js Stage Engine Warning:', err);
+      }
+    }
+
+    function createVolumetricNebula() {
+      const count = 650;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i += 3) {
+        pos[i] = (Math.random() - 0.5) * 90;
+        pos[i + 1] = (Math.random() - 0.5) * 65;
+        pos[i + 2] = (Math.random() - 0.5) * 55;
+      }
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      const mat = new THREE.PointsMaterial({
+        size: 0.25,
+        color: 0x00f3ff,
+        transparent: true,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending
+      });
+      particleNebula = new THREE.Points(geo, mat);
+      scene.add(particleNebula);
+    }
+
+    // THE CONTINUOUS ENERGY SPINE: A living laser thread that ties the entire presentation together
+    function createContinuousEnergySpine() {
+      const splinePoints = [];
+      const numPoints = 80;
+      for (let i = 0; i < numPoints; i++) {
+        const t = (i / numPoints) * Math.PI * 4;
+        splinePoints.push(new THREE.Vector3(
+          Math.sin(t) * (14 + Math.cos(t * 2) * 4),
+          Math.cos(t * 0.7) * 7,
+          -10 + (i / numPoints) * 25
+        ));
+      }
+      const curve = new THREE.CatmullRomCurve3(splinePoints);
+      curve.closed = true;
+
+      const spineGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(300));
+      const spineMat = new THREE.LineBasicMaterial({
+        color: 0x00f3ff,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending
+      });
+
+      continuousEnergySpine = new THREE.Line(spineGeo, spineMat);
+      scene.add(continuousEnergySpine);
+    }
+
+    function build17Scenographies() {
+      // 1. Cosmic Horizon Singularity
+      const g1 = new THREE.Group();
+      for (let i = 0; i < 7; i++) {
+        const ring = new THREE.LineLoop(
+          new THREE.RingGeometry(3.6 + i * 1.3, 3.64 + i * 1.3, 56),
+          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.55 })
+        );
+        ring.position.z = -i * 1.6;
+        g1.add(ring);
+      }
+      const ship = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.ConeGeometry(1.6, 4.5, 4)),
+        new THREE.LineBasicMaterial({ color: 0xff007f })
+      );
+      ship.rotation.x = Math.PI / 2;
+      ship.position.set(0, 0, 2);
+      g1.add(ship);
+      sceneObjects[1] = g1;
+      scene.add(g1);
+
+      // 2. Phoenix Wings
+      const g2 = new THREE.Group();
+      const wingMat = new THREE.LineBasicMaterial({ color: 0x39ff14, transparent: true, opacity: 0.8 });
+      for (let w = -1; w <= 1; w += 2) {
+        for (let i = 0; i < 12; i++) {
+          const curve = new THREE.CubicBezierCurve3(
+            new THREE.Vector3(0, -2.5, 0),
+            new THREE.Vector3(w * (3 + i * 1.2), 3 + i * 0.5, i * 0.4),
+            new THREE.Vector3(w * (8 + i * 1.5), 6.5 + i * 0.3, -i * 0.6),
+            new THREE.Vector3(w * (13 + i * 1.7), 1 - i * 0.3, -2)
+          );
+          g2.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(36)), wingMat));
+        }
+      }
+      sceneObjects[2] = g2;
+      g2.visible = false;
+      scene.add(g2);
+
+      // 3. Triptych Helix Spire
+      const g3 = new THREE.Group();
+      const hA = [], hB = [];
+      for (let t = -12; t <= 12; t += 0.28) {
+        hA.push(new THREE.Vector3(Math.cos(t) * 4.8, t * 0.62, Math.sin(t) * 4.8));
+        hB.push(new THREE.Vector3(Math.cos(t + Math.PI) * 4.8, t * 0.62, Math.sin(t + Math.PI) * 4.8));
+      }
+      const helixMat = new THREE.LineBasicMaterial({ color: 0xff5e00, transparent: true, opacity: 0.8 });
+      g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hA), helixMat));
+      g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hB), helixMat));
+      sceneObjects[3] = g3;
+      g3.visible = false;
+      scene.add(g3);
+
+      // 4. Split-Anamorphic Shards
+      const g4 = new THREE.Group();
+      for (let i = 0; i < 20; i++) {
+        const poly = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.2 + (i % 3) * 0.8, 0)),
+          new THREE.LineBasicMaterial({ color: i % 2 === 0 ? 0xff0055 : 0x00ffc4 })
+        );
+        poly.position.set((Math.random() - 0.5) * 28, (Math.random() - 0.5) * 16, (Math.random() - 0.5) * 10);
+        g4.add(poly);
+      }
+      sceneObjects[4] = g4;
+      g4.visible = false;
+      scene.add(g4);
+
+      // 5. Isometric Labyrinth & Expectation Towers
+      const g5 = new THREE.Group();
+      const grid = new THREE.GridHelper(28, 16, 0xff0033, 0xffcc00);
+      grid.rotation.x = Math.PI / 4;
+      grid.position.y = -6;
+      g5.add(grid);
+      for (let i = 0; i < 8; i++) {
+        const pillar = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(1.6, 5 + i * 1.2, 1.6)),
+          new THREE.LineBasicMaterial({ color: 0xff0033 })
+        );
+        pillar.position.set(-10 + i * 2.8, -2 + i * 0.6, -5 + (i % 3) * 2);
+        g5.add(pillar);
+      }
+      sceneObjects[5] = g5;
+      g5.visible = false;
+      scene.add(g5);
+
+      // 6. Kintsugi Laser Blossom & Jade Lotus
+      const g6 = new THREE.Group();
+      const lotusMat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.85 });
+      for (let layer = 1; layer <= 3; layer++) {
+        const count = 8 * layer;
+        for (let p = 0; p < count; p++) {
+          const angle = (p / count) * Math.PI * 2;
+          const curve = new THREE.QuadraticBezierCurve3(
+            new THREE.Vector3(0, -3, 0),
+            new THREE.Vector3(Math.cos(angle) * (4 + layer * 2), layer * 1.6, Math.sin(angle) * (4 + layer * 2)),
+            new THREE.Vector3(Math.cos(angle) * (3 + layer * 1.5), layer * 3.6, Math.sin(angle) * (3 + layer * 1.5))
+          );
+          g6.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(24)), lotusMat));
+        }
+      }
+      sceneObjects[6] = g6;
+      g6.visible = false;
+      scene.add(g6);
+
+      // 7. Orbital Radar Game Hub
+      const g7 = new THREE.Group();
+      for (let r = 2.5; r <= 16; r += 2.5) {
+        g7.add(new THREE.LineLoop(
+          new THREE.RingGeometry(r, r + 0.06, 64),
+          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.6 })
+        ));
+      }
+      sceneObjects[7] = g7;
+      g7.visible = false;
+      scene.add(g7);
+
+      // 8. Orbital Radar Q1
+      const g8 = new THREE.Group();
+      for (let i = 0; i < 4; i++) {
+        const orbit = new THREE.LineLoop(
+          new THREE.RingGeometry(6 + i * 2.2, 6.06 + i * 2.2, 54),
+          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.55 })
+        );
+        orbit.rotation.x = 0.5 + i * 0.25;
+        orbit.rotation.y = 0.3 + i * 0.2;
+        g8.add(orbit);
+      }
+      sceneObjects[8] = g8;
+      g8.visible = false;
+      scene.add(g8);
+
+      // 9. Crossroads Q2
+      const g9 = new THREE.Group();
+      const cross = new THREE.GridHelper(30, 20, 0xff9966, 0xc77dff);
+      cross.rotation.x = Math.PI / 3;
+      cross.position.y = -6;
+      g9.add(cross);
+      sceneObjects[9] = g9;
+      g9.visible = false;
+      scene.add(g9);
+
+      // 10. U-Turn Vector Loop Q3
+      const g10 = new THREE.Group();
+      const uC = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-12, -4, 0),
+        new THREE.Vector3(-5, -2, 2),
+        new THREE.Vector3(0, 4.5, 3),
+        new THREE.Vector3(5, -2, 2),
+        new THREE.Vector3(12, -4, 0)
+      ]);
+      g10.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(uC.getPoints(54)),
+        new THREE.LineBasicMaterial({ color: 0xff3c00, transparent: true, opacity: 0.9 })
+      ));
+      sceneObjects[10] = g10;
+      g10.visible = false;
+      scene.add(g10);
+
+      // 11. Bifocal HUD Q4
+      const g11 = new THREE.Group();
+      const rA = new THREE.LineLoop(new THREE.RingGeometry(4.4, 4.46, 54), new THREE.LineBasicMaterial({ color: 0x0066ff }));
+      rA.position.x = -2.6;
+      const rB = new THREE.LineLoop(new THREE.RingGeometry(4.4, 4.46, 54), new THREE.LineBasicMaterial({ color: 0xffd700 }));
+      rB.position.x = 2.6;
+      g11.add(rA); g11.add(rB);
+      sceneObjects[11] = g11;
+      g11.visible = false;
+      scene.add(g11);
+
+      // 12. Kinetic Balance Scale Q5
+      const g12 = new THREE.Group();
+      const f = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.ConeGeometry(1.8, 3.6, 3)),
+        new THREE.LineBasicMaterial({ color: 0xffaa00 })
+      );
+      f.position.y = -3;
+      const bm = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.BoxGeometry(16, 0.22, 0.22)),
+        new THREE.LineBasicMaterial({ color: 0xff0099 })
+      );
+      bm.position.y = -1.2;
+      g12.add(f); g12.add(bm);
+      sceneObjects[12] = g12;
+      g12.visible = false;
+      scene.add(g12);
+
+      // 13. Cracked Shield Q6
+      const g13 = new THREE.Group();
+      const sh = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.CylinderGeometry(5, 3.5, 9, 6, 2, true)),
+        new THREE.LineBasicMaterial({ color: 0xff0044 })
+      );
+      g13.add(sh);
+      sceneObjects[13] = g13;
+      g13.visible = false;
+      scene.add(g13);
+
+      // 14. Echo Chamber Microphone Vortex
+      const g14 = new THREE.Group();
+      const mic = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.CylinderGeometry(1.4, 1.4, 4.5, 16)),
+        new THREE.LineBasicMaterial({ color: 0xff007f })
+      );
+      mic.position.set(-10, 0, 0);
+      g14.add(mic);
+      for (let i = 1; i <= 8; i++) {
+        const wav = new THREE.LineLoop(
+          new THREE.RingGeometry(i * 1.6, i * 1.65, 40),
+          new THREE.LineBasicMaterial({ color: 0xe0aaff, transparent: true, opacity: 0.5 - i * 0.05 })
+        );
+        wav.position.set(-10 + i * 2.2, 0, 0);
+        g14.add(wav);
+      }
+      sceneObjects[14] = g14;
+      g14.visible = false;
+      scene.add(g14);
+
+      // 15. Constellation Origami Heart
+      const g15 = new THREE.Group();
+      const hShape = new THREE.Shape();
+      hShape.moveTo(0, 1.5);
+      hShape.bezierCurveTo(0, 2.5, -2.5, 3.5, -3, 1.5);
+      hShape.bezierCurveTo(-3.5, -0.5, 0, -2.5, 0, -4.5);
+      hShape.bezierCurveTo(0, -2.5, 3.5, -0.5, 3, 1.5);
+      hShape.bezierCurveTo(2.5, 3.5, 0, 2.5, 0, 1.5);
+      const hrt = new THREE.LineSegments(
+        new THREE.WireframeGeometry(new THREE.ShapeGeometry(hShape)),
+        new THREE.LineBasicMaterial({ color: 0xff3366 })
+      );
+      hrt.scale.set(1.15, 1.15, 1.15);
+      g15.add(hrt);
+      sceneObjects[15] = g15;
+      g15.visible = false;
+      scene.add(g15);
+
+      // 16. Supernova Spectrum Explosion
+      const g16 = new THREE.Group();
+      for (let i = 0; i < 32; i++) {
+        const angle = (i / 32) * Math.PI * 2;
+        const len = 10 + (i % 4) * 3;
+        const pts = [
+          new THREE.Vector3(0, 0, 0),
+          new THREE.Vector3(Math.cos(angle) * len, Math.sin(angle) * len, (Math.random() - 0.5) * 8)
+        ];
+        const col = new THREE.Color().setHSL(i / 32, 1.0, 0.55);
+        g16.add(new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(pts),
+          new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.9 })
+        ));
+      }
+      sceneObjects[16] = g16;
+      g16.visible = false;
+      scene.add(g16);
+
+      // 17. Mobius Strip 12A2 Dawn
+      const g17 = new THREE.Group();
+      const mobiusPts = [];
+      const segs = 130;
+      for (let i = 0; i <= segs; i++) {
+        const u = (i / segs) * Math.PI * 2;
+        const v = 0.8;
+        const x = (4.2 + v * Math.cos(u / 2)) * Math.cos(u);
+        const y = (4.2 + v * Math.cos(u / 2)) * Math.sin(u);
+        const z = v * Math.sin(u / 2);
+        mobiusPts.push(new THREE.Vector3(x, y, z));
+      }
+      g17.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(mobiusPts),
+        new THREE.LineBasicMaterial({ color: 0x00f5d4 })
+      ));
+      sceneObjects[17] = g17;
+      g17.visible = false;
+      scene.add(g17);
+    }
+
+    function onStageResize() {
+      if (!renderer || !camera) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // Multiharmonic Organic Breathing Loop & Particle Drift
+    let stageClock = new THREE.Clock();
+
+    function renderStageLoop() {
+      requestAnimationFrame(renderStageLoop);
+      const t = stageClock.getElapsedTime();
+
+      // Multiharmonic Breathing
+      const offset = 0.02 * Math.sin(2 * Math.PI * 0.25 * t) + 0.012 * Math.cos(2 * Math.PI * 0.125 * t + 0.5);
+      const scale = 1.0 + offset;
+      const glow = 26 + (offset / 0.032) * 16;
+
+      document.documentElement.style.setProperty('--breathe-scale', scale.toFixed(4));
+      document.documentElement.style.setProperty('--breathe-glow', `${glow.toFixed(1)}px`);
+
+      // Animate Ambient Giant Photon Emitters
+      const emA = document.getElementById('emitter-alpha');
+      const emB = document.getElementById('emitter-beta');
+      if (emA && emB) {
+        emA.style.transform = `translate(${Math.sin(t * 0.3) * 50}px, ${Math.cos(t * 0.25) * 45}px) scale(${1 + offset * 3})`;
+        emB.style.transform = `translate(${Math.cos(t * 0.25) * 50}px, ${Math.sin(t * 0.35) * 45}px) scale(${1 - offset * 3})`;
+      }
+
+      // Animate Continuous Energy Spine (Breathing & Slow Orbit)
+      if (continuousEnergySpine) {
+        continuousEnergySpine.rotation.z = t * 0.05;
+        continuousEnergySpine.rotation.y = Math.sin(t * 0.08) * 0.15;
+      }
+
+      // Rotate particle nebula
+      if (particleNebula) {
+        particleNebula.rotation.y = t * 0.025;
+        particleNebula.rotation.x = Math.sin(t * 0.02) * 0.08;
+      }
+
+      // Rotate current 3D wireframe architecture
+      if (sceneObjects[currentSlideIdx]) {
+        const obj = sceneObjects[currentSlideIdx];
+        obj.rotation.y = t * 0.25;
+        obj.rotation.x = Math.sin(t * 0.2) * 0.15;
+        obj.scale.set(scale, scale, scale);
+      }
+
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initStage3D();
+      renderStageLoop();
+      generateHoloNavTiles();
+      if (typeof initStageClock === 'function') {
+        initStageClock();
+      }
+      if (typeof applyGlassSettings === 'function') {
+        applyGlassSettings(1);
+      }
+      if (typeof applyAudioSettings === 'function') {
+        applyAudioSettings();
+      }
+      if (typeof loadContentFromTxt === 'function') {
+        loadContentFromTxt();
+      }
+    });
+  </script>
+
+  <!-- ==========================================================================
+       8. HYPERDRIVE WARP TRANSITIONS • 3D SPATIAL TILT LOCK • MINIGAME TARGET LOCK
+       ========================================================================== -->
+  <script>
+    function triggerSlideScenography(targetIdx) {
+      // Auto-close open media players if switching slides
+      if (currentActiveMedia) {
+        if (currentActiveMedia.type === 'music') closePerformanceMusicPlayer(currentActiveMedia.id);
+        else if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
+      }
+
+      if (targetIdx < 1 || targetIdx > totalSlides || targetIdx === currentSlideIdx) return;
+
+      const prevIdx = currentSlideIdx;
+      const prevEl = document.getElementById(`slide-${prevIdx}`);
+      const nextEl = document.getElementById(`slide-${targetIdx}`);
+
+      if (!nextEl) return;
+
+      stageAudio.playSubBassImpact();
+
+      // HYPERDRIVE WARP SPEED: FOV Surge & Light Flash
+      const warpFlash = document.getElementById('warp-flash-overlay');
+      if (window.gsap && camera) {
+        // Camera FOV Surges from 50 to 82 and returns
+        gsap.to(camera, {
+          fov: 82,
+          duration: 0.35,
+          ease: "power2.in",
+          onUpdate: () => camera.updateProjectionMatrix(),
+          onComplete: () => {
+            gsap.to(camera, {
+              fov: 50,
+              duration: 0.65,
+              ease: "power3.out",
+              onUpdate: () => camera.updateProjectionMatrix()
+            });
+          }
+        });
+
+        // Flash of Relativistic Light
+        if (warpFlash) {
+          gsap.fromTo(warpFlash, 
+            { opacity: 0, scale: 0.8 },
+            { opacity: 0.75, scale: 1.4, duration: 0.25, ease: "power2.in", yoyo: true, repeat: 1 }
+          );
+        }
+      }
+
+      // Continuous 3D Camera Trajectory Interpolation
+      const camData = nextEl.getAttribute('data-cam');
+      const camRotData = nextEl.getAttribute('data-cam-rot');
+      if (camData && window.gsap && camera) {
+        const [cx, cy, cz] = camData.split(',').map(Number);
+        gsap.to(camera.position, {
+          x: cx, y: cy, z: cz,
+          duration: 1.1,
+          ease: "power3.inOut"
+        });
+      }
+      if (camRotData && window.gsap && camera) {
+        const [rx, ry, rz] = camRotData.split(',').map(Number);
+        gsap.to(camera.rotation, {
+          x: rx, y: ry, z: rz,
+          duration: 1.1,
+          ease: "power3.inOut"
+        });
+
+        // 3D SPATIAL FUSION: Synchronize HTML text tilt with 3D Camera angle & content.txt settings
+        const sKey = `SLIDE_${targetIdx}`;
+        const sData = (typeof currentContentData !== 'undefined' && currentContentData) ? currentContentData[sKey] : null;
+        let tiltX = '0.00', tiltY = '0.00';
+
+        if (sData && sData.tilt_x !== undefined && sData.tilt_y !== undefined) {
+          tiltX = parseFloat(sData.tilt_x).toFixed(2);
+          tiltY = parseFloat(sData.tilt_y).toFixed(2);
+        } else {
+          const maxTilt = (window.stageTiltSettings && window.stageTiltSettings.maxDeg) ? window.stageTiltSettings.maxDeg : 8.5;
+          const mult = (window.stageTiltSettings && window.stageTiltSettings.multiplier) ? window.stageTiltSettings.multiplier : 20;
+          tiltX = Math.max(-maxTilt, Math.min(maxTilt, rx * mult)).toFixed(2);
+          tiltY = Math.max(-maxTilt, Math.min(maxTilt, ry * mult)).toFixed(2);
+        }
+        document.documentElement.style.setProperty('--cam-tilt-x', `${tiltX}deg`);
+        document.documentElement.style.setProperty('--cam-tilt-y', `${tiltY}deg`);
+      }
+
+      // Slide DOM Transitions with 3D Depth (Controlled, Center-Locked)
+      if (window.gsap && prevEl) {
+        gsap.to(prevEl, {
+          duration: 0.5,
+          opacity: 0,
+          scale: 0.94,
+          z: -40,
+          ease: "power2.inOut",
+          onComplete: () => {
+            prevEl.classList.remove('active');
+            gsap.set(prevEl, { clearProps: 'all' });
+          }
+        });
+
+        nextEl.classList.add('active');
+        gsap.fromTo(nextEl,
+          { opacity: 0, scale: 1.05, z: 30 },
+          { duration: 0.7, opacity: 1, scale: 1, z: 0, ease: "power2.out", delay: 0.08 }
+        );
+      } else {
+        if (prevEl) {
+          prevEl.classList.remove('active');
+          if (window.gsap) gsap.set(prevEl, { clearProps: 'all' });
+        }
+        nextEl.classList.add('active');
+      }
+
+      // 3D Wireframe Scene Smooth Spatial Cross-fade
+      if (sceneObjects[prevIdx] && window.gsap) {
+        const pObj = sceneObjects[prevIdx];
+        gsap.to(pObj.position, { z: -30, duration: 0.55, ease: "power2.in" });
+        gsap.to(pObj.scale, {
+          x: 0.1, y: 0.1, z: 0.1, duration: 0.55,
+          onComplete: () => {
+            pObj.visible = false;
+            pObj.position.set(0, 0, 0);
+          }
+        });
+      }
+      if (sceneObjects[targetIdx]) {
+        const nObj = sceneObjects[targetIdx];
+        nObj.visible = true;
+        nObj.position.set(0, 0, 20);
+        nObj.scale.set(0.2, 0.2, 0.2);
+        if (window.gsap) {
+          gsap.to(nObj.position, { z: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
+          gsap.to(nObj.scale, { x: 1, y: 1, z: 1, duration: 0.8, ease: "power3.out", delay: 0.1 });
+        }
+      }
+
+      // Update Dynamic Stage Neon Theme
+      const p = nextEl.getAttribute('data-neon-p') || '#00f3ff';
+      const s = nextEl.getAttribute('data-neon-s') || '#ff007f';
+      const t = nextEl.getAttribute('data-neon-t') || '#8a00ff';
+
+      document.documentElement.style.setProperty('--neon-primary', p);
+      document.documentElement.style.setProperty('--neon-secondary', s);
+      document.documentElement.style.setProperty('--neon-tertiary', t);
+      document.documentElement.style.setProperty('--neon-glow', `${p}88`);
+
+      // Update Continuous Energy Spine Color Palette
+      if (continuousEnergySpine) {
+        continuousEnergySpine.material.color.set(p);
+      }
+
+      // Update Photon Emitters
+      const emA = document.getElementById('emitter-alpha');
+      const emB = document.getElementById('emitter-beta');
+      if (emA) emA.style.background = `radial-gradient(circle, ${p} 0%, transparent 70%)`;
+      if (emB) emB.style.background = `radial-gradient(circle, ${s} 0%, transparent 70%)`;
+
+      currentSlideIdx = targetIdx;
+      if (typeof applyGlassSettings === 'function') {
+        applyGlassSettings(targetIdx);
+      }
+
+      // Update Stage HUD Bar
+      const counter = document.getElementById('hud-slide-counter');
+      const fill = document.getElementById('stage-laser-progress-fill');
+      if (counter) counter.textContent = `SLIDE ${String(targetIdx).padStart(2, '0')} / ${totalSlides}`;
+      if (fill) fill.style.width = `${(targetIdx / totalSlides) * 100}%`;
+
+      updateNavModalActiveTile();
+    }
+
+    function stepStageSlide(direction) {
+      const next = currentSlideIdx + direction;
+      if (next >= 1 && next <= totalSlides) {
+        triggerSlideScenography(next);
+      }
+    }
+
+    // Minigame Holographic Target Lock-On Handler (Interactive Right / Wrong Logic)
+    function engageHoloTarget(slideNum, selectedLetter) {
+      const slide = document.getElementById(`slide-${slideNum}`);
+      if (!slide) return;
+
+      const matrix = slide.querySelector('.target-nodes-matrix');
+      const correctChoice = matrix ? matrix.getAttribute('data-correct') : null;
+      const nodes = slide.querySelectorAll('.holo-target-node');
+      const insight = document.getElementById(`insight-${slideNum}`);
+      const statusLine = document.getElementById(`status-line-${slideNum}`);
+
+      const isCorrect = (selectedLetter === correctChoice);
+
+      if (!isCorrect) {
+        // WRONG ANSWER INTERACTION: Dissonance Buzz, Crimson Glitch Shake, Alert Badge
+        stageAudio.playErrorDissonance();
+
+        nodes.forEach(node => {
+          const choice = node.getAttribute('data-choice');
+          if (choice === selectedLetter) {
+            node.classList.remove('laser-correct', 'laser-dimmed');
+            node.classList.add('laser-wrong');
+
+            let badge = node.querySelector('.node-feedback-badge');
+            if (!badge) {
+              badge = document.createElement('div');
+              badge.className = 'node-feedback-badge';
+              node.appendChild(badge);
+            }
+            badge.textContent = '✕ CHƯA CHÍNH XÁC';
+          }
+        });
+
+        if (statusLine) {
+          statusLine.className = 'target-status-line status-wrong';
+          statusLine.textContent = `[ ✕ PHƯƠNG ÁN ${selectedLetter} CHƯA CHÍNH XÁC — HÃY THỬ LẠI! ]`;
+        }
+
+        if (insight) {
+          insight.classList.remove('active-beam');
+        }
+
+      } else {
+        // CORRECT ANSWER INTERACTION: Laser Lock, Celestial Harmonics, Emerald Radiance
+        stageAudio.playLaserLockOn();
+        setTimeout(() => {
+          stageAudio.playCelestialHarmonics();
+        }, 220);
+
+        nodes.forEach(node => {
+          const choice = node.getAttribute('data-choice');
+          node.classList.remove('laser-wrong');
+
+          if (choice === correctChoice) {
+            node.classList.remove('laser-dimmed');
+            node.classList.add('laser-correct');
+
+            let badge = node.querySelector('.node-feedback-badge');
+            if (!badge) {
+              badge = document.createElement('div');
+              badge.className = 'node-feedback-badge';
+              node.appendChild(badge);
+            }
+            badge.textContent = '✓ CHÍNH XÁC!';
+          } else {
+            node.classList.add('laser-dimmed');
+          }
+        });
+
+        if (statusLine) {
+          statusLine.className = 'target-status-line status-correct';
+          statusLine.textContent = `[ ✓ CHÍNH XÁC! KHÓA MỤC TIÊU ĐÁP ÁN ${correctChoice} ]`;
+        }
+
+        // Ignite Revealed Insight Beam
+        if (insight) {
+          insight.classList.add('active-beam');
+        }
+      }
+    }
+
+    // Floating Stage HUD Toast Notification
+    function showStageNotification(text, color = 'var(--neon-primary)') {
+      let toast = document.getElementById('stage-hud-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'stage-hud-toast';
+        toast.style.position = 'fixed';
+        toast.style.top = '1.2rem';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.padding = '0.45rem 1.6rem';
+        toast.style.background = 'rgba(6, 10, 18, 0.94)';
+        toast.style.border = '1.5px solid var(--neon-primary)';
+        toast.style.boxShadow = '0 0 30px var(--neon-glow)';
+        toast.style.fontSize = '12px';
+        toast.style.fontWeight = '800';
+        toast.style.letterSpacing = '2px';
+        toast.style.textTransform = 'uppercase';
+        toast.style.zIndex = '99999';
+        toast.style.pointerEvents = 'none';
+        toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        toast.style.clipPath = 'polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)';
+        document.body.appendChild(toast);
+      }
+      toast.style.color = color;
+      toast.style.borderColor = color;
+      toast.textContent = text;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(window.__stageToastTimer);
+      window.__stageToastTimer = setTimeout(() => {
+        if (toast) {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(-50%) translateY(-10px)';
+        }
+      }, 1600);
+    }
+
+    // Real-Time Stage Broadcast Clock
+    function initStageClock() {
+      const el = document.getElementById('hud-stage-clock-time');
+      if (!el) return;
+      function update() {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+        el.textContent = `${hh}:${mm}:${ss}`;
+      }
+      update();
+      setInterval(update, 1000);
+    }
+    initStageClock();
+
+    // Fullscreen LED Mode
+    function toggleCinemaFullscreen() {
+      stageAudio.playHudClick();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().then(() => {
+          showStageNotification('⛶ CHẾ ĐỘ TOÀN MÀN HÌNH: ĐÃ BẬT', 'var(--neon-primary)');
+        }).catch(err => console.log(err));
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().then(() => {
+            showStageNotification('⛶ ĐÃ THOÁT TOÀN MÀN HÌNH', 'rgba(255,255,255,0.7)');
+          }).catch(err => console.log(err));
+        }
+      }
+    }
+
+    // Audio System Toggle
+    function toggleAudioSystem() {
+      const isEnabled = stageAudio.toggleAudio();
+      stageAudio.playHudClick();
+      const btn = document.getElementById('btn-audio-toggle');
+      const lbl = document.getElementById('audio-icon-label');
+      if (isEnabled) {
+        if (btn) btn.classList.add('synth-on');
+        if (lbl) lbl.textContent = '🔊 Audio';
+        showStageNotification('🔊 ÂM THANH SÂN KHẤU: ĐÃ BẬT', '#39ff14');
+      } else {
+        if (btn) btn.classList.remove('synth-on');
+        if (lbl) lbl.textContent = '🔇 Tắt';
+        showStageNotification('🔇 ÂM THANH SÂN KHẤU: ĐÃ TẮT', '#ff0055');
+      }
+    }
+
+    // Hologram Slide Navigator Modal
+    function toggleHoloNavModal() {
+      stageAudio.playHudClick();
+      const modal = document.getElementById('scenography-nav-modal');
+      if (modal) modal.classList.toggle('open');
+    }
+
+    function handleNavModalClick(e) {
+      const modal = document.getElementById('scenography-nav-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    // Hologram Help / Cheatsheet Modal
+    function toggleHelpModal() {
+      stageAudio.playHudClick();
+      const modal = document.getElementById('scenography-help-modal');
+      if (modal) modal.classList.toggle('open');
+    }
+
+    function handleHelpModalClick(e) {
+      const modal = document.getElementById('scenography-help-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function generateHoloNavTiles() {
+      const grid = document.getElementById('nav-holo-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const s = document.getElementById(`slide-${i}`);
+        if (!s) continue;
+        const title = s.getAttribute('data-title') || `Slide ${i}`;
+
+        const tile = document.createElement('div');
+        tile.className = `nav-holo-tile ${i === currentSlideIdx ? 'active-tile' : ''}`;
+        tile.id = `nav-holo-tile-${i}`;
+        tile.innerHTML = `
+          <div style="font-size: 11px; font-weight: 800; color: var(--neon-primary); letter-spacing: 2px; margin-bottom: 6px;">SCENE ${String(i).padStart(2, '0')}</div>
+          <div style="font-size: 14px; font-weight: 800; color: #ffffff; line-height: 1.35;">${title}</div>
+        `;
+        tile.onclick = () => {
+          triggerSlideScenography(i);
+          toggleHoloNavModal();
+        };
+        grid.appendChild(tile);
+      }
+    }
+
+    function updateNavModalActiveTile() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const tile = document.getElementById(`nav-holo-tile-${i}`);
+        if (tile) {
+          if (i === currentSlideIdx) tile.classList.add('active-tile');
+          else tile.classList.remove('active-tile');
+        }
+      }
+    }
+
+    
+    // User Gesture Audio Unlocker (Permits autoplay on first click or keypress)
+    const unlockAudioOnGesture = () => {
+      if (stageAudio) {
+        stageAudio.ensureContext();
+        stageAudio.resumeBgm();
+      }
+      window.removeEventListener('click', unlockAudioOnGesture);
+      window.removeEventListener('keydown', unlockAudioOnGesture);
+    };
+    window.addEventListener('click', unlockAudioOnGesture);
+    window.addEventListener('keydown', unlockAudioOnGesture);
+
+    // Concert Keyboard Ergonomics (Full Keyboard Control)
+    window.addEventListener('keydown', (e) => {
+      // Intercept media player keys when player is open
+      if (currentActiveMedia) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          if (currentActiveMedia.type === 'music') closePerformanceMusicPlayer(currentActiveMedia.id);
+          else if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
+          return;
+        }
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (currentActiveMedia.type === 'music') togglePerfMusicPlay(currentActiveMedia.id);
+          else if (currentActiveMedia.type === 'video') toggleDramaVideoPlay(currentActiveMedia.id);
+          return;
+        }
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (currentActiveMedia.type === 'music') skipPerfMusic(currentActiveMedia.id, -10);
+          else if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, -10);
+          return;
+        }
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (currentActiveMedia.type === 'music') skipPerfMusic(currentActiveMedia.id, 10);
+          else if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, 10);
+          return;
+        }
+      }
+
+      // Space, ArrowRight, ArrowDown, PageDown, Enter, N -> Next Slide
+      if (e.code === 'Space' || e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.code === 'PageDown' || e.key === 'Enter' || e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        stepStageSlide(1);
+      }
+      // ArrowLeft, ArrowUp, PageUp, Backspace, P -> Prev Slide
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.code === 'PageUp' || e.key === 'Backspace' || e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        stepStageSlide(-1);
+      }
+      // F key -> Toggle Fullscreen
+      else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleCinemaFullscreen();
+      }
+      // M key -> Toggle Sound
+      else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        toggleAudioSystem();
+      }
+      // O, G, Tab -> Toggle Navigator
+      else if (e.key === 'o' || e.key === 'O' || e.key === 'g' || e.key === 'G' || e.key === 'Tab') {
+        e.preventDefault();
+        toggleHoloNavModal();
+      }
+      // H or ? -> Toggle Keyboard Shortcuts Cheatsheet
+      else if (e.key === 'h' || e.key === 'H' || e.key === '?') {
+        e.preventDefault();
+        toggleHelpModal();
+      }
+      // Escape -> Close Modals
+      else if (e.key === 'Escape') {
+        const modal = document.getElementById('scenography-nav-modal');
+        if (modal && modal.classList.contains('open')) modal.classList.remove('open');
+        const helpModal = document.getElementById('scenography-help-modal');
+        if (helpModal && helpModal.classList.contains('open')) helpModal.classList.remove('open');
+      }
+      // T key -> Nạp content.txt
+      else if (e.key === 't' || e.key === 'T') {
+        const inp = document.getElementById('txt-file-input');
+        if (inp) inp.click();
+      }
+      // Direct keyboard keys A, B, C, D for minigame lock-on
+      else if (['a', 'b', 'c', 'd', 'A', 'B', 'C', 'D'].includes(e.key)) {
+        if (currentSlideIdx >= 8 && currentSlideIdx <= 13) {
+          engageHoloTarget(currentSlideIdx, e.key.toUpperCase());
+        }
+      }
+      // Direct number keys 1, 2, 3, 4 for minigame options
+      else if (['1', '2', '3', '4'].includes(e.key)) {
+        if (currentSlideIdx >= 8 && currentSlideIdx <= 13) {
+          const map = { '1': 'A', '2': 'B', '3': 'C', '4': 'D' };
+          engageHoloTarget(currentSlideIdx, map[e.key]);
+        }
+      }
+      // Home / End
+      else if (e.key === 'Home') {
+        e.preventDefault();
+        triggerSlideScenography(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        triggerSlideScenography(totalSlides);
+      }
+    });
+  </script>
+
+  <!-- ==========================================================================
+       8B. PERFORMANCE MEDIA PLAYERS LOGIC (CYBER MUSIC & FULL-BLEED VIDEO)
+       ========================================================================== -->
+  <script>
+    let currentActiveMedia = null; // null | { type: 'music'|'video', id: number }
+
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds < 0) return '00:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    // --- MUSIC PLAYER LOGIC ---
+    function openPerformanceMusicPlayer(slideId) {
+      const slideView = document.getElementById(`slide-${slideId}-view`);
+      const playerPanel = document.getElementById(`music-player-${slideId}`);
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      if (!playerPanel || !audio) return;
+
+      if (slideView) slideView.style.display = 'none';
+      playerPanel.style.display = 'flex';
+      currentActiveMedia = { type: 'music', id: slideId };
+
+      // Duck / Pause background BGM
+      if (stageAudio && stageAudio.bgmAudio) {
+        stageAudio.bgmAudio.pause();
+      }
+
+      // Check if file is configured in content.txt
+      const slideCfg = (window.currentContentData && window.currentContentData[`SLIDE_${slideId}`]) || {};
+      if (slideCfg.music_file && !audio.src) {
+        audio.src = slideCfg.music_file;
+      }
+
+      // Setup audio event listeners once
+      if (!audio.__initialized) {
+        audio.__initialized = true;
+        audio.addEventListener('timeupdate', () => {
+          const curEl = document.getElementById(`perf-cur-time-${slideId}`);
+          const fillEl = document.getElementById(`perf-slider-fill-${slideId}`);
+          if (curEl) curEl.textContent = formatTime(audio.currentTime);
+          if (fillEl && audio.duration) {
+            fillEl.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+          }
+        });
+        audio.addEventListener('loadedmetadata', () => {
+          const durEl = document.getElementById(`perf-dur-time-${slideId}`);
+          if (durEl) durEl.textContent = formatTime(audio.duration);
+        });
+        audio.addEventListener('ended', () => {
+          updateMusicUiState(slideId, false);
+        });
+        audio.addEventListener('play', () => updateMusicUiState(slideId, true));
+        audio.addEventListener('pause', () => updateMusicUiState(slideId, false));
+      }
+
+      if (audio.src) {
+        audio.play().catch(() => {});
+      }
+      showStageNotification('🎵 ĐÃ MỞ TRÌNH PHÁT NHẠC TIẾT MỤC', 'var(--neon-primary)');
+    }
+
+    function closePerformanceMusicPlayer(slideId) {
+      const slideView = document.getElementById(`slide-${slideId}-view`);
+      const playerPanel = document.getElementById(`music-player-${slideId}`);
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+
+      if (audio) audio.pause();
+      updateMusicUiState(slideId, false);
+
+      if (playerPanel) playerPanel.style.display = 'none';
+      if (slideView) slideView.style.display = 'flex';
+      currentActiveMedia = null;
+
+      // Resume background BGM if enabled
+      if (stageAudio && stageAudio.enabled) {
+        stageAudio.resumeBgm();
+      }
+    }
+
+    function updateMusicUiState(slideId, isPlaying) {
+      const icon = document.getElementById(`perf-play-icon-${slideId}`);
+      const disc = document.getElementById(`vinyl-disc-${slideId}`);
+      const badge = document.getElementById(`perf-status-badge-${slideId}`);
+      const bars = document.querySelectorAll(`#eq-bars-${slideId} .cyber-eq-bar`);
+
+      if (icon) icon.textContent = isPlaying ? '❚❚' : '▶';
+      if (disc) {
+        if (isPlaying) disc.classList.add('spinning');
+        else disc.classList.remove('spinning');
+      }
+      if (badge) {
+        badge.textContent = isPlaying ? '● ĐANG PHÁT BIỂU DIỄN' : '⏸ ĐÃ TẠM DỪNG';
+        badge.style.color = isPlaying ? '#39ff14' : '#ffe600';
+      }
+      bars.forEach(b => {
+        if (isPlaying) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    }
+
+    function togglePerfMusicPlay(slideId) {
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      if (!audio) return;
+      if (!audio.src) {
+        showStageNotification('⚠️ Chưa nạp file nhạc cho bài hát này!', 'var(--neon-accent)');
+        return;
+      }
+      if (audio.paused) {
+        audio.play().catch(e => console.log(e));
+      } else {
+        audio.pause();
+      }
+    }
+
+    function seekPerfMusic(slideId, event) {
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      const rail = document.getElementById(`perf-slider-rail-${slideId}`);
+      if (!audio || !rail || !audio.duration) return;
+      const rect = rail.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      audio.currentTime = pct * audio.duration;
+    }
+
+    function skipPerfMusic(slideId, seconds) {
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      if (!audio) return;
+      audio.currentTime = Math.max(0, Math.min(audio.duration || 9999, audio.currentTime + seconds));
+    }
+
+    function setPerfMusicVolume(slideId, val) {
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      if (audio) audio.volume = parseFloat(val);
+    }
+
+    function handlePerfMusicFileSelected(slideId, file) {
+      if (!file) return;
+      const audio = document.getElementById(`perf-audio-${slideId}`);
+      if (!audio) return;
+
+      const url = URL.createObjectURL(file);
+      audio.src = url;
+      showStageNotification(`🎵 BẮT ĐẦU PHÁT: ${file.name}`, '#39ff14');
+      audio.play().catch(() => {});
+    }
+
+    // --- VIDEO PLAYER LOGIC ---
+    function openDramaVideoPlayer(slideId) {
+      const slideView = document.getElementById(`slide-${slideId}-view`);
+      const playerPanel = document.getElementById(`video-player-${slideId}`);
+      const video = document.getElementById(`perf-video-${slideId}`);
+      const standby = document.getElementById(`video-standby-${slideId}`);
+      if (!playerPanel || !video) return;
+
+      if (slideView) slideView.style.display = 'none';
+      playerPanel.style.display = 'flex';
+      currentActiveMedia = { type: 'video', id: slideId };
+
+      // Duck / Pause background BGM
+      if (stageAudio && stageAudio.bgmAudio) {
+        stageAudio.bgmAudio.pause();
+      }
+
+      // Check if video file is in content.txt
+      const slideCfg = (window.currentContentData && window.currentContentData[`SLIDE_${slideId}`]) || {};
+      if (slideCfg.video_file && !video.src) {
+        video.src = slideCfg.video_file;
+      }
+
+      if (!video.__initialized) {
+        video.__initialized = true;
+        video.addEventListener('timeupdate', () => {
+          const curEl = document.getElementById(`video-cur-time-${slideId}`);
+          const fillEl = document.getElementById(`video-slider-fill-${slideId}`);
+          if (curEl) curEl.textContent = formatTime(video.currentTime);
+          if (fillEl && video.duration) {
+            fillEl.style.width = `${(video.currentTime / video.duration) * 100}%`;
+          }
+        });
+        video.addEventListener('loadedmetadata', () => {
+          const durEl = document.getElementById(`video-dur-time-${slideId}`);
+          if (durEl) durEl.textContent = formatTime(video.duration);
+          if (standby) standby.style.display = 'none';
+        });
+        video.addEventListener('play', () => {
+          const icon = document.getElementById(`video-play-icon-${slideId}`);
+          if (icon) icon.textContent = '❚❚';
+          if (standby) standby.style.display = 'none';
+        });
+        video.addEventListener('pause', () => {
+          const icon = document.getElementById(`video-play-icon-${slideId}`);
+          if (icon) icon.textContent = '▶';
+        });
+        video.addEventListener('ended', () => {
+          const icon = document.getElementById(`video-play-icon-${slideId}`);
+          if (icon) icon.textContent = '▶';
+        });
+      }
+
+      if (video.src) {
+        if (standby) standby.style.display = 'none';
+        video.play().catch(() => {});
+      } else {
+        if (standby) standby.style.display = 'flex';
+      }
+      showStageNotification('🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO TIỂU PHẨM', '#ff0033');
+    }
+
+    function closeDramaVideoPlayer(slideId) {
+      const slideView = document.getElementById(`slide-${slideId}-view`);
+      const playerPanel = document.getElementById(`video-player-${slideId}`);
+      const video = document.getElementById(`perf-video-${slideId}`);
+
+      if (video) video.pause();
+      if (playerPanel) playerPanel.style.display = 'none';
+      if (slideView) slideView.style.display = 'flex';
+      currentActiveMedia = null;
+
+      // Resume background BGM
+      if (stageAudio && stageAudio.enabled) {
+        stageAudio.resumeBgm();
+      }
+    }
+
+    function toggleDramaVideoPlay(slideId) {
+      const video = document.getElementById(`perf-video-${slideId}`);
+      if (!video) return;
+      if (!video.src) {
+        showStageNotification('⚠️ Chưa nạp video cho tiểu phẩm kịch!', '#ff0033');
+        return;
+      }
+      if (video.paused) {
+        video.play().catch(e => console.log(e));
+      } else {
+        video.pause();
+      }
+    }
+
+    function seekDramaVideo(slideId, event) {
+      const video = document.getElementById(`perf-video-${slideId}`);
+      const rail = document.getElementById(`video-slider-rail-${slideId}`);
+      if (!video || !rail || !video.duration) return;
+      const rect = rail.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      video.currentTime = pct * video.duration;
+    }
+
+    function skipDramaVideo(slideId, seconds) {
+      const video = document.getElementById(`perf-video-${slideId}`);
+      if (!video) return;
+      video.currentTime = Math.max(0, Math.min(video.duration || 9999, video.currentTime + seconds));
+    }
+
+    function setDramaVideoVolume(slideId, val) {
+      const video = document.getElementById(`perf-video-${slideId}`);
+      if (video) video.volume = parseFloat(val);
+    }
+
+    function toggleDramaVideoFullscreen(slideId) {
+      const panel = document.getElementById(`video-player-${slideId}`);
+      if (!panel) return;
+      if (!document.fullscreenElement) {
+        panel.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen().catch(err => console.log(err));
+      }
+    }
+
+    function handlePerfVideoFileSelected(slideId, file) {
+      if (!file) return;
+      const video = document.getElementById(`perf-video-${slideId}`);
+      const standby = document.getElementById(`video-standby-${slideId}`);
+      if (!video) return;
+
+      const url = URL.createObjectURL(file);
+      video.src = url;
+      if (standby) standby.style.display = 'none';
+      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, '#ff0033');
+      video.play().catch(() => {});
+    }
+  </script>
+
+  <!-- ==========================================================================
+       9. DYNAMIC CONTENT ENGINE (EXTERNAL content.txt LOADER & PARSER)
+       ========================================================================== -->
+  <script>
+    // Built-in fallback copy of external content.txt
+    const DEFAULT_CONTENT_TXT = `# ==============================================================================
+# KỊCH BẢN NỘI DUNG SÂN KHẤU: "TÔI TRƯỞNG THÀNH" — TẬP THỂ 12A2
+# Tệp văn bản nguồn độc lập (content.txt)
+# 
+# HƯỚNG DẪN DÀNH CHO BAN TỔ CHỨC / LỚP 12A2:
+# 1. Bạn có thể mở và chỉnh sửa toàn bộ câu từ, câu hỏi, đáp án bằng Notepad.
+# 2. Các dòng bắt đầu bằng ký tự # là dòng ghi chú, không ảnh hưởng đến nội dung.
+# 3. Cấu trúc dạng [TÊN_SLIDE] theo sau là các cặp key = giá trị.
+# ==============================================================================
+
+# ==============================================================================
+# CẤU HÌNH HIỆU ỨNG KHÔNG GIAN 3D & TILTING (3D SPATIAL TILTING)
+# Điều chỉnh độ nghiêng và cảm giác chiều sâu 3D của các slide tại đây:
+# - tilt_max_deg: Góc nghiêng tối đa (độ) — khuyến nghị 7.0 đến 12.0 để thấy rõ chiều sâu 3D
+# - tilt_multiplier: Hệ số nhạy theo camera 3D Three.js (khuyến nghị 18 đến 25)
+# - perspective_px: Tiêu cự phối cảnh (px) — càng nhỏ hiệu ứng 3D càng sâu (khuyến nghị 1500 đến 1850)
+# (Bạn cũng có thể tùy chỉnh tilt_x và tilt_y ở từng [SLIDE_X] bên dưới)
+# ==============================================================================
+[SETTINGS]
+tilt_max_deg = 12
+tilt_multiplier = 20
+perspective_px = 1700
+glass_enabled = true
+glass_alpha = 0.25
+glass_blur_px = 14
+glass_border_glow = 0.30
+glass_width_vw = 94
+glass_height_vh = 82
+bgm_file = bgm.mp3
+bgm_volume = 0.35
+bgm_loop = true
+synth_drone_enabled = false
+synth_drone_volume = 0.0
+
+[TOP_HUD]
+telemetry = CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH
+indicator = CONTINUOUS DIGITAL SCENOGRAPHY • 4K 60FPS
+
+[SLIDE_1]
+nav_title = Khai Màn: Tôi Trưởng Thành
+telemetry = [ CHUYÊN ĐỀ SÂN KHẤU TRƯỜNG HỌC • LỚP 12A2 ]
+title = TÔI TRƯỞNG THÀNH
+quote = "DÁM ƯỚC MƠ • DÁM THỬ SỨC • DÁM BẮT ĐẦU LẠI"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_2]
+nav_title = Tiết Mục: Hò Vươn Mình
+telemetry = [ TIẾT MỤC BIỂU DIỄN KHAI MÀN ]
+title = HÒ VƯƠN MÌNH
+subtitle = MASHUP: HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
+quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
+performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
+music_file = audio/ho_vuon_minh.mp3
+tilt_x = -3.5
+tilt_y = 0.0
+
+[SLIDE_3]
+nav_title = Định Nghĩa Trưởng Thành
+question = BAO GIỜ CHÚNG TA THỰC SỰ TRƯỞNG THÀNH?
+spire1_tag = // CHÂN LÝ 01
+spire1_text = "Biết Đứng Dậy Sau Những Lần Yếu Lòng"
+spire2_tag = // CHÂN LÝ 02
+spire2_text = "Biết Sửa Đổi & Chịu Trách Nhiệm Với Lựa Chọn"
+spire3_tag = // CHÂN LÝ 03
+spire3_text = "Biết Mình Muốn Trở Thành Người Như Thế Nào"
+tilt_x = -2.5
+tilt_y = -6.5
+
+[SLIDE_4]
+nav_title = Hành Trình Soi Rọi Chính Mình
+telemetry = // CHUYÊN ĐỀ CHIÊM NGHIỆM
+title = HÀNH TRÌNH TỰ SOI RỌI CHÍNH MÌNH
+quote = "À, MÌNH CỦA NGÀY HÔM NAY ĐÃ KHÁC MÌNH CỦA NGÀY HÔM QUA THẬT RỒI!"
+badge1 = [ NHÌN LẠI ĐỂ THẤU HIỂU ]
+badge2 = [ BƯỚC TIẾP ĐỂ VƯƠN XA ]
+tilt_x = 0.0
+tilt_y = 5.0
+
+[SLIDE_5]
+nav_title = Tiểu Phẩm Kịch: Tôi Của Ngày Hôm Qua
+telemetry = // TIỂU PHẨM SÂN KHẤU
+title = TÔI CỦA NGÀY HÔM QUA
+subtitle = Áp Lực Học Tập • Kỳ Vọng Gia Đình • Lựa Chọn Tuổi Trẻ
+quote = "NẾU ĐƯỢC QUAY LẠI, BẠN CÓ CHỌN KHÁC ĐI?"
+video_file = video/tieu_pham.mp4
+tilt_x = -8.5
+tilt_y = 7.5
+
+[SLIDE_6]
+nav_title = Bài Học Sau Vấp Ngã
+subtitle = "Trưởng thành không đo bằng việc chúng ta đã đi được bao xa..."
+quote_lead = "MÀ LÀ SAU MỖI LẦN VẤP NGÃ,
+quote_highlight = CHÚNG TA ĐÃ HỌC ĐƯỢC ĐIỀU GÌ."
+tilt_x = 4.5
+tilt_y = 0.0
+
+[SLIDE_7]
+nav_title = Khởi Động Minigame
+telemetry = [ GIAO LƯU SÂN KHẤU TOÀN TRƯỜNG ]
+title = ĐỨNG TRƯỚC LỰA CHỌN
+quote = GIƠ TAY PHÁT BIỂU • NHẬN QUÀ LƯU NIỆM ĐẶC BIỆT TỪ 12A2
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_8]
+nav_title = Câu Hỏi 01: Dấu Hiệu Trưởng Thành
+telemetry = // THỬ THÁCH 01 / 06
+question = "ĐIỀU GÌ LÀ DẤU HIỆU RÕ NHẤT CỦA SỰ TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Không còn phụ thuộc vào người khác
+choice_b = BIẾT CHỊU TRÁCH NHIỆM VỚI LỰA CHỌN CỦA MÌNH
+choice_c = Có thể tự kiếm tiền
+choice_d = Không bao giờ mắc sai lầm
+correct = B
+insight_tag = ● KHÓA MỤC TIÊU: ĐÁP ÁN B
+insight_lead = "Trưởng thành không phải là không sai, mà là 
+insight_highlight = DÁM CHỊU TRÁCH NHIỆM
+insight_tail =  với điều mình đã chọn!"
+tilt_x = 2.5
+tilt_y = -3.5
+
+[SLIDE_9]
+nav_title = Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?
+telemetry = // THỬ THÁCH 02 / 06
+question = "KHI THẤT BẠI, BẠN THƯỜNG LÀM GÌ?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Đổ lỗi cho hoàn cảnh
+choice_b = Bỏ cuộc vì nghĩ mình không đủ khả năng
+choice_c = Giấu cảm xúc và coi như không có chuyện gì
+choice_d = NHÌN LẠI, RÚT KINH NGHIỆM VÀ THỬ LẠI
+correct = D
+insight_tag = ● CHUYỂN HƯỚNG TƯ DUY: ĐÁP ÁN D
+insight_lead = "Chuyển từ câu hỏi: 'Tại sao mình lại gặp chuyện này?' sang 
+insight_highlight = 'MÌNH CÓ THỂ LÀM GÌ ĐỂ TỐT HƠN?'
+insight_tail = "
+tilt_x = -2.5
+tilt_y = 3.5
+
+[SLIDE_10]
+nav_title = Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai
+telemetry = // THỬ THÁCH 03 / 06
+question = "KHI NHẬN RA MÌNH ĐÃ LỰA CHỌN SAI, BẠN SẼ LÀM GÌ?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Cố gắng che giấu để không bị đánh giá
+choice_b = Đổ lỗi cho hoàn cảnh
+choice_c = THỪA NHẬN SAI LẦM VÀ TÌM CÁCH SỬA CHỮA
+choice_d = Bỏ qua vì chuyện đã xảy ra rồi
+correct = C
+insight_tag = ● BẢN LĨNH BẢN THÂN: ĐÁP ÁN C
+insight_lead = "Dũng cảm 
+insight_highlight = nhận sai và sửa đổi
+insight_tail =  là biểu hiện cao nhất của sự bản lĩnh!"
+tilt_x = -4.5
+tilt_y = 0.0
+
+[SLIDE_11]
+nav_title = Câu Hỏi 04: Biểu Hiện Trưởng Thành
+telemetry = // THỬ THÁCH 04 / 06
+question = "ĐIỀU NÀO DƯỚI ĐÂY THỂ HIỆN MỘT NGƯỜI ĐANG TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Luôn cố gắng làm hài lòng tất cả mọi người
+choice_b = Không bao giờ cho phép bản thân mắc sai lầm
+choice_c = BIẾT LẮNG NGHE, TỰ QUYẾT ĐỊNH VÀ CHỊU TRÁCH NHIỆM
+choice_d = Luôn tự mình giải quyết mọi vấn đề, không cần đến ai
+correct = C
+insight_tag = ● TỰ CHỦ CUỘC ĐỜI: ĐÁP ÁN C
+insight_lead = "
+insight_highlight = Lắng nghe xung quanh
+insight_tail =  nhưng luôn làm chủ tay lái cuộc đời mình!"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_12]
+nav_title = Câu Hỏi 05: Khi Người Khác Thất Vọng
+telemetry = // THỬ THÁCH 05 / 06
+question = "NẾU LỰA CHỌN CỦA BẠN KHIẾN NGƯỜI KHÁC THẤT VỌNG?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Từ bỏ lựa chọn của mình ngay
+choice_b = Làm theo ý mọi người để không bị trách
+choice_c = CÂN NHẮC, LẮNG NGHE NHƯNG VẪN TỰ CHỊU TRÁCH NHIỆM
+choice_d = Không quan tâm đến bất kỳ ai
+correct = C
+insight_tag = ● GIỮ VỮNG LẬP TRƯỜNG: ĐÁP ÁN C
+insight_lead = "Trưởng thành là 
+insight_highlight = giữ vững lập trường
+insight_tail =  mà không cực đoan, tiếp thu mà không đánh mất mình!"
+tilt_x = 2.5
+tilt_y = -4.5
+
+[SLIDE_13]
+nav_title = Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?
+telemetry = // THỬ THÁCH 06 / 06
+question = "ĐIỀU NÀO KHÔNG ĐỒNG NGHĨA VỚI TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Biết xin lỗi khi mình sai
+choice_b = Biết lắng nghe người khác
+choice_c = LUÔN PHẢI MẠNH MẼ VÀ KHÔNG ĐƯỢC YẾU LÒNG
+choice_d = Biết chịu trách nhiệm
+correct = C
+insight_tag = ● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C
+insight_lead = "
+insight_highlight = TRƯỞNG THÀNH ĐƯỢC PHÉP YẾU LÒNG
+insight_tail =  — Quan trọng là biết đứng lên sau khi lau khô nước mắt!"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_14]
+nav_title = Câu Hỏi Mở Sân Khấu
+telemetry = // GIAO LƯU TRỰC TIẾP KHÁN GIẢ
+question = "BẠN NGHĨ MÌNH ĐÃ TRƯỞNG THÀNH CHƯA?"
+statement = "Nếu hôm nay bạn vẫn chưa có câu trả lời... Không sao cả."
+hero = CHÚNG TA ĐỀU ĐANG TRƯỞNG THÀNH TỪNG NGÀY!
+tilt_x = 0.0
+tilt_y = 6.5
+
+[SLIDE_15]
+nav_title = Lời Nhắn Gửi Bản Thân
+title = LỜI NHẮN GỬI TÔI CỦA NGÀY MAI
+ribbon1_tag = // THÔNG ĐIỆP 01
+ribbon1_text = "Cảm ơn vì đã không bỏ cuộc giữa những áp lực."
+ribbon2_tag = // THÔNG ĐIỆP 02
+ribbon2_text = "Xin lỗi vì đã từng quá khắt khe với chính mình."
+ribbon3_tag = // THÔNG ĐIỆP 03
+ribbon3_text = "Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"
+quote = "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là một hành trình!"
+tilt_x = 1.5
+tilt_y = 0.0
+
+[SLIDE_16]
+nav_title = Tiết Mục Kết: Rực Rỡ
+hero = RỰC RỠ
+title = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
+callout = CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
+music_file = audio/ruc_ro.mp3
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_17]
+nav_title = Bế Mạc & Tri Ân
+subtitle = "NẾU CẢ ĐỜI NÀY KHÔNG RỰC RỠ THÌ SAO?"
+hero = "Không sao cả, vì ngày mai vẫn đến và sương mù sẽ tan!"
+statement = TẬP THỂ 12A2 TRÂN TRỌNG CẢM ƠN QUÝ THẦY CÔ VÀ CÁC BẠN!
+wish = Chúc toàn trường một tuần mới tràn đầy năng lượng & hạnh phúc!
+tilt_x = 2.5
+tilt_y = -6.5
+`;
+
+    // Global 3D Tilting Engine Settings (Driven by content.txt [SETTINGS])
+    window.stageTiltSettings = {
+      maxDeg: 8.5,
+      multiplier: 20,
+      perspective: 1700
+    };
+
+    // Frosted Glass Monolith Backdrop Settings (Driven by content.txt [SETTINGS])
+    window.stageGlassSettings = {
+      enabled: true,
+      blurPx: 14,
+      alpha: 0.25,
+      borderGlow: 0.30,
+      widthVw: 94,
+      heightVh: 82
+    };
+
+    function applyGlassSettings(overrideSlideIdx) {
+      const glassEl = document.getElementById('stage-glass-monolith');
+      if (!glassEl) return;
+
+      let isEnabled = window.stageGlassSettings.enabled;
+      let alpha = window.stageGlassSettings.alpha;
+
+      if (overrideSlideIdx && currentContentData) {
+        const slideCfg = currentContentData[`SLIDE_${overrideSlideIdx}`];
+        if (slideCfg) {
+          if (slideCfg.glass_enabled !== undefined) {
+            isEnabled = slideCfg.glass_enabled.toLowerCase() === 'true';
+          }
+          if (slideCfg.glass_alpha !== undefined) {
+            alpha = parseFloat(slideCfg.glass_alpha);
+          } else if (slideCfg.glass_opacity !== undefined) {
+            alpha = parseFloat(slideCfg.glass_opacity);
+          }
+        }
+      }
+
+      if (!isEnabled) {
+        glassEl.style.display = 'none';
+      } else {
+        glassEl.style.display = 'block';
+        document.documentElement.style.setProperty('--glass-blur', `${window.stageGlassSettings.blurPx}px`);
+        document.documentElement.style.setProperty('--glass-alpha', alpha);
+        document.documentElement.style.setProperty('--glass-opacity', alpha);
+        document.documentElement.style.setProperty('--glass-border-opacity', window.stageGlassSettings.borderGlow);
+        document.documentElement.style.setProperty('--glass-width', `min(${window.stageGlassSettings.widthVw}vw, 1600px)`);
+        document.documentElement.style.setProperty('--glass-height', `min(${window.stageGlassSettings.heightVh}vh, 660px)`);
+      }
+    }
+
+    // Audio Background Music Settings (Driven by content.txt [SETTINGS])
+    window.stageAudioSettings = {
+      bgmFile: 'bgm.mp3',
+      bgmVolume: 0.35,
+      bgmLoop: true,
+      synthDroneEnabled: false,
+      synthDroneVolume: 0.0
+    };
+
+    function applyAudioSettings() {
+      if (!stageAudio) return;
+      stageAudio.setSynthDrone(window.stageAudioSettings.synthDroneEnabled, window.stageAudioSettings.synthDroneVolume);
+      if (window.stageAudioSettings.bgmFile) {
+        stageAudio.loadBgm(window.stageAudioSettings.bgmFile, window.stageAudioSettings.bgmVolume, window.stageAudioSettings.bgmLoop);
+      }
+    }
+
+
+
+    let currentContentData = null;
+
+    function parseContentTxt(rawText) {
+      if (!rawText) return {};
+      const sections = {};
+      let currentSection = 'GLOBAL';
+      sections[currentSection] = {};
+
+      const lines = rawText.split(/\r?\n/);
+      for (let line of lines) {
+        line = line.trim();
+        if (!line || line.startsWith('#')) continue;
+
+        const sectionMatch = line.match(/^\[([A-Za-z0-9_]+)\]$/);
+        if (sectionMatch) {
+          currentSection = sectionMatch[1];
+          if (!sections[currentSection]) sections[currentSection] = {};
+          continue;
+        }
+
+        const eqIdx = line.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = line.slice(0, eqIdx).trim();
+          const val = line.slice(eqIdx + 1).trim();
+          sections[currentSection][key] = val;
+        }
+      }
+      return sections;
+    }
+
+    function applyContentToSlides(data) {
+      if (!data) return;
+      currentContentData = data;
+
+      const setTxt = (el, text) => {
+        if (el && text !== undefined && text !== null) el.textContent = text;
+      };
+      const setHtml = (el, html) => {
+        if (el && html !== undefined && html !== null) el.innerHTML = html;
+      };
+
+      // 0. 3D Spatial Tilting Settings & Frosted Glass Monolith Settings
+      if (data.SETTINGS) {
+        if (data.SETTINGS.tilt_max_deg) window.stageTiltSettings.maxDeg = parseFloat(data.SETTINGS.tilt_max_deg) || 8.5;
+        if (data.SETTINGS.tilt_multiplier) window.stageTiltSettings.multiplier = parseFloat(data.SETTINGS.tilt_multiplier) || 20;
+        if (data.SETTINGS.perspective_px) {
+          window.stageTiltSettings.perspective = parseFloat(data.SETTINGS.perspective_px) || 1700;
+          document.documentElement.style.setProperty('--stage-perspective', `${window.stageTiltSettings.perspective}px`);
+        }
+        // Frosted Glass Monolith Settings
+        if (data.SETTINGS.glass_enabled !== undefined) {
+          window.stageGlassSettings.enabled = data.SETTINGS.glass_enabled.toLowerCase() === 'true';
+        }
+        if (data.SETTINGS.glass_blur_px !== undefined) {
+          window.stageGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_blur_px) || 14;
+        }
+        // Support glass_alpha (primary) and glass_opacity (alias)
+        if (data.SETTINGS.glass_alpha !== undefined) {
+          window.stageGlassSettings.alpha = parseFloat(data.SETTINGS.glass_alpha);
+        } else if (data.SETTINGS.glass_opacity !== undefined) {
+          window.stageGlassSettings.alpha = parseFloat(data.SETTINGS.glass_opacity);
+        }
+        if (data.SETTINGS.glass_border_glow !== undefined) {
+          window.stageGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_border_glow) || 0.30;
+        }
+        if (data.SETTINGS.glass_width_vw !== undefined) {
+          window.stageGlassSettings.widthVw = parseFloat(data.SETTINGS.glass_width_vw) || 94;
+        }
+        if (data.SETTINGS.glass_height_vh !== undefined) {
+          window.stageGlassSettings.heightVh = parseFloat(data.SETTINGS.glass_height_vh) || 82;
+        }
+        // External Audio & Background Music Settings
+        if (data.SETTINGS.bgm_file !== undefined) {
+          window.stageAudioSettings.bgmFile = data.SETTINGS.bgm_file.trim();
+        }
+        if (data.SETTINGS.bgm_volume !== undefined) {
+          window.stageAudioSettings.bgmVolume = parseFloat(data.SETTINGS.bgm_volume) || 0.35;
+        }
+        if (data.SETTINGS.bgm_loop !== undefined) {
+          window.stageAudioSettings.bgmLoop = data.SETTINGS.bgm_loop.toLowerCase() === 'true';
+        }
+        if (data.SETTINGS.synth_drone_enabled !== undefined) {
+          window.stageAudioSettings.synthDroneEnabled = data.SETTINGS.synth_drone_enabled.toLowerCase() === 'true';
+        }
+        if (data.SETTINGS.synth_drone_volume !== undefined) {
+          window.stageAudioSettings.synthDroneVolume = parseFloat(data.SETTINGS.synth_drone_volume) || 0.0;
+        }
+        applyAudioSettings();
+      }
+      applyGlassSettings(currentSlideIdx);
+
+      // 1. Top HUD
+      if (data.TOP_HUD) {
+        const tel = document.getElementById('top-telemetry-text');
+        if (tel && data.TOP_HUD.telemetry) tel.textContent = data.TOP_HUD.telemetry;
+        const mode = document.getElementById('top-mode-indicator-text');
+        if (mode && data.TOP_HUD.indicator) mode.textContent = data.TOP_HUD.indicator;
+      }
+
+      // 2. Slide 1
+      if (data.SLIDE_1) {
+        const s1 = document.getElementById('slide-1');
+        if (s1) {
+          if (data.SLIDE_1.nav_title) s1.setAttribute('data-title', data.SLIDE_1.nav_title);
+          setTxt(s1.querySelector('.telemetry-tag span'), data.SLIDE_1.telemetry);
+          setTxt(s1.querySelector('.monumental-text'), data.SLIDE_1.title);
+          setTxt(s1.querySelector('.hero-sub-statement'), data.SLIDE_1.quote);
+        }
+      }
+
+      // 3. Slide 2: Hò Vươn Mình
+      if (data.SLIDE_2) {
+        const s2 = document.getElementById('slide-2');
+        if (s2) {
+          if (data.SLIDE_2.nav_title) s2.setAttribute('data-title', data.SLIDE_2.nav_title);
+          const tags = s2.querySelectorAll('.telemetry-tag span');
+          if (tags[0]) setTxt(tags[0], data.SLIDE_2.telemetry);
+          setTxt(s2.querySelector('.monumental-text'), data.SLIDE_2.title);
+          setTxt(s2.querySelector('h2'), data.SLIDE_2.subtitle);
+          setTxt(s2.querySelector('p'), data.SLIDE_2.quote);
+          if (tags[1]) setTxt(tags[1], data.SLIDE_2.performer);
+          if (data.SLIDE_2.music_file) {
+            const audio2 = document.getElementById('perf-audio-2');
+            if (audio2 && !audio2.src) audio2.src = data.SLIDE_2.music_file;
+          }
+        }
+      }
+
+      // 4. Slide 3
+      if (data.SLIDE_3) {
+        const s3 = document.getElementById('slide-3');
+        if (s3) {
+          if (data.SLIDE_3.nav_title) s3.setAttribute('data-title', data.SLIDE_3.nav_title);
+          setTxt(s3.querySelector('h1'), data.SLIDE_3.question);
+          const spires = s3.querySelectorAll('.trinity-laser-spire');
+          if (spires[0]) {
+            setTxt(spires[0].querySelector('.telemetry-tag'), data.SLIDE_3.spire1_tag);
+            setTxt(spires[0].querySelector('p'), data.SLIDE_3.spire1_text);
+          }
+          if (spires[1]) {
+            setTxt(spires[1].querySelector('.telemetry-tag'), data.SLIDE_3.spire2_tag);
+            setTxt(spires[1].querySelector('p'), data.SLIDE_3.spire2_text);
+          }
+          if (spires[2]) {
+            setTxt(spires[2].querySelector('.telemetry-tag'), data.SLIDE_3.spire3_tag);
+            setTxt(spires[2].querySelector('p'), data.SLIDE_3.spire3_text);
+          }
+        }
+      }
+
+      // 5. Slide 4
+      if (data.SLIDE_4) {
+        const s4 = document.getElementById('slide-4');
+        if (s4) {
+          if (data.SLIDE_4.nav_title) s4.setAttribute('data-title', data.SLIDE_4.nav_title);
+          setTxt(s4.querySelector('.telemetry-tag'), data.SLIDE_4.telemetry);
+          setTxt(s4.querySelector('h1'), data.SLIDE_4.title);
+          setTxt(s4.querySelector('.hud-bracket-container p'), data.SLIDE_4.quote);
+          const badges = s4.querySelectorAll('div[style*="display: flex"] span');
+          if (badges[0]) setTxt(badges[0], data.SLIDE_4.badge1);
+          if (badges[1]) setTxt(badges[1], data.SLIDE_4.badge2);
+        }
+      }
+
+      // 6. Slide 5: Tiểu Phẩm Kịch
+      if (data.SLIDE_5) {
+        const s5 = document.getElementById('slide-5');
+        if (s5) {
+          if (data.SLIDE_5.nav_title) s5.setAttribute('data-title', data.SLIDE_5.nav_title);
+          setTxt(s5.querySelector('.telemetry-tag'), data.SLIDE_5.telemetry);
+          setTxt(s5.querySelector('.monumental-text'), data.SLIDE_5.title);
+          setTxt(s5.querySelector('.layout-isometric-labyrinth > p'), data.SLIDE_5.subtitle);
+          setTxt(s5.querySelector('.hud-bracket-container p'), data.SLIDE_5.quote);
+          if (data.SLIDE_5.video_file) {
+            const video5 = document.getElementById('perf-video-5');
+            const standby5 = document.getElementById('video-standby-5');
+            if (video5 && !video5.src) {
+              video5.src = data.SLIDE_5.video_file;
+              if (standby5) standby5.style.display = 'none';
+            }
+          }
+        }
+      }
+
+      // 7. Slide 6
+      if (data.SLIDE_6) {
+        const s6 = document.getElementById('slide-6');
+        if (s6) {
+          if (data.SLIDE_6.nav_title) s6.setAttribute('data-title', data.SLIDE_6.nav_title);
+          setTxt(s6.querySelector('.layout-kintsugi-rebirth > p'), data.SLIDE_6.subtitle);
+          const quoteEl = s6.querySelector('.kintsugi-gold-manifesto p');
+          if (quoteEl && (data.SLIDE_6.quote_lead || data.SLIDE_6.quote_highlight)) {
+            setHtml(quoteEl, `${data.SLIDE_6.quote_lead || ''}<br><span style="color: #ffd700; text-shadow: 0 0 45px #ffd700;">${data.SLIDE_6.quote_highlight || ''}</span>`);
+          }
+        }
+      }
+
+      // 8. Slide 7
+      if (data.SLIDE_7) {
+        const s7 = document.getElementById('slide-7');
+        if (s7) {
+          if (data.SLIDE_7.nav_title) s7.setAttribute('data-title', data.SLIDE_7.nav_title);
+          setTxt(s7.querySelector('.telemetry-tag'), data.SLIDE_7.telemetry);
+          setTxt(s7.querySelector('.monumental-text'), data.SLIDE_7.title);
+          setTxt(s7.querySelector('p'), data.SLIDE_7.quote);
+        }
+      }
+
+      // 9. Slides 8 to 13 (Minigame Arena Slides)
+      for (let i = 8; i <= 13; i++) {
+        const sKey = `SLIDE_${i}`;
+        const sData = data[sKey];
+        if (!sData) continue;
+        const sEl = document.getElementById(`slide-${i}`);
+        if (!sEl) continue;
+
+        if (sData.nav_title) sEl.setAttribute('data-title', sData.nav_title);
+        setTxt(sEl.querySelector('.target-question-header .telemetry-tag'), sData.telemetry);
+        setTxt(sEl.querySelector('.target-question-header h2'), sData.question);
+        setTxt(sEl.querySelector('.target-status-line'), sData.status);
+
+        const matrix = sEl.querySelector('.target-nodes-matrix');
+        if (matrix && sData.correct) {
+          matrix.setAttribute('data-correct', sData.correct.trim().toUpperCase());
+        }
+
+        setTxt(sEl.querySelector('.holo-target-node[data-choice="A"] .node-statement-text'), sData.choice_a);
+        setTxt(sEl.querySelector('.holo-target-node[data-choice="B"] .node-statement-text'), sData.choice_b);
+        setTxt(sEl.querySelector('.holo-target-node[data-choice="C"] .node-statement-text'), sData.choice_c);
+        setTxt(sEl.querySelector('.holo-target-node[data-choice="D"] .node-statement-text'), sData.choice_d);
+
+        const beam = sEl.querySelector('.revealed-insight-beam');
+        if (beam) {
+          setTxt(beam.querySelector('.telemetry-tag'), sData.insight_tag);
+          const beamP = beam.querySelector('p');
+          if (beamP) {
+            if (sData.insight_text) {
+              setHtml(beamP, sData.insight_text);
+            } else if (sData.insight_lead || sData.insight_highlight) {
+              setHtml(beamP, `${sData.insight_lead || ''}<span style="color: #39ff14;">${sData.insight_highlight || ''}</span>${sData.insight_tail || ''}`);
+            }
+          }
+        }
+      }
+
+      // 10. Slide 14
+      if (data.SLIDE_14) {
+        const s14 = document.getElementById('slide-14');
+        if (s14) {
+          if (data.SLIDE_14.nav_title) s14.setAttribute('data-title', data.SLIDE_14.nav_title);
+          setTxt(s14.querySelector('.telemetry-tag'), data.SLIDE_14.telemetry);
+          setTxt(s14.querySelector('.monumental-text'), data.SLIDE_14.question);
+          const pList = s14.querySelectorAll('p');
+          if (pList[0]) setTxt(pList[0], data.SLIDE_14.statement);
+          if (pList[1]) setTxt(pList[1], data.SLIDE_14.hero);
+        }
+      }
+
+      // 11. Slide 15
+      if (data.SLIDE_15) {
+        const s15 = document.getElementById('slide-15');
+        if (s15) {
+          if (data.SLIDE_15.nav_title) s15.setAttribute('data-title', data.SLIDE_15.nav_title);
+          setTxt(s15.querySelector('h1'), data.SLIDE_15.title);
+          const spires = s15.querySelectorAll('.origami-ribbon-spire');
+          if (spires[0]) setHtml(spires[0], `<div class="telemetry-tag" style="color: #ff7700; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon1_tag || ''}</div>${data.SLIDE_15.ribbon1_text || ''}`);
+          if (spires[1]) setHtml(spires[1], `<div class="telemetry-tag" style="color: #ff3366; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon2_tag || ''}</div>${data.SLIDE_15.ribbon2_text || ''}`);
+          if (spires[2]) setHtml(spires[2], `<div class="telemetry-tag" style="color: #e0aaff; margin-bottom: 0.8rem;">${data.SLIDE_15.ribbon3_tag || ''}</div>${data.SLIDE_15.ribbon3_text || ''}`);
+          setTxt(s15.querySelector('.hud-bracket-container p'), data.SLIDE_15.quote);
+        }
+      }
+
+      // 12. Slide 16: Tiết Mục Kết
+      if (data.SLIDE_16) {
+        const s16 = document.getElementById('slide-16');
+        if (s16) {
+          if (data.SLIDE_16.nav_title) s16.setAttribute('data-title', data.SLIDE_16.nav_title);
+          setTxt(s16.querySelector('.supernova-kinetic-hero'), data.SLIDE_16.hero);
+          setTxt(s16.querySelector('h2'), data.SLIDE_16.title);
+          const pList = s16.querySelectorAll('p');
+          if (pList[0]) setTxt(pList[0], data.SLIDE_16.statement);
+          if (pList[1]) setTxt(pList[1], data.SLIDE_16.callout);
+          if (data.SLIDE_16.music_file) {
+            const audio16 = document.getElementById('perf-audio-16');
+            if (audio16 && !audio16.src) audio16.src = data.SLIDE_16.music_file;
+          }
+        }
+      }
+
+      // 13. Slide 17
+      if (data.SLIDE_17) {
+        const s17 = document.getElementById('slide-17');
+        if (s17) {
+          if (data.SLIDE_17.nav_title) s17.setAttribute('data-title', data.SLIDE_17.nav_title);
+          setTxt(s17.querySelector('h2'), data.SLIDE_17.subtitle);
+          setTxt(s17.querySelector('h1'), data.SLIDE_17.hero);
+          const pList = s17.querySelectorAll('p');
+          if (pList[0]) setTxt(pList[0], data.SLIDE_17.statement);
+          if (pList[1]) setTxt(pList[1], data.SLIDE_17.wish);
+        }
+      }
+
+      // Update Navigation Modal Titles
+      if (typeof generateHoloNavTiles === 'function') {
+        generateHoloNavTiles();
+      }
+
+      // Update active slide tilt angles immediately
+      applySlideTilt(currentSlideIdx);
+    }
+
+    function applySlideTilt(slideIdx) {
+      if (!slideIdx) return;
+      const curEl = document.getElementById(`slide-${slideIdx}`);
+      if (!curEl) return;
+
+      const sKey = `SLIDE_${slideIdx}`;
+      const sData = currentContentData ? currentContentData[sKey] : null;
+      const camRotData = curEl.getAttribute('data-cam-rot');
+
+      let tX = '0.00', tY = '0.00';
+      if (sData && sData.tilt_x !== undefined && sData.tilt_y !== undefined) {
+        tX = parseFloat(sData.tilt_x).toFixed(2);
+        tY = parseFloat(sData.tilt_y).toFixed(2);
+      } else if (camRotData) {
+        const [rx, ry, rz] = camRotData.split(',').map(Number);
+        const maxT = window.stageTiltSettings ? window.stageTiltSettings.maxDeg : 8.5;
+        const mult = window.stageTiltSettings ? window.stageTiltSettings.multiplier : 20;
+        tX = Math.max(-maxT, Math.min(maxT, rx * mult)).toFixed(2);
+        tY = Math.max(-maxT, Math.min(maxT, ry * mult)).toFixed(2);
+      }
+      document.documentElement.style.setProperty('--cam-tilt-x', `${tX}deg`);
+      document.documentElement.style.setProperty('--cam-tilt-y', `${tY}deg`);
+    }
+
+    function showTxtStatusBadge(msg) {
+      const badge = document.getElementById('txt-source-status');
+      if (!badge) return;
+      badge.textContent = msg;
+      badge.style.display = 'inline-block';
+      badge.style.opacity = '1';
+      clearTimeout(badge._timer);
+      badge._timer = setTimeout(() => {
+        badge.style.opacity = '0';
+        setTimeout(() => { badge.style.display = 'none'; }, 300);
+      }, 3500);
+    }
+
+    async function loadContentFromTxt() {
+      let text = '';
+      try {
+        const res = await fetch('content.txt?t=' + Date.now());
+        if (res.ok) {
+          text = await res.text();
+          console.log('✅ Loaded external content.txt via Fetch');
+          showTxtStatusBadge('✅ TỰ ĐỘNG: content.txt');
+        }
+      } catch (err) {
+        console.warn('Fetch content.txt not reachable (file:// protocol restriction). Using local content data.');
+      }
+
+      if (!text || text.trim().length === 0) {
+        text = DEFAULT_CONTENT_TXT;
+      }
+
+      const parsed = parseContentTxt(text);
+      applyContentToSlides(parsed);
+    }
+
+    
+    function handleCustomAudioUpload(file) {
+      if (!file) return;
+      const audioUrl = URL.createObjectURL(file);
+      if (stageAudio) {
+        stageAudio.ensureContext();
+        stageAudio.loadBgm(audioUrl, window.stageAudioSettings ? window.stageAudioSettings.bgmVolume : 0.35, true);
+        showStageNotification('🎵 ĐÃ NẠP NHẠC NỀN: ' + file.name, '#39ff14');
+      }
+    }
+    function handleCustomTxtUpload(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const parsed = parseContentTxt(text);
+        applyContentToSlides(parsed);
+        if (stageAudio && stageAudio.playLaserLockOn) {
+          stageAudio.playLaserLockOn();
+        }
+        showTxtStatusBadge('✅ ĐÃ NẠP: ' + file.name);
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+
+    // Drag and Drop support for content.txt directly onto the presentation window
+    window.addEventListener('dragover', (e) => e.preventDefault());
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const file = e.dataTransfer.files[0];
+        if (file.name.endsWith('.txt')) {
+          handleCustomTxtUpload(file);
+        } else if (/\.(mp4|webm|mov|mkv)$/i.test(file.name)) {
+          if (currentSlideIdx === 5 || (currentActiveMedia && currentActiveMedia.type === 'video')) {
+            openDramaVideoPlayer(5);
+            handlePerfVideoFileSelected(5, file);
+          } else {
+            showStageNotification('🎬 Vui lòng chuyển sang Slide 5 để phát video!', '#ff0033');
+          }
+        } else if (/\.(mp3|wav|ogg|m4a|aac|flac)$/i.test(file.name)) {
+          if (currentSlideIdx === 2 || (currentActiveMedia && currentActiveMedia.id === 2)) {
+            openPerformanceMusicPlayer(2);
+            handlePerfMusicFileSelected(2, file);
+          } else if (currentSlideIdx === 16 || (currentActiveMedia && currentActiveMedia.id === 16)) {
+            openPerformanceMusicPlayer(16);
+            handlePerfMusicFileSelected(16, file);
+          } else {
+            handleCustomAudioUpload(file);
+          }
+        }
+      }
+    });
+
+    // Run loader immediately upon script evaluation
+    loadContentFromTxt();
+  </script>
+
+</body>
+</html>

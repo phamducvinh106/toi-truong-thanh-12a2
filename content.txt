@@ -1,0 +1,251 @@
+==============================================================================
+# KỊCH BẢN NỘI DUNG SÂN KHẤU: "TÔI TRƯỞNG THÀNH" — TẬP THỂ 12A2
+# Tệp văn bản nguồn độc lập (content.txt)
+# 
+# HƯỚNG DẪN DÀNH CHO BAN TỔ CHỨC / LỚP 12A2:
+# 1. Bạn có thể mở và chỉnh sửa toàn bộ câu từ, câu hỏi, đáp án bằng Notepad.
+# 2. Các dòng bắt đầu bằng ký tự # là dòng ghi chú, không ảnh hưởng đến nội dung.
+# 3. Cấu trúc dạng [TÊN_SLIDE] theo sau là các cặp key = giá trị.
+# ==============================================================================
+
+# ==============================================================================
+# CẤU HÌNH HIỆU ỨNG KHÔNG GIAN 3D & TILTING (3D SPATIAL TILTING)
+# Điều chỉnh độ nghiêng và cảm giác chiều sâu 3D của các slide tại đây:
+# - tilt_max_deg: Góc nghiêng tối đa (độ) — khuyến nghị 7.0 đến 12.0 để thấy rõ chiều sâu 3D
+# - tilt_multiplier: Hệ số nhạy theo camera 3D Three.js (khuyến nghị 18 đến 25)
+# - perspective_px: Tiêu cự phối cảnh (px) — càng nhỏ hiệu ứng 3D càng sâu (khuyến nghị 1500 đến 1850)
+# (Bạn cũng có thể tùy chỉnh tilt_x và tilt_y ở từng [SLIDE_X] bên dưới)
+# ==============================================================================
+[SETTINGS]
+tilt_max_deg = 12
+tilt_multiplier = 20
+perspective_px = 1700
+glass_enabled = true
+glass_alpha = 0.25
+glass_blur_px = 14
+glass_border_glow = 0.30
+glass_width_vw = 94
+glass_height_vh = 82
+bgm_file = bgm.mp3
+bgm_volume = 0.35
+bgm_loop = true
+synth_drone_enabled = false
+synth_drone_volume = 0.0
+
+[TOP_HUD]
+telemetry = CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH
+indicator = CONTINUOUS DIGITAL SCENOGRAPHY • 4K 60FPS
+
+[SLIDE_1]
+nav_title = Khai Màn: Tôi Trưởng Thành
+telemetry = [ CHUYÊN ĐỀ SÂN KHẤU TRƯỜNG HỌC • LỚP 12A2 ]
+title = TÔI TRƯỞNG THÀNH
+quote = "DÁM ƯỚC MƠ • DÁM THỬ SỨC • DÁM BẮT ĐẦU LẠI"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_2]
+nav_title = Tiết Mục: Hò Vươn Mình
+telemetry = [ TIẾT MỤC BIỂU DIỄN KHAI MÀN ]
+title = HÒ VƯƠN MÌNH
+subtitle = MASHUP: HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
+quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
+performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
+# File nhạc biểu diễn tiết mục (tuỳ chọn, hoặc kéo thả file vào màn hình)
+music_file = audio/ho_vuon_minh.mp3
+tilt_x = -3.5
+tilt_y = 0.0
+
+[SLIDE_3]
+nav_title = Định Nghĩa Trưởng Thành
+question = BAO GIỜ CHÚNG TA THỰC SỰ TRƯỞNG THÀNH?
+spire1_tag = // CHÂN LÝ 01
+spire1_text = "Biết Đứng Dậy Sau Những Lần Yếu Lòng"
+spire2_tag = // CHÂN LÝ 02
+spire2_text = "Biết Sửa Đổi & Chịu Trách Nhiệm Với Lựa Chọn"
+spire3_tag = // CHÂN LÝ 03
+spire3_text = "Biết Mình Muốn Trở Thành Người Như Thế Nào"
+tilt_x = -2.5
+tilt_y = -6.5
+
+[SLIDE_4]
+nav_title = Hành Trình Soi Rọi Chính Mình
+telemetry = // CHUYÊN ĐỀ CHIÊM NGHIỆM
+title = HÀNH TRÌNH TỰ SOI RỌI CHÍNH MÌNH
+quote = "À, MÌNH CỦA NGÀY HÔM NAY ĐÃ KHÁC MÌNH CỦA NGÀY HÔM QUA THẬT RỒI!"
+badge1 = [ NHÌN LẠI ĐỂ THẤU HIỂU ]
+badge2 = [ BƯỚC TIẾP ĐỂ VƯƠN XA ]
+tilt_x = 0.0
+tilt_y = 5.0
+
+[SLIDE_5]
+nav_title = Tiểu Phẩm Kịch: Tôi Của Ngày Hôm Qua
+telemetry = // TIỂU PHẨM SÂN KHẤU
+title = TÔI CỦA NGÀY HÔM QUA
+subtitle = Áp Lực Học Tập • Kỳ Vọng Gia Đình • Lựa Chọn Tuổi Trẻ
+quote = "NẾU ĐƯỢC QUAY LẠI, BẠN CÓ CHỌN KHÁC ĐI?"
+# File video tiểu phẩm kịch (tuỳ chọn, hoặc kéo thả file vào màn hình)
+video_file = video/tieu_pham.mp4
+tilt_x = -8.5
+tilt_y = 7.5
+
+[SLIDE_6]
+nav_title = Bài Học Sau Vấp Ngã
+subtitle = "Trưởng thành không đo bằng việc chúng ta đã đi được bao xa..."
+quote_lead = "MÀ LÀ SAU MỖI LẦN VẤP NGÃ,
+quote_highlight = CHÚNG TA ĐÃ HỌC ĐƯỢC ĐIỀU GÌ."
+tilt_x = 4.5
+tilt_y = 0.0
+
+[SLIDE_7]
+nav_title = Khởi Động Minigame
+telemetry = [ GIAO LƯU SÂN KHẤU TOÀN TRƯỜNG ]
+title = ĐỨNG TRƯỚC LỰA CHỌN
+quote = GIƠ TAY PHÁT BIỂU • NHẬN QUÀ LƯU NIỆM ĐẶC BIỆT TỪ 12A2
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_8]
+nav_title = Câu Hỏi 01: Dấu Hiệu Trưởng Thành
+telemetry = // THỬ THÁCH 01 / 06
+question = "ĐIỀU GÌ LÀ DẤU HIỆU RÕ NHẤT CỦA SỰ TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Không còn phụ thuộc vào người khác
+choice_b = BIẾT CHỊU TRÁCH NHIỆM VỚI LỰA CHỌN CỦA MÌNH
+choice_c = Có thể tự kiếm tiền
+choice_d = Không bao giờ mắc sai lầm
+correct = B
+insight_tag = ● KHÓA MỤC TIÊU: ĐÁP ÁN B
+insight_lead = "Trưởng thành không phải là không sai, mà là 
+insight_highlight = DÁM CHỊU TRÁCH NHIỆM
+insight_tail =  với điều mình đã chọn!"
+tilt_x = 2.5
+tilt_y = -3.5
+
+[SLIDE_9]
+nav_title = Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?
+telemetry = // THỬ THÁCH 02 / 06
+question = "KHI THẤT BẠI, BẠN THƯỜNG LÀM GÌ?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Đổ lỗi cho hoàn cảnh
+choice_b = Bỏ cuộc vì nghĩ mình không đủ khả năng
+choice_c = Giấu cảm xúc và coi như không có chuyện gì
+choice_d = NHÌN LẠI, RÚT KINH NGHIỆM VÀ THỬ LẠI
+correct = D
+insight_tag = ● CHUYỂN HƯỚNG TƯ DUY: ĐÁP ÁN D
+insight_lead = "Chuyển từ câu hỏi: 'Tại sao mình lại gặp chuyện này?' sang 
+insight_highlight = 'MÌNH CÓ THỂ LÀM GÌ ĐỂ TỐT HƠN?'
+insight_tail = "
+tilt_x = -2.5
+tilt_y = 3.5
+
+[SLIDE_10]
+nav_title = Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai
+telemetry = // THỬ THÁCH 03 / 06
+question = "KHI NHẬN RA MÌNH ĐÃ LỰA CHỌN SAI, BẠN SẼ LÀM GÌ?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Cố gắng che giấu để không bị đánh giá
+choice_b = Đổ lỗi cho hoàn cảnh
+choice_c = THỪA NHẬN SAI LẦM VÀ TÌM CÁCH SỬA CHỮA
+choice_d = Bỏ qua vì chuyện đã xảy ra rồi
+correct = C
+insight_tag = ● BẢN LĨNH BẢN THÂN: ĐÁP ÁN C
+insight_lead = "Dũng cảm 
+insight_highlight = nhận sai và sửa đổi
+insight_tail =  là biểu hiện cao nhất của sự bản lĩnh!"
+tilt_x = -4.5
+tilt_y = 0.0
+
+[SLIDE_11]
+nav_title = Câu Hỏi 04: Biểu Hiện Trưởng Thành
+telemetry = // THỬ THÁCH 04 / 06
+question = "ĐIỀU NÀO DƯỚI ĐÂY THỂ HIỆN MỘT NGƯỜI ĐANG TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Luôn cố gắng làm hài lòng tất cả mọi người
+choice_b = Không bao giờ cho phép bản thân mắc sai lầm
+choice_c = BIẾT LẮNG NGHE, TỰ QUYẾT ĐỊNH VÀ CHỊU TRÁCH NHIỆM
+choice_d = Luôn tự mình giải quyết mọi vấn đề, không cần đến ai
+correct = C
+insight_tag = ● TỰ CHỦ CUỘC ĐỜI: ĐÁP ÁN C
+insight_lead = "
+insight_highlight = Lắng nghe xung quanh
+insight_tail =  nhưng luôn làm chủ tay lái cuộc đời mình!"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_12]
+nav_title = Câu Hỏi 05: Khi Người Khác Thất Vọng
+telemetry = // THỬ THÁCH 05 / 06
+question = "NẾU LỰA CHỌN CỦA BẠN KHIẾN NGƯỜI KHÁC THẤT VỌNG?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Từ bỏ lựa chọn của mình ngay
+choice_b = Làm theo ý mọi người để không bị trách
+choice_c = CÂN NHẮC, LẮNG NGHE NHƯNG VẪN TỰ CHỊU TRÁCH NHIỆM
+choice_d = Không quan tâm đến bất kỳ ai
+correct = C
+insight_tag = ● GIỮ VỮNG LẬP TRƯỜNG: ĐÁP ÁN C
+insight_lead = "Trưởng thành là 
+insight_highlight = giữ vững lập trường
+insight_tail =  mà không cực đoan, tiếp thu mà không đánh mất mình!"
+tilt_x = 2.5
+tilt_y = -4.5
+
+[SLIDE_13]
+nav_title = Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?
+telemetry = // THỬ THÁCH 06 / 06
+question = "ĐIỀU NÀO KHÔNG ĐỒNG NGHĨA VỚI TRƯỞNG THÀNH?"
+status = [ CHỌN ĐÁP ÁN A, B, C HOẶC D TRÊN BÀN PHÍM HOẶC CLICK ]
+choice_a = Biết xin lỗi khi mình sai
+choice_b = Biết lắng nghe người khác
+choice_c = LUÔN PHẢI MẠNH MẼ VÀ KHÔNG ĐƯỢC YẾU LÒNG
+choice_d = Biết chịu trách nhiệm
+correct = C
+insight_tag = ● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C
+insight_lead = "
+insight_highlight = TRƯỞNG THÀNH ĐƯỢC PHÉP YẾU LÒNG
+insight_tail =  — Quan trọng là biết đứng lên sau khi lau khô nước mắt!"
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_14]
+nav_title = Câu Hỏi Mở Sân Khấu
+telemetry = // GIAO LƯU TRỰC TIẾP KHÁN GIẢ
+question = "BẠN NGHĨ MÌNH ĐÃ TRƯỞNG THÀNH CHƯA?"
+statement = "Nếu hôm nay bạn vẫn chưa có câu trả lời... Không sao cả."
+hero = CHÚNG TA ĐỀU ĐANG TRƯỞNG THÀNH TỪNG NGÀY!
+tilt_x = 0.0
+tilt_y = 6.5
+
+[SLIDE_15]
+nav_title = Lời Nhắn Gửi Bản Thân
+title = LỜI NHẮN GỬI TÔI CỦA NGÀY MAI
+ribbon1_tag = // THÔNG ĐIỆP 01
+ribbon1_text = "Cảm ơn vì đã không bỏ cuộc giữa những áp lực."
+ribbon2_tag = // THÔNG ĐIỆP 02
+ribbon2_text = "Xin lỗi vì đã từng quá khắt khe với chính mình."
+ribbon3_tag = // THÔNG ĐIỆP 03
+ribbon3_text = "Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"
+quote = "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là một hành trình!"
+tilt_x = 1.5
+tilt_y = 0.0
+
+[SLIDE_16]
+nav_title = Tiết Mục Kết: Rực Rỡ
+hero = RỰC RỠ
+title = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
+callout = CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
+# File nhạc bài hát bế mạc (tuỳ chọn)
+music_file = audio/ruc_ro.mp3
+tilt_x = 0.0
+tilt_y = 0.0
+
+[SLIDE_17]
+nav_title = Bế Mạc & Tri Ân
+subtitle = "NẾU CẢ ĐỜI NÀY KHÔNG RỰC RỠ THÌ SAO?"
+hero = "Không sao cả, vì ngày mai vẫn đến và sương mù sẽ tan!"
+statement = TẬP THỂ 12A2 TRÂN TRỌNG CẢM ƠN QUÝ THẦY CÔ VÀ CÁC BẠN!
+wish = Chúc toàn trường một tuần mới tràn đầy năng lượng & hạnh phúc!
+tilt_x = 2.5
+tilt_y = -6.5
+`
