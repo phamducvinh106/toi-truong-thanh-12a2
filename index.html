@@ -45,6 +45,11 @@
       --glass-width: min(94vw, 1600px);
       --glass-height: min(82vh, 660px);
       
+      /* Small Component Frosted Glass Settings (Setting riêng cho khung kính nhỏ) */
+      --glass-small-alpha: 0.55;
+      --glass-small-blur: 14px;
+      --glass-small-border-opacity: 0.85;
+      
       /* Monumental Stage Typography Hierarchy (Balanced, Zero Overflow, Legible 30 - 50m) */
       --font-monumental: clamp(52px, 7vw, 105px);
       --font-hero: clamp(36px, 4.5vw, 70px);
@@ -1727,6 +1732,247 @@
       will-change: translate;
     }
 
+  
+    /* ==========================================================================
+       MULTI-LAYER FROSTED GLASS & COLORED OUTLINE SYSTEM
+       ========================================================================== */
+
+    /* 1. Stage Glass Monolith (Khung lớn bao quanh: giữ nguyên cấu hình cũ) */
+    .stage-glass-monolith {
+      border: 1.5px solid var(--neon-primary) !important;
+      border-radius: 20px !important;
+      clip-path: none !important;
+      box-shadow: 
+        0 15px 45px rgba(0, 0, 0, 0.5),
+        0 0 30px var(--neon-primary),
+        inset 0 0 25px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 2. Telemetry Tags (Frosted Glass Capsule với biến riêng --glass-small-...) */
+    .telemetry-tag {
+      padding: 0.35rem 1.4rem !important;
+      border-radius: 999px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.55)) !important;
+      border: 1.5px solid currentColor !important;
+      box-shadow: 
+        0 4px 18px rgba(0, 0, 0, 0.4),
+        0 0 12px currentColor,
+        inset 0 0 10px rgba(255, 255, 255, 0.04) !important;
+      transition: all 0.4s ease;
+    }
+
+    /* 3. Major Headings & Titles */
+    .monumental-text,
+    .scenography-slide > div:first-child > h1 {
+      display: inline-block !important;
+      padding: 0.5rem 2.2rem !important;
+      border-radius: 18px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.52)) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      box-shadow: 
+        0 10px 35px rgba(0, 0, 0, 0.5),
+        0 0 22px var(--neon-primary),
+        inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
+      max-width: 95%;
+    }
+
+    /* 3B. Slide 16 Song Title Frame (Bảo toàn tuyệt đối chữ RỰC RỠ quang phổ) */
+    .supernova-hero-glass-frame {
+      display: inline-block !important;
+      padding: 0.5rem 2.4rem !important;
+      border-radius: 20px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.52)) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      box-shadow: 
+        0 10px 35px rgba(0, 0, 0, 0.5),
+        0 0 25px var(--neon-primary),
+        inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
+      max-width: 95%;
+    }
+
+    .supernova-kinetic-hero {
+      background: linear-gradient(90deg, #ff0055, #ff9900, #ffe600, #00ff66, #00f3ff, #7b2cbf, #ff007f) !important;
+      background-size: 400% 400% !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      display: block !important;
+    }
+
+    /* 4. Secondary Headings (h2 in Slide 2, 16, 17) */
+    .scenography-slide > div:first-child > h2 {
+      display: inline-block !important;
+      padding: 0.45rem 2rem !important;
+      border-radius: 16px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.52)) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.45),
+        0 0 16px var(--neon-primary),
+        inset 0 0 14px rgba(255, 255, 255, 0.04) !important;
+      max-width: 92%;
+    }
+
+    /* 5. Sub-Statements & Hero Sub-Statements */
+    .hero-sub-statement {
+      display: inline-block !important;
+      padding: 0.9rem 2.5rem !important;
+      border-radius: 16px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.56)) !important;
+      border: 1.5px solid var(--neon-secondary) !important;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 20px var(--neon-secondary),
+        inset 0 0 15px rgba(255, 255, 255, 0.04) !important;
+      max-width: 92%;
+    }
+
+    /* 6. HUD Bracket Containers & Manifesto Frames */
+    .hud-bracket-container {
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.56)) !important;
+      border: 1.5px solid var(--neon-secondary) !important;
+      border-radius: 16px !important;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 0 20px var(--neon-secondary),
+        inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .kintsugi-gold-manifesto {
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(145%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(145%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.6)) !important;
+      border: 1.5px solid #ffd700 !important;
+      border-radius: 18px !important;
+      box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(255, 215, 0, 0.35),
+        inset 0 0 18px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 7. Standalone Direct Statement Paragraphs */
+    .scenography-slide > div:first-child > p {
+      display: inline-block !important;
+      padding: 0.55rem 2rem !important;
+      border-radius: 14px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.54)) !important;
+      border: 1.5px solid var(--neon-secondary) !important;
+      box-shadow: 
+        0 6px 25px rgba(0, 0, 0, 0.45),
+        0 0 16px var(--neon-secondary),
+        inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
+      max-width: 92%;
+    }
+
+    /* 8. Slide 04 Sub-Badges Pair */
+    .layout-anamorphic-split > div[style*="display: flex"] span {
+      display: inline-flex !important;
+      align-items: center !important;
+      padding: 0.45rem 1.8rem !important;
+      border-radius: 999px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.55)) !important;
+      border: 1.5px solid currentColor !important;
+      box-shadow: 
+        0 4px 18px rgba(0, 0, 0, 0.4),
+        0 0 14px currentColor,
+        inset 0 0 10px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 9. Independent Trinity & Ribbon Spire Towers */
+    .trinity-laser-spire {
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.62)) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      border: 1.5px solid currentColor !important;
+      border-radius: 18px !important;
+      box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.5),
+        0 0 22px currentColor,
+        inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .origami-ribbon-spire {
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.62)) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      border: 1.5px solid currentColor !important;
+      border-radius: 18px !important;
+      box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.5),
+        0 0 22px currentColor,
+        inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 10. Minigame Target Question Header & Node Cards */
+    .target-question-header {
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.56)) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      border-radius: 18px !important;
+      padding: 1.2rem 2.4rem !important;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 22px var(--neon-primary),
+        inset 0 0 15px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .holo-target-node {
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.6)) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      border-radius: 14px !important;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.45),
+        0 0 18px rgba(0, 243, 255, 0.22),
+        inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 11. Play Trigger Button Wrap Capsule */
+    .play-trigger-wrap {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 1.4rem !important;
+      padding: 0.6rem 2.2rem 0.6rem 1.4rem !important;
+      border-radius: 999px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.58)) !important;
+      border: 1.5px solid var(--neon-primary) !important;
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.5),
+        0 0 22px var(--neon-primary),
+        inset 0 0 15px rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* 12. Revealed Insight Beam on Minigames */
+    .revealed-insight-beam {
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(145%) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(145%) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.72)) !important;
+      border: 1.5px solid #00ffa3 !important;
+      border-radius: 18px !important;
+      box-shadow: 
+        0 15px 45px rgba(0, 0, 0, 0.6),
+        0 0 35px #00ffa3,
+        inset 0 0 20px rgba(0, 255, 163, 0.15) !important;
+    }
   </style>
 </head>
 <body>
@@ -2457,7 +2703,9 @@
         
         <!-- Standard Slide View -->
         <div class="layout-supernova-blast" id="slide-16-view">
-          <h1 class="supernova-kinetic-hero">RỰC RỠ</h1>
+          <div class="supernova-hero-glass-frame">
+            <h1 class="supernova-kinetic-hero">RỰC RỠ</h1>
+          </div>
 
           <h2 style="font-size: var(--font-title); font-weight: 900; color: #ffe600; text-shadow: 0 0 35px #ffe600; letter-spacing: 4px;">
             TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
@@ -4535,6 +4783,12 @@ tilt_y = -6.5
     };
 
     // Frosted Glass Monolith Backdrop Settings (Driven by content.txt [SETTINGS])
+    window.stageSmallGlassSettings = {
+      alpha: 0.55,
+      blurPx: 14,
+      borderGlow: 0.85
+    };
+
     window.stageGlassSettings = {
       enabled: true,
       blurPx: 14,
@@ -4575,6 +4829,9 @@ tilt_y = -6.5
         document.documentElement.style.setProperty('--glass-border-opacity', window.stageGlassSettings.borderGlow);
         document.documentElement.style.setProperty('--glass-width', `min(${window.stageGlassSettings.widthVw}vw, 1600px)`);
         document.documentElement.style.setProperty('--glass-height', `min(${window.stageGlassSettings.heightVh}vh, 660px)`);
+        document.documentElement.style.setProperty('--glass-small-blur', `${window.stageSmallGlassSettings.blurPx}px`);
+        document.documentElement.style.setProperty('--glass-small-alpha', window.stageSmallGlassSettings.alpha);
+        document.documentElement.style.setProperty('--glass-small-border-opacity', window.stageSmallGlassSettings.borderGlow);
       }
     }
 
@@ -4667,6 +4924,15 @@ tilt_y = -6.5
         }
         if (data.SETTINGS.glass_height_vh !== undefined) {
           window.stageGlassSettings.heightVh = parseFloat(data.SETTINGS.glass_height_vh) || 82;
+          if (data.SETTINGS.glass_small_alpha !== undefined) {
+            window.stageSmallGlassSettings.alpha = parseFloat(data.SETTINGS.glass_small_alpha) || 0.55;
+          }
+          if (data.SETTINGS.glass_small_blur_px !== undefined) {
+            window.stageSmallGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_small_blur_px) || 14;
+          }
+          if (data.SETTINGS.glass_small_border_glow !== undefined) {
+            window.stageSmallGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_small_border_glow) || 0.85;
+          }
         }
         // External Audio & Background Music Settings
         if (data.SETTINGS.bgm_file !== undefined) {

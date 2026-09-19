@@ -39,6 +39,16 @@ glass_border_glow = 0.30
 glass_width_vw = 94
 glass_height_vh = 82
 
+# ------------------------------------------------------------------------------
+# THIẾT LẬP ĐỘ MỜ KÍNH MỜ CHO CÁC THÀNH PHẦN NHỎ ĐỘC LẬP (SMALL COMPONENT GLASS)
+# (Khung kính mờ lớn bao quanh giữ nguyên các giá trị glass_alpha / glass_blur_px ở trên)
+# - glass_small_alpha: Độ mờ đục/trong suốt của các khung kính nhỏ (0.0 = trong suốt, 1.0 = đục)
+# - glass_small_blur_px: Độ mờ nhòe (blur) của các khung kính nhỏ (px)
+# - glass_small_border_glow: Độ sáng viền quang học của các khung kính nhỏ (0.0 đến 1.0)
+glass_small_alpha = 0.35
+glass_small_blur_px = 0
+glass_small_border_glow = 1
+
 # ==============================================================================
 # CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
 # Tùy chỉnh phát nhạc nền từ file âm thanh bên ngoài (mp3, wav, ogg):
