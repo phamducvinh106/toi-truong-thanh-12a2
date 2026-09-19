@@ -27,10 +27,11 @@
 4. **Khóa Tọa Độ Không Gian 3D Cho Chữ (Spatial 3D Tilt Fusion):**
    - Typography không còn phẳng: Chữ được đồng bộ trực tiếp với góc nghiêng `rotateX` và `rotateY` của camera 3D (`--cam-tilt-x`, `--cam-tilt-y`), tạo cảm giác các khối chữ đứng sừng sững giữa không gian 3 chiều.
 
-5. **Khung Kính Mờ Quang Học Duy Nhất (Single Frosted Glass Backdrop Monolith):**
+5. **Khung Kính Mờ Quang Học Duy Nhất (Single Frosted Glass Backdrop Monolith) & Chuyển Động Bồng Bềnh Hữu Cơ (Organic Levitation):**
    - Một khối kính cường lực mờ nguyên khối duy nhất bao quanh toàn bộ nội dung, giải quyết triệt để vấn đề chữ bị lẫn vào phông nền 3D động.
    - 4 góc vát hình bát giác công nghệ cao (`clip-path` đa giác 8 cạnh), ngàm quang học phát sáng đổi màu theo neon của từng slide.
    - Tùy chỉnh độ mờ đục / trong suốt (`glass_alpha`) linh hoạt trực tiếp trong `content.txt`.
+   - **Chuyển động bồng bềnh hữu cơ độc lập, lệch pha nhịp nhàng (Multi-Harmonic Living Levitation):** Khung kính mờ và toàn bộ các thành phần nội dung (tiêu đề, thẻ thông tin, đường laser, cột triết lý, 4 phương án trắc nghiệm) không còn đứng yên một chỗ mà chuyển động bồng bềnh lên xuống nhẹ nhàng, dao động độc lập và lệch pha với nhau, tạo cảm giác một giao diện ba chiều tràn đầy sự sống.
 
 6. **Âm Thanh Nền Ngoài (External BGM Audio Engine) & Triệt Tiếng Ồn Synth Drone:**
    - Tắt hoàn toàn tiếng u u synth nhân tạo gây ồn (`synth_drone_enabled = false`, `synth_drone_volume = 0.0`).

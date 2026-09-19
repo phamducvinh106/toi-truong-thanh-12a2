@@ -2,5 +2,6 @@
 * - Copy.*
 *.tmp
 *.log
+backup_*/
 Thumbs.db
 .DS_Store
