@@ -8,9 +8,11 @@
 
 ## 💎 CÁC NÂNG CẤP ĐỘT PHÁ TRIỆT TIÊU SỰ RỜI RẠC
 
-1. **Xóa Bỏ 100% MC Clue & Tinh Gọn HUD Đáy Tuyệt Đối:**
-   - Xóa bỏ hoàn toàn các nút bấm điều khiển vụn vặt và text đếm slide ở thanh đáy. Thanh HUD bên dưới giờ đây **chỉ hiển thị duy nhất Đồng hồ thời gian thực (HH:MM:SS) và Thanh tiến độ Laser**, đem lại màn hình LED 100% tinh khiết, đẳng cấp chuẩn sân khấu sự kiện lớn.
-   - Toàn bộ thao tác vận hành được chuyển hóa thành **hệ thống phím tắt chuyên nghiệp (Keyboard-First)**, tương thích hoàn hảo với Remote Clicker trình chiếu.
+1. **Thanh HUD Sân Khấu & Hệ Thống Ẩn/Hiện Phím Tắt [U / K]:**
+   - Khôi phục đầy đủ thanh điều khiển kỹ thuật ở đáy màn hình: Số thứ tự Slide (`SLIDE 01 / 17`), Đồng hồ thời gian thực (`HH:MM:SS`), Thanh tiến độ Laser, cùng hàng nút bấm thao tác nhanh: `❮ Lùi`, `Tiến ❯`, `☰ Slide`, `🔊 Audio`, `⛶ LED F11` và `👁️ Ẩn UI [U]`.
+   - Khôi phục các nút chọn tệp kỹ thuật trong trình phát nhạc và video (`📁 Chọn File Nhạc` / `📁 Chọn Video`).
+   - **Phím tắt chuyển đổi linh hoạt [U] hoặc [K]:** Người điều khiển có thể nhấn phím **`U`** hoặc **`K`** (hoặc click nút `👁️ Ẩn UI`) để lập tức ẩn sạch toàn bộ thanh HUD đáy và các nút kỹ thuật, trả lại màn hình LED 100% tinh khiết cho khán giả theo dõi. Nhấn lại **`U`** hoặc **`K`** để hiển thị lại toàn bộ ngay tức khắc!
+   - Toàn bộ thao tác vận hành vẫn tương thích hoàn hảo với Remote Clicker trình chiếu và hệ thống phím tắt chuyên nghiệp.
 
 2. **Trục Năng Lượng 3D Xuyên Suốt (Continuous Energy Spine):**
    - Một dải tơ laser 3D (`continuousEnergySpine`) uốn lượn liên tục qua toàn bộ 17 slide, biến không gian thành một vũ trụ liền mạch duy nhất thay vì 17 trang web chắp vá.
@@ -81,6 +83,7 @@
 | **`T`** | Phím **Text Source** | Mở hộp thoại chọn file `content.txt` để nạp lại |
 | **Kéo thả chuột** | Thả file `content.txt`, audio hoặc video | Thả trực tiếp vào màn hình để nạp văn bản, nhạc nền, bài hát hoặc video tiểu phẩm tức thì |
 | **`A` `B` `C` `D`** hoặc **`1` `2` `3` `4`** | Phím chọn đáp án Minigame | Khóa mục tiêu tương tác Minigame Đúng / Sai (Slide 8 – 13) |
+| **`U`** / **`K`** | Phím **UI / Kỹ Thuật** | Hiển thị / Ẩn toàn bộ thanh HUD đáy và các nút kỹ thuật (Chế độ sân khấu tinh khiết) |
 | **`Home`** / **`End`** | Phím nhảy nhanh | Về ngay Cảnh 01 (Khai màn) / Tới Cảnh 17 (Bế mạc) |
 
 ---

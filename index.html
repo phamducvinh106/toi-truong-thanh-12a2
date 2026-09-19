@@ -890,15 +890,36 @@
        ========================================================================== */
     footer.stage-bottom-hud {
       position: relative;
-      z-index: 10;
+      z-index: 100;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 0.55rem 2rem 0.65rem 2rem;
+      justify-content: space-between;
+      padding: 0.6rem 3rem 0.8rem 3rem;
       width: 100%;
-      background: linear-gradient(0deg, rgba(2,3,6,0.95) 0%, transparent 100%);
+      background: linear-gradient(0deg, rgba(2,3,6,0.96) 0%, transparent 100%);
       flex-shrink: 0;
-      pointer-events: none;
+      pointer-events: auto;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    body.tech-ui-hidden .stage-bottom-hud {
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none !important;
+    }
+
+    body.tech-ui-hidden .tech-ui-element {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    .hud-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      pointer-events: auto;
     }
 
     .stage-laser-progress {
@@ -963,6 +984,16 @@
       clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
       transition: all 0.25s ease;
       pointer-events: auto;
+    }
+
+    .hud-action-btn:active {
+      transform: translateY(1px);
+    }
+
+    .hud-action-btn.synth-on {
+      border-color: #39ff14 !important;
+      color: #39ff14 !important;
+      box-shadow: 0 0 18px rgba(57, 255, 20, 0.4) !important;
     }
 
     .hud-action-btn:hover {
@@ -1586,6 +1617,8 @@
         <div class="stage-music-player-panel" id="music-player-2" style="display: none;">
           <audio id="perf-audio-2" preload="metadata"></audio>
 
+          <input type="file" id="perf-audio-file-input-2" accept="audio/*" style="display: none;" onchange="handlePerfMusicFileSelected(2, this.files[0])">
+
           <div class="player-header-bar">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <div class="telemetry-beacon" style="background: #39ff14; box-shadow: 0 0 18px #39ff14;"></div>
@@ -1594,6 +1627,9 @@
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-audio-file-input-2').click()" title="Chọn tệp âm thanh từ máy tính">
+                <span>📁 Chọn File Nhạc</span>
+              </button>
               <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(2)" title="Trở về slide [Esc]">
                 <span>✕ Đóng [Esc]</span>
               </button>
@@ -1770,6 +1806,8 @@
 
         <!-- Video Player View (Near edge-to-edge, native aspect ratio) -->
         <div class="stage-video-player-panel" id="video-player-5" style="display: none; border-color: #ff0033; box-shadow: 0 25px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(255,0,51,0.5);">
+          <input type="file" id="perf-video-file-input-5" accept="video/*" style="display: none;" onchange="handlePerfVideoFileSelected(5, this.files[0])">
+
           <!-- Top Overlay Bar -->
           <div class="video-overlay-header">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
@@ -1779,6 +1817,9 @@
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-video-file-input-5').click()" title="Chọn tệp video từ máy tính">
+                <span>📁 Chọn Video</span>
+              </button>
               <button class="player-secondary-btn" onclick="closeDramaVideoPlayer(5)" title="Đóng video [Esc]">
                 <span>✕ Đóng Video [Esc]</span>
               </button>
@@ -1798,6 +1839,9 @@
               <p style="font-size: 14px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.5;">
                 Video phát tràn viền theo đúng tỉ lệ khung hình gốc.
               </p>
+              <button class="player-secondary-btn tech-ui-element" style="border-color: #ff0033; color: #ff0033; margin-top: 0.5rem;" onclick="event.stopPropagation(); document.getElementById('perf-video-file-input-5').click();">
+                <span>📁 Nạp File Video Ngay</span>
+              </button>
             </div>
           </div>
 
@@ -2223,6 +2267,8 @@
         <div class="stage-music-player-panel" id="music-player-16" style="display: none;">
           <audio id="perf-audio-16" preload="metadata"></audio>
 
+          <input type="file" id="perf-audio-file-input-16" accept="audio/*" style="display: none;" onchange="handlePerfMusicFileSelected(16, this.files[0])">
+
           <div class="player-header-bar">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <div class="telemetry-beacon"></div>
@@ -2231,6 +2277,9 @@
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-audio-file-input-16').click()" title="Chọn tệp âm thanh từ máy tính">
+                <span>📁 Chọn File Nhạc</span>
+              </button>
               <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(16)" title="Trở về slide [Esc]">
                 <span>✕ Đóng [Esc]</span>
               </button>
@@ -2335,15 +2384,45 @@
     </div>
   </main>
 
-  <!-- Bottom Stage HUD Bar (Streamlined: Real-time Clock & Laser Progress Only) -->
-  <footer class="stage-bottom-hud">
+  <!-- Bottom Stage HUD Bar (Interactive Technical Controls & Real-time Telemetry) -->
+  <footer class="stage-bottom-hud" id="stage-bottom-hud">
     <div class="stage-laser-progress">
       <div class="stage-laser-progress-fill" id="stage-laser-progress-fill"></div>
     </div>
 
+    <!-- Left: Slide Counter -->
+    <div style="display: flex; align-items: center; gap: 0.8rem;">
+      <span class="telemetry-tag" id="hud-slide-counter" style="color: var(--neon-primary); font-size: 14px; font-weight: 800;">
+        SLIDE 01 / 17
+      </span>
+    </div>
+
+    <!-- Center: Stage Clock -->
     <div class="hud-stage-clock">
       <div class="clock-beacon"></div>
       <span id="hud-stage-clock-time">00:00:00</span>
+    </div>
+
+    <!-- Right: Technical Control Buttons -->
+    <div class="hud-controls-row">
+      <button class="hud-action-btn" onclick="stepStageSlide(-1)" title="Lùi slide [🠔]">
+        <span>❮ Lùi</span>
+      </button>
+      <button class="hud-action-btn" onclick="stepStageSlide(1)" title="Tiến slide [Space / ➔]">
+        <span>Tiến ❯</span>
+      </button>
+      <button class="hud-action-btn" onclick="toggleHoloNavModal()" title="Danh mục 17 slide [O]">
+        <span>☰ Slide</span>
+      </button>
+      <button class="hud-action-btn synth-on" id="btn-audio-toggle" onclick="toggleAudioSystem()" title="Bật/Tắt âm thanh [M]">
+        <span id="audio-icon-label">🔊 Audio</span>
+      </button>
+      <button class="hud-action-btn" onclick="toggleCinemaFullscreen()" title="Toàn màn hình [F]">
+        <span>⛶ LED F11</span>
+      </button>
+      <button class="hud-action-btn" onclick="toggleTechUiVisibility()" title="Ẩn/Hiện HUD và nút kỹ thuật [Phím U / K]" style="border-color: var(--neon-secondary); color: #ffffff;">
+        <span id="btn-toggle-ui-label">👁️ Ẩn UI [U]</span>
+      </button>
     </div>
   </footer>
 
@@ -2408,6 +2487,10 @@
         <div class="shortcut-row">
           <div class="shortcut-keys"><span class="key-badge">Home</span> / <span class="key-badge">End</span></div>
           <div class="shortcut-desc">Nhảy nhanh về Cảnh đầu tiên (Khai màn) / Cảnh cuối (Bế mạc)</div>
+        </div>
+        <div class="shortcut-row">
+          <div class="shortcut-keys"><span class="key-badge">U</span> <span class="key-badge">K</span></div>
+          <div class="shortcut-desc">Hiển thị / Ẩn toàn bộ thanh HUD và các nút kỹ thuật (Chế độ sân khấu tinh khiết)</div>
         </div>
         <div class="shortcut-row">
           <div class="shortcut-keys"><span class="key-badge">H</span> / <span class="key-badge">?</span></div>
@@ -3435,6 +3518,28 @@
     initStageClock();
 
     // Fullscreen LED Mode
+        // Tech UI / HUD Toggle System [U / K]
+    let techUiVisible = true;
+    function toggleTechUiVisibility(forceState) {
+      if (typeof forceState === 'boolean') {
+        techUiVisible = forceState;
+      } else {
+        techUiVisible = !techUiVisible;
+      }
+
+      const lbl = document.getElementById('btn-toggle-ui-label');
+
+      if (techUiVisible) {
+        document.body.classList.remove('tech-ui-hidden');
+        if (lbl) lbl.textContent = '👁️ Ẩn UI [U]';
+        showStageNotification('🎛️ ĐÃ HIỆN THANH ĐIỀU KHIỂN & CÁC NÚT KỸ THUẬT [U/K]', '#39ff14');
+      } else {
+        document.body.classList.add('tech-ui-hidden');
+        if (lbl) lbl.textContent = '👁️ Hiện UI [U]';
+        showStageNotification('👁️ ĐÃ ẨN TOÀN BỘ HUD & NÚT KỸ THUẬT [Bấm U/K để hiện]', 'var(--neon-primary)');
+      }
+    }
+
     function toggleCinemaFullscreen() {
       stageAudio.playHudClick();
       if (!document.fullscreenElement) {
@@ -3610,6 +3715,11 @@
       else if (e.key === 't' || e.key === 'T') {
         const inp = document.getElementById('txt-file-input');
         if (inp) inp.click();
+      }
+      // U or K key -> Toggle HUD and Technical Buttons
+      else if (e.key === 'u' || e.key === 'U' || e.key === 'k' || e.key === 'K') {
+        e.preventDefault();
+        toggleTechUiVisibility();
       }
       // Direct keyboard keys A, B, C, D for minigame lock-on
       else if (['a', 'b', 'c', 'd', 'A', 'B', 'C', 'D'].includes(e.key)) {
