@@ -45,9 +45,9 @@ glass_height_vh = 82
 # - glass_small_alpha: Độ mờ đục/trong suốt của các khung kính nhỏ (0.0 = trong suốt, 1.0 = đục)
 # - glass_small_blur_px: Độ mờ nhòe (blur) của các khung kính nhỏ (px)
 # - glass_small_border_glow: Độ sáng viền quang học của các khung kính nhỏ (0.0 đến 1.0)
-glass_small_alpha = 0
-glass_small_blur_px = 0
-glass_small_border_glow = 1
+glass_small_alpha = 0.55
+glass_small_blur_px = 14
+glass_small_border_glow = 0.65
 
 # ==============================================================================
 # CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
@@ -74,8 +74,8 @@ nav_title = Khai Màn: Tôi Trưởng Thành
 telemetry = [ CHUYÊN ĐỀ • LỚP 12A2 ]
 title = TÔI TRƯỞNG THÀNH
 quote = "DÁM ƯỚC MƠ • DÁM THỬ SỨC • DÁM BẮT ĐẦU LẠI"
-tilt_x = 0.0
-tilt_y = 0.0
+tilt_x = -2.0
+tilt_y = 5.0
 
 [SLIDE_2]
 nav_title = Tiết Mục: Hò Vươn Mình
@@ -85,8 +85,8 @@ subtitle = MASHUP: HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
 quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
 music_file = audio/ho_vuon_minh.mp3
-tilt_x = -3.5
-tilt_y = 3.0
+tilt_x = -2.5
+tilt_y = -4.5
 
 [SLIDE_3]
 nav_title = Định Nghĩa Trưởng Thành
@@ -97,8 +97,8 @@ spire2_tag = // CHÂN LÝ 02
 spire2_text = "Biết Sửa Đổi & Chịu Trách Nhiệm Với Lựa Chọn"
 spire3_tag = // CHÂN LÝ 03
 spire3_text = "Biết Mình Muốn Trở Thành Người Như Thế Nào"
-tilt_x = -2.5
-tilt_y = -6.5
+tilt_x = -3.0
+tilt_y = 5.5
 
 [SLIDE_4]
 nav_title = Hành Trình Soi Rọi Chính Mình
@@ -107,8 +107,8 @@ title = HÀNH TRÌNH TỰ SOI RỌI CHÍNH MÌNH
 quote = "À, MÌNH CỦA NGÀY HÔM NAY ĐÃ KHÁC MÌNH CỦA NGÀY HÔM QUA THẬT RỒI!"
 badge1 = [ NHÌN LẠI ĐỂ THẤU HIỂU ]
 badge2 = [ BƯỚC TIẾP ĐỂ VƯƠN XA ]
-tilt_x = 0.0
-tilt_y = 5.0
+tilt_x = 2.0
+tilt_y = 4.5
 
 [SLIDE_5]
 nav_title = Tiểu Phẩm Kịch: Tôi Của Ngày Hôm Qua
@@ -117,24 +117,24 @@ title = TÔI CỦA NGÀY HÔM QUA
 subtitle = Áp Lực Học Tập • Kỳ Vọng Gia Đình • Lựa Chọn Tuổi Trẻ
 quote = "NẾU ĐƯỢC QUAY LẠI, BẠN CÓ CHỌN KHÁC ĐI?"
 video_file = video/tieu_pham.mp4
-tilt_x = 0
-tilt_y = 0
+tilt_x = -1.8
+tilt_y = -4.0
 
 [SLIDE_6]
 nav_title = Bài Học Sau Vấp Ngã
 subtitle = "Trưởng thành không đo bằng việc chúng ta đã đi được bao xa..."
 quote_lead = "MÀ LÀ SAU MỖI LẦN VẤP NGÃ,
 quote_highlight = CHÚNG TA ĐÃ HỌC ĐƯỢC ĐIỀU GÌ."
-tilt_x = 4.5
-tilt_y = 3.0
+tilt_x = 3.5
+tilt_y = 4.0
 
 [SLIDE_7]
 nav_title = Khởi Động Minigame
 telemetry = [ GIAO LƯU SÂN KHẤU TOÀN TRƯỜNG ]
 title = ĐỨNG TRƯỚC LỰA CHỌN
 quote = GIƠ TAY PHÁT BIỂU • NHẬN QUÀ LƯU NIỆM ĐẶC BIỆT TỪ 12A2
-tilt_x = 0.0
-tilt_y = 0.0
+tilt_x = -2.0
+tilt_y = -4.5
 
 [SLIDE_8]
 nav_title = Câu Hỏi 01: Dấu Hiệu Trưởng Thành
@@ -151,7 +151,7 @@ insight_lead = "Trưởng thành không phải là không sai, mà là
 insight_highlight = DÁM CHỊU TRÁCH NHIỆM
 insight_tail =  với điều mình đã chọn!"
 tilt_x = 2.5
-tilt_y = -3.5
+tilt_y = 4.0
 
 [SLIDE_9]
 nav_title = Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?
@@ -168,7 +168,7 @@ insight_lead = "Chuyển từ câu hỏi: 'Tại sao mình lại gặp chuyện 
 insight_highlight = 'MÌNH CÓ THỂ LÀM GÌ ĐỂ TỐT HƠN?'
 insight_tail = "
 tilt_x = -2.5
-tilt_y = 3.5
+tilt_y = -4.0
 
 [SLIDE_10]
 nav_title = Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai
@@ -184,8 +184,8 @@ insight_tag = ● BẢN LĨNH BẢN THÂN: ĐÁP ÁN C
 insight_lead = "Dũng cảm 
 insight_highlight = nhận sai và sửa đổi
 insight_tail =  là biểu hiện cao nhất của sự bản lĩnh!"
-tilt_x = -4.5
-tilt_y = 0.0
+tilt_x = -3.0
+tilt_y = 4.5
 
 [SLIDE_11]
 nav_title = Câu Hỏi 04: Biểu Hiện Trưởng Thành
@@ -201,8 +201,8 @@ insight_tag = ● TỰ CHỦ CUỘC ĐỜI: ĐÁP ÁN C
 insight_lead = "
 insight_highlight = Lắng nghe xung quanh
 insight_tail =  nhưng luôn làm chủ tay lái cuộc đời mình!"
-tilt_x = 0.0
-tilt_y = 0.0
+tilt_x = 2.0
+tilt_y = -4.5
 
 [SLIDE_12]
 nav_title = Câu Hỏi 05: Khi Người Khác Thất Vọng
@@ -219,7 +219,7 @@ insight_lead = "Trưởng thành là
 insight_highlight = giữ vững lập trường
 insight_tail =  mà không cực đoan, tiếp thu mà không đánh mất mình!"
 tilt_x = 2.5
-tilt_y = -4.5
+tilt_y = 4.5
 
 [SLIDE_13]
 nav_title = Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?
@@ -235,8 +235,8 @@ insight_tag = ● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C
 insight_lead = "
 insight_highlight = TRƯỞNG THÀNH ĐƯỢC PHÉP YẾU LÒNG
 insight_tail =  — Quan trọng là biết đứng lên sau khi lau khô nước mắt!"
-tilt_x = 0.0
-tilt_y = 0.0
+tilt_x = -2.0
+tilt_y = -4.0
 
 [SLIDE_14]
 nav_title = Câu Hỏi Mở Sân Khấu
@@ -244,8 +244,8 @@ telemetry = // GIAO LƯU TRỰC TIẾP KHÁN GIẢ
 question = "BẠN NGHĨ MÌNH ĐÃ TRƯỞNG THÀNH CHƯA?"
 statement = "Nếu hôm nay bạn vẫn chưa có câu trả lời... Không sao cả."
 hero = CHÚNG TA ĐỀU ĐANG TRƯỞNG THÀNH TỪNG NGÀY!
-tilt_x = 0.0
-tilt_y = 6.5
+tilt_x = -2.5
+tilt_y = 5.0
 
 [SLIDE_15]
 nav_title = Lời Nhắn Gửi Bản Thân
@@ -258,7 +258,7 @@ ribbon3_tag = // THÔNG ĐIỆP 03
 ribbon3_text = "Mình đã làm rất tốt rồi — Hãy kiên nhẫn với chính bạn!"
 quote = "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là một hành trình!"
 tilt_x = 1.5
-tilt_y = 0.0
+tilt_y = -4.0
 
 [SLIDE_16]
 nav_title = Tiết Mục Kết: Rực Rỡ
@@ -267,8 +267,8 @@ title = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
 callout = CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
 music_file = audio/ruc_ro.mp3
-tilt_x = 0.0
-tilt_y = 0.0
+tilt_x = -2.5
+tilt_y = 4.5
 
 [SLIDE_17]
 nav_title = Bế Mạc & Tri Ân
@@ -276,5 +276,5 @@ subtitle = "NẾU CẢ ĐỜI NÀY KHÔNG RỰC RỠ THÌ SAO?"
 hero = "Không sao cả, vì ngày mai vẫn đến và sương mù sẽ tan!"
 statement = TẬP THỂ 12A2 TRÂN TRỌNG CẢM ƠN QUÝ THẦY CÔ VÀ CÁC BẠN!
 wish = Chúc toàn trường một tuần mới tràn đầy năng lượng & hạnh phúc!
-tilt_x = 2.5
-tilt_y = -6.5
+tilt_x = 3.5
+tilt_y = -2.5

@@ -259,7 +259,7 @@
       -webkit-backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
       background: linear-gradient(135deg, rgba(8, 16, 32, var(--glass-alpha, 0.25)) 0%, rgba(2, 5, 14, var(--glass-alpha, 0.25)) 100%);
       box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.4),
+        0 30px 85px -15px rgba(0, 0, 0, 0.85),
         0 0 30px rgba(0, 243, 255, calc(var(--glass-border-opacity, 0.3) * 0.25)),
         inset 0 0 25px rgba(255, 255, 255, 0.03);
       clip-path: polygon(
@@ -275,6 +275,15 @@
       pointer-events: none;
       z-index: 1;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stage-glass-monolith::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 35%, transparent 65%, rgba(0, 0, 0, 0.3) 100%);
+      clip-path: inherit;
+      pointer-events: none;
     }
 
     .stage-glass-monolith::before {
@@ -1593,6 +1602,7 @@
 
     /* 4. Monumental Headings & Main Titles */
     .monumental-text,
+    .scenography-slide > div[class*="layout-"] h1,
     .supernova-kinetic-hero,
     .layout-portal-singularity h1,
     .layout-phoenix-soundscape h1,
@@ -1616,6 +1626,7 @@
 
     /* 5. Sub-statements & Secondary Headings */
     .hero-sub-statement,
+    .scenography-slide > div[class*="layout-"] p,
     .layout-phoenix-soundscape h2,
     .layout-isometric-labyrinth p,
     .layout-supernova-climax p,
@@ -1888,7 +1899,7 @@
     }
 
     /* 7. Standalone Direct Statement Paragraphs */
-    .scenography-slide > div:first-child > p {
+    .scenography-slide > div[class*="layout-"] > p {
       display: inline-block !important;
       padding: 0.55rem 2rem !important;
       border-radius: 14px !important;
@@ -2637,7 +2648,7 @@
       <section class="scenography-slide" id="slide-3" data-index="3"
         data-title="Định Nghĩa Trưởng Thành"
         data-cam="8,5,18" data-cam-rot="-0.1,-0.3,0"
-        data-neon-p="#ff5e00" data-neon-s="#ffb700" data-neon-t="#0044ff">
+        data-neon-p="#ff5e00" data-neon-s="#ffb700" data-neon-t="#00f3ff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-3" style="top: 5.5%; left: 5%; width: 122px; height: 122px;">
@@ -2694,7 +2705,7 @@
       <section class="scenography-slide" id="slide-4" data-index="4"
         data-title="Hành Trình Soi Rọi Chính Mình"
         data-cam="-6,2,20" data-cam-rot="0,0.2,-0.05"
-        data-neon-p="#ff0055" data-neon-s="#5f00ff" data-neon-t="#00ffc4">
+        data-neon-p="#ff0055" data-neon-s="#9d4edd" data-neon-t="#00ffc4">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-2 alt-neon" style="top: 5.5%; left: 5%; width: 122px; height: 122px;">
@@ -2745,7 +2756,7 @@
       <section class="scenography-slide" id="slide-5" data-index="5"
         data-title="Tiểu Phẩm Kịch: Tôi Của Ngày Hôm Qua"
         data-cam="12,14,18" data-cam-rot="-0.5,0.4,0.2"
-        data-neon-p="#ff0033" data-neon-s="#ffcc00" data-neon-t="#3b0066">
+        data-neon-p="#ff1744" data-neon-s="#ffcc00" data-neon-t="#a855f7">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-5 alt-neon" style="top: 5.5%; left: 5%; width: 126px; height: 126px;">
@@ -2962,7 +2973,7 @@
       <section class="scenography-slide" id="slide-8" data-index="8"
         data-title="Câu Hỏi 01: Dấu Hiệu Trưởng Thành"
         data-cam="4,-2,20" data-cam-rot="0.1,-0.15,0"
-        data-neon-p="#00f3ff" data-neon-s="#39ff14" data-neon-t="#002266">
+        data-neon-p="#00f3ff" data-neon-s="#39ff14" data-neon-t="#00f5d4">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-5 alt-neon" style="top: 5.5%; left: 5%; width: 130px; height: 130px;">
@@ -3154,7 +3165,7 @@
       <section class="scenography-slide" id="slide-11" data-index="11"
         data-title="Câu Hỏi 04: Biểu Hiện Trưởng Thành"
         data-cam="0,0,21" data-cam-rot="0,0,0.1"
-        data-neon-p="#0066ff" data-neon-s="#ffd700" data-neon-t="#ffffff">
+        data-neon-p="#38bdf8" data-neon-s="#ffd700" data-neon-t="#ffffff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-5 alt-neon" style="top: 5.5%; left: 5%; width: 126px; height: 126px;">
@@ -3218,7 +3229,7 @@
       <section class="scenography-slide" id="slide-12" data-index="12"
         data-title="Câu Hỏi 05: Khi Người Khác Thất Vọng"
         data-cam="5,-3,19" data-cam-rot="0.1,-0.2,0"
-        data-neon-p="#ffaa00" data-neon-s="#ff0099" data-neon-t="#1a0033">
+        data-neon-p="#ffaa00" data-neon-s="#ff0099" data-neon-t="#e0aaff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-3 alt-neon" style="top: 5.5%; left: 5%; width: 130px; height: 130px;">
@@ -3282,7 +3293,7 @@
       <section class="scenography-slide" id="slide-13" data-index="13"
         data-title="Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?"
         data-cam="0,0,18" data-cam-rot="0,0,-0.1"
-        data-neon-p="#ff0044" data-neon-s="#9d4edd" data-neon-t="#80d8ff">
+        data-neon-p="#ff2a6d" data-neon-s="#c77dff" data-neon-t="#80d8ff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-1 alt-neon" style="top: 5.5%; left: 5%; width: 122px; height: 122px;">
@@ -3346,7 +3357,7 @@
       <section class="scenography-slide" id="slide-14" data-index="14"
         data-title="Câu Hỏi Mở Sân Khấu"
         data-cam="-8,2,20" data-cam-rot="0,0.3,0"
-        data-neon-p="#480048" data-neon-s="#ff007f" data-neon-t="#ffffff">
+        data-neon-p="#d946ef" data-neon-s="#00f5d4" data-neon-t="#ffffff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
           <div class="floating-outline-item float-traj-5 alt-neon" style="top: 5.5%; left: 5%; width: 122px; height: 122px;">
@@ -4117,278 +4128,461 @@
     }
 
     function build17Scenographies() {
-      // 1. Cosmic Horizon Singularity
-      const g1 = new THREE.Group();
-      for (let i = 0; i < 7; i++) {
-        const ring = new THREE.LineLoop(
-          new THREE.RingGeometry(3.6 + i * 1.3, 3.64 + i * 1.3, 56),
-          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.55 })
-        );
-        ring.position.z = -i * 1.6;
-        g1.add(ring);
-      }
-      const ship = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.ConeGeometry(1.6, 4.5, 4)),
-        new THREE.LineBasicMaterial({ color: 0xff007f })
-      );
-      ship.rotation.x = Math.PI / 2;
-      ship.position.set(0, 0, 2);
-      g1.add(ship);
-      sceneObjects[1] = g1;
-      scene.add(g1);
-
-      // 2. Phoenix Wings
-      const g2 = new THREE.Group();
-      const wingMat = new THREE.LineBasicMaterial({ color: 0x39ff14, transparent: true, opacity: 0.8 });
-      for (let w = -1; w <= 1; w += 2) {
-        for (let i = 0; i < 12; i++) {
-          const curve = new THREE.CubicBezierCurve3(
-            new THREE.Vector3(0, -2.5, 0),
-            new THREE.Vector3(w * (3 + i * 1.2), 3 + i * 0.5, i * 0.4),
-            new THREE.Vector3(w * (8 + i * 1.5), 6.5 + i * 0.3, -i * 0.6),
-            new THREE.Vector3(w * (13 + i * 1.7), 1 - i * 0.3, -2)
-          );
-          g2.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(36)), wingMat));
+      // 1. SLIDE 1: Gargantua Black Hole & Accretion Disk (Right edge x: +13, r: 16)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const core = new THREE.Mesh(new THREE.SphereGeometry(4.2, 32, 24), new THREE.MeshBasicMaterial({ color: 0x010206 }));
+        m.add(core);
+        const horizonWire = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(4.25, 24, 16)), new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.85 }));
+        m.add(horizonWire);
+        
+        for (let r = 4.6; r <= 5.4; r += 0.25) {
+          const pRing = new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.05, 64), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 }));
+          pRing.rotation.x = Math.PI * 0.38;
+          m.add(pRing);
         }
-      }
-      sceneObjects[2] = g2;
-      g2.visible = false;
-      scene.add(g2);
-
-      // 3. Triptych Helix Spire
-      const g3 = new THREE.Group();
-      const hA = [], hB = [];
-      for (let t = -12; t <= 12; t += 0.28) {
-        hA.push(new THREE.Vector3(Math.cos(t) * 4.8, t * 0.62, Math.sin(t) * 4.8));
-        hB.push(new THREE.Vector3(Math.cos(t + Math.PI) * 4.8, t * 0.62, Math.sin(t + Math.PI) * 4.8));
-      }
-      const helixMat = new THREE.LineBasicMaterial({ color: 0xff5e00, transparent: true, opacity: 0.8 });
-      g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hA), helixMat));
-      g3.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hB), helixMat));
-      sceneObjects[3] = g3;
-      g3.visible = false;
-      scene.add(g3);
-
-      // 4. Split-Anamorphic Shards
-      const g4 = new THREE.Group();
-      for (let i = 0; i < 20; i++) {
-        const poly = new THREE.LineSegments(
-          new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.2 + (i % 3) * 0.8, 0)),
-          new THREE.LineBasicMaterial({ color: i % 2 === 0 ? 0xff0055 : 0x00ffc4 })
-        );
-        poly.position.set((Math.random() - 0.5) * 28, (Math.random() - 0.5) * 16, (Math.random() - 0.5) * 10);
-        g4.add(poly);
-      }
-      sceneObjects[4] = g4;
-      g4.visible = false;
-      scene.add(g4);
-
-      // 5. Isometric Labyrinth & Expectation Towers
-      const g5 = new THREE.Group();
-      const grid = new THREE.GridHelper(28, 16, 0xff0033, 0xffcc00);
-      grid.rotation.x = Math.PI / 4;
-      grid.position.y = -6;
-      g5.add(grid);
-      for (let i = 0; i < 8; i++) {
-        const pillar = new THREE.LineSegments(
-          new THREE.EdgesGeometry(new THREE.BoxGeometry(1.6, 5 + i * 1.2, 1.6)),
-          new THREE.LineBasicMaterial({ color: 0xff0033 })
-        );
-        pillar.position.set(-10 + i * 2.8, -2 + i * 0.6, -5 + (i % 3) * 2);
-        g5.add(pillar);
-      }
-      sceneObjects[5] = g5;
-      g5.visible = false;
-      scene.add(g5);
-
-      // 6. Kintsugi Laser Blossom & Jade Lotus
-      const g6 = new THREE.Group();
-      const lotusMat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.85 });
-      for (let layer = 1; layer <= 3; layer++) {
-        const count = 8 * layer;
-        for (let p = 0; p < count; p++) {
-          const angle = (p / count) * Math.PI * 2;
-          const curve = new THREE.QuadraticBezierCurve3(
-            new THREE.Vector3(0, -3, 0),
-            new THREE.Vector3(Math.cos(angle) * (4 + layer * 2), layer * 1.6, Math.sin(angle) * (4 + layer * 2)),
-            new THREE.Vector3(Math.cos(angle) * (3 + layer * 1.5), layer * 3.6, Math.sin(angle) * (3 + layer * 1.5))
-          );
-          g6.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(24)), lotusMat));
+        const diskGroup = new THREE.Group();
+        diskGroup.name = "diskGroup";
+        const accMat = new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.75 });
+        const accMat2 = new THREE.LineBasicMaterial({ color: 0xff007f, transparent: true, opacity: 0.65 });
+        for (let r = 5.8; r <= 15.5; r += 0.9) {
+          const dRing = new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.06, 72), (r > 10 ? accMat2 : accMat));
+          dRing.rotation.x = Math.PI * 0.38;
+          diskGroup.add(dRing);
         }
+        m.add(diskGroup);
+        
+        for (let dir = -1; dir <= 1; dir += 2) {
+          const jet = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.ConeGeometry(2.8, 12, 16, 4, true)), new THREE.LineBasicMaterial({ color: 0x8a00ff, transparent: true, opacity: 0.75 }));
+          jet.position.y = dir * 6.5;
+          jet.rotation.x = dir === 1 ? 0 : Math.PI;
+          m.add(jet);
+        }
+        root.add(m);
+        sceneObjects[1] = root;
+        scene.add(root);
       }
-      sceneObjects[6] = g6;
-      g6.visible = false;
-      scene.add(g6);
 
-      // 7. Orbital Radar Game Hub
-      const g7 = new THREE.Group();
-      for (let r = 2.5; r <= 16; r += 2.5) {
-        g7.add(new THREE.LineLoop(
-          new THREE.RingGeometry(r, r + 0.06, 64),
-          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.6 })
-        ));
+      // 2. SLIDE 2: Pulsating Giant Star (Left edge x: -13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const starCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(5.2, 2)), new THREE.LineBasicMaterial({ color: 0xffe600 }));
+        m.add(starCore);
+        
+        const coronaMat1 = new THREE.LineBasicMaterial({ color: 0x39ff14, transparent: true, opacity: 0.85 });
+        const coronaMat2 = new THREE.LineBasicMaterial({ color: 0xffe600, transparent: true, opacity: 0.75 });
+        for (let layer = 1; layer <= 3; layer++) {
+          const count = 10 * layer;
+          for (let p = 0; p < count; p++) {
+            const angle = (p / count) * Math.PI * 2;
+            const rOuter = 6.2 + layer * 2.8;
+            const curve = new THREE.QuadraticBezierCurve3(
+              new THREE.Vector3(Math.cos(angle) * 5.2, Math.sin(angle) * 5.2, 0),
+              new THREE.Vector3(Math.cos(angle + 0.12) * (rOuter * 0.8), Math.sin(angle + 0.12) * (rOuter * 0.8), (layer % 2 === 0 ? 2 : -2)),
+              new THREE.Vector3(Math.cos(angle) * rOuter, Math.sin(angle) * rOuter, 0)
+            );
+            m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(20)), (layer === 2 ? coronaMat2 : coronaMat1)));
+          }
+        }
+        root.add(m);
+        sceneObjects[2] = root;
+        root.visible = false;
+        scene.add(root);
       }
-      sceneObjects[7] = g7;
-      g7.visible = false;
-      scene.add(g7);
 
-      // 8. Orbital Radar Q1
-      const g8 = new THREE.Group();
-      for (let i = 0; i < 4; i++) {
-        const orbit = new THREE.LineLoop(
-          new THREE.RingGeometry(6 + i * 2.2, 6.06 + i * 2.2, 54),
-          new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.55 })
-        );
-        orbit.rotation.x = 0.5 + i * 0.25;
-        orbit.rotation.y = 0.3 + i * 0.2;
-        g8.add(orbit);
+      // 3. SLIDE 3: Trinary Stellar Core (Top-Right x: +12, y: +5, r: 14)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(12, 5, -2);
+        
+        const triPts = [];
+        const triR = 6.8;
+        for (let i = 0; i <= 3; i++) {
+          const a = (i % 3) * (Math.PI * 2 / 3);
+          triPts.push(new THREE.Vector3(Math.cos(a) * triR, Math.sin(a) * triR, 0));
+        }
+        m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(triPts), new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.8 })));
+        
+        for (let r = 8.5; r <= 13.5; r += 2.2) {
+          m.add(new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.05, 54), new THREE.LineBasicMaterial({ color: 0xff5e00, transparent: true, opacity: 0.55 })));
+        }
+        
+        for (let i = 0; i < 3; i++) {
+          const a = i * (Math.PI * 2 / 3);
+          const starNode = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.4, 1)), new THREE.LineBasicMaterial({ color: i === 0 ? 0xff5e00 : (i === 1 ? 0xffb700 : 0x00f3ff) }));
+          starNode.position.set(Math.cos(a) * triR, Math.sin(a) * triR, 0);
+          m.add(starNode);
+        }
+        root.add(m);
+        sceneObjects[3] = root;
+        root.visible = false;
+        scene.add(root);
       }
-      sceneObjects[8] = g8;
-      g8.visible = false;
-      scene.add(g8);
 
-      // 9. Crossroads Q2
-      const g9 = new THREE.Group();
-      const cross = new THREE.GridHelper(30, 20, 0xff9966, 0xc77dff);
-      cross.rotation.x = Math.PI / 3;
-      cross.position.y = -6;
-      g9.add(cross);
-      sceneObjects[9] = g9;
-      g9.visible = false;
-      scene.add(g9);
-
-      // 10. U-Turn Vector Loop Q3
-      const g10 = new THREE.Group();
-      const uC = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(-12, -4, 0),
-        new THREE.Vector3(-5, -2, 2),
-        new THREE.Vector3(0, 4.5, 3),
-        new THREE.Vector3(5, -2, 2),
-        new THREE.Vector3(12, -4, 0)
-      ]);
-      g10.add(new THREE.Line(
-        new THREE.BufferGeometry().setFromPoints(uC.getPoints(54)),
-        new THREE.LineBasicMaterial({ color: 0xff3c00, transparent: true, opacity: 0.9 })
-      ));
-      sceneObjects[10] = g10;
-      g10.visible = false;
-      scene.add(g10);
-
-      // 11. Bifocal HUD Q4
-      const g11 = new THREE.Group();
-      const rA = new THREE.LineLoop(new THREE.RingGeometry(4.4, 4.46, 54), new THREE.LineBasicMaterial({ color: 0x0066ff }));
-      rA.position.x = -2.6;
-      const rB = new THREE.LineLoop(new THREE.RingGeometry(4.4, 4.46, 54), new THREE.LineBasicMaterial({ color: 0xffd700 }));
-      rB.position.x = 2.6;
-      g11.add(rA); g11.add(rB);
-      sceneObjects[11] = g11;
-      g11.visible = false;
-      scene.add(g11);
-
-      // 12. Kinetic Balance Scale Q5
-      const g12 = new THREE.Group();
-      const f = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.ConeGeometry(1.8, 3.6, 3)),
-        new THREE.LineBasicMaterial({ color: 0xffaa00 })
-      );
-      f.position.y = -3;
-      const bm = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.BoxGeometry(16, 0.22, 0.22)),
-        new THREE.LineBasicMaterial({ color: 0xff0099 })
-      );
-      bm.position.y = -1.2;
-      g12.add(f); g12.add(bm);
-      sceneObjects[12] = g12;
-      g12.visible = false;
-      scene.add(g12);
-
-      // 13. Cracked Shield Q6
-      const g13 = new THREE.Group();
-      const sh = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.CylinderGeometry(5, 3.5, 9, 6, 2, true)),
-        new THREE.LineBasicMaterial({ color: 0xff0044 })
-      );
-      g13.add(sh);
-      sceneObjects[13] = g13;
-      g13.visible = false;
-      scene.add(g13);
-
-      // 14. Echo Chamber Microphone Vortex
-      const g14 = new THREE.Group();
-      const mic = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.CylinderGeometry(1.4, 1.4, 4.5, 16)),
-        new THREE.LineBasicMaterial({ color: 0xff007f })
-      );
-      mic.position.set(-10, 0, 0);
-      g14.add(mic);
-      for (let i = 1; i <= 8; i++) {
-        const wav = new THREE.LineLoop(
-          new THREE.RingGeometry(i * 1.6, i * 1.65, 40),
-          new THREE.LineBasicMaterial({ color: 0xe0aaff, transparent: true, opacity: 0.5 - i * 0.05 })
-        );
-        wav.position.set(-10 + i * 2.2, 0, 0);
-        g14.add(wav);
+      // 4. SLIDE 4: 4D Tesseract (Right edge x: +13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const outerBox = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(10, 10, 10)), new THREE.LineBasicMaterial({ color: 0x00ffc4 }));
+        const innerBox = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(5.2, 5.2, 5.2)), new THREE.LineBasicMaterial({ color: 0xff0055 }));
+        m.add(outerBox); m.add(innerBox);
+        
+        const hyperMat = new THREE.LineBasicMaterial({ color: 0x9d4edd, transparent: true, opacity: 0.8 });
+        const dOuter = 5, dInner = 2.6;
+        for (let sx of [-1, 1]) {
+          for (let sy of [-1, 1]) {
+            for (let sz of [-1, 1]) {
+              const pLine = [new THREE.Vector3(sx * dOuter, sy * dOuter, sz * dOuter), new THREE.Vector3(sx * dInner, sy * dInner, sz * dInner)];
+              m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pLine), hyperMat));
+            }
+          }
+        }
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(12, 12.06, 64), new THREE.LineBasicMaterial({ color: 0x00ffc4, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[4] = root;
+        root.visible = false;
+        scene.add(root);
       }
-      sceneObjects[14] = g14;
-      g14.visible = false;
-      scene.add(g14);
 
-      // 15. Constellation Origami Heart
-      const g15 = new THREE.Group();
-      const hShape = new THREE.Shape();
-      hShape.moveTo(0, 1.5);
-      hShape.bezierCurveTo(0, 2.5, -2.5, 3.5, -3, 1.5);
-      hShape.bezierCurveTo(-3.5, -0.5, 0, -2.5, 0, -4.5);
-      hShape.bezierCurveTo(0, -2.5, 3.5, -0.5, 3, 1.5);
-      hShape.bezierCurveTo(2.5, 3.5, 0, 2.5, 0, 1.5);
-      const hrt = new THREE.LineSegments(
-        new THREE.WireframeGeometry(new THREE.ShapeGeometry(hShape)),
-        new THREE.LineBasicMaterial({ color: 0xff3366 })
-      );
-      hrt.scale.set(1.15, 1.15, 1.15);
-      g15.add(hrt);
-      sceneObjects[15] = g15;
-      g15.visible = false;
-      scene.add(g15);
-
-      // 16. Supernova Spectrum Explosion
-      const g16 = new THREE.Group();
-      for (let i = 0; i < 32; i++) {
-        const angle = (i / 32) * Math.PI * 2;
-        const len = 10 + (i % 4) * 3;
-        const pts = [
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(Math.cos(angle) * len, Math.sin(angle) * len, (Math.random() - 0.5) * 8)
+      // 5. SLIDE 5: Cosmic Armillary Sphere (Left edge x: -13, r: 16)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const armCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(3.6)), new THREE.LineBasicMaterial({ color: 0xffcc00 }));
+        m.add(armCore);
+        
+        const armRings = [
+          { r: 6.2, rx: 0, ry: 0, col: 0xff1744 },
+          { r: 8.4, rx: Math.PI / 4, ry: 0, col: 0xa855f7 },
+          { r: 10.6, rx: Math.PI / 2, ry: Math.PI / 6, col: 0xffcc00 },
+          { r: 12.8, rx: Math.PI / 3, ry: Math.PI / 3, col: 0xff1744 },
+          { r: 15.0, rx: 0, ry: Math.PI / 2, col: 0xa855f7 }
         ];
-        const col = new THREE.Color().setHSL(i / 32, 1.0, 0.55);
-        g16.add(new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints(pts),
-          new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.9 })
-        ));
+        armRings.forEach(cfg => {
+          const loop = new THREE.LineLoop(new THREE.RingGeometry(cfg.r, cfg.r + 0.08, 64), new THREE.LineBasicMaterial({ color: cfg.col, transparent: true, opacity: 0.8 }));
+          loop.rotation.x = cfg.rx; loop.rotation.y = cfg.ry;
+          m.add(loop);
+        });
+        root.add(m);
+        sceneObjects[5] = root;
+        root.visible = false;
+        scene.add(root);
       }
-      sceneObjects[16] = g16;
-      g16.visible = false;
-      scene.add(g16);
 
-      // 17. Mobius Strip 12A2 Dawn
-      const g17 = new THREE.Group();
-      const mobiusPts = [];
-      const segs = 130;
-      for (let i = 0; i <= segs; i++) {
-        const u = (i / segs) * Math.PI * 2;
-        const v = 0.8;
-        const x = (4.2 + v * Math.cos(u / 2)) * Math.cos(u);
-        const y = (4.2 + v * Math.cos(u / 2)) * Math.sin(u);
-        const z = v * Math.sin(u / 2);
-        mobiusPts.push(new THREE.Vector3(x, y, z));
+      // 6. SLIDE 6: Kintsugi Lotus Mandala (Right edge x: +12, r: 17) [Reference Standard]
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(12, 0, -2);
+        
+        const lotusCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.8, 1)), new THREE.LineBasicMaterial({ color: 0xffd700 }));
+        m.add(lotusCore);
+        
+        const lotusMat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.85 });
+        const goldMat = new THREE.LineBasicMaterial({ color: 0xffd700, transparent: true, opacity: 0.75 });
+        for (let layer = 1; layer <= 3; layer++) {
+          const count = 10 * layer;
+          for (let p = 0; p < count; p++) {
+            const angle = (p / count) * Math.PI * 2;
+            const curve = new THREE.QuadraticBezierCurve3(
+              new THREE.Vector3(0, -2, 0),
+              new THREE.Vector3(Math.cos(angle) * (5 + layer * 3.5), layer * 2.2, Math.sin(angle) * (5 + layer * 3.5)),
+              new THREE.Vector3(Math.cos(angle) * (4 + layer * 2.8), layer * 5.2, Math.sin(angle) * (4 + layer * 2.8))
+            );
+            m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(24)), (layer === 2 ? goldMat : lotusMat)));
+          }
+        }
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(15.5, 15.6, 72), new THREE.LineBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.6 })));
+        root.add(m);
+        sceneObjects[6] = root;
+        root.visible = false;
+        scene.add(root);
       }
-      g17.add(new THREE.Line(
-        new THREE.BufferGeometry().setFromPoints(mobiusPts),
-        new THREE.LineBasicMaterial({ color: 0x00f5d4 })
-      ));
-      sceneObjects[17] = g17;
-      g17.visible = false;
-      scene.add(g17);
+
+      // 7. SLIDE 7: Stanford Torus (Left edge x: -13, r: 16)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const torusWheel = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.TorusGeometry(11.5, 2.2, 16, 48)), new THREE.LineBasicMaterial({ color: 0x00f3ff }));
+        m.add(torusWheel);
+        const hubCyl = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CylinderGeometry(2.4, 2.4, 6, 16)), new THREE.LineBasicMaterial({ color: 0xff007f }));
+        m.add(hubCyl);
+        
+        const spokeMat = new THREE.LineBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.8 });
+        for (let i = 0; i < 6; i++) {
+          const a = (i / 6) * Math.PI * 2;
+          const pts = [new THREE.Vector3(Math.cos(a) * 2.4, Math.sin(a) * 2.4, 0), new THREE.Vector3(Math.cos(a) * 11.5, Math.sin(a) * 11.5, 0)];
+          m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), spokeMat));
+        }
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(15, 15.08, 64), new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[7] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 8. SLIDE 8: Bohr Quantum Atom (Right edge x: +13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const nuc = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.8, 1)), new THREE.LineBasicMaterial({ color: 0x39ff14 }));
+        m.add(nuc);
+        
+        const orbMat = new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.8 });
+        const eleMat = new THREE.LineBasicMaterial({ color: 0x00f5d4 });
+        for (let i = 0; i < 3; i++) {
+          const orbGroup = new THREE.Group();
+          orbGroup.rotation.z = (i * Math.PI) / 3;
+          orbGroup.rotation.x = Math.PI * 0.42;
+          const curve = new THREE.EllipseCurve(0, 0, 11.5, 6.2, 0, Math.PI * 2, false, 0);
+          orbGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(curve.getPoints(54)), orbMat));
+          const electron = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.85)), eleMat);
+          electron.position.set(11.5, 0, 0);
+          orbGroup.add(electron);
+          m.add(orbGroup);
+        }
+        root.add(m);
+        sceneObjects[8] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 9. SLIDE 9: Binary Star System (Left edge x: -13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const starA = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.0, 1)), new THREE.LineBasicMaterial({ color: 0xff9966 }));
+        starA.position.set(-6.5, 0, 0);
+        const starB = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.5, 1)), new THREE.LineBasicMaterial({ color: 0xc77dff }));
+        starB.position.set(6.5, 0, 0);
+        m.add(starA); m.add(starB);
+        
+        const bridgePts = [];
+        for (let t = 0; t <= Math.PI * 2; t += 0.08) {
+          const scale8 = 9.5;
+          const x = (scale8 * Math.cos(t)) / (1 + Math.sin(t) * Math.sin(t));
+          const y = (scale8 * Math.sin(t) * Math.cos(t)) / (1 + Math.sin(t) * Math.sin(t));
+          bridgePts.push(new THREE.Vector3(x, y, 0));
+        }
+        m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(bridgePts), new THREE.LineBasicMaterial({ color: 0x39ff14, transparent: true, opacity: 0.85 })));
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(13, 13.06, 64), new THREE.LineBasicMaterial({ color: 0xff9966, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[9] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 10. SLIDE 10: Symmetrical Trefoil Torus Knot (Right edge x: +13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const knotGeo = new THREE.TorusKnotGeometry(7.2, 2.0, 96, 16, 2, 3);
+        const knotWire = new THREE.LineSegments(new THREE.EdgesGeometry(knotGeo), new THREE.LineBasicMaterial({ color: 0xff3c00 }));
+        m.add(knotWire);
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(12.5, 12.08, 64), new THREE.LineBasicMaterial({ color: 0x55ffcc, transparent: true, opacity: 0.6 })));
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(15.2, 15.28, 64), new THREE.LineBasicMaterial({ color: 0x9933ff, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[10] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 11. SLIDE 11: Planetary Star System (Left edge x: -13, r: 16)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const sunCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.6, 2)), new THREE.LineBasicMaterial({ color: 0xffd700 }));
+        m.add(sunCore);
+        
+        const planetOrbits = [6.2, 9.0, 12.0, 15.2];
+        const pColors = [0x38bdf8, 0xffd700, 0x38bdf8, 0xffffff];
+        planetOrbits.forEach((rad, idx) => {
+          const oRail = new THREE.LineLoop(new THREE.RingGeometry(rad, rad + 0.05, 64), new THREE.LineBasicMaterial({ color: pColors[idx], transparent: true, opacity: 0.55 }));
+          oRail.rotation.x = Math.PI * 0.38;
+          m.add(oRail);
+          const pGroup = new THREE.Group();
+          pGroup.rotation.x = Math.PI * 0.38;
+          const a = (idx * Math.PI) / 2;
+          const pMesh = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.75 + idx * 0.15)), new THREE.LineBasicMaterial({ color: pColors[idx] }));
+          pMesh.position.set(Math.cos(a) * rad, Math.sin(a) * rad, 0);
+          pGroup.add(pMesh);
+          if (idx === 2) {
+            const pRing = new THREE.LineLoop(new THREE.RingGeometry(1.6, 2.2, 32), new THREE.LineBasicMaterial({ color: 0xffd700 }));
+            pRing.position.set(Math.cos(a) * rad, Math.sin(a) * rad, 0);
+            pGroup.add(pRing);
+          }
+          m.add(pGroup);
+        });
+        root.add(m);
+        sceneObjects[11] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 12. SLIDE 12: Dual Platonic Solid (Right edge x: +13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const ddec = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.DodecahedronGeometry(8.5)), new THREE.LineBasicMaterial({ color: 0xffaa00 }));
+        const icos = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(5.2)), new THREE.LineBasicMaterial({ color: 0xff0099 }));
+        const octa = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(2.4)), new THREE.LineBasicMaterial({ color: 0xe0aaff }));
+        m.add(ddec); m.add(icos); m.add(octa);
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(13.5, 13.58, 64), new THREE.LineBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[12] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 13. SLIDE 13: Geodesic Biosphere (Left edge x: -13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const bioGeo = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(5.8, 2)), new THREE.LineBasicMaterial({ color: 0x80d8ff }));
+        m.add(bioGeo);
+        const diaCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(3.2)), new THREE.LineBasicMaterial({ color: 0xff2a6d }));
+        m.add(diaCore);
+        for (let i = 0; i < 3; i++) {
+          const sRing = new THREE.LineLoop(new THREE.RingGeometry(9.5, 9.58, 64), new THREE.LineBasicMaterial({ color: 0xc77dff, transparent: true, opacity: 0.7 }));
+          sRing.rotation.x = (i * Math.PI) / 3; sRing.rotation.y = (i * Math.PI) / 6;
+          m.add(sRing);
+        }
+        root.add(m);
+        sceneObjects[13] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 14. SLIDE 14: Dual-Arm Spiral Galaxy (Right edge x: +13, r: 17)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const galCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.5, 1)), new THREE.LineBasicMaterial({ color: 0xffffff }));
+        m.add(galCore);
+        
+        const armCol1 = new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.85 });
+        const armCol2 = new THREE.LineBasicMaterial({ color: 0x00f5d4, transparent: true, opacity: 0.85 });
+        for (let arm = 0; arm < 2; arm++) {
+          const armAngleOffset = arm * Math.PI;
+          for (let strand = -1; strand <= 1; strand++) {
+            const spiralPts = [];
+            for (let t = 0.8; t <= 4.2; t += 0.1) {
+              const r = 2.4 * Math.exp(0.42 * t) + strand * 0.4;
+              const theta = t + armAngleOffset;
+              spiralPts.push(new THREE.Vector3(Math.cos(theta) * r, Math.sin(theta) * r, (Math.random() - 0.5) * 1.5));
+            }
+            m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(spiralPts), (arm === 0 ? armCol1 : armCol2)));
+          }
+        }
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(14.5, 14.58, 64), new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.5 })));
+        root.add(m);
+        sceneObjects[14] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 15. SLIDE 15: Volumetric 3D Origami Heart (Left edge x: -13, r: 15)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(-13, 0, -2);
+        
+        const heartShape = new THREE.Shape();
+        heartShape.moveTo(0, 2.2);
+        heartShape.bezierCurveTo(0, 3.8, -3.8, 5.2, -4.5, 2.2);
+        heartShape.bezierCurveTo(-5.2, -0.8, 0, -3.8, 0, -6.5);
+        heartShape.bezierCurveTo(0, -3.8, 5.2, -0.8, 4.5, 2.2);
+        heartShape.bezierCurveTo(3.8, 5.2, 0, 3.8, 0, 2.2);
+        
+        const extrudeSettings = { depth: 3.5, bevelEnabled: true, bevelSegments: 3, steps: 2, bevelSize: 0.8, bevelThickness: 0.8 };
+        const heartGeo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+        heartGeo.center();
+        const heartWire = new THREE.LineSegments(new THREE.EdgesGeometry(heartGeo), new THREE.LineBasicMaterial({ color: 0xff3366 }));
+        m.add(heartWire);
+        
+        const hRing1 = new THREE.LineLoop(new THREE.RingGeometry(9.5, 9.58, 64), new THREE.LineBasicMaterial({ color: 0xff7700, transparent: true, opacity: 0.7 }));
+        hRing1.rotation.x = Math.PI * 0.35; hRing1.rotation.y = Math.PI * 0.25;
+        const hRing2 = new THREE.LineLoop(new THREE.RingGeometry(9.5, 9.58, 64), new THREE.LineBasicMaterial({ color: 0xe0aaff, transparent: true, opacity: 0.7 }));
+        hRing2.rotation.x = Math.PI * 0.35; hRing2.rotation.y = -Math.PI * 0.25;
+        m.add(hRing1); m.add(hRing2);
+        root.add(m);
+        sceneObjects[15] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 16. SLIDE 16: Supernova Blast (Right edge x: +13, r: 18)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(13, 0, -2);
+        
+        const pulsar = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(3.5)), new THREE.LineBasicMaterial({ color: 0xffe600 }));
+        m.add(pulsar);
+        
+        const sShells = [6.5, 10.5, 14.5];
+        const sCol = [0xff0055, 0x00f3ff, 0xffe600];
+        sShells.forEach((r, idx) => {
+          const shell = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(r, 1)), new THREE.LineBasicMaterial({ color: sCol[idx], transparent: true, opacity: 0.7 - idx * 0.15 }));
+          m.add(shell);
+        });
+        // 36 Symmetrical High-Velocity Shockwave Jets
+        for (let i = 0; i < 36; i++) {
+          const a = (i / 36) * Math.PI * 2;
+          const len = 16.5;
+          const pts = [new THREE.Vector3(Math.cos(a) * 3.5, Math.sin(a) * 3.5, 0), new THREE.Vector3(Math.cos(a) * len, Math.sin(a) * len, (i % 2 === 0 ? 3 : -3))];
+          m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: sCol[i % 3], transparent: true, opacity: 0.8 })));
+        }
+        root.add(m);
+        sceneObjects[16] = root;
+        root.visible = false;
+        scene.add(root);
+      }
+
+      // 17. SLIDE 17: Mobius Infinity Ribbon (Bottom Arc x: 0, y: -8, r: 18)
+      {
+        const root = new THREE.Group();
+        const m = new THREE.Group();
+        m.position.set(0, -8, -2);
+        
+        const mobiusKnot = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.TorusKnotGeometry(12.5, 2.5, 128, 16, 2, 5)), new THREE.LineBasicMaterial({ color: 0x00f5d4 }));
+        m.add(mobiusKnot);
+        const dawnStar = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.2, 1)), new THREE.LineBasicMaterial({ color: 0xffd166 }));
+        dawnStar.position.set(0, 6.5, 0);
+        m.add(dawnStar);
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(16, 16.08, 72), new THREE.LineBasicMaterial({ color: 0xff70a6, transparent: true, opacity: 0.55 })));
+        root.add(m);
+        sceneObjects[17] = root;
+        root.visible = false;
+        scene.add(root);
+      }
     }
 
     function onStageResize() {
@@ -4433,12 +4627,29 @@
         particleNebula.rotation.x = Math.sin(t * 0.02) * 0.08;
       }
 
-      // Rotate current 3D wireframe architecture
+      // Rotate current 3D celestial architecture
       if (sceneObjects[currentSlideIdx]) {
-        const obj = sceneObjects[currentSlideIdx];
-        obj.rotation.y = t * 0.25;
-        obj.rotation.x = Math.sin(t * 0.2) * 0.15;
-        obj.scale.set(scale, scale, scale);
+        const rootObj = sceneObjects[currentSlideIdx];
+        rootObj.scale.set(scale, scale, scale);
+        const model = (rootObj.children && rootObj.children.length > 0) ? rootObj.children[0] : rootObj;
+        model.rotation.y = t * 0.22;
+        model.rotation.x = Math.sin(t * 0.18) * 0.12;
+
+        // Slide-specific celestial dynamics
+        if (currentSlideIdx === 1) {
+          const disk = model.getObjectByName("diskGroup");
+          if (disk) disk.rotation.z = t * 0.55;
+        } else if (currentSlideIdx === 8) {
+          // Quantum atom electron orbits
+          model.children.forEach((c, idx) => {
+            if (c.type === 'Group') c.rotation.y = t * (0.6 + idx * 0.35);
+          });
+        } else if (currentSlideIdx === 11) {
+          // Planetary Keplerian orbits
+          model.children.forEach((c, idx) => {
+            if (c.type === 'Group') c.rotation.z = t * (0.35 + (4 - idx) * 0.25);
+          });
+        }
       }
 
       if (renderer && scene && camera) {
