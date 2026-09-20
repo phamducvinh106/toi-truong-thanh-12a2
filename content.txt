@@ -34,7 +34,7 @@ tilt_multiplier = 20
 perspective_px = 1700
 glass_enabled = true
 glass_alpha = 0.25
-glass_blur_px = 14
+glass_blur_px = 22
 glass_border_glow = 0.30
 glass_width_vw = 94
 glass_height_vh = 82
@@ -46,7 +46,7 @@ glass_height_vh = 82
 # - glass_small_blur_px: Độ mờ nhòe (blur) của các khung kính nhỏ (px)
 # - glass_small_border_glow: Độ sáng viền quang học của các khung kính nhỏ (0.0 đến 1.0)
 glass_small_alpha = 0.55
-glass_small_blur_px = 14
+glass_small_blur_px = 18
 glass_small_border_glow = 0.65
 
 # ==============================================================================

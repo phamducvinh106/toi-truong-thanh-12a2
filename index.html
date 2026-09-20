@@ -40,15 +40,15 @@
       /* Single Frosted Glass Monolith Backdrop (Configurable via content.txt) */
       --glass-alpha: 0.25;
       --glass-opacity: 0.25;
-      --glass-blur: 14px;
-      --glass-border-opacity: 0.30;
+      --glass-blur: 22px;
+      --glass-border-opacity: 0.25;
       --glass-width: min(94vw, 1600px);
       --glass-height: min(82vh, 660px);
       
       /* Small Component Frosted Glass Settings (Setting riêng cho khung kính nhỏ) */
       --glass-small-alpha: 0.55;
-      --glass-small-blur: 14px;
-      --glass-small-border-opacity: 0.85;
+      --glass-small-blur: 18px;
+      --glass-small-border-opacity: 0.45;
       
       /* Monumental Stage Typography Hierarchy (Balanced, Zero Overflow, Legible 30 - 50m) */
       --font-monumental: clamp(52px, 7vw, 105px);
@@ -255,8 +255,8 @@
       transform: translate(-50%, -50%) translateZ(-8px);
       width: var(--glass-width, min(94vw, 1600px));
       height: var(--glass-height, min(82vh, 660px));
-      backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
-      -webkit-backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
+      backdrop-filter: blur(var(--glass-blur, 22px)) saturate(135%);
+      -webkit-backdrop-filter: blur(var(--glass-blur, 22px)) saturate(135%);
       background: linear-gradient(135deg, rgba(8, 16, 32, var(--glass-alpha, 0.25)) 0%, rgba(2, 5, 14, var(--glass-alpha, 0.25)) 100%);
       box-shadow: 
         0 30px 85px -15px rgba(0, 0, 0, 0.85),
@@ -935,17 +935,63 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.6rem 3rem 0.8rem 3rem;
+      min-height: 52px;
       width: 100%;
       background: linear-gradient(0deg, rgba(2,3,6,0.96) 0%, transparent 100%);
       flex-shrink: 0;
       pointer-events: auto;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.3s ease;
     }
 
     body.tech-ui-hidden .stage-bottom-hud {
-      transform: translateY(100%);
-      opacity: 0;
+      transform: none !important;
+      opacity: 1 !important;
+      background: transparent !important;
       pointer-events: none !important;
+      justify-content: center !important;
+    }
+
+    body.tech-ui-hidden .stage-laser-progress {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    body.tech-ui-hidden #hud-slide-counter,
+    body.tech-ui-hidden .hud-slide-counter-wrapper {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    body.tech-ui-hidden .hud-controls-row {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    body.tech-ui-hidden .hud-stage-clock {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      pointer-events: auto !important;
+      cursor: pointer;
+      background: rgba(2, 6, 15, 0.55);
+      padding: 0.35rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s ease;
+    }
+
+    body.tech-ui-hidden .hud-stage-clock:hover {
+      border-color: var(--neon-primary);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.35);
+      color: #ffffff;
     }
 
     body.tech-ui-hidden .tech-ui-element {
@@ -1554,9 +1600,9 @@
        Khung kính mờ & các thành phần nội dung chuyển động độc lập, lệch pha nhịp nhàng
        ========================================================================== */
 
-    /* 1. Frosted Glass Monolith Levitation */
+    /* 1. Frosted Glass Monolith Levitation (Serene 14s micro-breath) */
     .stage-glass-monolith {
-      animation: monolithOrganicLevitate 8.4s ease-in-out infinite !important;
+      animation: monolithOrganicLevitate 14s ease-in-out infinite !important;
       will-change: transform;
     }
 
@@ -1565,42 +1611,42 @@
         transform: translate(-50%, -50%) translateZ(-8px) translateY(0px);
       }
       50% {
-        transform: translate(-50%, -50%) translateZ(-8px) translateY(-10px);
+        transform: translate(-50%, -50%) translateZ(-8px) translateY(-2px);
       }
     }
 
     .glass-top-accent {
-      animation: glassAccentBreath 5.8s ease-in-out infinite;
+      animation: glassAccentBreath 10s ease-in-out infinite;
     }
 
     @keyframes glassAccentBreath {
-      0%, 100% { opacity: var(--glass-border-opacity, 0.32); transform: scaleX(1); }
-      50% { opacity: calc(var(--glass-border-opacity, 0.32) * 1.5); transform: scaleX(1.04); }
+      0%, 100% { opacity: var(--glass-border-opacity, 0.25); transform: scaleX(1); }
+      50% { opacity: calc(var(--glass-border-opacity, 0.25) * 1.3); transform: scaleX(1.02); }
     }
 
-    /* 2. Slide Root Layout Gentle Foundation Float */
+    /* 2. Slide Root Layout - Rock-Solid Eye-Comfort Stability */
     .scenography-slide > div {
-      animation: organicMacroSlideFloat 9.6s ease-in-out infinite;
+      animation: organicMacroSlideFloat 12s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicMacroSlideFloat {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -4px; }
+      50% { translate: 0 0; }
     }
 
-    /* 3. Telemetry Tags (Top Tech Badges) */
+    /* 3. Telemetry Tags (Top Tech Badges) - Rock-Solid */
     .telemetry-tag {
-      animation: organicFloatTag 5.2s ease-in-out infinite;
+      animation: organicFloatTag 10s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicFloatTag {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -6px; }
+      50% { translate: 0 0; }
     }
 
-    /* 4. Monumental Headings & Main Titles */
+    /* 4. Monumental Headings & Main Titles - Rock-Solid Eye Comfort */
     .monumental-text,
     .scenography-slide > div[class*="layout-"] h1,
     .supernova-kinetic-hero,
@@ -1615,157 +1661,157 @@
     .layout-origami-heart h1,
     .layout-supernova-climax h1,
     .layout-mobius-infinity h1 {
-      animation: organicFloatHeading 6.8s ease-in-out infinite 0.7s;
+      animation: organicFloatHeading 10s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicFloatHeading {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -8px; }
+      50% { translate: 0 0; }
     }
 
-    /* 5. Sub-statements & Secondary Headings */
+    /* 5. Sub-statements & Secondary Headings - Rock-Solid Eye Comfort */
     .hero-sub-statement,
     .scenography-slide > div[class*="layout-"] p,
     .layout-phoenix-soundscape h2,
     .layout-isometric-labyrinth p,
     .layout-supernova-climax p,
     .layout-mobius-infinity p {
-      animation: organicFloatSubStatement 7.4s ease-in-out infinite 1.3s;
+      animation: organicFloatSubStatement 10s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicFloatSubStatement {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -7px; }
+      50% { translate: 0 0; }
     }
 
-    /* 6. Laser Blade Rail */
+    /* 6. Laser Blade Rail - Rock-Solid */
     .laser-blade-rail {
-      animation: organicFloatLaserRail 5.8s ease-in-out infinite 1.9s;
+      animation: organicFloatLaserRail 10s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicFloatLaserRail {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -5px; }
+      50% { translate: 0 0; }
     }
 
-    /* 7. HUD Bracket Containers & Manifesto Boxes */
+    /* 7. HUD Bracket Containers & Manifesto Boxes - Rock-Solid */
     .hud-bracket-container,
     .kintsugi-gold-manifesto {
-      animation: organicFloatBracket 6.5s ease-in-out infinite 0.9s;
+      animation: organicFloatBracket 10s ease-in-out infinite;
       will-change: translate;
     }
 
     @keyframes organicFloatBracket {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -7px; }
+      50% { translate: 0 0; }
     }
 
-    /* 8. Trinity Spire Pillars (Slide 3: Chân Lý 01, 02, 03) - Phase-Shifted Levitation */
+    /* 8. Trinity Spire Pillars (Slide 3: Chân Lý 01, 02, 03) - Rock-Solid */
     .trinity-pillars-row .trinity-laser-spire:nth-child(1) {
-      animation: organicFloatSpire1 5.3s ease-in-out infinite 0.0s;
+      animation: organicFloatSpire1 10s ease-in-out infinite 0.0s;
       will-change: translate;
     }
     .trinity-pillars-row .trinity-laser-spire:nth-child(2) {
-      animation: organicFloatSpire2 6.5s ease-in-out infinite 1.5s;
+      animation: organicFloatSpire2 10s ease-in-out infinite 1.5s;
       will-change: translate;
     }
     .trinity-pillars-row .trinity-laser-spire:nth-child(3) {
-      animation: organicFloatSpire3 5.9s ease-in-out infinite 2.6s;
+      animation: organicFloatSpire3 10s ease-in-out infinite 2.6s;
       will-change: translate;
     }
 
     @keyframes organicFloatSpire1 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -11px; }
+      50% { translate: 0 0; }
     }
     @keyframes organicFloatSpire2 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 9px; }
+      50% { translate: 0 0; }
     }
     @keyframes organicFloatSpire3 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -8px; }
+      50% { translate: 0 0; }
     }
 
-    /* 9. Minigame Interactive Choice Nodes (Slide 8-13: A, B, C, D) - Diagonally Balanced Floating */
+    /* 9. Minigame Interactive Choice Nodes (Slide 8-13: A, B, C, D) - Rock-Solid */
     .target-nodes-matrix .holo-target-node:nth-child(1) {
-      animation: organicFloatNode1 5.5s ease-in-out infinite 0.0s;
+      animation: organicFloatNode1 10s ease-in-out infinite 0.0s;
       will-change: translate;
     }
     .target-nodes-matrix .holo-target-node:nth-child(2) {
-      animation: organicFloatNode2 6.3s ease-in-out infinite 1.2s;
+      animation: organicFloatNode2 10s ease-in-out infinite 1.2s;
       will-change: translate;
     }
     .target-nodes-matrix .holo-target-node:nth-child(3) {
-      animation: organicFloatNode3 5.8s ease-in-out infinite 2.3s;
+      animation: organicFloatNode3 10s ease-in-out infinite 2.3s;
       will-change: translate;
     }
     .target-nodes-matrix .holo-target-node:nth-child(4) {
-      animation: organicFloatNode4 6.7s ease-in-out infinite 0.8s;
+      animation: organicFloatNode4 10s ease-in-out infinite 0.8s;
       will-change: translate;
     }
 
     @keyframes organicFloatNode1 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -9px; }
+      50% { translate: 0 0; }
     }
     @keyframes organicFloatNode2 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 8px; }
+      50% { translate: 0 0; }
     }
     @keyframes organicFloatNode3 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 7px; }
+      50% { translate: 0 0; }
     }
     @keyframes organicFloatNode4 {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -10px; }
+      50% { translate: 0 0; }
     }
 
-    /* 10. Minigame Question Header, Status Line & Insight Beam */
+    /* 10. Minigame Question Header, Status Line & Insight Beam - Rock-Solid */
     .target-question-header {
-      animation: organicFloatQuestion 6.2s ease-in-out infinite 0.5s;
+      animation: organicFloatQuestion 10s ease-in-out infinite 0.5s;
       will-change: translate;
     }
     @keyframes organicFloatQuestion {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -6px; }
+      50% { translate: 0 0; }
     }
 
     .target-status-line {
-      animation: organicFloatStatusLine 5.5s ease-in-out infinite 1.1s;
+      animation: organicFloatStatusLine 10s ease-in-out infinite 1.1s;
       will-change: translate;
     }
     @keyframes organicFloatStatusLine {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -4px; }
+      50% { translate: 0 0; }
     }
 
     .revealed-insight-beam {
-      animation: organicFloatInsight 5.7s ease-in-out infinite 1.4s;
+      animation: organicFloatInsight 10s ease-in-out infinite 1.4s;
       will-change: translate;
     }
     @keyframes organicFloatInsight {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -6px; }
+      50% { translate: 0 0; }
     }
 
-    /* 11. Triangular Play Trigger Buttons */
+    /* 11. Triangular Play Trigger Buttons - Rock-Solid */
     .play-trigger-wrap {
-      animation: organicFloatPlayTrigger 4.9s ease-in-out infinite 1.0s;
+      animation: organicFloatPlayTrigger 10s ease-in-out infinite 1.0s;
       will-change: translate;
     }
     @keyframes organicFloatPlayTrigger {
       0%, 100% { translate: 0 0; }
-      50% { translate: 0 -10px; }
+      50% { translate: 0 0; }
     }
 
-    /* 12. Slide 04 Sub-Tags */
+    /* 12. Slide 04 Sub-Tags - Rock-Solid */
     .layout-anamorphic-split > div:last-child {
-      animation: organicFloatSubStatement 6.4s ease-in-out infinite 1.6s;
+      animation: organicFloatSubStatement 10s ease-in-out infinite 1.6s;
       will-change: translate;
     }
 
@@ -1781,7 +1827,7 @@
       clip-path: none !important;
       box-shadow: 
         0 15px 45px rgba(0, 0, 0, 0.5),
-        0 0 30px var(--neon-primary),
+        0 0 16px var(--neon-primary),
         inset 0 0 25px rgba(255, 255, 255, 0.04) !important;
     }
 
@@ -1795,7 +1841,7 @@
       border: 1.5px solid currentColor !important;
       box-shadow: 
         0 4px 18px rgba(0, 0, 0, 0.4),
-        0 0 12px currentColor,
+        0 0 10px currentColor,
         inset 0 0 10px rgba(255, 255, 255, 0.04) !important;
       transition: all 0.4s ease;
     }
@@ -1812,7 +1858,7 @@
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
         0 10px 35px rgba(0, 0, 0, 0.5),
-        0 0 22px var(--neon-primary),
+        0 0 12px var(--neon-primary),
         inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
       max-width: 95%;
     }
@@ -1828,7 +1874,7 @@
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
         0 10px 35px rgba(0, 0, 0, 0.5),
-        0 0 25px var(--neon-primary),
+        0 0 14px var(--neon-primary),
         inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
       max-width: 95%;
     }
@@ -1852,7 +1898,7 @@
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
         0 8px 25px rgba(0, 0, 0, 0.45),
-        0 0 16px var(--neon-primary),
+        0 0 10px var(--neon-primary),
         inset 0 0 14px rgba(255, 255, 255, 0.04) !important;
       max-width: 92%;
     }
@@ -1868,7 +1914,7 @@
       border: 1.5px solid var(--neon-secondary) !important;
       box-shadow: 
         0 8px 25px rgba(0, 0, 0, 0.4),
-        0 0 20px var(--neon-secondary),
+        0 0 10px var(--neon-secondary),
         inset 0 0 15px rgba(255, 255, 255, 0.04) !important;
       max-width: 92%;
     }
@@ -1882,7 +1928,7 @@
       border-radius: 16px !important;
       box-shadow: 
         0 10px 30px rgba(0, 0, 0, 0.45),
-        0 0 20px var(--neon-secondary),
+        0 0 12px var(--neon-secondary),
         inset 0 0 16px rgba(255, 255, 255, 0.04) !important;
     }
 
@@ -1894,7 +1940,7 @@
       border-radius: 18px !important;
       box-shadow: 
         0 12px 35px rgba(0, 0, 0, 0.5),
-        0 0 25px rgba(255, 215, 0, 0.35),
+        0 0 16px rgba(255, 215, 0, 0.3),
         inset 0 0 18px rgba(255, 255, 255, 0.04) !important;
     }
 
@@ -1905,11 +1951,10 @@
       border-radius: 14px !important;
       backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
       -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
-      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.54)) !important;
-      border: 1.5px solid var(--neon-secondary) !important;
+      background: rgba(6, 14, 28, 0.38) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
       box-shadow: 
-        0 6px 25px rgba(0, 0, 0, 0.45),
-        0 0 16px var(--neon-secondary),
+        0 6px 20px rgba(0, 0, 0, 0.45),
         inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
       max-width: 92%;
     }
@@ -2030,21 +2075,21 @@
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      opacity: 0.56;
+      opacity: 0.38 !important;
       color: var(--neon-primary, #00f3ff);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(0, 243, 255, 0.28));
+      filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 24px rgba(0, 243, 255, 0.22));
       transition: color 0.6s ease, filter 0.6s ease, opacity 0.5s ease;
       will-change: transform;
     }
 
     .floating-outline-item.alt-neon {
       color: var(--neon-secondary, #ff007f);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(255, 0, 127, 0.28));
+      filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 24px rgba(255, 0, 127, 0.22));
     }
 
     .floating-outline-item.tert-neon {
       color: var(--neon-tertiary, #8a00ff);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(138, 0, 255, 0.28));
+      filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 24px rgba(138, 0, 255, 0.22));
     }
 
     .floating-outline-svg {
@@ -2057,61 +2102,61 @@
       stroke-linejoin: round;
     }
 
-    /* 6 Organic Free-Floating Harmonic Trajectories (Wide Stage Amplitude) */
+    /* 6 Organic Free-Floating Harmonic Trajectories (Serene Celestial Watermark Drift) */
     @keyframes floatWander2D_1 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(55px, -70px, 0) rotate(12deg) scale(1.08); }
-      50% { transform: translate3d(-45px, -105px, 0) rotate(-10deg) scale(0.93); }
-      75% { transform: translate3d(-75px, -35px, 0) rotate(11deg) scale(1.06); }
+      25% { transform: translate3d(12px, -15px, 0) rotate(2deg) scale(1.02); }
+      50% { transform: translate3d(-10px, -18px, 0) rotate(-2deg) scale(0.98); }
+      75% { transform: translate3d(-14px, -8px, 0) rotate(2deg) scale(1.01); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
     @keyframes floatWander2D_2 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(-60px, 65px, 0) rotate(-12deg) scale(0.93); }
-      50% { transform: translate3d(50px, 100px, 0) rotate(13deg) scale(1.09); }
-      75% { transform: translate3d(75px, 25px, 0) rotate(-9deg) scale(0.96); }
+      25% { transform: translate3d(-14px, 12px, 0) rotate(-2deg) scale(0.98); }
+      50% { transform: translate3d(10px, 18px, 0) rotate(2deg) scale(1.02); }
+      75% { transform: translate3d(15px, 6px, 0) rotate(-2deg) scale(0.99); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
     @keyframes floatWander2D_3 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      30% { transform: translate3d(70px, 50px, 0) rotate(-13deg) scale(1.09); }
-      60% { transform: translate3d(-55px, -85px, 0) rotate(11deg) scale(0.93); }
-      85% { transform: translate3d(-25px, 60px, 0) rotate(-8deg) scale(1.05); }
+      30% { transform: translate3d(15px, 10px, 0) rotate(-2deg) scale(1.02); }
+      60% { transform: translate3d(-12px, -16px, 0) rotate(2deg) scale(0.98); }
+      85% { transform: translate3d(-6px, 12px, 0) rotate(-1deg) scale(1.01); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
     @keyframes floatWander2D_4 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      30% { transform: translate3d(-80px, -55px, 0) rotate(12deg) scale(0.94); }
-      65% { transform: translate3d(60px, 75px, 0) rotate(-13deg) scale(1.08); }
-      85% { transform: translate3d(30px, -50px, 0) rotate(8deg) scale(0.97); }
+      30% { transform: translate3d(-16px, -10px, 0) rotate(2deg) scale(0.98); }
+      65% { transform: translate3d(12px, 15px, 0) rotate(-2deg) scale(1.02); }
+      85% { transform: translate3d(8px, -10px, 0) rotate(1deg) scale(0.99); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
     @keyframes floatWander2D_5 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      20% { transform: translate3d(45px, -85px, 0) rotate(-10deg) scale(1.07); }
-      50% { transform: translate3d(-70px, -50px, 0) rotate(14deg) scale(0.93); }
-      80% { transform: translate3d(55px, 70px, 0) rotate(-11deg) scale(1.07); }
+      20% { transform: translate3d(10px, -16px, 0) rotate(-2deg) scale(1.02); }
+      50% { transform: translate3d(-14px, -10px, 0) rotate(2deg) scale(0.98); }
+      80% { transform: translate3d(12px, 14px, 0) rotate(-2deg) scale(1.01); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
     @keyframes floatWander2D_6 {
       0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(-55px, 80px, 0) rotate(13deg) scale(0.93); }
-      55% { transform: translate3d(70px, -60px, 0) rotate(-14deg) scale(1.09); }
-      80% { transform: translate3d(-40px, -85px, 0) rotate(9deg) scale(0.96); }
+      25% { transform: translate3d(-12px, 15px, 0) rotate(2deg) scale(0.98); }
+      55% { transform: translate3d(15px, -12px, 0) rotate(-2deg) scale(1.02); }
+      80% { transform: translate3d(-8px, -16px, 0) rotate(1deg) scale(0.99); }
       100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
     }
 
-    .float-traj-1 { animation: floatWander2D_1 16s ease-in-out infinite; animation-delay: -3s; }
-    .float-traj-2 { animation: floatWander2D_2 20s ease-in-out infinite; animation-delay: -8s; }
-    .float-traj-3 { animation: floatWander2D_3 24s ease-in-out infinite; animation-delay: -13s; }
-    .float-traj-4 { animation: floatWander2D_4 18s ease-in-out infinite; animation-delay: -5s; }
-    .float-traj-5 { animation: floatWander2D_5 22s ease-in-out infinite; animation-delay: -11s; }
-    .float-traj-6 { animation: floatWander2D_6 26s ease-in-out infinite; animation-delay: -17s; }
+    .float-traj-1 { animation: floatWander2D_1 22s ease-in-out infinite; animation-delay: -3s; }
+    .float-traj-2 { animation: floatWander2D_2 26s ease-in-out infinite; animation-delay: -8s; }
+    .float-traj-3 { animation: floatWander2D_3 30s ease-in-out infinite; animation-delay: -13s; }
+    .float-traj-4 { animation: floatWander2D_4 24s ease-in-out infinite; animation-delay: -5s; }
+    .float-traj-5 { animation: floatWander2D_5 28s ease-in-out infinite; animation-delay: -11s; }
+    .float-traj-6 { animation: floatWander2D_6 32s ease-in-out infinite; animation-delay: -17s; }
 
   </style>
 </head>
@@ -3663,14 +3708,14 @@
     </div>
 
     <!-- Left: Slide Counter -->
-    <div style="display: flex; align-items: center; gap: 0.8rem;">
+    <div class="hud-slide-counter-wrapper" style="display: flex; align-items: center; gap: 0.8rem;">
       <span class="telemetry-tag" id="hud-slide-counter" style="color: var(--neon-primary); font-size: 14px; font-weight: 800;">
         SLIDE 01 / 17
       </span>
     </div>
 
     <!-- Center: Stage Clock -->
-    <div class="hud-stage-clock">
+    <div class="hud-stage-clock" id="hud-stage-clock" onclick="handleClockClick()" title="Thời gian thực tế (Bấm để ẩn/hiện thanh điều khiển HUD [U/K])">
       <div class="clock-beacon"></div>
       <span id="hud-stage-clock-time">00:00:00</span>
     </div>
@@ -4644,32 +4689,32 @@
         continuousEnergySpine.rotation.y = Math.sin(t * 0.08) * 0.15;
       }
 
-      // Rotate particle nebula
+      // Rotate particle nebula (gentle serene drift)
       if (particleNebula) {
-        particleNebula.rotation.y = t * 0.025;
-        particleNebula.rotation.x = Math.sin(t * 0.02) * 0.08;
+        particleNebula.rotation.y = t * 0.012;
+        particleNebula.rotation.x = Math.sin(t * 0.01) * 0.04;
       }
 
-            // 17 Unique 3D Celestial Fan Tilts (Diverse perspective tilt angles + axial ceiling-fan rotor spin)
+      // 17 Unique 3D Celestial Fan Tilts (Cosmic Drift: ~0.11 to 0.16 rad/s for supreme visual serenity)
       const slideFanTilts = [
         null,
-        { x: 1.08, y: -0.22, speed: 0.32 }, // Slide 1: Gargantua Black Hole Accretion Fan
-        { x: 1.02, y: 0.25, speed: 0.26 },  // Slide 2: Pulsating Star Corona Rotor
-        { x: 0.95, y: -0.32, speed: 0.28 }, // Slide 3: Trinary Stellar Trinity Fan
-        { x: 1.15, y: 0.28, speed: 0.24 },  // Slide 4: 4D Tesseract Rotor
-        { x: 0.98, y: -0.26, speed: 0.30 }, // Slide 5: Armillary Celestial Gyro Fan
-        { x: 1.12, y: 0.18, speed: 0.25 },  // Slide 6: Kintsugi Lotus Mandala Overhead Fan
-        { x: 1.05, y: 0.35, speed: 0.22 },  // Slide 7: Stanford Torus Spoke Rotor
-        { x: 0.92, y: -0.30, speed: 0.32 }, // Slide 8: Bohr Quantum Atom Rotor
-        { x: 1.10, y: 0.22, speed: 0.28 },  // Slide 9: Binary Star Lemniscate Rotor
-        { x: 0.96, y: -0.24, speed: 0.27 }, // Slide 10: Trefoil Torus Knot Rotor
-        { x: 1.18, y: 0.20, speed: 0.25 },  // Slide 11: Keplerian Planetary System Fan
-        { x: 0.88, y: -0.28, speed: 0.24 }, // Slide 12: Dual Platonic Solid Rotor
-        { x: 1.04, y: 0.30, speed: 0.26 },  // Slide 13: Geodesic Biosphere Shield Fan
-        { x: 1.05, y: -0.18, speed: 0.28 }, // Slide 14: Logarithmic Spiral Galaxy Fan
-        { x: 0.82, y: 0.25, speed: 0.25 },  // Slide 15: Volumetric Polyhedral Heart Rotor
-        { x: 1.08, y: -0.25, speed: 0.34 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
-        { x: 0.85, y: 0.00, speed: 0.24 }   // Slide 17: Mobius Horizon Bottom Arc Fan
+        { x: 1.08, y: -0.22, speed: 0.15 }, // Slide 1: Gargantua Black Hole Accretion Fan
+        { x: 1.02, y: 0.25, speed: 0.13 },  // Slide 2: Pulsating Star Corona Rotor
+        { x: 0.95, y: -0.32, speed: 0.14 }, // Slide 3: Trinary Stellar Trinity Fan
+        { x: 1.15, y: 0.28, speed: 0.12 },  // Slide 4: 4D Tesseract Rotor
+        { x: 0.98, y: -0.26, speed: 0.15 }, // Slide 5: Armillary Celestial Gyro Fan
+        { x: 1.12, y: 0.18, speed: 0.13 },  // Slide 6: Kintsugi Lotus Mandala Overhead Fan
+        { x: 1.05, y: 0.35, speed: 0.11 },  // Slide 7: Stanford Torus Spoke Rotor
+        { x: 0.92, y: -0.30, speed: 0.15 }, // Slide 8: Bohr Quantum Atom Rotor
+        { x: 1.10, y: 0.22, speed: 0.14 },  // Slide 9: Binary Star Lemniscate Rotor
+        { x: 0.96, y: -0.24, speed: 0.13 }, // Slide 10: Trefoil Torus Knot Rotor
+        { x: 1.18, y: 0.20, speed: 0.12 },  // Slide 11: Keplerian Planetary System Fan
+        { x: 0.88, y: -0.28, speed: 0.12 }, // Slide 12: Dual Platonic Solid Rotor
+        { x: 1.04, y: 0.30, speed: 0.13 },  // Slide 13: Geodesic Biosphere Shield Fan
+        { x: 1.05, y: -0.18, speed: 0.14 }, // Slide 14: Logarithmic Spiral Galaxy Fan
+        { x: 0.82, y: 0.25, speed: 0.12 },  // Slide 15: Volumetric Polyhedral Heart Rotor
+        { x: 1.08, y: -0.25, speed: 0.16 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
+        { x: 0.85, y: 0.00, speed: 0.12 }   // Slide 17: Mobius Horizon Bottom Arc Fan
       ];
 
       // Rotate current 3D celestial architecture like a ceiling fan spinning around its axis
@@ -4678,7 +4723,7 @@
         rootObj.scale.set(scale, scale, scale);
         const model = (rootObj.children && rootObj.children.length > 0) ? rootObj.children[0] : rootObj;
         
-        const tiltCfg = slideFanTilts[currentSlideIdx] || { x: 1.05, y: 0.2, speed: 0.28 };
+        const tiltCfg = slideFanTilts[currentSlideIdx] || { x: 1.05, y: 0.2, speed: 0.14 };
         // Gentle organic micro-sway for celestial floating realism
         const currentTiltX = tiltCfg.x + Math.sin(t * 0.15) * 0.03;
         const currentTiltY = tiltCfg.y + Math.cos(t * 0.12) * 0.02;
@@ -4690,16 +4735,16 @@
         // Slide-specific celestial dynamics (orbiting children, relative motion)
         if (currentSlideIdx === 1) {
           const disk = model.getObjectByName("diskGroup");
-          if (disk) disk.rotation.z = t * 0.25;
+          if (disk) disk.rotation.z = t * 0.12;
         } else if (currentSlideIdx === 8) {
           // Quantum atom electron orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.z = t * (0.35 + idx * 0.25);
+            if (c.type === 'Group') c.rotation.z = t * (0.16 + idx * 0.12);
           });
         } else if (currentSlideIdx === 11) {
           // Planetary Keplerian orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.z = t * (0.2 + (4 - idx) * 0.18);
+            if (c.type === 'Group') c.rotation.z = t * (0.10 + (4 - idx) * 0.08);
           });
         }
       }
@@ -5042,7 +5087,7 @@
     initStageClock();
 
     // Fullscreen LED Mode
-        // Tech UI / HUD Toggle System [U / K]
+    // Tech UI / HUD Toggle System [U / K]
     let techUiVisible = true;
     function toggleTechUiVisibility(forceState) {
       if (typeof forceState === 'boolean') {
@@ -5060,8 +5105,15 @@
       } else {
         document.body.classList.add('tech-ui-hidden');
         if (lbl) lbl.textContent = '👁️ Hiện UI [U]';
-        showStageNotification('👁️ ĐÃ ẨN TOÀN BỘ HUD & NÚT KỸ THUẬT [Bấm U/K để hiện]', 'var(--neon-primary)');
+        showStageNotification('👁️ ĐÃ ẨN NÚT KỸ THUẬT (Duy trì đồng hồ & tiến độ) [Bấm U/K]', 'var(--neon-primary)');
       }
+    }
+
+    function handleClockClick() {
+      if (window.stageAudio && typeof stageAudio.playHudClick === 'function') {
+        stageAudio.playHudClick();
+      }
+      toggleTechUiVisibility();
     }
 
     function toggleCinemaFullscreen() {
@@ -5842,15 +5894,15 @@ tilt_y = -6.5
     // Frosted Glass Monolith Backdrop Settings (Driven by content.txt [SETTINGS])
     window.stageSmallGlassSettings = {
       alpha: 0.55,
-      blurPx: 14,
-      borderGlow: 0.85
+      blurPx: 18,
+      borderGlow: 0.45
     };
 
     window.stageGlassSettings = {
       enabled: true,
-      blurPx: 14,
+      blurPx: 22,
       alpha: 0.25,
-      borderGlow: 0.30,
+      borderGlow: 0.25,
       widthVw: 94,
       heightVh: 82
     };
