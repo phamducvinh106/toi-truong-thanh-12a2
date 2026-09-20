@@ -3356,7 +3356,7 @@
       <!-- SLIDE 14: CÂU HỎI MỞ SÂN KHẤU -->
       <section class="scenography-slide" id="slide-14" data-index="14"
         data-title="Câu Hỏi Mở Sân Khấu"
-        data-cam="-8,2,20" data-cam-rot="0,0.3,0"
+        data-cam="0,0,22" data-cam-rot="0,0,0"
         data-neon-p="#d946ef" data-neon-s="#00f5d4" data-neon-t="#ffffff">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
         <div class="slide-floating-ambient-plane" aria-hidden="true">
@@ -4477,30 +4477,54 @@
         scene.add(root);
       }
 
-      // 14. SLIDE 14: Dual-Arm Spiral Galaxy (Right edge x: +13, r: 17)
+      // 14. SLIDE 14: Dual-Arm Spiral Galaxy (Right edge x: +12, r: 16.5)
       {
         const root = new THREE.Group();
         const m = new THREE.Group();
-        m.position.set(13, 0, -2);
+        m.position.set(12, 0, -2);
         
+        // Radiant Multi-Layer Galactic Core
         const galCore = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.5, 1)), new THREE.LineBasicMaterial({ color: 0xffffff }));
+        const galCoreInner = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(2.2)), new THREE.LineBasicMaterial({ color: 0xd946ef }));
         m.add(galCore);
+        m.add(galCoreInner);
         
-        const armCol1 = new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.85 });
-        const armCol2 = new THREE.LineBasicMaterial({ color: 0x00f5d4, transparent: true, opacity: 0.85 });
+        // Inner luminous accretion rings
+        for (let r = 4.2; r <= 5.8; r += 0.8) {
+          m.add(new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.06, 48), new THREE.LineBasicMaterial({ color: 0x00f5d4, transparent: true, opacity: 0.75 })));
+        }
+        
+        // Dense Multi-Strand Logarithmic Spiral Arms
+        const armCol1 = new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.88 });
+        const armCol2 = new THREE.LineBasicMaterial({ color: 0x00f5d4, transparent: true, opacity: 0.88 });
+        const starMat = new THREE.LineBasicMaterial({ color: 0xffffff });
+        
         for (let arm = 0; arm < 2; arm++) {
           const armAngleOffset = arm * Math.PI;
-          for (let strand = -1; strand <= 1; strand++) {
+          for (let strand = -2; strand <= 2; strand++) {
             const spiralPts = [];
-            for (let t = 0.8; t <= 4.2; t += 0.1) {
-              const r = 2.4 * Math.exp(0.42 * t) + strand * 0.4;
+            for (let t = 0.8; t <= 4.2; t += 0.08) {
+              const r = 2.4 * Math.exp(0.42 * t) + strand * 0.35;
               const theta = t + armAngleOffset;
-              spiralPts.push(new THREE.Vector3(Math.cos(theta) * r, Math.sin(theta) * r, (Math.random() - 0.5) * 1.5));
+              spiralPts.push(new THREE.Vector3(Math.cos(theta) * r, Math.sin(theta) * r, (strand * 0.4)));
             }
             m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(spiralPts), (arm === 0 ? armCol1 : armCol2)));
           }
+          // Orbiting star clusters along the spiral arms
+          for (let st = 1.4; st <= 4.0; st += 0.7) {
+            const sr = 2.4 * Math.exp(0.42 * st);
+            const stheta = st + armAngleOffset;
+            const starNode = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.75)), starMat);
+            starNode.position.set(Math.cos(stheta) * sr, Math.sin(stheta) * sr, 0);
+            m.add(starNode);
+          }
         }
-        m.add(new THREE.LineLoop(new THREE.RingGeometry(14.5, 14.58, 64), new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.5 })));
+        
+        // Concentric Harmonic Outer Galactic Containment Rings
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(8.8, 8.86, 54), new THREE.LineBasicMaterial({ color: 0x00f5d4, transparent: true, opacity: 0.45 })));
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(11.8, 11.86, 64), new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.45 })));
+        m.add(new THREE.LineLoop(new THREE.RingGeometry(14.5, 14.58, 64), new THREE.LineBasicMaterial({ color: 0xd946ef, transparent: true, opacity: 0.6 })));
+        
         root.add(m);
         sceneObjects[14] = root;
         root.visible = false;
@@ -4642,7 +4666,7 @@
         { x: 1.18, y: 0.20, speed: 0.25 },  // Slide 11: Keplerian Planetary System Fan
         { x: 0.88, y: -0.28, speed: 0.24 }, // Slide 12: Dual Platonic Solid Rotor
         { x: 1.04, y: 0.30, speed: 0.26 },  // Slide 13: Geodesic Biosphere Shield Fan
-        { x: 1.16, y: -0.22, speed: 0.30 }, // Slide 14: Logarithmic Spiral Galaxy Fan
+        { x: 1.05, y: -0.18, speed: 0.28 }, // Slide 14: Logarithmic Spiral Galaxy Fan
         { x: 0.82, y: 0.25, speed: 0.25 },  // Slide 15: Volumetric Polyhedral Heart Rotor
         { x: 1.08, y: -0.25, speed: 0.34 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
         { x: 0.85, y: 0.00, speed: 0.24 }   // Slide 17: Mobius Horizon Bottom Arc Fan
