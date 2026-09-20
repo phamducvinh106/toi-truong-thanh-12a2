@@ -4139,9 +4139,8 @@
         const horizonWire = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(4.25, 24, 16)), new THREE.LineBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.85 }));
         m.add(horizonWire);
         
-        for (let r = 4.6; r <= 5.4; r += 0.25) {
+                for (let r = 4.6; r <= 5.4; r += 0.25) {
           const pRing = new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.05, 64), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 }));
-          pRing.rotation.x = Math.PI * 0.38;
           m.add(pRing);
         }
         const diskGroup = new THREE.Group();
@@ -4150,15 +4149,14 @@
         const accMat2 = new THREE.LineBasicMaterial({ color: 0xff007f, transparent: true, opacity: 0.65 });
         for (let r = 5.8; r <= 15.5; r += 0.9) {
           const dRing = new THREE.LineLoop(new THREE.RingGeometry(r, r + 0.06, 72), (r > 10 ? accMat2 : accMat));
-          dRing.rotation.x = Math.PI * 0.38;
           diskGroup.add(dRing);
         }
         m.add(diskGroup);
         
         for (let dir = -1; dir <= 1; dir += 2) {
           const jet = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.ConeGeometry(2.8, 12, 16, 4, true)), new THREE.LineBasicMaterial({ color: 0x8a00ff, transparent: true, opacity: 0.75 }));
-          jet.position.y = dir * 6.5;
-          jet.rotation.x = dir === 1 ? 0 : Math.PI;
+          jet.position.z = dir * 6.5;
+          jet.rotation.x = dir === 1 ? Math.PI / 2 : -Math.PI / 2;
           m.add(jet);
         }
         root.add(m);
@@ -4296,9 +4294,9 @@
           for (let p = 0; p < count; p++) {
             const angle = (p / count) * Math.PI * 2;
             const curve = new THREE.QuadraticBezierCurve3(
-              new THREE.Vector3(0, -2, 0),
-              new THREE.Vector3(Math.cos(angle) * (5 + layer * 3.5), layer * 2.2, Math.sin(angle) * (5 + layer * 3.5)),
-              new THREE.Vector3(Math.cos(angle) * (4 + layer * 2.8), layer * 5.2, Math.sin(angle) * (4 + layer * 2.8))
+              new THREE.Vector3(0, 0, -2),
+              new THREE.Vector3(Math.cos(angle) * (5 + layer * 3.5), Math.sin(angle) * (5 + layer * 3.5), layer * 2.2),
+              new THREE.Vector3(Math.cos(angle) * (4 + layer * 2.8), Math.sin(angle) * (4 + layer * 2.8), layer * 5.2)
             );
             m.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(24)), (layer === 2 ? goldMat : lotusMat)));
           }
@@ -4319,6 +4317,7 @@
         const torusWheel = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.TorusGeometry(11.5, 2.2, 16, 48)), new THREE.LineBasicMaterial({ color: 0x00f3ff }));
         m.add(torusWheel);
         const hubCyl = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CylinderGeometry(2.4, 2.4, 6, 16)), new THREE.LineBasicMaterial({ color: 0xff007f }));
+        hubCyl.rotation.x = Math.PI / 2;
         m.add(hubCyl);
         
         const spokeMat = new THREE.LineBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.8 });
@@ -4627,27 +4626,56 @@
         particleNebula.rotation.x = Math.sin(t * 0.02) * 0.08;
       }
 
-      // Rotate current 3D celestial architecture
+            // 17 Unique 3D Celestial Fan Tilts (Diverse perspective tilt angles + axial ceiling-fan rotor spin)
+      const slideFanTilts = [
+        null,
+        { x: 1.08, y: -0.22, speed: 0.32 }, // Slide 1: Gargantua Black Hole Accretion Fan
+        { x: 1.02, y: 0.25, speed: 0.26 },  // Slide 2: Pulsating Star Corona Rotor
+        { x: 0.95, y: -0.32, speed: 0.28 }, // Slide 3: Trinary Stellar Trinity Fan
+        { x: 1.15, y: 0.28, speed: 0.24 },  // Slide 4: 4D Tesseract Rotor
+        { x: 0.98, y: -0.26, speed: 0.30 }, // Slide 5: Armillary Celestial Gyro Fan
+        { x: 1.12, y: 0.18, speed: 0.25 },  // Slide 6: Kintsugi Lotus Mandala Overhead Fan
+        { x: 1.05, y: 0.35, speed: 0.22 },  // Slide 7: Stanford Torus Spoke Rotor
+        { x: 0.92, y: -0.30, speed: 0.32 }, // Slide 8: Bohr Quantum Atom Rotor
+        { x: 1.10, y: 0.22, speed: 0.28 },  // Slide 9: Binary Star Lemniscate Rotor
+        { x: 0.96, y: -0.24, speed: 0.27 }, // Slide 10: Trefoil Torus Knot Rotor
+        { x: 1.18, y: 0.20, speed: 0.25 },  // Slide 11: Keplerian Planetary System Fan
+        { x: 0.88, y: -0.28, speed: 0.24 }, // Slide 12: Dual Platonic Solid Rotor
+        { x: 1.04, y: 0.30, speed: 0.26 },  // Slide 13: Geodesic Biosphere Shield Fan
+        { x: 1.16, y: -0.22, speed: 0.30 }, // Slide 14: Logarithmic Spiral Galaxy Fan
+        { x: 0.82, y: 0.25, speed: 0.25 },  // Slide 15: Volumetric Polyhedral Heart Rotor
+        { x: 1.08, y: -0.25, speed: 0.34 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
+        { x: 0.85, y: 0.00, speed: 0.24 }   // Slide 17: Mobius Horizon Bottom Arc Fan
+      ];
+
+      // Rotate current 3D celestial architecture like a ceiling fan spinning around its axis
       if (sceneObjects[currentSlideIdx]) {
         const rootObj = sceneObjects[currentSlideIdx];
         rootObj.scale.set(scale, scale, scale);
         const model = (rootObj.children && rootObj.children.length > 0) ? rootObj.children[0] : rootObj;
-        model.rotation.y = t * 0.22;
-        model.rotation.x = Math.sin(t * 0.18) * 0.12;
+        
+        const tiltCfg = slideFanTilts[currentSlideIdx] || { x: 1.05, y: 0.2, speed: 0.28 };
+        // Gentle organic micro-sway for celestial floating realism
+        const currentTiltX = tiltCfg.x + Math.sin(t * 0.15) * 0.03;
+        const currentTiltY = tiltCfg.y + Math.cos(t * 0.12) * 0.02;
+        const currentSpinZ = t * tiltCfg.speed;
+        
+        // Ceiling Fan Rotor Spin: Pure axial rotation around the tilted normal axis
+        model.rotation.set(currentTiltX, currentTiltY, currentSpinZ, 'XYZ');
 
-        // Slide-specific celestial dynamics
+        // Slide-specific celestial dynamics (orbiting children, relative motion)
         if (currentSlideIdx === 1) {
           const disk = model.getObjectByName("diskGroup");
-          if (disk) disk.rotation.z = t * 0.55;
+          if (disk) disk.rotation.z = t * 0.25;
         } else if (currentSlideIdx === 8) {
           // Quantum atom electron orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.y = t * (0.6 + idx * 0.35);
+            if (c.type === 'Group') c.rotation.z = t * (0.35 + idx * 0.25);
           });
         } else if (currentSlideIdx === 11) {
           // Planetary Keplerian orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.z = t * (0.35 + (4 - idx) * 0.25);
+            if (c.type === 'Group') c.rotation.z = t * (0.2 + (4 - idx) * 0.18);
           });
         }
       }
