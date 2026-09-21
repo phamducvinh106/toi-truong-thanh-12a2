@@ -247,7 +247,7 @@
       justify-content: center;
     }
 
-    /* Single Monolithic Frosted Glass Backdrop (Protects Content Contrast with Translucency) */
+    /* Single Monolithic Frosted Glass Backdrop (Ultra-sheer ethereal stage frame) */
     .stage-glass-monolith {
       position: absolute;
       top: 50%;
@@ -255,23 +255,15 @@
       transform: translate(-50%, -50%) translateZ(-8px);
       width: var(--glass-width, min(94vw, 1600px));
       height: var(--glass-height, min(82vh, 660px));
-      backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
-      -webkit-backdrop-filter: blur(var(--glass-blur, 14px)) saturate(135%);
-      background: linear-gradient(135deg, rgba(8, 16, 32, var(--glass-alpha, 0.25)) 0%, rgba(2, 5, 14, var(--glass-alpha, 0.25)) 100%);
+      backdrop-filter: blur(var(--glass-blur, 2px)) saturate(110%);
+      -webkit-backdrop-filter: blur(var(--glass-blur, 2px)) saturate(110%);
+      background: rgba(4, 10, 24, var(--glass-alpha, 0.04)) !important;
+      border: 1.2px solid var(--neon-primary) !important;
+      border-radius: 20px !important;
+      clip-path: none !important;
       box-shadow: 
-        0 30px 85px -15px rgba(0, 0, 0, 0.85),
-        0 0 30px rgba(0, 243, 255, calc(var(--glass-border-opacity, 0.3) * 0.25)),
-        inset 0 0 25px rgba(255, 255, 255, 0.03);
-      clip-path: polygon(
-        18px 0, 
-        calc(100% - 18px) 0, 
-        100% 18px, 
-        100% calc(100% - 18px), 
-        calc(100% - 18px) 100%, 
-        18px 100%, 
-        0 calc(100% - 18px), 
-        0 18px
-      );
+        0 0 25px rgba(0, 243, 255, 0.12),
+        inset 0 0 20px rgba(255, 255, 255, 0.02) !important;
       pointer-events: none;
       z-index: 1;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -281,20 +273,13 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 35%, transparent 65%, rgba(0, 0, 0, 0.3) 100%);
-      clip-path: inherit;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+      border-radius: inherit;
       pointer-events: none;
     }
 
     .stage-glass-monolith::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border: 1.5px solid var(--neon-primary);
-      opacity: var(--glass-border-opacity, 0.32);
-      clip-path: inherit;
-      pointer-events: none;
-      transition: border-color 0.6s ease, opacity 0.6s ease;
+      display: none !important;
     }
 
     .glass-corner {
@@ -1774,15 +1759,17 @@
        MULTI-LAYER FROSTED GLASS & COLORED OUTLINE SYSTEM
        ========================================================================== */
 
-    /* 1. Stage Glass Monolith (Khung lớn bao quanh: giữ nguyên cấu hình cũ) */
+    /* 1. Stage Glass Monolith (Khung lớn bao quanh: siêu trong suốt, chỉ giữ viền khung thanh thoát) */
     .stage-glass-monolith {
-      border: 1.5px solid var(--neon-primary) !important;
+      border: 1.2px solid var(--neon-primary) !important;
       border-radius: 20px !important;
       clip-path: none !important;
+      background: rgba(4, 10, 24, 0.04) !important;
+      backdrop-filter: blur(2.5px) !important;
+      -webkit-backdrop-filter: blur(2.5px) !important;
       box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.5),
-        0 0 30px var(--neon-primary),
-        inset 0 0 25px rgba(255, 255, 255, 0.04) !important;
+        0 0 25px rgba(0, 243, 255, 0.12),
+        inset 0 0 20px rgba(255, 255, 255, 0.02) !important;
     }
 
     /* 2. Telemetry Tags (Frosted Glass Capsule với biến riêng --glass-small-...) */
@@ -1800,15 +1787,17 @@
       transition: all 0.4s ease;
     }
 
-    /* 3. Major Headings & Titles */
+    /* 3. Universal Headings & Titles (All h1, h2, h3 across all slides) */
     .monumental-text,
-    .scenography-slide > div:first-child > h1 {
+    .scenography-slide h1,
+    .scenography-slide h2,
+    .scenography-slide h3 {
       display: inline-block !important;
       padding: 0.5rem 2.2rem !important;
       border-radius: 18px !important;
       backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
       -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(140%) !important;
-      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.52)) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.62)) !important;
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
         0 10px 35px rgba(0, 0, 0, 0.5),
@@ -1839,22 +1828,6 @@
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
       display: block !important;
-    }
-
-    /* 4. Secondary Headings (h2 in Slide 2, 16, 17) */
-    .scenography-slide > div:first-child > h2 {
-      display: inline-block !important;
-      padding: 0.45rem 2rem !important;
-      border-radius: 16px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
-      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.52)) !important;
-      border: 1.5px solid var(--neon-primary) !important;
-      box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.45),
-        0 0 16px var(--neon-primary),
-        inset 0 0 14px rgba(255, 255, 255, 0.04) !important;
-      max-width: 92%;
     }
 
     /* 5. Sub-Statements & Hero Sub-Statements */
@@ -1898,20 +1871,38 @@
         inset 0 0 18px rgba(255, 255, 255, 0.04) !important;
     }
 
-    /* 7. Standalone Direct Statement Paragraphs */
-    .scenography-slide > div[class*="layout-"] > p {
+    /* 7. Universal Standalone Paragraphs & Statements */
+    .scenography-slide p {
       display: inline-block !important;
       padding: 0.55rem 2rem !important;
       border-radius: 14px !important;
       backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
       -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(135%) !important;
-      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.54)) !important;
+      background: rgba(6, 14, 28, var(--glass-small-alpha, 0.58)) !important;
       border: 1.5px solid var(--neon-secondary) !important;
       box-shadow: 
         0 6px 25px rgba(0, 0, 0, 0.45),
         0 0 16px var(--neon-secondary),
         inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
       max-width: 92%;
+    }
+
+    /* Text blocks nested inside dedicated frosted glass containers do not have redundant double frames */
+    .hud-bracket-container > p,
+    .kintsugi-gold-manifesto > p,
+    .revealed-insight-beam > p,
+    .origami-ribbon-spire > p,
+    .origami-ribbon-spire > .origami-ribbon-text,
+    .supernova-hero-glass-frame > h1,
+    .target-question-header > h2,
+    .target-question-header > p {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      display: block !important;
+      padding: 0 !important;
     }
 
     /* 8. Slide 04 Sub-Badges Pair */
@@ -2030,21 +2021,21 @@
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      opacity: 0.56;
+      opacity: 0.68 !important;
       color: var(--neon-primary, #00f3ff);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(0, 243, 255, 0.28));
+      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 28px rgba(0, 243, 255, 0.38));
       transition: color 0.6s ease, filter 0.6s ease, opacity 0.5s ease;
       will-change: transform;
     }
 
     .floating-outline-item.alt-neon {
       color: var(--neon-secondary, #ff007f);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(255, 0, 127, 0.28));
+      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 28px rgba(255, 0, 127, 0.38));
     }
 
     .floating-outline-item.tert-neon {
       color: var(--neon-tertiary, #8a00ff);
-      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 24px rgba(138, 0, 255, 0.28));
+      filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 28px rgba(138, 0, 255, 0.38));
     }
 
     .floating-outline-svg {
@@ -2057,61 +2048,43 @@
       stroke-linejoin: round;
     }
 
-    /* 6 Organic Free-Floating Harmonic Trajectories (Wide Stage Amplitude) */
-    @keyframes floatWander2D_1 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(55px, -70px, 0) rotate(12deg) scale(1.08); }
-      50% { transform: translate3d(-45px, -105px, 0) rotate(-10deg) scale(0.93); }
-      75% { transform: translate3d(-75px, -35px, 0) rotate(11deg) scale(1.06); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    /* 6 Gentle Vertical-Only Floating Trajectories (Chỉ chuyển động lên xuống thật nhẹ) */
+    @keyframes floatVerticalOnly_1 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
     }
 
-    @keyframes floatWander2D_2 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(-60px, 65px, 0) rotate(-12deg) scale(0.93); }
-      50% { transform: translate3d(50px, 100px, 0) rotate(13deg) scale(1.09); }
-      75% { transform: translate3d(75px, 25px, 0) rotate(-9deg) scale(0.96); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    @keyframes floatVerticalOnly_2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(10px); }
     }
 
-    @keyframes floatWander2D_3 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      30% { transform: translate3d(70px, 50px, 0) rotate(-13deg) scale(1.09); }
-      60% { transform: translate3d(-55px, -85px, 0) rotate(11deg) scale(0.93); }
-      85% { transform: translate3d(-25px, 60px, 0) rotate(-8deg) scale(1.05); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    @keyframes floatVerticalOnly_3 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-14px); }
     }
 
-    @keyframes floatWander2D_4 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      30% { transform: translate3d(-80px, -55px, 0) rotate(12deg) scale(0.94); }
-      65% { transform: translate3d(60px, 75px, 0) rotate(-13deg) scale(1.08); }
-      85% { transform: translate3d(30px, -50px, 0) rotate(8deg) scale(0.97); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    @keyframes floatVerticalOnly_4 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(12px); }
     }
 
-    @keyframes floatWander2D_5 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      20% { transform: translate3d(45px, -85px, 0) rotate(-10deg) scale(1.07); }
-      50% { transform: translate3d(-70px, -50px, 0) rotate(14deg) scale(0.93); }
-      80% { transform: translate3d(55px, 70px, 0) rotate(-11deg) scale(1.07); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    @keyframes floatVerticalOnly_5 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
 
-    @keyframes floatWander2D_6 {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-      25% { transform: translate3d(-55px, 80px, 0) rotate(13deg) scale(0.93); }
-      55% { transform: translate3d(70px, -60px, 0) rotate(-14deg) scale(1.09); }
-      80% { transform: translate3d(-40px, -85px, 0) rotate(9deg) scale(0.96); }
-      100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    @keyframes floatVerticalOnly_6 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(14px); }
     }
 
-    .float-traj-1 { animation: floatWander2D_1 16s ease-in-out infinite; animation-delay: -3s; }
-    .float-traj-2 { animation: floatWander2D_2 20s ease-in-out infinite; animation-delay: -8s; }
-    .float-traj-3 { animation: floatWander2D_3 24s ease-in-out infinite; animation-delay: -13s; }
-    .float-traj-4 { animation: floatWander2D_4 18s ease-in-out infinite; animation-delay: -5s; }
-    .float-traj-5 { animation: floatWander2D_5 22s ease-in-out infinite; animation-delay: -11s; }
-    .float-traj-6 { animation: floatWander2D_6 26s ease-in-out infinite; animation-delay: -17s; }
+    .float-traj-1 { animation: floatVerticalOnly_1 6.5s ease-in-out infinite; animation-delay: -1.5s; }
+    .float-traj-2 { animation: floatVerticalOnly_2 7.5s ease-in-out infinite; animation-delay: -3.2s; }
+    .float-traj-3 { animation: floatVerticalOnly_3 8.5s ease-in-out infinite; animation-delay: -4.8s; }
+    .float-traj-4 { animation: floatVerticalOnly_4 7.0s ease-in-out infinite; animation-delay: -2.1s; }
+    .float-traj-5 { animation: floatVerticalOnly_5 8.0s ease-in-out infinite; animation-delay: -5.4s; }
+    .float-traj-6 { animation: floatVerticalOnly_6 9.0s ease-in-out infinite; animation-delay: -3.8s; }
 
   </style>
 </head>
@@ -4640,36 +4613,36 @@
 
       // Animate Continuous Energy Spine (Breathing & Slow Orbit)
       if (continuousEnergySpine) {
-        continuousEnergySpine.rotation.z = t * 0.05;
-        continuousEnergySpine.rotation.y = Math.sin(t * 0.08) * 0.15;
+        continuousEnergySpine.rotation.z = t * 0.02;
+        continuousEnergySpine.rotation.y = Math.sin(t * 0.04) * 0.08;
       }
 
-      // Rotate particle nebula
+      // Rotate particle nebula (gentle celestial drift)
       if (particleNebula) {
-        particleNebula.rotation.y = t * 0.025;
-        particleNebula.rotation.x = Math.sin(t * 0.02) * 0.08;
+        particleNebula.rotation.y = t * 0.008;
+        particleNebula.rotation.x = Math.sin(t * 0.01) * 0.03;
       }
 
-            // 17 Unique 3D Celestial Fan Tilts (Diverse perspective tilt angles + axial ceiling-fan rotor spin)
+      // 17 Unique 3D Celestial Fan Tilts (Ultra-slow rotation: 0.04 to 0.065 rad/s - Just enough to perceive rotation)
       const slideFanTilts = [
         null,
-        { x: 1.08, y: -0.22, speed: 0.32 }, // Slide 1: Gargantua Black Hole Accretion Fan
-        { x: 1.02, y: 0.25, speed: 0.26 },  // Slide 2: Pulsating Star Corona Rotor
-        { x: 0.95, y: -0.32, speed: 0.28 }, // Slide 3: Trinary Stellar Trinity Fan
-        { x: 1.15, y: 0.28, speed: 0.24 },  // Slide 4: 4D Tesseract Rotor
-        { x: 0.98, y: -0.26, speed: 0.30 }, // Slide 5: Armillary Celestial Gyro Fan
-        { x: 1.12, y: 0.18, speed: 0.25 },  // Slide 6: Kintsugi Lotus Mandala Overhead Fan
-        { x: 1.05, y: 0.35, speed: 0.22 },  // Slide 7: Stanford Torus Spoke Rotor
-        { x: 0.92, y: -0.30, speed: 0.32 }, // Slide 8: Bohr Quantum Atom Rotor
-        { x: 1.10, y: 0.22, speed: 0.28 },  // Slide 9: Binary Star Lemniscate Rotor
-        { x: 0.96, y: -0.24, speed: 0.27 }, // Slide 10: Trefoil Torus Knot Rotor
-        { x: 1.18, y: 0.20, speed: 0.25 },  // Slide 11: Keplerian Planetary System Fan
-        { x: 0.88, y: -0.28, speed: 0.24 }, // Slide 12: Dual Platonic Solid Rotor
-        { x: 1.04, y: 0.30, speed: 0.26 },  // Slide 13: Geodesic Biosphere Shield Fan
-        { x: 1.05, y: -0.18, speed: 0.28 }, // Slide 14: Logarithmic Spiral Galaxy Fan
-        { x: 0.82, y: 0.25, speed: 0.25 },  // Slide 15: Volumetric Polyhedral Heart Rotor
-        { x: 1.08, y: -0.25, speed: 0.34 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
-        { x: 0.85, y: 0.00, speed: 0.24 }   // Slide 17: Mobius Horizon Bottom Arc Fan
+        { x: 1.08, y: -0.22, speed: 0.060 }, // Slide 1: Gargantua Black Hole Accretion Fan
+        { x: 1.02, y: 0.25, speed: 0.050 },  // Slide 2: Pulsating Star Corona Rotor
+        { x: 0.95, y: -0.32, speed: 0.055 }, // Slide 3: Trinary Stellar Trinity Fan
+        { x: 1.15, y: 0.28, speed: 0.045 },  // Slide 4: 4D Tesseract Rotor
+        { x: 0.98, y: -0.26, speed: 0.055 }, // Slide 5: Armillary Celestial Gyro Fan
+        { x: 1.12, y: 0.18, speed: 0.050 },  // Slide 6: Kintsugi Lotus Mandala Overhead Fan
+        { x: 1.05, y: 0.35, speed: 0.040 },  // Slide 7: Stanford Torus Spoke Rotor
+        { x: 0.92, y: -0.30, speed: 0.060 }, // Slide 8: Bohr Quantum Atom Rotor
+        { x: 1.10, y: 0.22, speed: 0.055 },  // Slide 9: Binary Star Lemniscate Rotor
+        { x: 0.96, y: -0.24, speed: 0.050 }, // Slide 10: Trefoil Torus Knot Rotor
+        { x: 1.18, y: 0.20, speed: 0.045 },  // Slide 11: Keplerian Planetary System Fan
+        { x: 0.88, y: -0.28, speed: 0.045 }, // Slide 12: Dual Platonic Solid Rotor
+        { x: 1.04, y: 0.30, speed: 0.050 },  // Slide 13: Geodesic Biosphere Shield Fan
+        { x: 1.05, y: -0.18, speed: 0.055 }, // Slide 14: Logarithmic Spiral Galaxy Fan
+        { x: 0.82, y: 0.25, speed: 0.045 },  // Slide 15: Volumetric Polyhedral Heart Rotor
+        { x: 1.08, y: -0.25, speed: 0.065 }, // Slide 16: Supernova Blast 36-Jet Turbine Fan
+        { x: 0.85, y: 0.00, speed: 0.045 }   // Slide 17: Mobius Horizon Bottom Arc Fan
       ];
 
       // Rotate current 3D celestial architecture like a ceiling fan spinning around its axis
@@ -4678,10 +4651,10 @@
         rootObj.scale.set(scale, scale, scale);
         const model = (rootObj.children && rootObj.children.length > 0) ? rootObj.children[0] : rootObj;
         
-        const tiltCfg = slideFanTilts[currentSlideIdx] || { x: 1.05, y: 0.2, speed: 0.28 };
+        const tiltCfg = slideFanTilts[currentSlideIdx] || { x: 1.05, y: 0.2, speed: 0.050 };
         // Gentle organic micro-sway for celestial floating realism
-        const currentTiltX = tiltCfg.x + Math.sin(t * 0.15) * 0.03;
-        const currentTiltY = tiltCfg.y + Math.cos(t * 0.12) * 0.02;
+        const currentTiltX = tiltCfg.x + Math.sin(t * 0.10) * 0.02;
+        const currentTiltY = tiltCfg.y + Math.cos(t * 0.08) * 0.015;
         const currentSpinZ = t * tiltCfg.speed;
         
         // Ceiling Fan Rotor Spin: Pure axial rotation around the tilted normal axis
@@ -4690,16 +4663,16 @@
         // Slide-specific celestial dynamics (orbiting children, relative motion)
         if (currentSlideIdx === 1) {
           const disk = model.getObjectByName("diskGroup");
-          if (disk) disk.rotation.z = t * 0.25;
+          if (disk) disk.rotation.z = t * 0.05;
         } else if (currentSlideIdx === 8) {
           // Quantum atom electron orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.z = t * (0.35 + idx * 0.25);
+            if (c.type === 'Group') c.rotation.z = t * (0.06 + idx * 0.04);
           });
         } else if (currentSlideIdx === 11) {
           // Planetary Keplerian orbits
           model.children.forEach((c, idx) => {
-            if (c.type === 'Group') c.rotation.z = t * (0.2 + (4 - idx) * 0.18);
+            if (c.type === 'Group') c.rotation.z = t * (0.05 + (4 - idx) * 0.03);
           });
         }
       }
@@ -5595,11 +5568,20 @@ tilt_max_deg = 12
 tilt_multiplier = 20
 perspective_px = 1700
 glass_enabled = true
-glass_alpha = 0.25
-glass_blur_px = 14
-glass_border_glow = 0.30
+glass_alpha = 0.1
+glass_blur_px = 10
+glass_border_glow = 0.65
 glass_width_vw = 94
 glass_height_vh = 82
+
+# ------------------------------------------------------------------------------
+# THIẾT LẬP ĐỘ MỜ KÍNH MỜ CHO CÁC THÀNH PHẦN NHỎ ĐỘC LẬP (SMALL COMPONENT GLASS)
+# - glass_small_alpha: Độ mờ đục/trong suốt của các khung kính nhỏ (0.0 = trong suốt, 1.0 = đục)
+# - glass_small_blur_px: Độ mờ nhòe (blur) của các khung kính nhỏ (px)
+# - glass_small_border_glow: Độ sáng viền quang học của các khung kính nhỏ (0.0 đến 1.0)
+glass_small_alpha = 0.80
+glass_small_blur_px = 14
+glass_small_border_glow = 0.65
 
 # ==============================================================================
 # CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
@@ -5848,9 +5830,9 @@ tilt_y = -6.5
 
     window.stageGlassSettings = {
       enabled: true,
-      blurPx: 14,
-      alpha: 0.25,
-      borderGlow: 0.30,
+      blurPx: 2,
+      alpha: 0.04,
+      borderGlow: 0.25,
       widthVw: 94,
       heightVh: 82
     };
@@ -5965,7 +5947,7 @@ tilt_y = -6.5
           window.stageGlassSettings.enabled = data.SETTINGS.glass_enabled.toLowerCase() === 'true';
         }
         if (data.SETTINGS.glass_blur_px !== undefined) {
-          window.stageGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_blur_px) || 14;
+          window.stageGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_blur_px) || 2;
         }
         // Support glass_alpha (primary) and glass_opacity (alias)
         if (data.SETTINGS.glass_alpha !== undefined) {
@@ -5974,22 +5956,22 @@ tilt_y = -6.5
           window.stageGlassSettings.alpha = parseFloat(data.SETTINGS.glass_opacity);
         }
         if (data.SETTINGS.glass_border_glow !== undefined) {
-          window.stageGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_border_glow) || 0.30;
+          window.stageGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_border_glow) || 0.25;
         }
         if (data.SETTINGS.glass_width_vw !== undefined) {
           window.stageGlassSettings.widthVw = parseFloat(data.SETTINGS.glass_width_vw) || 94;
         }
         if (data.SETTINGS.glass_height_vh !== undefined) {
           window.stageGlassSettings.heightVh = parseFloat(data.SETTINGS.glass_height_vh) || 82;
-          if (data.SETTINGS.glass_small_alpha !== undefined) {
-            window.stageSmallGlassSettings.alpha = parseFloat(data.SETTINGS.glass_small_alpha) || 0.55;
-          }
-          if (data.SETTINGS.glass_small_blur_px !== undefined) {
-            window.stageSmallGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_small_blur_px) || 14;
-          }
-          if (data.SETTINGS.glass_small_border_glow !== undefined) {
-            window.stageSmallGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_small_border_glow) || 0.85;
-          }
+        }
+        if (data.SETTINGS.glass_small_alpha !== undefined) {
+          window.stageSmallGlassSettings.alpha = parseFloat(data.SETTINGS.glass_small_alpha) || 0.55;
+        }
+        if (data.SETTINGS.glass_small_blur_px !== undefined) {
+          window.stageSmallGlassSettings.blurPx = parseFloat(data.SETTINGS.glass_small_blur_px) || 14;
+        }
+        if (data.SETTINGS.glass_small_border_glow !== undefined) {
+          window.stageSmallGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_small_border_glow) || 0.85;
         }
         // External Audio & Background Music Settings
         if (data.SETTINGS.bgm_file !== undefined) {
@@ -6279,6 +6261,7 @@ tilt_y = -6.5
         }
       } catch (err) {
         console.warn('Fetch content.txt not reachable (file:// protocol restriction). Using local content data.');
+        showTxtStatusBadge('💡 Đang dùng thiết lập sẵn (Kéo thả content.txt vào để nạp file ngoài)');
       }
 
       if (!text || text.trim().length === 0) {
