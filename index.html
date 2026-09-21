@@ -1319,6 +1319,43 @@
       padding: 0.5rem 0;
     }
 
+    .player-track-info {
+      flex: 1;
+      text-align: left;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.75rem !important;
+    }
+
+    .player-track-info h2 {
+      margin: 0 !important;
+    }
+
+    .player-track-meta {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.85rem !important;
+      flex-wrap: wrap !important;
+      width: 100%;
+    }
+
+    .player-track-meta p {
+      margin: 0 !important;
+    }
+
+    .player-track-info .player-track-sub {
+      border-color: #ffe600 !important;
+      color: #ffe600 !important;
+      box-shadow: 0 0 16px rgba(255, 230, 0, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
+    }
+
+    .player-track-info .player-track-performer {
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      color: rgba(255, 255, 255, 0.75) !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.04) !important;
+    }
+
     .player-vinyl-wrap {
       flex-shrink: 0;
       display: flex;
@@ -2624,20 +2661,21 @@
               </div>
             </div>
 
-            <div class="player-track-info" style="flex: 1; text-align: left;">
-              <div class="telemetry-tag" style="color: #39ff14; margin-bottom: 0.5rem;" id="perf-status-badge-2">
+            <div class="player-track-info">
+              <div class="telemetry-tag" style="color: #39ff14;" id="perf-status-badge-2">
                 ● SẴN SÀNG PHÁT
               </div>
               <h2 style="font-size: 34px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px rgba(57,255,20,0.6);" id="perf-track-title-2">
                 HÒ VƯƠN MÌNH & A LITTLE DREAM OF ME
               </h2>
-              <p style="font-size: 16px; color: #ffe600; font-weight: 800; margin-top: 0.4rem;">
-                Tiết Mục Khai Màn Chuyên Đề
-              </p>
-              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 0.4rem;">
-                Biểu diễn: Tập thể lớp 12A2
-              </p>
-
+              <div class="player-track-meta">
+                <p class="player-track-sub" style="font-size: 16px; font-weight: 800;">
+                  Tiết Mục Khai Màn Chuyên Đề
+                </p>
+                <p class="player-track-performer" style="font-size: 14px;">
+                  Biểu diễn: Tập thể lớp 12A2
+                </p>
+              </div>
             </div>
           </div>
 
@@ -3589,20 +3627,21 @@
               </div>
             </div>
 
-            <div class="player-track-info" style="flex: 1; text-align: left;">
-              <div class="telemetry-tag" style="color: #ff0055; margin-bottom: 0.5rem;" id="perf-status-badge-16">
+            <div class="player-track-info">
+              <div class="telemetry-tag" style="color: #ff0055;" id="perf-status-badge-16">
                 ● SẴN SÀNG PHÁT
               </div>
               <h2 style="font-size: 34px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px rgba(255, 0, 85, 0.6);" id="perf-track-title-16">
                 RỰC RỠ
               </h2>
-              <p style="font-size: 16px; color: #ffe600; font-weight: 800; margin-top: 0.4rem;">
-                Tiết Mục Hát Bế Mạc Chuyên Đề
-              </p>
-              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 0.4rem;">
-                Biểu diễn: Tập thể lớp 12A2
-              </p>
-
+              <div class="player-track-meta">
+                <p class="player-track-sub" style="font-size: 16px; font-weight: 800;">
+                  Tiết Mục Hát Bế Mạc Chuyên Đề
+                </p>
+                <p class="player-track-performer" style="font-size: 14px;">
+                  Biểu diễn: Tập thể lớp 12A2
+                </p>
+              </div>
             </div>
           </div>
 
@@ -6093,6 +6132,12 @@ tilt_y = -6.5
           setTxt(s2.querySelector('h2'), data.SLIDE_2.subtitle);
           setTxt(s2.querySelector('p'), data.SLIDE_2.quote);
           if (tags[1]) setTxt(tags[1], data.SLIDE_2.performer);
+          const pTitle2 = document.getElementById('perf-track-title-2');
+          if (pTitle2 && data.SLIDE_2.title) setTxt(pTitle2, data.SLIDE_2.title);
+          const pSub2 = s2.querySelector('.player-track-sub');
+          if (pSub2 && data.SLIDE_2.subtitle) setTxt(pSub2, data.SLIDE_2.subtitle);
+          const pPerf2 = s2.querySelector('.player-track-performer');
+          if (pPerf2 && data.SLIDE_2.performer) setTxt(pPerf2, data.SLIDE_2.performer);
           if (data.SLIDE_2.music_file) {
             const audio2 = document.getElementById('perf-audio-2');
             if (audio2 && !audio2.src) audio2.src = data.SLIDE_2.music_file;
@@ -6255,6 +6300,12 @@ tilt_y = -6.5
           setTxt(s16.querySelector('h2'), data.SLIDE_16.subtitle || data.SLIDE_16.title);
           setTxt(s16.querySelector('p'), data.SLIDE_16.quote || data.SLIDE_16.statement);
           if (tags[1]) setTxt(tags[1], data.SLIDE_16.performer || data.SLIDE_16.callout);
+          const pTitle16 = document.getElementById('perf-track-title-16');
+          if (pTitle16) setTxt(pTitle16, data.SLIDE_16.title || data.SLIDE_16.hero);
+          const pSub16 = s16.querySelector('.player-track-sub');
+          if (pSub16 && (data.SLIDE_16.subtitle || data.SLIDE_16.title)) setTxt(pSub16, data.SLIDE_16.subtitle || data.SLIDE_16.title);
+          const pPerf16 = s16.querySelector('.player-track-performer');
+          if (pPerf16 && (data.SLIDE_16.performer || data.SLIDE_16.callout)) setTxt(pPerf16, data.SLIDE_16.performer || data.SLIDE_16.callout);
           if (data.SLIDE_16.music_file) {
             const audio16 = document.getElementById('perf-audio-16');
             if (audio16 && !audio16.src) audio16.src = data.SLIDE_16.music_file;
