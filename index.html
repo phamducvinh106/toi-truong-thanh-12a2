@@ -1868,12 +1868,22 @@
       max-width: 95%;
     }
 
+    .supernova-hero-glass-frame > h1.supernova-kinetic-hero,
     .supernova-kinetic-hero {
       background: linear-gradient(90deg, #ff0055, #ff9900, #ffe600, #00ff66, #00f3ff, #7b2cbf, #ff007f) !important;
       background-size: 400% 400% !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
+      white-space: nowrap !important;
       display: block !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 0.1rem 1rem !important;
+      margin: 0 !important;
+      animation: hyperSpectrumShift 6s infinite ease !important;
+      filter: drop-shadow(0 0 50px rgba(255, 0, 127, 0.85)) drop-shadow(0 0 25px rgba(255, 230, 0, 0.7)) !important;
     }
 
     /* 5. Sub-Statements & Hero Sub-Statements */
@@ -1939,7 +1949,6 @@
     .revealed-insight-beam > p,
     .origami-ribbon-spire > p,
     .origami-ribbon-spire > .origami-ribbon-text,
-    .supernova-hero-glass-frame > h1,
     .target-question-header > h2,
     .target-question-header > p {
       background: transparent !important;
