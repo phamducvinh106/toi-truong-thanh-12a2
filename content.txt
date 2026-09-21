@@ -80,7 +80,7 @@ tilt_y = 5.0
 [SLIDE_2]
 nav_title = Tiết Mục: Hò Vươn Mình
 telemetry = [ TIẾT MỤC BIỂU DIỄN KHAI MÀN ]
-title = HÒ VƯƠN MÌNH
+title = HÒ VƯƠN MÌNH x A LITTLE DREAM OF ME
 subtitle = TIẾT MỤC MÚA MỞ MÀN
 quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
