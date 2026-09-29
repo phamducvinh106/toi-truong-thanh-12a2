@@ -1860,19 +1860,20 @@
 
     /* 2. Telemetry Tags (Frosted Glass Capsule với biến riêng --glass-small-...) */
     .telemetry-tag {
-      padding: 0.38rem 1.45rem !important;
+      padding: 0.42rem 1.6rem !important;
       border-radius: 999px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
       background: 
-        radial-gradient(ellipse at 25% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, transparent 75%),
-        linear-gradient(135deg, rgba(12, 24, 48, var(--glass-small-alpha, 0.78)) 0%, rgba(5, 11, 24, calc(var(--glass-small-alpha, 0.78) * 1.1)) 100%) !important;
+        radial-gradient(ellipse at 30% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45) 0%, transparent 80%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, rgba(10, 26, 52, var(--glass-small-alpha, 0.58)) 55%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 100%) !important;
       border: 1.5px solid currentColor !important;
       box-shadow: 
-        0 4px 18px rgba(0, 0, 0, 0.45),
-        0 0 16px currentColor,
-        inset 0 1px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 14px currentColor !important;
+        0 4px 22px rgba(0, 0, 0, 0.45),
+        0 0 25px currentColor,
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
+        inset 0 0 18px currentColor !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 2px #000;
       transition: all 0.4s ease;
     }
 
@@ -1882,40 +1883,45 @@
     .scenography-slide h2,
     .scenography-slide h3 {
       display: inline-block !important;
-      padding: 0.55rem 2.4rem !important;
+      padding: 0.65rem 2.6rem !important;
       border-radius: 20px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
       background: 
-        radial-gradient(ellipse at 18% 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.30) 0%, transparent 60%),
-        radial-gradient(ellipse at 82% 100%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.22) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(10, 22, 46, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 11, 24, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 20% 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.55) 0%, transparent 65%),
+        radial-gradient(ellipse at 80% 100%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.45) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.25) 0%, rgba(12, 28, 58, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 100%) !important;
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
-        0 14px 38px rgba(0, 0, 0, 0.55),
-        0 0 30px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.40),
-        inset 0 0 22px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) !important;
+        0 14px 45px rgba(0, 0, 0, 0.45),
+        0 0 45px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.70),
+        0 0 22px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.45),
+        inset 0 2px 2px rgba(255, 255, 255, 0.60),
+        inset 0 0 30px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.40),
+        inset 0 0 20px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000 !important;
       max-width: 95%;
     }
 
     /* 3B. Slide 16 Song Title Frame (Bảo toàn tuyệt đối chữ RỰC RỠ quang phổ) */
     .supernova-hero-glass-frame {
       display: inline-block !important;
-      padding: 0.55rem 2.6rem !important;
+      padding: 0.65rem 2.8rem !important;
       border-radius: 22px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(250%) brightness(1.30) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(250%) brightness(1.30) !important;
       background: 
-        radial-gradient(ellipse at 18% 0%, rgba(255, 0, 85, 0.32) 0%, transparent 60%),
-        radial-gradient(ellipse at 82% 100%, rgba(0, 243, 255, 0.24) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(16, 12, 36, var(--glass-small-alpha, 0.80)) 0%, rgba(6, 10, 24, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 20% 0%, rgba(255, 0, 85, 0.60) 0%, transparent 65%),
+        radial-gradient(ellipse at 80% 100%, rgba(0, 243, 255, 0.50) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(255, 0, 85, 0.28) 0%, rgba(24, 10, 38, var(--glass-small-alpha, 0.60)) 50%, rgba(0, 243, 255, 0.28) 100%) !important;
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
-        0 14px 38px rgba(0, 0, 0, 0.55),
-        0 0 32px rgba(255, 0, 85, 0.50),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.40),
-        inset 0 0 22px rgba(255, 0, 85, 0.25) !important;
+        0 14px 45px rgba(0, 0, 0, 0.45),
+        0 0 50px rgba(255, 0, 85, 0.75),
+        0 0 25px rgba(0, 243, 255, 0.50),
+        inset 0 2px 2px rgba(255, 255, 255, 0.60),
+        inset 0 0 32px rgba(255, 0, 85, 0.42),
+        inset 0 0 20px rgba(0, 243, 255, 0.30) !important;
       max-width: 95%;
     }
 
@@ -1940,73 +1946,81 @@
     /* 5. Sub-Statements & Hero Sub-Statements */
     .hero-sub-statement {
       display: inline-block !important;
-      padding: 0.95rem 2.6rem !important;
+      padding: 0.95rem 2.7rem !important;
       border-radius: 18px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.26) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.26) !important;
       background: 
-        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.28) 0%, transparent 60%),
-        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(14, 18, 40, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 10, 24, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.52) 0%, transparent 65%),
+        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.40) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 0%, rgba(20, 12, 42, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) 100%) !important;
       border: 1.5px solid var(--neon-secondary) !important;
       box-shadow: 
-        0 10px 32px rgba(0, 0, 0, 0.52),
-        0 0 28px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.45),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 20px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.20) !important;
+        0 10px 38px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.65),
+        0 0 18px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.38),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.55),
+        inset 0 0 28px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.38),
+        inset 0 0 18px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000 !important;
       max-width: 92%;
     }
 
     /* 6. HUD Bracket Containers & Manifesto Frames */
     .hud-bracket-container {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 18% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 0%, transparent 60%),
-        radial-gradient(ellipse at 82% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.18) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(12, 18, 38, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 10, 24, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 18% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.50) 0%, transparent 65%),
+        radial-gradient(ellipse at 82% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.38) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 0%, rgba(18, 14, 44, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) 100%) !important;
       border: 1.5px solid var(--neon-secondary) !important;
       border-radius: 18px !important;
       box-shadow: 
-        0 12px 35px rgba(0, 0, 0, 0.52),
-        0 0 26px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.42),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.30),
-        inset 0 0 20px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.18) !important;
+        0 12px 40px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.62),
+        0 0 20px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.50),
+        inset 0 0 28px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.35) !important;
     }
 
     .kintsugi-gold-manifesto {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
       background: 
-        radial-gradient(ellipse at 18% 0%, rgba(255, 215, 0, 0.30) 0%, transparent 60%),
-        radial-gradient(ellipse at 82% 100%, rgba(255, 0, 127, 0.20) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(28, 20, 8, var(--glass-small-alpha, 0.82)) 0%, rgba(10, 8, 18, calc(var(--glass-small-alpha, 0.82) * 1.05)) 100%) !important;
+        radial-gradient(ellipse at 18% 0%, rgba(255, 215, 0, 0.55) 0%, transparent 65%),
+        radial-gradient(ellipse at 82% 100%, rgba(255, 0, 127, 0.42) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(255, 215, 0, 0.28) 0%, rgba(42, 28, 8, var(--glass-small-alpha, 0.62)) 50%, rgba(255, 0, 127, 0.25) 100%) !important;
       border: 1.5px solid #ffd700 !important;
       border-radius: 20px !important;
       box-shadow: 
-        0 14px 40px rgba(0, 0, 0, 0.55),
-        0 0 32px rgba(255, 215, 0, 0.45),
-        inset 0 1.5px 1px rgba(255, 235, 150, 0.45),
-        inset 0 0 22px rgba(255, 215, 0, 0.22) !important;
+        0 14px 48px rgba(0, 0, 0, 0.45),
+        0 0 48px rgba(255, 215, 0, 0.70),
+        0 0 24px rgba(255, 0, 127, 0.42),
+        inset 0 2px 2px rgba(255, 245, 200, 0.65),
+        inset 0 0 32px rgba(255, 215, 0, 0.40),
+        inset 0 0 18px rgba(255, 0, 127, 0.25) !important;
     }
 
     /* 7. Universal Standalone Paragraphs & Statements */
     .scenography-slide p {
       display: inline-block !important;
-      padding: 0.6rem 2.2rem !important;
+      padding: 0.65rem 2.4rem !important;
       border-radius: 16px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.04) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.04) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.18) 0%, transparent 55%),
-        linear-gradient(135deg, rgba(12, 18, 38, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 10, 22, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.48) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.24) 0%, rgba(18, 16, 44, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) 100%) !important;
       border: 1.5px solid var(--neon-secondary) !important;
       box-shadow: 
-        0 8px 28px rgba(0, 0, 0, 0.50),
-        0 0 24px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.42),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.28),
-        inset 0 0 18px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.18) !important;
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.62),
+        0 0 18px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.32),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.50),
+        inset 0 0 25px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.32) !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000 !important;
       max-width: 92%;
     }
 
@@ -2031,19 +2045,20 @@
     .layout-anamorphic-split > div[style*="display: flex"] span {
       display: inline-flex !important;
       align-items: center !important;
-      padding: 0.45rem 1.8rem !important;
+      padding: 0.5rem 2rem !important;
       border-radius: 999px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 25% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, transparent 75%),
-        linear-gradient(135deg, rgba(10, 22, 44, var(--glass-small-alpha, 0.78)) 0%, rgba(5, 11, 24, calc(var(--glass-small-alpha, 0.78) * 1.1)) 100%) !important;
+        radial-gradient(ellipse at 25% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45) 0%, transparent 75%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, rgba(12, 26, 52, var(--glass-small-alpha, 0.58)) 55%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 100%) !important;
       border: 1.5px solid currentColor !important;
       box-shadow: 
-        0 4px 18px rgba(0, 0, 0, 0.45),
-        0 0 18px currentColor,
-        inset 0 1px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 14px currentColor !important;
+        0 4px 22px rgba(0, 0, 0, 0.45),
+        0 0 28px currentColor,
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
+        inset 0 0 20px currentColor !important;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.95);
     }
 
     /* 9. Independent Trinity & Ribbon Spire Towers */
@@ -2057,51 +2072,56 @@
 
     .trinity-laser-spire,
     .origami-ribbon-spire {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 20% 0%, rgba(var(--spire-rgb, 0, 243, 255), 0.28) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(12, 18, 38, var(--glass-small-alpha, 0.82)) 0%, rgba(5, 10, 24, calc(var(--glass-small-alpha, 0.82) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 25% -10%, rgba(var(--spire-rgb, 0, 243, 255), 0.52) 0%, transparent 65%),
+        radial-gradient(ellipse at 75% 110%, rgba(var(--spire-rgb, 0, 243, 255), 0.35) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(var(--spire-rgb, 0, 243, 255), 0.26) 0%, rgba(16, 20, 46, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--spire-rgb, 0, 243, 255), 0.20) 100%) !important;
       border: 1.5px solid currentColor !important;
       border-radius: 18px !important;
       box-shadow: 
-        0 14px 38px rgba(0, 0, 0, 0.55),
-        0 0 28px currentColor,
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 20px currentColor !important;
+        0 14px 42px rgba(0, 0, 0, 0.45),
+        0 0 40px currentColor,
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.55),
+        inset 0 0 28px currentColor !important;
     }
 
     /* 10. Minigame Target Question Header & Node Cards */
     .target-question-header {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, transparent 60%),
-        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.20) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(10, 22, 44, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 11, 24, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 15% 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.52) 0%, transparent 65%),
+        radial-gradient(ellipse at 85% 100%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.38) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.26) 0%, rgba(12, 24, 52, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.22) 100%) !important;
       border: 1.5px solid var(--neon-primary) !important;
       border-radius: 18px !important;
-      padding: 1.2rem 2.4rem !important;
+      padding: 1.3rem 2.6rem !important;
       box-shadow: 
-        0 14px 38px rgba(0, 0, 0, 0.55),
-        0 0 30px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 20px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) !important;
+        0 14px 45px rgba(0, 0, 0, 0.45),
+        0 0 45px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.68),
+        0 0 22px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.38),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.55),
+        inset 0 0 30px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35) !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000 !important;
     }
 
     .holo-target-node {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(170%) brightness(1.04) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(170%) brightness(1.04) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(220%) brightness(1.22) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(220%) brightness(1.22) !important;
       background: 
-        radial-gradient(ellipse at 15% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) 0%, transparent 65%),
-        linear-gradient(135deg, rgba(8, 18, 38, var(--glass-small-alpha, 0.80)) 0%, rgba(5, 10, 22, calc(var(--glass-small-alpha, 0.80) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 15% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.42) 0%, transparent 70%),
+        radial-gradient(ellipse at 85% 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.28) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.24) 0%, rgba(10, 20, 46, var(--glass-small-alpha, 0.60)) 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.18) 100%) !important;
       border: 1.5px solid var(--neon-primary) !important;
       border-radius: 14px !important;
       box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.48),
-        0 0 22px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.38),
-        inset 0 1px 1px rgba(255, 255, 255, 0.28),
-        inset 0 0 14px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.16) !important;
+        0 8px 30px rgba(0, 0, 0, 0.45),
+        0 0 32px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.58),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.50),
+        inset 0 0 22px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.30) !important;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
     }
 
     /* 11. Play Trigger Button Wrap Capsule */
@@ -2109,36 +2129,39 @@
       display: inline-flex !important;
       align-items: center !important;
       gap: 1.4rem !important;
-      padding: 0.6rem 2.2rem 0.6rem 1.4rem !important;
+      padding: 0.7rem 2.4rem 0.7rem 1.5rem !important;
       border-radius: 999px !important;
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(175%) brightness(1.05) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(230%) brightness(1.25) !important;
       background: 
-        radial-gradient(ellipse at 15% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.30) 0%, transparent 65%),
-        linear-gradient(135deg, rgba(12, 24, 48, var(--glass-small-alpha, 0.78)) 0%, rgba(5, 11, 24, calc(var(--glass-small-alpha, 0.78) * 1.1)) 100%) !important;
+        radial-gradient(ellipse at 15% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.52) 0%, transparent 70%),
+        radial-gradient(ellipse at 85% 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.35) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, rgba(12, 28, 58, var(--glass-small-alpha, 0.58)) 50%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.22) 100%) !important;
       border: 1.5px solid var(--neon-primary) !important;
       box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.5),
-        0 0 28px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.48),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.35),
-        inset 0 0 18px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) !important;
+        0 8px 35px rgba(0, 0, 0, 0.45),
+        0 0 42px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.68),
+        0 0 20px rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.38),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.55),
+        inset 0 0 28px rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35) !important;
     }
 
     /* 12. Revealed Insight Beam on Minigames */
     .revealed-insight-beam {
-      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
-      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(180%) brightness(1.06) !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
       background: 
-        radial-gradient(ellipse at 20% 0%, rgba(0, 255, 163, 0.30) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 100%, rgba(0, 243, 255, 0.22) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(6, 26, 20, var(--glass-small-alpha, 0.82)) 0%, rgba(4, 12, 20, calc(var(--glass-small-alpha, 0.82) * 1.08)) 100%) !important;
+        radial-gradient(ellipse at 20% 0%, rgba(0, 255, 163, 0.55) 0%, transparent 65%),
+        radial-gradient(ellipse at 80% 100%, rgba(0, 243, 255, 0.40) 0%, transparent 65%),
+        linear-gradient(135deg, rgba(0, 255, 163, 0.30) 0%, rgba(6, 32, 24, var(--glass-small-alpha, 0.62)) 50%, rgba(0, 243, 255, 0.25) 100%) !important;
       border: 1.5px solid #00ffa3 !important;
       border-radius: 18px !important;
       box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.6),
-        0 0 35px #00ffa3,
-        inset 0 1.5px 1px rgba(200, 255, 230, 0.4),
-        inset 0 0 20px rgba(0, 255, 163, 0.25) !important;
+        0 15px 50px rgba(0, 0, 0, 0.50),
+        0 0 50px #00ffa3,
+        0 0 25px rgba(0, 243, 255, 0.40),
+        inset 0 2px 2px rgba(220, 255, 240, 0.65),
+        inset 0 0 32px rgba(0, 255, 163, 0.42) !important;
     }
 
     /* ==========================================================================
