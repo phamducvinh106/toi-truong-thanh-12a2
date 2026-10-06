@@ -3592,9 +3592,9 @@
         </div>
       </section>
 
-      <!-- SLIDE 16: TIẾT MỤC KẾT: “RỰC RỠ” -->
+      <!-- SLIDE 16: TIẾT MỤC KẾT: MV "CHÚNG TA CỦA HIỆN TẠI" -->
       <section class="scenography-slide" id="slide-16" data-index="16"
-        data-title="Tiết Mục Kết: Rực Rỡ"
+        data-title="MV Bế Mạc: Chúng Ta Của Hiện Tại"
         data-cam="0,0,12" data-cam-rot="0,0,0.2"
         data-neon-p="#ff0055" data-neon-s="#00f3ff" data-neon-t="#ffe600">
         <!-- 2D Ambient Floating Outline Plane (Học Đường & Trưởng Thành) -->
@@ -3618,20 +3618,19 @@
             <svg class="floating-outline-svg"><use href="#icon-school-bell"></use></svg>
           </div>
         </div>
-
         
         <!-- Standard Slide View -->
         <div class="layout-supernova-blast" id="slide-16-view">
           <div class="telemetry-tag" style="color: #ff0055;">
-            <span>[ TIẾT MỤC BIỂU DIỄN BẾ MẠC ]</span>
+            <span>[ TIẾT MỤC MV BẾ MẠC ]</span>
           </div>
 
-          <h1 class="monumental-text" style="color: #ffffff; text-shadow: 0 0 50px #ff0055;">
-            RỰC RỠ
+          <h1 class="monumental-text" style="font-size: clamp(38px, 4.8vw, 74px); letter-spacing: 4px; color: #ffffff; text-shadow: 0 0 50px #ff0055; white-space: nowrap;">
+            CHÚNG TA CỦA HIỆN TẠI
           </h1>
 
           <h2 style="font-size: var(--font-title); color: #ffe600; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 30px #ffe600;">
-            TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+            MV CA NHẠC BẾ MẠC CHUYÊN ĐỀ
           </h2>
 
           <div class="laser-blade-rail" style="max-width: 1300px;"></div>
@@ -3641,105 +3640,90 @@
           </p>
 
           <div class="telemetry-tag" style="color: rgba(255,255,255,0.7); margin-top: 0.5rem;">
-            <span>BIỂU DIỄN: TẬP THỂ LỚP 12A2</span>
+            <span>THỰC HIỆN: TẬP THỂ LỚP 12A2</span>
           </div>
 
           <!-- Triangular Play Trigger -->
           <div class="play-trigger-wrap">
-            <button class="stage-play-trigger-btn" onclick="openPerformanceMusicPlayer(16)" title="Khởi động Trình phát nhạc bài hát">
+            <button class="stage-play-trigger-btn" onclick="openDramaVideoPlayer(16)" title="Khởi động Trình phát video MV">
               <span class="triangle-play-icon">▶</span>
             </button>
-            <span class="play-trigger-label">PHÁT TIẾT MỤC ÂM NHẠC</span>
+            <span class="play-trigger-label">PHÁT VIDEO MV CA NHẠC</span>
           </div>
         </div>
 
-        <!-- Music Player View -->
-        <div class="stage-music-player-panel" id="music-player-16" style="display: none;">
-          <audio id="perf-audio-16" preload="metadata"></audio>
+        <!-- Video Player View (Near edge-to-edge, native aspect ratio) -->
+        <div class="stage-video-player-panel" id="video-player-16" style="display: none; border-color: #ff0055; box-shadow: 0 25px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(255,0,85,0.5);">
+          <input type="file" id="perf-video-file-input-16" accept="video/*" style="display: none;" onchange="handlePerfVideoFileSelected(16, this.files[0])">
 
-          <input type="file" id="perf-audio-file-input-16" accept="audio/*" style="display: none;" onchange="handlePerfMusicFileSelected(16, this.files[0])">
-
-          <div class="player-header-bar">
+          <!-- Top Overlay Bar -->
+          <div class="video-overlay-header">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <div class="telemetry-beacon" style="background: #ff0055; box-shadow: 0 0 18px #ff0055;"></div>
-              <span class="telemetry-tag" style="color: #ff0055; font-size: 13px;">
-                // TRÌNH PHÁT NHẠC TIẾT MỤC BIỂU DIỄN
+              <span class="telemetry-tag" style="color: #ff0055; font-size: 14px; font-weight: 900;">
+                // TRÌNH PHÁT VIDEO MV: CHÚNG TA CỦA HIỆN TẠI
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
-              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-audio-file-input-16').click()" title="Chọn tệp âm thanh từ máy tính">
-                <span>📁 Chọn File Nhạc</span>
+              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-video-file-input-16').click()" title="Chọn tệp video từ máy tính">
+                <span>📁 Chọn Video</span>
               </button>
-              <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(16)" title="Trở về slide [Esc]">
-                <span>✕ Đóng [Esc]</span>
+              <button class="player-secondary-btn" onclick="closeDramaVideoPlayer(16)" title="Đóng video [Esc]">
+                <span>✕ Đóng Video [Esc]</span>
               </button>
             </div>
           </div>
 
-          <div class="player-body-deck">
-            <div class="player-vinyl-wrap">
-              <div class="player-vinyl-disc" id="vinyl-disc-16">
-                <div class="player-vinyl-center">
-                  <span style="font-size: 20px;">🎵</span>
-                </div>
-              </div>
-              <div class="cyber-eq-bars" id="eq-bars-16">
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-              </div>
-            </div>
+          <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
+          <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(16)">
+            <video id="perf-video-16" preload="metadata" playsinline></video>
 
-            <div class="player-track-info">
-              <div class="telemetry-tag" style="color: #ff0055;" id="perf-status-badge-16">
-                ● SẴN SÀNG PHÁT
-              </div>
-              <h2 style="font-size: 34px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px rgba(255, 0, 85, 0.6);" id="perf-track-title-16">
-                RỰC RỠ
-              </h2>
-              <div class="player-track-meta">
-                <p class="player-track-sub" style="font-size: 16px; font-weight: 800;">
-                  Tiết Mục Hát Bế Mạc Chuyên Đề
-                </p>
-                <p class="player-track-performer" style="font-size: 14px;">
-                  Biểu diễn: Tập thể lớp 12A2
-                </p>
-              </div>
+            <!-- Standby screen if video not loaded yet -->
+            <div class="video-standby-placeholder" id="video-standby-16" style="display: flex;">
+              <div style="font-size: 48px; color: #ff0055; text-shadow: 0 0 30px #ff0055;">🎬</div>
+              <h3 style="font-size: 22px; font-weight: 900; color: #ffffff; letter-spacing: 2px;" id="perf-video-title-16">
+                TRÌNH PHÁT VIDEO MV CA NHẠC
+              </h3>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.5;">
+                Video phát tràn viền theo đúng tỷ lệ khung hình gốc của MV.
+              </p>
+              <button class="player-secondary-btn tech-ui-element" style="border-color: #ff0055; color: #ff0055; margin-top: 0.5rem;" onclick="event.stopPropagation(); document.getElementById('perf-video-file-input-16').click();">
+                <span>📁 Nạp File Video MV Ngay</span>
+              </button>
             </div>
           </div>
 
-          <div class="player-bottom-deck">
+          <!-- Bottom Overlay Bar -->
+          <div class="video-overlay-footer">
             <div class="player-timeline-wrap">
-              <span class="player-time-text" id="perf-cur-time-16">00:00</span>
-              <div class="player-slider-rail" id="perf-slider-rail-16" onclick="seekPerfMusic(16, event)">
-                <div class="player-slider-fill" id="perf-slider-fill-16"></div>
+              <span class="player-time-text" id="video-cur-time-16">00:00</span>
+              <div class="player-slider-rail" id="video-slider-rail-16" onclick="event.stopPropagation(); seekDramaVideo(16, event)">
+                <div class="player-slider-fill" id="video-slider-fill-16" style="background: linear-gradient(90deg, #ff0055, #00f3ff); box-shadow: 0 0 15px #ff0055;"></div>
               </div>
-              <span class="player-time-text" id="perf-dur-time-16">00:00</span>
+              <span class="player-time-text" id="video-dur-time-16">00:00</span>
             </div>
 
             <div class="player-controls-row">
               <div style="display: flex; align-items: center; gap: 1rem;">
-                <button class="player-secondary-btn" onclick="skipPerfMusic(16, -10)" title="Lùi 10s">
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(16, -10)" title="Lùi 10s">
                   <span>⏪ 10s</span>
                 </button>
-                <button class="player-main-btn" id="perf-play-btn-16" onclick="togglePerfMusicPlay(16)" title="Phát / Tạm dừng [Space]">
-                  <span id="perf-play-icon-16">▶</span>
+                <button class="player-main-btn" id="video-play-btn-16" style="background: #ff0055; box-shadow: 0 0 30px #ff0055;" onclick="event.stopPropagation(); toggleDramaVideoPlay(16)" title="Phát / Dừng">
+                  <span id="video-play-icon-16">▶</span>
                 </button>
-                <button class="player-secondary-btn" onclick="skipPerfMusic(16, 10)" title="Tiến 10s">
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(16, 10)" title="Tiến 10s">
                   <span>10s ⏩</span>
                 </button>
               </div>
 
-              <div style="display: flex; align-items: center; gap: 0.8rem;">
-                <span style="font-size: 16px;">🔊</span>
-                <input type="range" min="0" max="1" step="0.05" value="0.85" style="width: 110px; accent-color: var(--neon-primary); cursor: pointer;" oninput="setPerfMusicVolume(16, this.value)">
+              <div style="display: flex; align-items: center; gap: 1.2rem;">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="font-size: 16px;">🔊</span>
+                  <input type="range" min="0" max="1" step="0.05" value="0.9" style="width: 100px; accent-color: #ff0055; cursor: pointer;" onclick="event.stopPropagation()" oninput="setDramaVideoVolume(16, this.value)">
+                </div>
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); toggleDramaVideoFullscreen(16)" title="Toàn màn hình">
+                  <span>⛶ Toàn Màn Hình</span>
+                </button>
               </div>
             </div>
           </div>
@@ -5635,7 +5619,7 @@
       } else {
         if (standby) standby.style.display = 'flex';
       }
-      showStageNotification('🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO TIỂU PHẨM', '#ff0033');
+      showStageNotification(slideId === 16 ? '🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO MV CA NHẠC' : '🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO TIỂU PHẨM', slideId === 16 ? '#ff0055' : '#ff0033');
     }
 
     function closeDramaVideoPlayer(slideId) {
@@ -5658,7 +5642,7 @@
       const video = document.getElementById(`perf-video-${slideId}`);
       if (!video) return;
       if (!video.src) {
-        showStageNotification('⚠️ Chưa nạp video cho tiểu phẩm kịch!', '#ff0033');
+        showStageNotification(slideId === 16 ? '⚠️ Chưa nạp video cho MV ca nhạc!' : '⚠️ Chưa nạp video cho tiểu phẩm kịch!', slideId === 16 ? '#ff0055' : '#ff0033');
         return;
       }
       if (video.paused) {
@@ -5708,7 +5692,7 @@
       const url = URL.createObjectURL(file);
       video.src = url;
       if (standby) standby.style.display = 'none';
-      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, '#ff0033');
+      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, slideId === 16 ? '#ff0055' : '#ff0033');
       video.play().catch(() => {});
     }
   </script>
@@ -5981,16 +5965,16 @@ tilt_x = 1.5
 tilt_y = 0.0
 
 [SLIDE_16]
-nav_title = Tiết Mục Kết: Rực Rỡ
-telemetry = [ TIẾT MỤC BIỂU DIỄN BẾ MẠC ]
-title = RỰC RỠ
-subtitle = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+nav_title = MV Bế Mạc: Chúng Ta Của Hiện Tại
+telemetry = [ TIẾT MỤC MV BẾ MẠC ]
+title = CHÚNG TA CỦA HIỆN TẠI
+subtitle = MV CA NHẠC BẾ MẠC CHUYÊN ĐỀ
 quote = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
-performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
-hero = RỰC RỠ
+performer = THỰC HIỆN: TẬP THỂ LỚP 12A2
+hero = CHÚNG TA CỦA HIỆN TẠI
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
-callout = CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
-music_file = audio/ruc_ro.mp3
+callout = CÙNG XEM • CÙNG HÁT • CÙNG CẢM NHẬN
+video_file = video/chung_ta_cua_hien_tai.mp4
 tilt_x = -2.5
 tilt_y = 4.5
 
@@ -6370,26 +6354,26 @@ tilt_y = -6.5
         }
       }
 
-      // 12. Slide 16: Tiết Mục Kết (Rực Rỡ)
+      // 12. Slide 16: MV Bế Mạc (Chúng Ta Của Hiện Tại)
       if (data.SLIDE_16) {
         const s16 = document.getElementById('slide-16');
         if (s16) {
           if (data.SLIDE_16.nav_title) s16.setAttribute('data-title', data.SLIDE_16.nav_title);
           const tags = s16.querySelectorAll('#slide-16-view .telemetry-tag span');
-          if (tags[0]) setTxt(tags[0], data.SLIDE_16.telemetry || '[ TIẾT MỤC BIỂU DIỄN BẾ MẠC ]');
+          if (tags[0]) setTxt(tags[0], data.SLIDE_16.telemetry || '[ TIẾT MỤC MV BẾ MẠC ]');
           setTxt(s16.querySelector('.monumental-text') || s16.querySelector('h1'), data.SLIDE_16.title || data.SLIDE_16.hero);
           setTxt(s16.querySelector('h2'), data.SLIDE_16.subtitle || data.SLIDE_16.title);
           setTxt(s16.querySelector('p'), data.SLIDE_16.quote || data.SLIDE_16.statement);
           if (tags[1]) setTxt(tags[1], data.SLIDE_16.performer || data.SLIDE_16.callout);
-          const pTitle16 = document.getElementById('perf-track-title-16');
-          if (pTitle16) setTxt(pTitle16, data.SLIDE_16.title || data.SLIDE_16.hero);
-          const pSub16 = s16.querySelector('.player-track-sub');
-          if (pSub16 && (data.SLIDE_16.subtitle || data.SLIDE_16.title)) setTxt(pSub16, data.SLIDE_16.subtitle || data.SLIDE_16.title);
-          const pPerf16 = s16.querySelector('.player-track-performer');
-          if (pPerf16 && (data.SLIDE_16.performer || data.SLIDE_16.callout)) setTxt(pPerf16, data.SLIDE_16.performer || data.SLIDE_16.callout);
-          if (data.SLIDE_16.music_file) {
-            const audio16 = document.getElementById('perf-audio-16');
-            if (audio16 && !audio16.src) audio16.src = data.SLIDE_16.music_file;
+          const vTitle16 = document.getElementById('perf-video-title-16');
+          if (vTitle16) setTxt(vTitle16, data.SLIDE_16.title || data.SLIDE_16.hero);
+          if (data.SLIDE_16.video_file) {
+            const video16 = document.getElementById('perf-video-16');
+            const standby16 = document.getElementById('video-standby-16');
+            if (video16 && !video16.src) {
+              video16.src = data.SLIDE_16.video_file;
+              if (standby16) standby16.style.display = 'none';
+            }
           }
         }
       }
@@ -6509,19 +6493,17 @@ tilt_y = -6.5
         if (file.name.endsWith('.txt')) {
           handleCustomTxtUpload(file);
         } else if (/\.(mp4|webm|mov|mkv)$/i.test(file.name)) {
-          if (currentSlideIdx === 5 || (currentActiveMedia && currentActiveMedia.type === 'video')) {
-            openDramaVideoPlayer(5);
-            handlePerfVideoFileSelected(5, file);
+          if (currentSlideIdx === 5 || currentSlideIdx === 16 || (currentActiveMedia && currentActiveMedia.type === 'video')) {
+            const vidId = (currentActiveMedia && currentActiveMedia.id) || (currentSlideIdx === 16 ? 16 : 5);
+            openDramaVideoPlayer(vidId);
+            handlePerfVideoFileSelected(vidId, file);
           } else {
-            showStageNotification('🎬 Vui lòng chuyển sang Slide 5 để phát video!', '#ff0033');
+            showStageNotification('🎬 Vui lòng chuyển sang Slide 5 hoặc Slide 16 để phát video!', '#ff0033');
           }
         } else if (/\.(mp3|wav|ogg|m4a|aac|flac)$/i.test(file.name)) {
           if (currentSlideIdx === 2 || (currentActiveMedia && currentActiveMedia.id === 2)) {
             openPerformanceMusicPlayer(2);
             handlePerfMusicFileSelected(2, file);
-          } else if (currentSlideIdx === 16 || (currentActiveMedia && currentActiveMedia.id === 16)) {
-            openPerformanceMusicPlayer(16);
-            handlePerfMusicFileSelected(16, file);
           } else {
             handleCustomAudioUpload(file);
           }

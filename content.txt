@@ -261,16 +261,16 @@ tilt_x = 1.5
 tilt_y = -4.0
 
 [SLIDE_16]
-nav_title = Tiết Mục Kết: Rực Rỡ
-telemetry = [ TIẾT MỤC BIỂU DIỄN BẾ MẠC ]
-title = RỰC RỠ
-subtitle = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
+nav_title = MV Bế Mạc: Chúng Ta Của Hiện Tại
+telemetry = [ TIẾT MỤC MV BẾ MẠC ]
+title = CHÚNG TA CỦA HIỆN TẠI
+subtitle = MV CA NHẠC BẾ MẠC CHUYÊN ĐỀ
 quote = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
-performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
-hero = RỰC RỠ
+performer = THỰC HIỆN: TẬP THỂ LỚP 12A2
+hero = CHÚNG TA CỦA HIỆN TẠI
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
-callout = CÙNG HÁT • CÙNG CẢM NHẬN • CÙNG RỰC RỠ
-music_file = audio/ruc_ro.mp3
+callout = CÙNG XEM • CÙNG HÁT • CÙNG CẢM NHẬN
+video_file = video/chung_ta_cua_hien_tai.mp4
 tilt_x = -2.5
 tilt_y = 4.5
 
