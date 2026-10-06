@@ -71,14 +71,14 @@
     }
 
     body {
-      background-color: #030816;
+      background-color: #030612;
       background-image: 
-        radial-gradient(ellipse 130% 95% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) 0%, transparent 75%),
-        radial-gradient(circle 80vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.32) 0%, transparent 65%),
-        radial-gradient(circle 80vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.30) 0%, transparent 65%),
-        radial-gradient(circle 70vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.26) 0%, transparent 60%),
-        radial-gradient(circle 70vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.24) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(8, 20, 44, 0.96) 0%, rgba(4, 10, 26, 0.96) 50%, rgba(16, 12, 40, 0.96) 100%);
+        radial-gradient(ellipse 110% 85% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.07) 0%, transparent 70%),
+        radial-gradient(circle 75vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.10) 0%, transparent 60%),
+        radial-gradient(circle 75vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 0%, transparent 60%),
+        radial-gradient(circle 65vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.08) 0%, transparent 55%),
+        radial-gradient(circle 65vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.08) 0%, transparent 55%),
+        linear-gradient(135deg, #050b18 0%, #02040c 50%, #090616 100%);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
@@ -108,8 +108,8 @@
     .photon-emitter {
       position: absolute;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.82;
+      filter: blur(130px);
+      opacity: 0.30;
       mix-blend-mode: screen;
       will-change: transform;
       transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -117,56 +117,56 @@
     }
 
     #emitter-alpha {
-      width: 85vw;
-      height: 85vw;
-      top: -22vw;
-      left: -18vw;
-      background: radial-gradient(circle, var(--neon-primary) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45) 45%, transparent 72%);
+      width: 80vw;
+      height: 80vw;
+      top: -20vw;
+      left: -15vw;
+      background: radial-gradient(circle, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.32) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.10) 45%, transparent 70%);
     }
 
     #emitter-beta {
-      width: 80vw;
-      height: 80vw;
-      bottom: -22vw;
-      right: -18vw;
-      background: radial-gradient(circle, var(--neon-secondary) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.42) 45%, transparent 72%);
+      width: 75vw;
+      height: 75vw;
+      bottom: -20vw;
+      right: -15vw;
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.28) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 45%, transparent 70%);
       animation-delay: -4s;
     }
 
     #emitter-gamma {
-      width: 75vw;
-      height: 75vw;
-      top: -18vw;
-      right: -15vw;
-      background: radial-gradient(circle, var(--neon-tertiary) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.38) 45%, transparent 70%);
+      width: 70vw;
+      height: 70vw;
+      top: -15vw;
+      right: -12vw;
+      background: radial-gradient(circle, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.24) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.08) 45%, transparent 68%);
       animation-delay: -8s;
     }
 
     #emitter-delta {
-      width: 75vw;
-      height: 75vw;
-      bottom: -18vw;
-      left: -15vw;
-      background: radial-gradient(circle, var(--neon-secondary) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.38) 45%, transparent 70%);
+      width: 70vw;
+      height: 70vw;
+      bottom: -15vw;
+      left: -12vw;
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.24) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.08) 45%, transparent 68%);
       animation-delay: -12s;
     }
 
     #emitter-center {
-      width: 95vw;
-      height: 65vh;
-      top: 18vh;
-      left: 2.5vw;
+      width: 90vw;
+      height: 60vh;
+      top: 20vh;
+      left: 5vw;
       border-radius: 40%;
-      filter: blur(130px);
-      opacity: 0.62;
-      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.42) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.30) 45%, transparent 75%);
+      filter: blur(140px);
+      opacity: 0.22;
+      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.18) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.08) 45%, transparent 72%);
       animation-delay: -6s;
     }
 
     @keyframes emitterPulse {
-      0% { transform: scale(0.92) translate(0, 0); opacity: 0.72; }
-      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.88; }
-      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.78; }
+      0% { transform: scale(0.92) translate(0, 0); opacity: 0.25; }
+      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.35; }
+      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.28; }
     }
 
     /* Anamorphic Horizontal Lens Flare Streak */
@@ -4255,8 +4255,8 @@
     }
 
     function createVolumetricNebula() {
-      // Primary Luminous Cosmic Stardust Field
-      const count = 1600;
+      // Primary Subtle Cosmic Stardust Field
+      const count = 1000;
       const geo = new THREE.BufferGeometry();
       const pos = new Float32Array(count * 3);
       for (let i = 0; i < count * 3; i += 3) {
@@ -4266,17 +4266,17 @@
       }
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
       const mat = new THREE.PointsMaterial({
-        size: 0.38,
+        size: 0.24,
         color: 0x00f3ff,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.55,
         blending: THREE.AdditiveBlending
       });
       particleNebula = new THREE.Points(geo, mat);
       scene.add(particleNebula);
 
       // Secondary Chromatic Harmonic Stardust Field
-      const countSec = 850;
+      const countSec = 500;
       const geoSec = new THREE.BufferGeometry();
       const posSec = new Float32Array(countSec * 3);
       for (let i = 0; i < countSec * 3; i += 3) {
@@ -4286,10 +4286,10 @@
       }
       geoSec.setAttribute('position', new THREE.BufferAttribute(posSec, 3));
       const matSec = new THREE.PointsMaterial({
-        size: 0.48,
+        size: 0.30,
         color: 0xff007f,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.38,
         blending: THREE.AdditiveBlending
       });
       particleNebulaSecondary = new THREE.Points(geoSec, matSec);
@@ -5109,11 +5109,11 @@
       const pRgb = _hexToRgbValues(p);
       const sRgb = _hexToRgbValues(s);
       const tRgb = _hexToRgbValues(t);
-      if (emA) emA.style.background = `radial-gradient(circle, ${p} 0%, rgba(${pRgb}, 0.45) 45%, transparent 72%)`;
-      if (emB) emB.style.background = `radial-gradient(circle, ${s} 0%, rgba(${sRgb}, 0.42) 45%, transparent 72%)`;
-      if (emC) emC.style.background = `radial-gradient(circle, ${t} 0%, rgba(${tRgb}, 0.38) 45%, transparent 70%)`;
-      if (emD) emD.style.background = `radial-gradient(circle, ${s} 0%, rgba(${pRgb}, 0.38) 45%, transparent 70%)`;
-      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.42) 0%, rgba(${sRgb}, 0.30) 45%, transparent 75%)`;
+      if (emA) emA.style.background = `radial-gradient(circle, rgba(${pRgb}, 0.32) 0%, rgba(${pRgb}, 0.10) 45%, transparent 70%)`;
+      if (emB) emB.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.28) 0%, rgba(${sRgb}, 0.09) 45%, transparent 70%)`;
+      if (emC) emC.style.background = `radial-gradient(circle, rgba(${tRgb}, 0.24) 0%, rgba(${tRgb}, 0.08) 45%, transparent 68%)`;
+      if (emD) emD.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.24) 0%, rgba(${pRgb}, 0.08) 45%, transparent 68%)`;
+      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.18) 0%, rgba(${sRgb}, 0.08) 45%, transparent 72%)`;
 
       currentSlideIdx = targetIdx;
       if (typeof applyGlassSettings === 'function') {
