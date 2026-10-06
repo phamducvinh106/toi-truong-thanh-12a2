@@ -22,7 +22,9 @@
        1. CONTINUOUS DIGITAL SCENOGRAPHY DESIGN SYSTEM (ZERO ROUNDED CARDS)
        ========================================================================== */
     :root {
-      --bg-abyss: #020306;
+      --bg-abyss: #050a1a;
+      --bg-brightness-mult: 1.20;
+      --bg-emitter-opacity: 0.40;
       --neon-primary: #00f3ff;
       --neon-secondary: #ff007f;
       --neon-tertiary: #8a00ff;
@@ -71,14 +73,14 @@
     }
 
     body {
-      background-color: #040816;
+      background-color: var(--bg-abyss, #050a1a);
       background-image: 
-        radial-gradient(ellipse 110% 85% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.08) 0%, transparent 70%),
-        radial-gradient(circle 75vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.12) 0%, transparent 60%),
-        radial-gradient(circle 75vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.11) 0%, transparent 60%),
-        radial-gradient(circle 65vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.09) 0%, transparent 55%),
-        radial-gradient(circle 65vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 0%, transparent 55%),
-        linear-gradient(135deg, #060d1c 0%, #030610 50%, #0b081a 100%);
+        radial-gradient(ellipse 110% 85% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.10) 0%, transparent 70%),
+        radial-gradient(circle 75vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.14) 0%, transparent 60%),
+        radial-gradient(circle 75vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.13) 0%, transparent 60%),
+        radial-gradient(circle 65vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.11) 0%, transparent 55%),
+        radial-gradient(circle 65vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.11) 0%, transparent 55%),
+        linear-gradient(135deg, #070e20 0%, #030713 50%, #0c091e 100%);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
@@ -109,7 +111,7 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(130px);
-      opacity: 0.33;
+      opacity: var(--bg-emitter-opacity, 0.40);
       mix-blend-mode: screen;
       will-change: transform;
       transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -121,7 +123,7 @@
       height: 80vw;
       top: -20vw;
       left: -15vw;
-      background: radial-gradient(circle, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.11) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.42) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.13) 45%, transparent 70%);
     }
 
     #emitter-beta {
@@ -129,7 +131,7 @@
       height: 75vw;
       bottom: -20vw;
       right: -15vw;
-      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.31) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.10) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.37) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.12) 45%, transparent 70%);
       animation-delay: -4s;
     }
 
@@ -138,7 +140,7 @@
       height: 70vw;
       top: -15vw;
       right: -12vw;
-      background: radial-gradient(circle, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.27) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.09) 45%, transparent 68%);
+      background: radial-gradient(circle, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.32) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.11) 45%, transparent 68%);
       animation-delay: -8s;
     }
 
@@ -147,7 +149,7 @@
       height: 70vw;
       bottom: -15vw;
       left: -12vw;
-      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.27) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.09) 45%, transparent 68%);
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.32) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.11) 45%, transparent 68%);
       animation-delay: -12s;
     }
 
@@ -158,15 +160,15 @@
       left: 5vw;
       border-radius: 40%;
       filter: blur(140px);
-      opacity: 0.25;
-      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 45%, transparent 72%);
+      opacity: 0.30;
+      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.24) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.11) 45%, transparent 72%);
       animation-delay: -6s;
     }
 
     @keyframes emitterPulse {
-      0% { transform: scale(0.92) translate(0, 0); opacity: 0.28; }
-      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.38; }
-      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.31; }
+      0% { transform: scale(0.92) translate(0, 0); opacity: 0.34; }
+      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.46; }
+      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.37; }
     }
 
     /* Anamorphic Horizontal Lens Flare Streak */
@@ -1648,6 +1650,19 @@
       pointer-events: all;
     }
 
+    .stage-video-player-panel.controls-hidden .video-overlay-header,
+    .stage-video-player-panel.controls-hidden .video-overlay-footer,
+    .stage-video-player-panel.controls-hidden:hover .video-overlay-header,
+    .stage-video-player-panel.controls-hidden:hover .video-overlay-footer {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    .stage-video-player-panel.controls-hidden .video-viewport-wrapper {
+      cursor: none;
+    }
+
     .video-standby-placeholder {
       position: absolute;
       top: 50%;
@@ -3006,6 +3021,9 @@
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn tech-ui-element" id="video-toggle-controls-btn-5" onclick="event.stopPropagation(); toggleDramaVideoControls(5)" title="Ẩn/Hiện nút điều khiển [Phím C / H]">
+                <span>👁️ Ẩn Điều Khiển [C]</span>
+              </button>
               <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-video-file-input-5').click()" title="Chọn tệp video từ máy tính">
                 <span>📁 Chọn Video</span>
               </button>
@@ -3714,6 +3732,9 @@
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="player-secondary-btn tech-ui-element" id="video-toggle-controls-btn-16" onclick="event.stopPropagation(); toggleDramaVideoControls(16)" title="Ẩn/Hiện nút điều khiển [Phím C / H]">
+                <span>👁️ Ẩn Điều Khiển [C]</span>
+              </button>
               <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-video-file-input-16').click()" title="Chọn tệp video từ máy tính">
                 <span>📁 Chọn Video</span>
               </button>
@@ -4266,10 +4287,10 @@
       }
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
       const mat = new THREE.PointsMaterial({
-        size: 0.26,
+        size: 0.28,
         color: 0x00f3ff,
         transparent: true,
-        opacity: 0.60,
+        opacity: 0.70,
         blending: THREE.AdditiveBlending
       });
       particleNebula = new THREE.Points(geo, mat);
@@ -4286,10 +4307,10 @@
       }
       geoSec.setAttribute('position', new THREE.BufferAttribute(posSec, 3));
       const matSec = new THREE.PointsMaterial({
-        size: 0.32,
+        size: 0.35,
         color: 0xff007f,
         transparent: true,
-        opacity: 0.42,
+        opacity: 0.50,
         blending: THREE.AdditiveBlending
       });
       particleNebulaSecondary = new THREE.Points(geoSec, matSec);
@@ -5109,11 +5130,11 @@
       const pRgb = _hexToRgbValues(p);
       const sRgb = _hexToRgbValues(s);
       const tRgb = _hexToRgbValues(t);
-      if (emA) emA.style.background = `radial-gradient(circle, rgba(${pRgb}, 0.35) 0%, rgba(${pRgb}, 0.11) 45%, transparent 70%)`;
-      if (emB) emB.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.31) 0%, rgba(${sRgb}, 0.10) 45%, transparent 70%)`;
-      if (emC) emC.style.background = `radial-gradient(circle, rgba(${tRgb}, 0.27) 0%, rgba(${tRgb}, 0.09) 45%, transparent 68%)`;
-      if (emD) emD.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.27) 0%, rgba(${pRgb}, 0.09) 45%, transparent 68%)`;
-      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.20) 0%, rgba(${sRgb}, 0.09) 45%, transparent 72%)`;
+      if (emA) emA.style.background = `radial-gradient(circle, rgba(${pRgb}, 0.42) 0%, rgba(${pRgb}, 0.13) 45%, transparent 70%)`;
+      if (emB) emB.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.37) 0%, rgba(${sRgb}, 0.12) 45%, transparent 70%)`;
+      if (emC) emC.style.background = `radial-gradient(circle, rgba(${tRgb}, 0.32) 0%, rgba(${tRgb}, 0.11) 45%, transparent 68%)`;
+      if (emD) emD.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.32) 0%, rgba(${pRgb}, 0.11) 45%, transparent 68%)`;
+      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.24) 0%, rgba(${sRgb}, 0.11) 45%, transparent 72%)`;
 
       currentSlideIdx = targetIdx;
       if (typeof applyGlassSettings === 'function') {
@@ -5414,6 +5435,13 @@
           if (currentActiveMedia.type === 'music') closePerformanceMusicPlayer(currentActiveMedia.id);
           else if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
           return;
+        }
+        if (currentActiveMedia.type === 'video') {
+          if (e.key === 'c' || e.key === 'C' || e.key === 'h' || e.key === 'H' || e.key === 'u' || e.key === 'U') {
+            e.preventDefault();
+            toggleDramaVideoControls(currentActiveMedia.id);
+            return;
+          }
         }
         if (e.code === 'Space') {
           e.preventDefault();
@@ -5722,7 +5750,15 @@
       const video = document.getElementById(`perf-video-${slideId}`);
 
       if (video) video.pause();
-      if (playerPanel) playerPanel.style.display = 'none';
+      if (playerPanel) {
+        playerPanel.style.display = 'none';
+        playerPanel.classList.remove('controls-hidden');
+      }
+      const toggleBtn = document.getElementById(`video-toggle-controls-btn-${slideId}`);
+      if (toggleBtn) {
+        const span = toggleBtn.querySelector('span');
+        if (span) span.textContent = '👁️ Ẩn Điều Khiển [C]';
+      }
       if (slideView) slideView.style.display = 'flex';
       currentActiveMedia = null;
 
@@ -5789,6 +5825,19 @@
       showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, slideId === 16 ? '#ff0055' : '#ff0033');
       video.play().catch(() => {});
     }
+
+    function toggleDramaVideoControls(slideId) {
+      const panel = document.getElementById(`video-player-${slideId}`);
+      if (!panel) return;
+      const isHidden = panel.classList.toggle('controls-hidden');
+      const toggleBtn = document.getElementById(`video-toggle-controls-btn-${slideId}`);
+      if (toggleBtn) {
+        const span = toggleBtn.querySelector('span');
+        if (span) span.textContent = isHidden ? '👁️ Hiện Nút [C]' : '👁️ Ẩn Điều Khiển [C]';
+      }
+      if (stageAudio && stageAudio.playNavClick) stageAudio.playNavClick();
+      showStageNotification(isHidden ? '👁️ ĐÃ ẨN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]' : '👁️ ĐÃ HIỆN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]', '#ff0055');
+    }
   </script>
 
   <!-- ==========================================================================
@@ -5846,6 +5895,16 @@ glass_height_vh = 82
 glass_small_alpha = 0.80
 glass_small_blur_px = 14
 glass_small_border_glow = 0.65
+
+# ------------------------------------------------------------------------------
+# THIẾT LẬP MÀU SẮC & ĐỘ SÁNG PHÔNG NỀN VŨ TRỤ (COSMIC BACKGROUND SETTINGS)
+# - bg_abyss_color: Mã màu nền đáy vũ trụ sâu (mặc định #050a1a)
+# - bg_brightness: Hệ số độ sáng phông nền vũ trụ (mặc định 1.20 - tăng 20% độ sáng)
+# - bg_emitter_opacity: Độ sáng phát quang của 5 chùm cực quang (0.0 đến 1.0, mặc định 0.40)
+# (Bạn cũng có thể cấu hình màu neon riêng cho từng slide: neon_primary, neon_secondary, neon_tertiary)
+bg_abyss_color = #050a1a
+bg_brightness = 1.20
+bg_emitter_opacity = 0.40
 
 # ==============================================================================
 # CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
@@ -6069,6 +6128,9 @@ hero = CHÚNG TA CỦA HIỆN TẠI
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
 callout = CÙNG XEM • CÙNG HÁT • CÙNG CẢM NHẬN
 video_file = video/chung_ta_cua_hien_tai.mp4
+neon_primary = #ff0055
+neon_secondary = #00f3ff
+neon_tertiary = #ffe600
 tilt_x = -2.5
 tilt_y = 4.5
 
@@ -6140,6 +6202,20 @@ tilt_y = -6.5
         document.documentElement.style.setProperty('--glass-small-alpha', window.stageSmallGlassSettings.alpha);
         document.documentElement.style.setProperty('--glass-small-border-opacity', window.stageSmallGlassSettings.borderGlow);
       }
+    }
+
+    // Background Cosmos / Emitter Settings (Driven by content.txt [SETTINGS])
+    window.stageBgSettings = {
+      abyssColor: '#050a1a',
+      brightness: 1.20,
+      emitterOpacity: 0.40
+    };
+
+    function applyBgSettings() {
+      if (!window.stageBgSettings) return;
+      document.documentElement.style.setProperty('--bg-abyss', window.stageBgSettings.abyssColor);
+      document.documentElement.style.setProperty('--bg-brightness-mult', window.stageBgSettings.brightness);
+      document.documentElement.style.setProperty('--bg-emitter-opacity', window.stageBgSettings.emitterOpacity);
     }
 
     // Audio Background Music Settings (Driven by content.txt [SETTINGS])
@@ -6241,6 +6317,17 @@ tilt_y = -6.5
         if (data.SETTINGS.glass_small_border_glow !== undefined) {
           window.stageSmallGlassSettings.borderGlow = parseFloat(data.SETTINGS.glass_small_border_glow) || 0.85;
         }
+        // Cosmic Background Settings
+        if (data.SETTINGS.bg_abyss_color !== undefined) {
+          window.stageBgSettings.abyssColor = data.SETTINGS.bg_abyss_color.trim();
+        }
+        if (data.SETTINGS.bg_brightness !== undefined) {
+          window.stageBgSettings.brightness = parseFloat(data.SETTINGS.bg_brightness) || 1.20;
+        }
+        if (data.SETTINGS.bg_emitter_opacity !== undefined) {
+          window.stageBgSettings.emitterOpacity = parseFloat(data.SETTINGS.bg_emitter_opacity) || 0.40;
+        }
+        applyBgSettings();
         // External Audio & Background Music Settings
         if (data.SETTINGS.bgm_file !== undefined) {
           window.stageAudioSettings.bgmFile = data.SETTINGS.bgm_file.trim();
@@ -6485,13 +6572,28 @@ tilt_y = -6.5
         }
       }
 
+      // 14. Per-slide dynamic neon theme overrides from content.txt
+      for (let i = 1; i <= 17; i++) {
+        const sKey = `SLIDE_${i}`;
+        const sData = data[sKey];
+        if (!sData) continue;
+        const sEl = document.getElementById(`slide-${i}`);
+        if (!sEl) continue;
+        if (sData.neon_primary) sEl.setAttribute('data-neon-p', sData.neon_primary.trim());
+        if (sData.neon_secondary) sEl.setAttribute('data-neon-s', sData.neon_secondary.trim());
+        if (sData.neon_tertiary) sEl.setAttribute('data-neon-t', sData.neon_tertiary.trim());
+      }
+
       // Update Navigation Modal Titles
       if (typeof generateHoloNavTiles === 'function') {
         generateHoloNavTiles();
       }
 
-      // Update active slide tilt angles immediately
+      // Update active slide tilt angles and scenography immediately
       applySlideTilt(currentSlideIdx);
+      if (currentSlideIdx && typeof triggerSlideScenography === 'function') {
+        triggerSlideScenography(currentSlideIdx);
+      }
     }
 
     function applySlideTilt(slideIdx) {

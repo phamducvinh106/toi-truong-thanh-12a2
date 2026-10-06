@@ -49,6 +49,16 @@ glass_small_alpha = 0.80
 glass_small_blur_px = 4
 glass_small_border_glow = 0.65
 
+# ------------------------------------------------------------------------------
+# THIẾT LẬP MÀU SẮC & ĐỘ SÁNG PHÔNG NỀN VŨ TRỤ (COSMIC BACKGROUND SETTINGS)
+# - bg_abyss_color: Mã màu nền đáy vũ trụ sâu (mặc định #050a1a)
+# - bg_brightness: Hệ số độ sáng phông nền vũ trụ (mặc định 1.20 - tăng 20% độ sáng)
+# - bg_emitter_opacity: Độ sáng phát quang của 5 chùm cực quang (0.0 đến 1.0, mặc định 0.40)
+# (Bạn cũng có thể cấu hình màu neon riêng cho từng slide: neon_primary, neon_secondary, neon_tertiary)
+bg_abyss_color = #050a1a
+bg_brightness = 1.20
+bg_emitter_opacity = 0.40
+
 # ==============================================================================
 # CẤU HÌNH ÂM THANH NỀN SÂN KHẤU (BACKGROUND AUDIO / MUSIC)
 # Tùy chỉnh phát nhạc nền từ file âm thanh bên ngoài (mp3, wav, ogg):
@@ -271,6 +281,9 @@ hero = CHÚNG TA CỦA HIỆN TẠI
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
 callout = CÙNG XEM • CÙNG HÁT • CÙNG CẢM NHẬN
 video_file = video/chung_ta_cua_hien_tai.mp4
+neon_primary = #ff0055
+neon_secondary = #00f3ff
+neon_tertiary = #ffe600
 tilt_x = -2.5
 tilt_y = 4.5
 
