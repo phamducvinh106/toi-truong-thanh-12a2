@@ -71,14 +71,14 @@
     }
 
     body {
-      background-color: #030612;
+      background-color: #040816;
       background-image: 
-        radial-gradient(ellipse 110% 85% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.07) 0%, transparent 70%),
-        radial-gradient(circle 75vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.10) 0%, transparent 60%),
-        radial-gradient(circle 75vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 0%, transparent 60%),
-        radial-gradient(circle 65vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.08) 0%, transparent 55%),
-        radial-gradient(circle 65vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.08) 0%, transparent 55%),
-        linear-gradient(135deg, #050b18 0%, #02040c 50%, #090616 100%);
+        radial-gradient(ellipse 110% 85% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.08) 0%, transparent 70%),
+        radial-gradient(circle 75vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.12) 0%, transparent 60%),
+        radial-gradient(circle 75vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.11) 0%, transparent 60%),
+        radial-gradient(circle 65vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.09) 0%, transparent 55%),
+        radial-gradient(circle 65vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 0%, transparent 55%),
+        linear-gradient(135deg, #060d1c 0%, #030610 50%, #0b081a 100%);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
@@ -109,7 +109,7 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(130px);
-      opacity: 0.30;
+      opacity: 0.33;
       mix-blend-mode: screen;
       will-change: transform;
       transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -121,7 +121,7 @@
       height: 80vw;
       top: -20vw;
       left: -15vw;
-      background: radial-gradient(circle, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.32) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.10) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.35) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.11) 45%, transparent 70%);
     }
 
     #emitter-beta {
@@ -129,7 +129,7 @@
       height: 75vw;
       bottom: -20vw;
       right: -15vw;
-      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.28) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.31) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.10) 45%, transparent 70%);
       animation-delay: -4s;
     }
 
@@ -138,7 +138,7 @@
       height: 70vw;
       top: -15vw;
       right: -12vw;
-      background: radial-gradient(circle, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.24) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.08) 45%, transparent 68%);
+      background: radial-gradient(circle, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.27) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.09) 45%, transparent 68%);
       animation-delay: -8s;
     }
 
@@ -147,7 +147,7 @@
       height: 70vw;
       bottom: -15vw;
       left: -12vw;
-      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.24) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.08) 45%, transparent 68%);
+      background: radial-gradient(circle, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.27) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.09) 45%, transparent 68%);
       animation-delay: -12s;
     }
 
@@ -158,15 +158,15 @@
       left: 5vw;
       border-radius: 40%;
       filter: blur(140px);
-      opacity: 0.22;
-      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.18) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.08) 45%, transparent 72%);
+      opacity: 0.25;
+      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.20) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.09) 45%, transparent 72%);
       animation-delay: -6s;
     }
 
     @keyframes emitterPulse {
-      0% { transform: scale(0.92) translate(0, 0); opacity: 0.25; }
-      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.35; }
-      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.28; }
+      0% { transform: scale(0.92) translate(0, 0); opacity: 0.28; }
+      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.38; }
+      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.31; }
     }
 
     /* Anamorphic Horizontal Lens Flare Streak */
@@ -4266,10 +4266,10 @@
       }
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
       const mat = new THREE.PointsMaterial({
-        size: 0.24,
+        size: 0.26,
         color: 0x00f3ff,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.60,
         blending: THREE.AdditiveBlending
       });
       particleNebula = new THREE.Points(geo, mat);
@@ -4286,10 +4286,10 @@
       }
       geoSec.setAttribute('position', new THREE.BufferAttribute(posSec, 3));
       const matSec = new THREE.PointsMaterial({
-        size: 0.30,
+        size: 0.32,
         color: 0xff007f,
         transparent: true,
-        opacity: 0.38,
+        opacity: 0.42,
         blending: THREE.AdditiveBlending
       });
       particleNebulaSecondary = new THREE.Points(geoSec, matSec);
@@ -5109,11 +5109,11 @@
       const pRgb = _hexToRgbValues(p);
       const sRgb = _hexToRgbValues(s);
       const tRgb = _hexToRgbValues(t);
-      if (emA) emA.style.background = `radial-gradient(circle, rgba(${pRgb}, 0.32) 0%, rgba(${pRgb}, 0.10) 45%, transparent 70%)`;
-      if (emB) emB.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.28) 0%, rgba(${sRgb}, 0.09) 45%, transparent 70%)`;
-      if (emC) emC.style.background = `radial-gradient(circle, rgba(${tRgb}, 0.24) 0%, rgba(${tRgb}, 0.08) 45%, transparent 68%)`;
-      if (emD) emD.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.24) 0%, rgba(${pRgb}, 0.08) 45%, transparent 68%)`;
-      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.18) 0%, rgba(${sRgb}, 0.08) 45%, transparent 72%)`;
+      if (emA) emA.style.background = `radial-gradient(circle, rgba(${pRgb}, 0.35) 0%, rgba(${pRgb}, 0.11) 45%, transparent 70%)`;
+      if (emB) emB.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.31) 0%, rgba(${sRgb}, 0.10) 45%, transparent 70%)`;
+      if (emC) emC.style.background = `radial-gradient(circle, rgba(${tRgb}, 0.27) 0%, rgba(${tRgb}, 0.09) 45%, transparent 68%)`;
+      if (emD) emD.style.background = `radial-gradient(circle, rgba(${sRgb}, 0.27) 0%, rgba(${pRgb}, 0.09) 45%, transparent 68%)`;
+      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.20) 0%, rgba(${sRgb}, 0.09) 45%, transparent 72%)`;
 
       currentSlideIdx = targetIdx;
       if (typeof applyGlassSettings === 'function') {
