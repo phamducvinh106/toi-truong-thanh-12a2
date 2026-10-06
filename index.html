@@ -71,7 +71,14 @@
     }
 
     body {
-      background-color: var(--bg-abyss);
+      background-color: #030816;
+      background-image: 
+        radial-gradient(ellipse 130% 95% at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.22) 0%, transparent 75%),
+        radial-gradient(circle 80vw at 10% 15%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.32) 0%, transparent 65%),
+        radial-gradient(circle 80vw at 90% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.30) 0%, transparent 65%),
+        radial-gradient(circle 70vw at 90% 15%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.26) 0%, transparent 60%),
+        radial-gradient(circle 70vw at 10% 85%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.24) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(8, 20, 44, 0.96) 0%, rgba(4, 10, 26, 0.96) 50%, rgba(16, 12, 40, 0.96) 100%);
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
@@ -83,9 +90,10 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       position: relative;
+      transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Ambient Giant Photon Laser Emitters */
+    /* Ambient Giant Photon Laser Emitters (All 4 Quadrants & Central Cosmic Corona) */
     #ambient-photon-field {
       position: absolute;
       top: 0;
@@ -100,27 +108,65 @@
     .photon-emitter {
       position: absolute;
       border-radius: 50%;
-      filter: blur(160px);
-      opacity: 0.65;
+      filter: blur(120px);
+      opacity: 0.82;
       mix-blend-mode: screen;
       will-change: transform;
-      transition: background 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: emitterPulse 14s ease-in-out infinite alternate;
     }
 
     #emitter-alpha {
-      width: 90vw;
-      height: 90vw;
-      top: -30vw;
-      left: -20vw;
-      background: radial-gradient(circle, var(--neon-primary) 0%, transparent 70%);
+      width: 85vw;
+      height: 85vw;
+      top: -22vw;
+      left: -18vw;
+      background: radial-gradient(circle, var(--neon-primary) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45) 45%, transparent 72%);
     }
 
     #emitter-beta {
-      width: 85vw;
-      height: 85vw;
-      bottom: -30vw;
-      right: -20vw;
-      background: radial-gradient(circle, var(--neon-secondary) 0%, transparent 70%);
+      width: 80vw;
+      height: 80vw;
+      bottom: -22vw;
+      right: -18vw;
+      background: radial-gradient(circle, var(--neon-secondary) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.42) 45%, transparent 72%);
+      animation-delay: -4s;
+    }
+
+    #emitter-gamma {
+      width: 75vw;
+      height: 75vw;
+      top: -18vw;
+      right: -15vw;
+      background: radial-gradient(circle, var(--neon-tertiary) 0%, rgba(var(--neon-tertiary-rgb, 138, 0, 255), 0.38) 45%, transparent 70%);
+      animation-delay: -8s;
+    }
+
+    #emitter-delta {
+      width: 75vw;
+      height: 75vw;
+      bottom: -18vw;
+      left: -15vw;
+      background: radial-gradient(circle, var(--neon-secondary) 0%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.38) 45%, transparent 70%);
+      animation-delay: -12s;
+    }
+
+    #emitter-center {
+      width: 95vw;
+      height: 65vh;
+      top: 18vh;
+      left: 2.5vw;
+      border-radius: 40%;
+      filter: blur(130px);
+      opacity: 0.62;
+      background: radial-gradient(ellipse at 50% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.42) 0%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.30) 45%, transparent 75%);
+      animation-delay: -6s;
+    }
+
+    @keyframes emitterPulse {
+      0% { transform: scale(0.92) translate(0, 0); opacity: 0.72; }
+      50% { transform: scale(1.08) translate(15px, -15px); opacity: 0.88; }
+      100% { transform: scale(0.96) translate(-10px, 12px); opacity: 0.78; }
     }
 
     /* Anamorphic Horizontal Lens Flare Streak */
@@ -129,10 +175,10 @@
       top: 50%;
       left: -10%;
       width: 120%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-primary), #ffffff, var(--neon-primary), transparent);
-      box-shadow: 0 0 35px var(--neon-primary), 0 0 70px var(--neon-primary);
-      opacity: 0.35;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--neon-primary), #ffffff, var(--neon-secondary), transparent);
+      box-shadow: 0 0 35px var(--neon-primary), 0 0 70px var(--neon-secondary);
+      opacity: 0.55;
       transform: translateY(-50%) rotate(-3deg);
       pointer-events: none;
       z-index: 3;
@@ -140,9 +186,9 @@
     }
 
     @keyframes flareDrift {
-      0% { transform: translateY(-50%) rotate(-3deg) scaleY(1); opacity: 0.25; }
-      50% { transform: translateY(-30%) rotate(2deg) scaleY(1.8); opacity: 0.55; }
-      100% { transform: translateY(-70%) rotate(-2deg) scaleY(1); opacity: 0.3; }
+      0% { transform: translateY(-50%) rotate(-3deg) scaleY(1); opacity: 0.35; }
+      50% { transform: translateY(-30%) rotate(2deg) scaleY(2.2); opacity: 0.75; }
+      100% { transform: translateY(-70%) rotate(-2deg) scaleY(1); opacity: 0.45; }
     }
 
     /* Hyperdrive Warp Speed Flash Overlay */
@@ -2542,10 +2588,13 @@
   </svg>
 
 
-  <!-- Ambient Giant Photon Emitters -->
+  <!-- Ambient Giant Photon Emitters (All 4 Quadrants & Central Cosmic Corona) -->
   <div id="ambient-photon-field">
     <div id="emitter-alpha" class="photon-emitter"></div>
     <div id="emitter-beta" class="photon-emitter"></div>
+    <div id="emitter-gamma" class="photon-emitter"></div>
+    <div id="emitter-delta" class="photon-emitter"></div>
+    <div id="emitter-center" class="photon-emitter"></div>
   </div>
 
   <!-- Anamorphic Horizontal Lens Flare Streak -->
@@ -3585,7 +3634,7 @@
           <div class="hud-bracket-container" style="max-width: 1200px;">
             <div class="hud-bracket-tr"></div>
             <div class="hud-bracket-bl"></div>
-            <p style="font-size: var(--font-statement); font-weight: 800; color: #ff3366;">
+            <p style="font-size: var(--font-statement); font-weight: 800; color: #ffffff; text-shadow: 0 0 25px rgba(255, 51, 102, 0.9);">
               "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là một hành trình!"
             </p>
           </div>
@@ -4176,6 +4225,7 @@
     let sceneObjects = [];
     let currentSlideIdx = 1;
     let particleNebula;
+    let particleNebulaSecondary;
     let continuousEnergySpine; // Unbroken 3D visual thread weaving through all 17 slides
     const totalSlides = 17;
 
@@ -4205,24 +4255,45 @@
     }
 
     function createVolumetricNebula() {
-      const count = 650;
+      // Primary Luminous Cosmic Stardust Field
+      const count = 1600;
       const geo = new THREE.BufferGeometry();
       const pos = new Float32Array(count * 3);
       for (let i = 0; i < count * 3; i += 3) {
-        pos[i] = (Math.random() - 0.5) * 90;
-        pos[i + 1] = (Math.random() - 0.5) * 65;
-        pos[i + 2] = (Math.random() - 0.5) * 55;
+        pos[i] = (Math.random() - 0.5) * 105;
+        pos[i + 1] = (Math.random() - 0.5) * 78;
+        pos[i + 2] = (Math.random() - 0.5) * 65;
       }
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
       const mat = new THREE.PointsMaterial({
-        size: 0.25,
+        size: 0.38,
         color: 0x00f3ff,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending
       });
       particleNebula = new THREE.Points(geo, mat);
       scene.add(particleNebula);
+
+      // Secondary Chromatic Harmonic Stardust Field
+      const countSec = 850;
+      const geoSec = new THREE.BufferGeometry();
+      const posSec = new Float32Array(countSec * 3);
+      for (let i = 0; i < countSec * 3; i += 3) {
+        posSec[i] = (Math.random() - 0.5) * 95;
+        posSec[i + 1] = (Math.random() - 0.5) * 70;
+        posSec[i + 2] = (Math.random() - 0.5) * 60;
+      }
+      geoSec.setAttribute('position', new THREE.BufferAttribute(posSec, 3));
+      const matSec = new THREE.PointsMaterial({
+        size: 0.48,
+        color: 0xff007f,
+        transparent: true,
+        opacity: 0.72,
+        blending: THREE.AdditiveBlending
+      });
+      particleNebulaSecondary = new THREE.Points(geoSec, matSec);
+      scene.add(particleNebulaSecondary);
     }
 
     // THE CONTINUOUS ENERGY SPINE: A living laser thread that ties the entire presentation together
@@ -4755,13 +4826,17 @@
       document.documentElement.style.setProperty('--breathe-scale', scale.toFixed(4));
       document.documentElement.style.setProperty('--breathe-glow', `${glow.toFixed(1)}px`);
 
-      // Animate Ambient Giant Photon Emitters
+      // Animate Ambient Giant Photon Emitters (All 4 Quadrants & Central Corona)
       const emA = document.getElementById('emitter-alpha');
       const emB = document.getElementById('emitter-beta');
-      if (emA && emB) {
-        emA.style.transform = `translate(${Math.sin(t * 0.3) * 50}px, ${Math.cos(t * 0.25) * 45}px) scale(${1 + offset * 3})`;
-        emB.style.transform = `translate(${Math.cos(t * 0.25) * 50}px, ${Math.sin(t * 0.35) * 45}px) scale(${1 - offset * 3})`;
-      }
+      const emC = document.getElementById('emitter-gamma');
+      const emD = document.getElementById('emitter-delta');
+      const emE = document.getElementById('emitter-center');
+      if (emA) emA.style.transform = `translate(${Math.sin(t * 0.3) * 50}px, ${Math.cos(t * 0.25) * 45}px) scale(${1 + offset * 3})`;
+      if (emB) emB.style.transform = `translate(${Math.cos(t * 0.25) * 50}px, ${Math.sin(t * 0.35) * 45}px) scale(${1 - offset * 3})`;
+      if (emC) emC.style.transform = `translate(${Math.sin(t * 0.22 + 1.2) * 55}px, ${Math.cos(t * 0.28 + 0.8) * 40}px) scale(${1 + offset * 2.5})`;
+      if (emD) emD.style.transform = `translate(${Math.cos(t * 0.28 + 2.1) * 45}px, ${Math.sin(t * 0.2 + 1.5) * 50}px) scale(${1 - offset * 2.5})`;
+      if (emE) emE.style.transform = `translate(${Math.sin(t * 0.18) * 35}px, ${Math.cos(t * 0.22) * 30}px) scale(${1 + offset * 4})`;
 
       // Animate Continuous Energy Spine (Breathing & Slow Orbit)
       if (continuousEnergySpine) {
@@ -4773,6 +4848,10 @@
       if (particleNebula) {
         particleNebula.rotation.y = t * 0.008;
         particleNebula.rotation.x = Math.sin(t * 0.01) * 0.03;
+      }
+      if (particleNebulaSecondary) {
+        particleNebulaSecondary.rotation.y = -t * 0.006;
+        particleNebulaSecondary.rotation.z = Math.cos(t * 0.012) * 0.025;
       }
 
       // 17 Unique 3D Celestial Fan Tilts (Ultra-slow rotation: 0.04 to 0.065 rad/s - Just enough to perceive rotation)
@@ -5010,16 +5089,31 @@
       document.documentElement.style.setProperty('--neon-secondary-rgb', _hexToRgbValues(s));
       document.documentElement.style.setProperty('--neon-tertiary-rgb', _hexToRgbValues(t));
 
-      // Update Continuous Energy Spine Color Palette
+      // Update Continuous Energy Spine and Volumetric Nebulae Color Palette
       if (continuousEnergySpine) {
         continuousEnergySpine.material.color.set(p);
       }
+      if (particleNebula && particleNebula.material) {
+        particleNebula.material.color.set(p);
+      }
+      if (particleNebulaSecondary && particleNebulaSecondary.material) {
+        particleNebulaSecondary.material.color.set(s);
+      }
 
-      // Update Photon Emitters
+      // Update All 5 Multi-Quadrant Photon Emitters with Vivid Harmonized Neons
       const emA = document.getElementById('emitter-alpha');
       const emB = document.getElementById('emitter-beta');
-      if (emA) emA.style.background = `radial-gradient(circle, ${p} 0%, transparent 70%)`;
-      if (emB) emB.style.background = `radial-gradient(circle, ${s} 0%, transparent 70%)`;
+      const emC = document.getElementById('emitter-gamma');
+      const emD = document.getElementById('emitter-delta');
+      const emE = document.getElementById('emitter-center');
+      const pRgb = _hexToRgbValues(p);
+      const sRgb = _hexToRgbValues(s);
+      const tRgb = _hexToRgbValues(t);
+      if (emA) emA.style.background = `radial-gradient(circle, ${p} 0%, rgba(${pRgb}, 0.45) 45%, transparent 72%)`;
+      if (emB) emB.style.background = `radial-gradient(circle, ${s} 0%, rgba(${sRgb}, 0.42) 45%, transparent 72%)`;
+      if (emC) emC.style.background = `radial-gradient(circle, ${t} 0%, rgba(${tRgb}, 0.38) 45%, transparent 70%)`;
+      if (emD) emD.style.background = `radial-gradient(circle, ${s} 0%, rgba(${pRgb}, 0.38) 45%, transparent 70%)`;
+      if (emE) emE.style.background = `radial-gradient(ellipse at 50% 50%, rgba(${pRgb}, 0.42) 0%, rgba(${sRgb}, 0.30) 45%, transparent 75%)`;
 
       currentSlideIdx = targetIdx;
       if (typeof applyGlassSettings === 'function') {
