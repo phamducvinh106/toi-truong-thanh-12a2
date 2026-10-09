@@ -89,10 +89,9 @@ tilt_x = -2.0
 tilt_y = 5.0
 
 [SLIDE_2]
-nav_title = Tiết Mục: Hò Vươn Mình
-telemetry = [ TIẾT MỤC BIỂU DIỄN KHAI MÀN ]
+nav_title = Khai Màn: Hò Vươn Mình
+telemetry = [ KHAI MÀN SÂN KHẤU ]
 title = HÒ VƯƠN MÌNH x A LITTLE DREAM OF ME
-subtitle = TIẾT MỤC MÚA MỞ MÀN
 quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
 music_file = audio/ho_vuon_minh.mp3
@@ -238,10 +237,9 @@ tilt_x = 1.5
 tilt_y = -4.0
 
 [SLIDE_14]
-nav_title = Tiết Mục Bế Mạc: Bánh Mì Không
-telemetry = [ TIẾT MỤC HÁT BẾ MẠC ]
+nav_title = Bế Mạc: Bánh Mì Không
+telemetry = [ BẾ MẠC CHUYÊN ĐỀ ]
 title = BÁNH MÌ KHÔNG
-subtitle = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
 quote = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
 performer = THỰC HIỆN: TẬP THỂ LỚP 12A2
 hero = BÁNH MÌ KHÔNG
