@@ -271,16 +271,16 @@ tilt_x = 1.5
 tilt_y = -4.0
 
 [SLIDE_16]
-nav_title = MV Bế Mạc: Chúng Ta Của Hiện Tại
-telemetry = [ TIẾT MỤC MV BẾ MẠC ]
-title = CHÚNG TA CỦA HIỆN TẠI
-subtitle = MV CA NHẠC BẾ MẠC CHUYÊN ĐỀ
+nav_title = Tiết Mục Bế Mạc: Bánh Mì Không
+telemetry = [ TIẾT MỤC HÁT BẾ MẠC ]
+title = BÁNH MÌ KHÔNG
+subtitle = TIẾT MỤC HÁT BẾ MẠC CHUYÊN ĐỀ
 quote = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
 performer = THỰC HIỆN: TẬP THỂ LỚP 12A2
-hero = CHÚNG TA CỦA HIỆN TẠI
+hero = BÁNH MÌ KHÔNG
 statement = "MANG THEO NHỮNG ĐIỀU ĐẸP NHẤT CỦA TUỔI TRẺ ĐỂ BƯỚC VÀO TƯƠNG LAI!"
-callout = CÙNG XEM • CÙNG HÁT • CÙNG CẢM NHẬN
-video_file = video/chung_ta_cua_hien_tai.mp4
+callout = CÙNG LẮNG NGHE • CÙNG HÁT • CÙNG CẢM NHẬN
+video_file = video/banh_mi_khong.mp4
 neon_primary = #ff0055
 neon_secondary = #00f3ff
 neon_tertiary = #ffe600
