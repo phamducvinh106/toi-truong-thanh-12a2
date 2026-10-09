@@ -38,6 +38,7 @@ glass_blur_px = 4
 glass_border_glow = 0.80
 glass_width_vw = 94
 glass_height_vh = 82
+default_aspect_ratio = auto
 
 # ------------------------------------------------------------------------------
 # THIẾT LẬP ĐỘ MỜ KÍNH MỜ CHO CÁC THÀNH PHẦN NHỎ ĐỘC LẬP (SMALL COMPONENT GLASS)
