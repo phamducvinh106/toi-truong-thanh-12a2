@@ -78,6 +78,7 @@ synth_drone_volume = 0.0
 [TOP_HUD]
 telemetry = CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH
 indicator = THPT SÓC SƠN
+logo_file = assets/logo_thpt_soc_son.png
 
 [SLIDE_1]
 nav_title = Khai Màn: Tôi Trưởng Thành

@@ -256,13 +256,75 @@
       50% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 12px var(--neon-primary)); }
     }
 
-    .stage-mode-indicator {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--neon-primary);
-      border-left: 2px solid var(--neon-primary);
-      padding-left: 0.8rem;
+    /* Stage School Logo Frame (Góc trên bên trái - Khung kính mờ) */
+    .stage-logo-frame {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.35rem 1.4rem 0.35rem 0.45rem !important;
+      border-radius: 999px !important;
+      backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      -webkit-backdrop-filter: blur(var(--glass-small-blur, 14px)) saturate(240%) brightness(1.28) !important;
+      background: 
+        radial-gradient(ellipse at 30% 50%, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.45) 0%, transparent 80%),
+        linear-gradient(135deg, rgba(var(--neon-primary-rgb, 0, 243, 255), 0.28) 0%, rgba(10, 26, 52, var(--glass-small-alpha, 0.58)) 55%, rgba(var(--neon-secondary-rgb, 255, 0, 127), 0.25) 100%) !important;
+      border: 1.5px solid var(--neon-primary, #00f3ff) !important;
+      box-shadow: 
+        0 4px 22px rgba(0, 0, 0, 0.45),
+        0 0 25px var(--neon-primary, #00f3ff),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
+        inset 0 0 18px var(--neon-primary, #00f3ff) !important;
+      color: rgba(255, 255, 255, 0.95);
+      animation: organicFloatTag 5.2s ease-in-out infinite;
+      will-change: translate;
+      cursor: default;
+      user-select: none;
+      transition: all 0.4s ease;
+    }
+
+    .stage-logo-frame:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 6px 28px rgba(0, 0, 0, 0.5),
+        0 0 35px var(--neon-primary, #00f3ff),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8),
+        inset 0 0 22px var(--neon-primary, #00f3ff) !important;
+    }
+
+    .stage-school-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 9px;
+      background: #ffffff;
+      padding: 2.5px;
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.45);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .stage-logo-frame:hover .stage-school-logo {
+      transform: scale(1.06);
+    }
+
+    .stage-logo-text {
+      font-size: var(--font-hud);
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 12px var(--neon-primary, #00f3ff);
+    }
+
+    /* Harmonize top header right telemetry tag */
+    header.stage-top-hud .telemetry-tag {
+      border: 1.5px solid var(--neon-primary, #00f3ff) !important;
+      box-shadow: 
+        0 4px 22px rgba(0, 0, 0, 0.45),
+        0 0 25px var(--neon-primary, #00f3ff),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
+        inset 0 0 18px var(--neon-primary, #00f3ff) !important;
+      cursor: default;
     }
 
     /* ==========================================================================
@@ -2724,14 +2786,18 @@
 
   <!-- Top Stage Telemetry HUD -->
   <header class="stage-top-hud">
-    <div class="telemetry-tag">
-      <div class="telemetry-beacon"></div>
-      <span id="top-telemetry-text">CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH</span>
+    <!-- Góc trên bên trái: Logo trường trên khung kính mờ -->
+    <div class="stage-logo-frame" id="stage-logo-frame" title="Trường THPT Sóc Sơn">
+      <img src="assets/logo_thpt_soc_son.png" alt="Logo THPT Sóc Sơn" class="stage-school-logo" id="top-school-logo-img" />
+      <span class="stage-logo-text" id="top-mode-indicator-text">THPT SÓC SƠN</span>
     </div>
+
+    <!-- Góc trên bên phải: Ô nội dung Chuyên đề 12A2 // Tôi Trưởng Thành -->
     <div style="display: flex; align-items: center; gap: 1.2rem;">
       <span id="txt-source-status" style="font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #39ff14; background: rgba(57,255,20,0.12); border: 1px solid rgba(57,255,20,0.3); padding: 0.25rem 0.75rem; border-radius: 4px; display: none; transition: opacity 0.3s ease;"></span>
-      <div class="stage-mode-indicator">
-        <span id="top-mode-indicator-text">THPT SÓC SƠN</span>
+      <div class="telemetry-tag">
+        <div class="telemetry-beacon"></div>
+        <span id="top-telemetry-text">CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH</span>
       </div>
     </div>
   </header>
@@ -6026,6 +6092,7 @@ synth_drone_volume = 0.0
 [TOP_HUD]
 telemetry = CHUYÊN ĐỀ 12A2 // TÔI TRƯỞNG THÀNH
 indicator = THPT SÓC SƠN
+logo_file = assets/logo_thpt_soc_son.png
 
 [SLIDE_1]
 nav_title = Khai Màn: Tôi Trưởng Thành
@@ -6455,6 +6522,8 @@ tilt_y = -6.5
         if (tel && data.TOP_HUD.telemetry) tel.textContent = data.TOP_HUD.telemetry;
         const mode = document.getElementById('top-mode-indicator-text');
         if (mode && data.TOP_HUD.indicator) mode.textContent = data.TOP_HUD.indicator;
+        const logo = document.getElementById('top-school-logo-img');
+        if (logo && data.TOP_HUD.logo_file) logo.src = data.TOP_HUD.logo_file;
       }
 
       // 2. Slide 1
