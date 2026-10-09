@@ -149,7 +149,7 @@ tilt_y = -4.5
 
 [SLIDE_8]
 nav_title = Câu Hỏi 01: Dấu Hiệu Trưởng Thành
-telemetry = // THỬ THÁCH 01 / 06
+telemetry = // THỬ THÁCH 01 / 04
 question = "ĐIỀU GÌ LÀ DẤU HIỆU RÕ NHẤT CỦA SỰ TRƯỞNG THÀNH?"
 status = [   ]
 choice_a = Không còn phụ thuộc vào người khác
@@ -166,7 +166,7 @@ tilt_y = 4.0
 
 [SLIDE_9]
 nav_title = Câu Hỏi 02: Khi Thất Bại Bạn Làm Gì?
-telemetry = // THỬ THÁCH 02 / 06
+telemetry = // THỬ THÁCH 02 / 04
 question = "KHI THẤT BẠI, BẠN THƯỜNG LÀM GÌ?"
 status = [   ]
 choice_a = Đổ lỗi cho hoàn cảnh
@@ -183,7 +183,7 @@ tilt_y = -4.0
 
 [SLIDE_10]
 nav_title = Câu Hỏi 03: Khi Nhận Ra Lựa Chọn Sai
-telemetry = // THỬ THÁCH 03 / 06
+telemetry = // THỬ THÁCH 03 / 04
 question = "KHI NHẬN RA MÌNH ĐÃ LỰA CHỌN SAI, BẠN SẼ LÀM GÌ?"
 status = [   ]
 choice_a = Cố gắng che giấu để không bị đánh giá
@@ -200,7 +200,7 @@ tilt_y = 4.5
 
 [SLIDE_11]
 nav_title = Câu Hỏi 04: Biểu Hiện Trưởng Thành
-telemetry = // THỬ THÁCH 04 / 06
+telemetry = // THỬ THÁCH 04 / 04
 question = "ĐIỀU NÀO DƯỚI ĐÂY THỂ HIỆN MỘT NGƯỜI ĐANG TRƯỞNG THÀNH?"
 status = [   ]
 choice_a = Luôn cố gắng làm hài lòng tất cả mọi người
@@ -216,40 +216,6 @@ tilt_x = 2.0
 tilt_y = -4.5
 
 [SLIDE_12]
-nav_title = Câu Hỏi 05: Khi Người Khác Thất Vọng
-telemetry = // THỬ THÁCH 05 / 06
-question = "NẾU LỰA CHỌN CỦA BẠN KHIẾN NGƯỜI KHÁC THẤT VỌNG?"
-status = [   ]
-choice_a = Từ bỏ lựa chọn của mình ngay
-choice_b = Làm theo ý mọi người để không bị trách
-choice_c = Cân nhắc, lắng nghe nhưng vẫn tự chịu trách nhiệm
-choice_d = Không quan tâm đến bất kỳ ai
-correct = C
-insight_tag = ● GIỮ VỮNG LẬP TRƯỜNG: ĐÁP ÁN C
-insight_lead = "Trưởng thành là 
-insight_highlight = giữ vững lập trường
-insight_tail =  mà không cực đoan, tiếp thu mà không đánh mất mình!"
-tilt_x = 2.5
-tilt_y = 4.5
-
-[SLIDE_13]
-nav_title = Câu Hỏi 06: Điều Gì KHÔNG Phải Trưởng Thành?
-telemetry = // THỬ THÁCH 06 / 06
-question = "ĐIỀU NÀO KHÔNG ĐỒNG NGHĨA VỚI TRƯỞNG THÀNH?"
-status = [   ]
-choice_a = Biết xin lỗi khi mình sai
-choice_b = Biết lắng nghe người khác
-choice_c = Luôn phải mạnh mẽ và không được yếu lòng
-choice_d = Biết chịu trách nhiệm
-correct = C
-insight_tag = ● GIẢI PHÓNG ÁP LỰC: ĐÁP ÁN C
-insight_lead = "
-insight_highlight = TRƯỞNG THÀNH ĐƯỢC PHÉP YẾU LÒNG
-insight_tail =  — Quan trọng là biết đứng lên sau khi lau khô nước mắt!"
-tilt_x = -2.0
-tilt_y = -4.0
-
-[SLIDE_14]
 nav_title = Câu Hỏi Mở Sân Khấu
 telemetry = // GIAO LƯU TRỰC TIẾP KHÁN GIẢ
 question = "BẠN NGHĨ MÌNH ĐÃ TRƯỞNG THÀNH CHƯA?"
@@ -258,7 +224,7 @@ hero = CHÚNG TA ĐỀU ĐANG TRƯỞNG THÀNH TỪNG NGÀY!
 tilt_x = -2.5
 tilt_y = 5.0
 
-[SLIDE_15]
+[SLIDE_13]
 nav_title = Lời Nhắn Gửi Bản Thân
 title = LỜI NHẮN GỬI TÔI CỦA NGÀY MAI
 ribbon1_tag = // THÔNG ĐIỆP 01
@@ -271,7 +237,7 @@ quote = "Chúng ta không cần phải lớn quá nhanh. Trưởng thành là m�
 tilt_x = 1.5
 tilt_y = -4.0
 
-[SLIDE_16]
+[SLIDE_14]
 nav_title = Tiết Mục Bế Mạc: Bánh Mì Không
 telemetry = [ TIẾT MỤC HÁT BẾ MẠC ]
 title = BÁNH MÌ KHÔNG
@@ -288,7 +254,7 @@ neon_tertiary = #ffe600
 tilt_x = -2.5
 tilt_y = 4.5
 
-[SLIDE_17]
+[SLIDE_15]
 nav_title = Bế Mạc & Tri Ân
 subtitle = "NẾU CẢ ĐỜI NÀY KHÔNG RỰC RỠ THÌ SAO?"
 hero = "Không sao cả, vì ngày mai vẫn đến và sương mù sẽ tan!"
