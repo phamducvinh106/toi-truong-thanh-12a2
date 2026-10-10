@@ -95,7 +95,7 @@ telemetry = [ KHAI MÀN SÂN KHẤU ]
 title = HÒ VƯƠN MÌNH x A LITTLE DREAM OF ME
 quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
-music_file = audio/ho_vuon_minh.mp3
+video_file = video/ho_vuon_minh.mp4
 tilt_x = -2.5
 tilt_y = -4.5
 

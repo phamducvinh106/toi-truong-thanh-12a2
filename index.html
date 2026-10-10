@@ -1400,164 +1400,9 @@
       text-shadow: 0 0 15px var(--neon-glow);
     }
 
-    /* Cyber Music Player Panel */
-    .stage-music-player-panel {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(92vw, 1100px);
-      background: rgba(6, 12, 24, 0.94);
-      border: 2px solid var(--neon-primary);
-      box-shadow: 
-        0 25px 80px rgba(0, 0, 0, 0.92),
-        0 0 50px var(--neon-glow),
-        inset 0 0 40px rgba(0, 243, 255, 0.08);
-      border-radius: 8px;
-      padding: 2.2rem 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.8rem;
-      z-index: 50;
-      backdrop-filter: blur(30px);
-      animation: playerPanelPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
     @keyframes playerPanelPop {
       0% { opacity: 0; transform: translate(-50%, -46%) scale(0.92); }
       100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
-
-    .player-header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding-bottom: 1.2rem;
-    }
-
-    .player-body-deck {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      padding: 0.5rem 0;
-    }
-
-    .player-track-info {
-      flex: 1;
-      text-align: left;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 0.75rem !important;
-    }
-
-    .player-track-info h2 {
-      margin: 0 !important;
-    }
-
-    .player-track-meta {
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.85rem !important;
-      flex-wrap: wrap !important;
-      width: 100%;
-    }
-
-    .player-track-meta p {
-      margin: 0 !important;
-    }
-
-    .player-track-info .player-track-sub {
-      border-color: #ffe600 !important;
-      color: #ffe600 !important;
-      box-shadow: 0 0 16px rgba(255, 230, 0, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.04) !important;
-    }
-
-    .player-track-info .player-track-performer {
-      border-color: rgba(255, 255, 255, 0.22) !important;
-      color: rgba(255, 255, 255, 0.75) !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.04) !important;
-    }
-
-    .player-vinyl-wrap {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .player-vinyl-disc {
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #020306 20%, #151c2e 22%, #080d1a 45%, #182238 48%, #080d1a 70%, #1a2744 72%, #03060f 100%);
-      border: 3px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 
-        0 0 30px var(--neon-glow),
-        inset 0 0 25px rgba(0, 0, 0, 0.9);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s ease;
-    }
-
-    .player-vinyl-disc.spinning {
-      animation: vinylSpin 4.5s linear infinite;
-    }
-
-    @keyframes vinylSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .player-vinyl-center {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--neon-primary) 0%, #030612 80%);
-      border: 2px solid #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px #ffffff;
-    }
-
-    .cyber-eq-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 5px;
-      height: 32px;
-      margin-top: 1.2rem;
-    }
-
-    .cyber-eq-bar {
-      width: 6px;
-      background: var(--neon-primary);
-      box-shadow: 0 0 10px var(--neon-primary);
-      height: 6px;
-      transition: height 0.15s ease;
-      border-radius: 2px;
-    }
-
-    .cyber-eq-bar.active {
-      animation: eqBarJump 0.5s infinite alternate ease-in-out;
-    }
-
-    .cyber-eq-bar:nth-child(2) { animation-delay: 0.1s; }
-    .cyber-eq-bar:nth-child(3) { animation-delay: 0.25s; }
-    .cyber-eq-bar:nth-child(4) { animation-delay: 0.15s; }
-    .cyber-eq-bar:nth-child(5) { animation-delay: 0.3s; }
-    .cyber-eq-bar:nth-child(6) { animation-delay: 0.05s; }
-    .cyber-eq-bar:nth-child(7) { animation-delay: 0.2s; }
-    .cyber-eq-bar:nth-child(8) { animation-delay: 0.35s; }
-    .cyber-eq-bar:nth-child(9) { animation-delay: 0.12s; }
-    .cyber-eq-bar:nth-child(10) { animation-delay: 0.28s; }
-
-    @keyframes eqBarJump {
-      0% { height: 6px; }
-      100% { height: 32px; }
     }
 
     .player-timeline-wrap {
@@ -2515,8 +2360,7 @@
       body:not(.aspect-16-9) .origami-ribbons-grid { max-width: 1720px !important; gap: 2.5rem !important; }
       body:not(.aspect-16-9) .origami-ribbon-spire { padding: 2.6rem 2.2rem !important; min-height: 380px !important; }
       body:not(.aspect-16-9) .layout-mobius-infinity { gap: 2.2rem !important; }
-      body:not(.aspect-16-9) #music-player-2 { max-width: 1150px !important; min-height: 520px !important; padding: 2.8rem 3.8rem !important; }
-      body:not(.aspect-16-9) #vinyl-disc-2 { width: 270px !important; height: 270px !important; }
+      body:not(.aspect-16-9) #video-player-2,
       body:not(.aspect-16-9) #video-player-5,
       body:not(.aspect-16-9) #video-player-14 { max-height: min(86vh, 920px) !important; }
     }
@@ -2555,8 +2399,7 @@
     body.aspect-16-10 .origami-ribbons-grid { max-width: 1720px !important; gap: 2.5rem !important; }
     body.aspect-16-10 .origami-ribbon-spire { padding: 2.6rem 2.2rem !important; min-height: 380px !important; }
     body.aspect-16-10 .layout-mobius-infinity { gap: 2.2rem !important; }
-    body.aspect-16-10 #music-player-2 { max-width: 1150px !important; min-height: 520px !important; padding: 2.8rem 3.8rem !important; }
-    body.aspect-16-10 #vinyl-disc-2 { width: 270px !important; height: 270px !important; }
+    body.aspect-16-10 #video-player-2,
     body.aspect-16-10 #video-player-5,
     body.aspect-16-10 #video-player-14 { max-height: min(86vh, 920px) !important; }
 
@@ -2995,97 +2838,88 @@
 
           <!-- Triangular Play Trigger -->
           <div class="play-trigger-wrap">
-            <button class="stage-play-trigger-btn" onclick="openPerformanceMusicPlayer(2)" title="Khởi động Trình phát âm nhạc">
-              <span class="triangle-play-icon">▶</span>
+            <button class="stage-play-trigger-btn" style="border-color: #39ff14; box-shadow: 0 0 35px rgba(57,255,20,0.5);" onclick="openDramaVideoPlayer(2)" title="Khởi động Trình phát video khai màn">
+              <span class="triangle-play-icon" style="color: #39ff14; text-shadow: 0 0 15px #39ff14;">▶</span>
             </button>
-            <span class="play-trigger-label">PHÁT ÂM NHẠC</span>
+            <span class="play-trigger-label" style="color: #39ff14; text-shadow: 0 0 12px rgba(57,255,20,0.6);">PHÁT VIDEO KHAI MÀN</span>
           </div>
         </div>
 
-        <!-- Music Player View -->
-        <div class="stage-music-player-panel" id="music-player-2" style="display: none;">
-          <audio id="perf-audio-2" preload="metadata"></audio>
+        <!-- Video Player View (Near edge-to-edge, native aspect ratio) -->
+        <div class="stage-video-player-panel" id="video-player-2" style="display: none; border-color: #39ff14; box-shadow: 0 25px 90px rgba(0, 0, 0, 0.95), 0 0 60px rgba(57,255,20,0.5);">
+          <input type="file" id="perf-video-file-input-2" accept="video/*" style="display: none;" onchange="handlePerfVideoFileSelected(2, this.files[0])">
 
-          <input type="file" id="perf-audio-file-input-2" accept="audio/*" style="display: none;" onchange="handlePerfMusicFileSelected(2, this.files[0])">
-
-          <div class="player-header-bar">
+          <!-- Top Overlay Bar -->
+          <div class="video-overlay-header">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <div class="telemetry-beacon" style="background: #39ff14; box-shadow: 0 0 18px #39ff14;"></div>
-              <span class="telemetry-tag" style="color: #39ff14; font-size: 13px;">
-                // TRÌNH PHÁT ÂM NHẠC: HÒ VƯƠN MÌNH
+              <span class="telemetry-tag" style="color: #39ff14; font-size: 14px; font-weight: 900;">
+                // KHAI MÀN SÂN KHẤU: HÒ VƯƠN MÌNH x A LITTLE DREAM OF ME
               </span>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem;">
-              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-audio-file-input-2').click()" title="Chọn tệp âm thanh từ máy tính">
-                <span>📁 Chọn File Nhạc</span>
+              <button class="player-secondary-btn tech-ui-element" id="video-toggle-controls-btn-2" onclick="event.stopPropagation(); toggleDramaVideoControls(2)" title="Ẩn/Hiện nút điều khiển [Phím C / H]">
+                <span>👁️ Ẩn Điều Khiển [C]</span>
               </button>
-              <button class="player-secondary-btn" onclick="closePerformanceMusicPlayer(2)" title="Trở về slide [Esc]">
-                <span>✕ Đóng [Esc]</span>
+              <button class="player-secondary-btn tech-ui-element" onclick="document.getElementById('perf-video-file-input-2').click()" title="Chọn tệp video từ máy tính">
+                <span>📁 Chọn Video</span>
+              </button>
+              <button class="player-secondary-btn" onclick="closeDramaVideoPlayer(2)" title="Đóng video [Esc]">
+                <span>✕ Đóng Video [Esc]</span>
               </button>
             </div>
           </div>
 
-          <div class="player-body-deck">
-            <div class="player-vinyl-wrap">
-              <div class="player-vinyl-disc" id="vinyl-disc-2">
-                <div class="player-vinyl-center">
-                  <span style="font-size: 20px;">🎵</span>
-                </div>
-              </div>
-              <div class="cyber-eq-bars" id="eq-bars-2">
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-                <div class="cyber-eq-bar"></div>
-              </div>
-            </div>
+          <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
+          <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(2)">
+            <video id="perf-video-2" preload="metadata" playsinline></video>
 
-            <div class="player-track-info">
-              <div class="telemetry-tag" style="color: #39ff14;" id="perf-status-badge-2">
-                ● SẴN SÀNG PHÁT
-              </div>
-              <h2 style="font-size: 34px; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 25px rgba(57,255,20,0.6);" id="perf-track-title-2">
-                HÒ VƯƠN MÌNH
-              </h2>
-              <div class="player-track-meta">
-                <p class="player-track-performer" style="font-size: 14px;">
-                  Biểu diễn: Tập thể lớp 12A2
-                </p>
-              </div>
+            <!-- Standby screen if video not loaded yet -->
+            <div class="video-standby-placeholder" id="video-standby-2" style="display: flex;">
+              <div style="font-size: 48px; color: #39ff14; text-shadow: 0 0 30px #39ff14;">🎬</div>
+              <h3 style="font-size: 22px; font-weight: 900; color: #ffffff; letter-spacing: 2px;">
+                TRÌNH PHÁT VIDEO KHAI MÀN SÂN KHẤU
+              </h3>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.5;">
+                Video phát tràn viền theo đúng tỉ lệ khung hình gốc.
+              </p>
+              <button class="player-secondary-btn tech-ui-element" style="border-color: #39ff14; color: #39ff14; margin-top: 0.5rem;" onclick="event.stopPropagation(); document.getElementById('perf-video-file-input-2').click();">
+                <span>📁 Nạp File Video Ngay</span>
+              </button>
             </div>
           </div>
 
-          <div class="player-bottom-deck">
+          <!-- Bottom Overlay Bar -->
+          <div class="video-overlay-footer">
             <div class="player-timeline-wrap">
-              <span class="player-time-text" id="perf-cur-time-2">00:00</span>
-              <div class="player-slider-rail" id="perf-slider-rail-2" onclick="seekPerfMusic(2, event)">
-                <div class="player-slider-fill" id="perf-slider-fill-2"></div>
+              <span class="player-time-text" id="video-cur-time-2">00:00</span>
+              <div class="player-slider-rail" id="video-slider-rail-2" onclick="event.stopPropagation(); seekDramaVideo(2, event)">
+                <div class="player-slider-fill" id="video-slider-fill-2" style="background: linear-gradient(90deg, #00ffc4, #39ff14); box-shadow: 0 0 15px #39ff14;"></div>
               </div>
-              <span class="player-time-text" id="perf-dur-time-2">00:00</span>
+              <span class="player-time-text" id="video-dur-time-2">00:00</span>
             </div>
 
             <div class="player-controls-row">
               <div style="display: flex; align-items: center; gap: 1rem;">
-                <button class="player-secondary-btn" onclick="skipPerfMusic(2, -10)" title="Lùi 10s">
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(2, -10)" title="Lùi 10s">
                   <span>⏪ 10s</span>
                 </button>
-                <button class="player-main-btn" id="perf-play-btn-2" onclick="togglePerfMusicPlay(2)" title="Phát / Tạm dừng [Space]">
-                  <span id="perf-play-icon-2">▶</span>
+                <button class="player-main-btn" id="video-play-btn-2" style="background: #39ff14; box-shadow: 0 0 30px #39ff14;" onclick="event.stopPropagation(); toggleDramaVideoPlay(2)" title="Phát / Dừng">
+                  <span id="video-play-icon-2">▶</span>
                 </button>
-                <button class="player-secondary-btn" onclick="skipPerfMusic(2, 10)" title="Tiến 10s">
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); skipDramaVideo(2, 10)" title="Tiến 10s">
                   <span>10s ⏩</span>
                 </button>
               </div>
 
-              <div style="display: flex; align-items: center; gap: 0.8rem;">
-                <span style="font-size: 16px;">🔊</span>
-                <input type="range" min="0" max="1" step="0.05" value="0.85" style="width: 110px; accent-color: #39ff14; cursor: pointer;" oninput="setPerfMusicVolume(2, this.value)">
+              <div style="display: flex; align-items: center; gap: 1.2rem;">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="font-size: 16px;">🔊</span>
+                  <input type="range" min="0" max="1" step="0.05" value="0.9" style="width: 100px; accent-color: #39ff14; cursor: pointer;" onclick="event.stopPropagation()" oninput="setDramaVideoVolume(2, this.value)">
+                </div>
+                <button class="player-secondary-btn" onclick="event.stopPropagation(); toggleDramaVideoFullscreen(2)" title="Toàn màn hình">
+                  <span>⛶ Toàn Màn Hình</span>
+                </button>
               </div>
             </div>
           </div>
@@ -5027,8 +4861,7 @@
     function triggerSlideScenography(targetIdx) {
       // Auto-close open media players if switching slides
       if (currentActiveMedia) {
-        if (currentActiveMedia.type === 'music') closePerformanceMusicPlayer(currentActiveMedia.id);
-        else if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
+        if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
       }
 
       if (targetIdx < 1 || targetIdx > totalSlides || targetIdx === currentSlideIdx) return;
@@ -5573,8 +5406,7 @@
       if (currentActiveMedia) {
         if (e.key === 'Escape') {
           e.preventDefault();
-          if (currentActiveMedia.type === 'music') closePerformanceMusicPlayer(currentActiveMedia.id);
-          else if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
+          if (currentActiveMedia.type === 'video') closeDramaVideoPlayer(currentActiveMedia.id);
           return;
         }
         if (currentActiveMedia.type === 'video') {
@@ -5586,20 +5418,17 @@
         }
         if (e.code === 'Space') {
           e.preventDefault();
-          if (currentActiveMedia.type === 'music') togglePerfMusicPlay(currentActiveMedia.id);
-          else if (currentActiveMedia.type === 'video') toggleDramaVideoPlay(currentActiveMedia.id);
+          if (currentActiveMedia.type === 'video') toggleDramaVideoPlay(currentActiveMedia.id);
           return;
         }
         if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          if (currentActiveMedia.type === 'music') skipPerfMusic(currentActiveMedia.id, -10);
-          else if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, -10);
+          if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, -10);
           return;
         }
         if (e.key === 'ArrowRight') {
           e.preventDefault();
-          if (currentActiveMedia.type === 'music') skipPerfMusic(currentActiveMedia.id, 10);
-          else if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, 10);
+          if (currentActiveMedia.type === 'video') skipDramaVideo(currentActiveMedia.id, 10);
           return;
         }
       }
@@ -5681,10 +5510,10 @@
   </script>
 
   <!-- ==========================================================================
-       8B. PERFORMANCE MEDIA PLAYERS LOGIC (CYBER MUSIC & FULL-BLEED VIDEO)
+       8B. PERFORMANCE MEDIA PLAYERS LOGIC (FULL-BLEED NATIVE VIDEO PLAYERS)
        ========================================================================== -->
   <script>
-    let currentActiveMedia = null; // null | { type: 'music'|'video', id: number }
+    let currentActiveMedia = null; // null | { type: 'video', id: number }
 
     function formatTime(seconds) {
       if (isNaN(seconds) || seconds < 0) return '00:00';
@@ -5693,142 +5522,7 @@
       return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
     }
 
-    // --- MUSIC PLAYER LOGIC ---
-    function openPerformanceMusicPlayer(slideId) {
-      const slideView = document.getElementById(`slide-${slideId}-view`);
-      const playerPanel = document.getElementById(`music-player-${slideId}`);
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      if (!playerPanel || !audio) return;
-
-      if (slideView) slideView.style.display = 'none';
-      playerPanel.style.display = 'flex';
-      currentActiveMedia = { type: 'music', id: slideId };
-
-      // Duck / Pause background BGM
-      if (stageAudio && stageAudio.bgmAudio) {
-        stageAudio.bgmAudio.pause();
-      }
-
-      // Check if file is configured in content.txt
-      const slideCfg = (window.currentContentData && window.currentContentData[`SLIDE_${slideId}`]) || {};
-      if (slideCfg.music_file && !audio.src) {
-        audio.src = slideCfg.music_file;
-      }
-
-      // Setup audio event listeners once
-      if (!audio.__initialized) {
-        audio.__initialized = true;
-        audio.addEventListener('timeupdate', () => {
-          const curEl = document.getElementById(`perf-cur-time-${slideId}`);
-          const fillEl = document.getElementById(`perf-slider-fill-${slideId}`);
-          if (curEl) curEl.textContent = formatTime(audio.currentTime);
-          if (fillEl && audio.duration) {
-            fillEl.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-          }
-        });
-        audio.addEventListener('loadedmetadata', () => {
-          const durEl = document.getElementById(`perf-dur-time-${slideId}`);
-          if (durEl) durEl.textContent = formatTime(audio.duration);
-        });
-        audio.addEventListener('ended', () => {
-          updateMusicUiState(slideId, false);
-        });
-        audio.addEventListener('play', () => updateMusicUiState(slideId, true));
-        audio.addEventListener('pause', () => updateMusicUiState(slideId, false));
-      }
-
-      if (audio.src) {
-        audio.play().catch(() => {});
-      }
-      showStageNotification('🎵 ĐÃ MỞ TRÌNH PHÁT ÂM NHẠC', 'var(--neon-primary)');
-    }
-
-    function closePerformanceMusicPlayer(slideId) {
-      const slideView = document.getElementById(`slide-${slideId}-view`);
-      const playerPanel = document.getElementById(`music-player-${slideId}`);
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-
-      if (audio) audio.pause();
-      updateMusicUiState(slideId, false);
-
-      if (playerPanel) playerPanel.style.display = 'none';
-      if (slideView) slideView.style.display = 'flex';
-      currentActiveMedia = null;
-
-      // Resume background BGM if enabled
-      if (stageAudio && stageAudio.enabled) {
-        stageAudio.resumeBgm();
-      }
-    }
-
-    function updateMusicUiState(slideId, isPlaying) {
-      const icon = document.getElementById(`perf-play-icon-${slideId}`);
-      const disc = document.getElementById(`vinyl-disc-${slideId}`);
-      const badge = document.getElementById(`perf-status-badge-${slideId}`);
-      const bars = document.querySelectorAll(`#eq-bars-${slideId} .cyber-eq-bar`);
-
-      if (icon) icon.textContent = isPlaying ? '❚❚' : '▶';
-      if (disc) {
-        if (isPlaying) disc.classList.add('spinning');
-        else disc.classList.remove('spinning');
-      }
-      if (badge) {
-        badge.textContent = isPlaying ? '● ĐANG PHÁT BIỂU DIỄN' : '⏸ ĐÃ TẠM DỪNG';
-        badge.style.color = isPlaying ? '#39ff14' : '#ffe600';
-      }
-      bars.forEach(b => {
-        if (isPlaying) b.classList.add('active');
-        else b.classList.remove('active');
-      });
-    }
-
-    function togglePerfMusicPlay(slideId) {
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      if (!audio) return;
-      if (!audio.src) {
-        showStageNotification('⚠️ Chưa nạp file nhạc cho bài hát này!', 'var(--neon-accent)');
-        return;
-      }
-      if (audio.paused) {
-        audio.play().catch(e => console.log(e));
-      } else {
-        audio.pause();
-      }
-    }
-
-    function seekPerfMusic(slideId, event) {
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      const rail = document.getElementById(`perf-slider-rail-${slideId}`);
-      if (!audio || !rail || !audio.duration) return;
-      const rect = rail.getBoundingClientRect();
-      const clickX = event.clientX - rect.left;
-      const pct = Math.max(0, Math.min(1, clickX / rect.width));
-      audio.currentTime = pct * audio.duration;
-    }
-
-    function skipPerfMusic(slideId, seconds) {
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      if (!audio) return;
-      audio.currentTime = Math.max(0, Math.min(audio.duration || 9999, audio.currentTime + seconds));
-    }
-
-    function setPerfMusicVolume(slideId, val) {
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      if (audio) audio.volume = parseFloat(val);
-    }
-
-    function handlePerfMusicFileSelected(slideId, file) {
-      if (!file) return;
-      const audio = document.getElementById(`perf-audio-${slideId}`);
-      if (!audio) return;
-
-      const url = URL.createObjectURL(file);
-      audio.src = url;
-      showStageNotification(`🎵 BẮT ĐẦU PHÁT: ${file.name}`, '#39ff14');
-      audio.play().catch(() => {});
-    }
-
-    // --- VIDEO PLAYER LOGIC ---
+    // --- VIDEO PLAYER LOGIC (SLIDES 2, 5, 14) ---
     function openDramaVideoPlayer(slideId) {
       const slideView = document.getElementById(`slide-${slideId}-view`);
       const playerPanel = document.getElementById(`video-player-${slideId}`);
@@ -5887,7 +5581,10 @@
       } else {
         if (standby) standby.style.display = 'flex';
       }
-      showStageNotification(slideId === 14 ? '🎬 ĐÃ MỞ TRÌNH PHÁT BÀI HÁT: BÁNH MÌ KHÔNG' : '🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO TIỂU PHẨM', slideId === 14 ? '#ff0055' : '#ff0033');
+      const notifMsg = slideId === 2 ? '🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO KHAI MÀN' :
+        (slideId === 14 ? '🎬 ĐÃ MỞ TRÌNH PHÁT BÀI HÁT: BÁNH MÌ KHÔNG' : '🎬 ĐÃ MỞ TRÌNH PHÁT VIDEO TIỂU PHẨM');
+      const notifColor = slideId === 2 ? '#39ff14' : (slideId === 14 ? '#ff0055' : '#ff0033');
+      showStageNotification(notifMsg, notifColor);
     }
 
     function closeDramaVideoPlayer(slideId) {
@@ -5918,7 +5615,10 @@
       const video = document.getElementById(`perf-video-${slideId}`);
       if (!video) return;
       if (!video.src) {
-        showStageNotification(slideId === 14 ? '⚠️ Chưa nạp video cho bài hát bế mạc!' : '⚠️ Chưa nạp video cho tiểu phẩm kịch!', slideId === 14 ? '#ff0055' : '#ff0033');
+        const notifMsg = slideId === 2 ? '⚠️ Chưa nạp video cho phần khai màn!' :
+          (slideId === 14 ? '⚠️ Chưa nạp video cho bài hát bế mạc!' : '⚠️ Chưa nạp video cho tiểu phẩm kịch!');
+        const notifColor = slideId === 2 ? '#39ff14' : (slideId === 14 ? '#ff0055' : '#ff0033');
+        showStageNotification(notifMsg, notifColor);
         return;
       }
       if (video.paused) {
@@ -5968,7 +5668,8 @@
       const url = URL.createObjectURL(file);
       video.src = url;
       if (standby) standby.style.display = 'none';
-      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, slideId === 14 ? '#ff0055' : '#ff0033');
+      const notifColor = slideId === 2 ? '#39ff14' : (slideId === 14 ? '#ff0055' : '#ff0033');
+      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, notifColor);
       video.play().catch(() => {});
     }
 
@@ -5982,7 +5683,8 @@
         if (span) span.textContent = isHidden ? '👁️ Hiện Nút [C]' : '👁️ Ẩn Điều Khiển [C]';
       }
       if (stageAudio && stageAudio.playNavClick) stageAudio.playNavClick();
-      showStageNotification(isHidden ? '👁️ ĐÃ ẨN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]' : '👁️ ĐÃ HIỆN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]', '#ff0055');
+      const notifColor = slideId === 2 ? '#39ff14' : '#ff0055';
+      showStageNotification(isHidden ? '👁️ ĐÃ ẨN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]' : '👁️ ĐÃ HIỆN NÚT ĐIỀU KHIỂN VIDEO [Phím C / H]', notifColor);
     }
   </script>
 
@@ -6085,10 +5787,10 @@ tilt_y = 0.0
 [SLIDE_2]
 nav_title = Khai Màn: Hò Vươn Mình
 telemetry = [ KHAI MÀN SÂN KHẤU ]
-title = HÒ VƯƠN MÌNH
+title = HÒ VƯƠN MÌNH x A LITTLE DREAM OF ME
 quote = "BƯỚC RA KHỎI GIỚI HẠN — VƯƠN MÌNH CÙNG TUỔI TRẺ"
 performer = BIỂU DIỄN: TẬP THỂ LỚP 12A2
-music_file = audio/ho_vuon_minh.mp3
+video_file = video/ho_vuon_minh.mp4
 tilt_x = -3.5
 tilt_y = 3.0
 
@@ -6518,18 +6220,13 @@ tilt_y = -6.5
           setTxt(s2.querySelector('p'), data.SLIDE_2.quote);
           const perfTag2 = s2.querySelector('#slide-2-performer-tag span');
           if (perfTag2 && data.SLIDE_2.performer) setTxt(perfTag2, data.SLIDE_2.performer);
-          const pTitle2 = document.getElementById('perf-track-title-2');
-          if (pTitle2 && data.SLIDE_2.title) setTxt(pTitle2, data.SLIDE_2.title);
-          const pSub2 = s2.querySelector('.player-track-sub');
-          if (pSub2) {
-            if (data.SLIDE_2.subtitle) setTxt(pSub2, data.SLIDE_2.subtitle);
-            else pSub2.style.display = 'none';
-          }
-          const pPerf2 = s2.querySelector('.player-track-performer');
-          if (pPerf2 && data.SLIDE_2.performer) setTxt(pPerf2, data.SLIDE_2.performer);
-          if (data.SLIDE_2.music_file) {
-            const audio2 = document.getElementById('perf-audio-2');
-            if (audio2 && !audio2.src) audio2.src = data.SLIDE_2.music_file;
+          if (data.SLIDE_2.video_file) {
+            const video2 = document.getElementById('perf-video-2');
+            const standby2 = document.getElementById('video-standby-2');
+            if (video2 && !video2.src) {
+              video2.src = data.SLIDE_2.video_file;
+              if (standby2) standby2.style.display = 'none';
+            }
           }
         }
       }
@@ -6837,20 +6534,15 @@ tilt_y = -6.5
         if (file.name.endsWith('.txt')) {
           handleCustomTxtUpload(file);
         } else if (/\.(mp4|webm|mov|mkv)$/i.test(file.name)) {
-          if (currentSlideIdx === 5 || currentSlideIdx === 14 || (currentActiveMedia && currentActiveMedia.type === 'video')) {
-            const vidId = (currentActiveMedia && currentActiveMedia.id) || (currentSlideIdx === 14 ? 14 : 5);
+          if (currentSlideIdx === 2 || currentSlideIdx === 5 || currentSlideIdx === 14 || (currentActiveMedia && currentActiveMedia.type === 'video')) {
+            const vidId = (currentActiveMedia && currentActiveMedia.id) || (currentSlideIdx === 14 ? 14 : (currentSlideIdx === 2 ? 2 : 5));
             openDramaVideoPlayer(vidId);
             handlePerfVideoFileSelected(vidId, file);
           } else {
-            showStageNotification('🎬 Vui lòng chuyển sang Slide 5 hoặc Slide 14 để phát video!', '#ff0033');
+            showStageNotification('🎬 Vui lòng chuyển sang Slide 2, 5 hoặc 14 để phát video!', '#39ff14');
           }
         } else if (/\.(mp3|wav|ogg|m4a|aac|flac)$/i.test(file.name)) {
-          if (currentSlideIdx === 2 || (currentActiveMedia && currentActiveMedia.id === 2)) {
-            openPerformanceMusicPlayer(2);
-            handlePerfMusicFileSelected(2, file);
-          } else {
-            handleCustomAudioUpload(file);
-          }
+          handleCustomAudioUpload(file);
         }
       }
     });
