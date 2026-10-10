@@ -71,7 +71,7 @@ bg_emitter_opacity = 0.40
 # - synth_drone_volume: Âm lượng tiếng synth nhân tạo (khuyến nghị 0.0 hoặc 0.015)
 # ==============================================================================
 bgm_file = bgm.mp3?v=2
-bgm_volume = 0.30
+bgm_volume = 0.15
 bgm_loop = true
 synth_drone_enabled = false
 synth_drone_volume = 0.0
