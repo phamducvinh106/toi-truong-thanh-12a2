@@ -5533,6 +5533,83 @@
       return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
     }
 
+    // High-performance Full-buffer In-memory Loader (Zero-stutter Offline Playback)
+    async function loadFullVideoBuffer(slideId, fileOrUrl) {
+      const video = document.getElementById(`perf-video-${slideId}`);
+      const standby = document.getElementById(`video-standby-${slideId}`);
+      if (!video || !fileOrUrl) return;
+
+      const notifColor = slideId === 2 ? '#39ff14' : (slideId === 14 ? '#ff0055' : '#ff0033');
+
+      // 1. If it's a File object (from drag-and-drop or file input dialog)
+      if (typeof File !== 'undefined' && fileOrUrl instanceof File) {
+        const file = fileOrUrl;
+        // If file size is under 1.8GB, read 100% of bytes directly into RAM memory
+        if (file.size <= 1.8 * 1024 * 1024 * 1024) {
+          showStageNotification(`⚡ ĐANG NẠP 100% BỘ ĐỆM VÀO BỘ NHỚ: ${file.name}...`, notifColor);
+          try {
+            const arrayBuffer = await file.arrayBuffer();
+            const fullBlob = new Blob([arrayBuffer], { type: file.type || 'video/mp4' });
+            if (video.__fullBlobUrl) URL.revokeObjectURL(video.__fullBlobUrl);
+            const fullUrl = URL.createObjectURL(fullBlob);
+            video.__fullBlobUrl = fullUrl;
+            video.src = fullUrl;
+            video.preload = 'auto';
+            if (standby) standby.style.display = 'none';
+            showStageNotification(`✅ ĐÃ NẠP TOÀN BỘ BỘ ĐỆM (RAM): ${file.name}`, notifColor);
+
+            if (video.readyState >= 3) {
+              video.play().catch(() => {});
+            } else {
+              video.addEventListener('canplay', () => video.play().catch(() => {}), { once: true });
+            }
+            return;
+          } catch (e) {
+            console.warn('RAM buffer fallback to streaming:', e);
+          }
+        }
+        // Fallback for massive files > 1.8GB (e.g. 10GB raw video)
+        if (video.__fullBlobUrl) URL.revokeObjectURL(video.__fullBlobUrl);
+        const url = URL.createObjectURL(file);
+        video.__fullBlobUrl = url;
+        video.src = url;
+        video.preload = 'auto';
+        if (standby) standby.style.display = 'none';
+        showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, notifColor);
+        if (video.readyState >= 3) {
+          video.play().catch(() => {});
+        } else {
+          video.addEventListener('canplaythrough', () => video.play().catch(() => {}), { once: true });
+        }
+        return;
+      }
+
+      // 2. If it's a URL string (from content.txt)
+      if (typeof fileOrUrl === 'string') {
+        const url = fileOrUrl.trim();
+        if (!url) return;
+        if (video.src && (video.src.endsWith(url) || video.__fullBlobUrl)) return;
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('Fetch status ' + res.status);
+          const blob = await res.blob();
+          if (video.__fullBlobUrl) URL.revokeObjectURL(video.__fullBlobUrl);
+          const fullUrl = URL.createObjectURL(blob);
+          video.__fullBlobUrl = fullUrl;
+          video.src = fullUrl;
+          video.preload = 'auto';
+          if (standby) standby.style.display = 'none';
+          console.log(`✅ [Slide ${slideId}] Video fully pre-buffered into memory blob (${(blob.size / 1024 / 1024).toFixed(1)} MB)`);
+          return;
+        } catch (err) {
+          video.src = url;
+          video.preload = 'auto';
+          if (standby) standby.style.display = 'none';
+        }
+      }
+    }
+
     // --- VIDEO PLAYER LOGIC (SLIDES 2, 5, 14) ---
     function openDramaVideoPlayer(slideId) {
       const slideView = document.getElementById(`slide-${slideId}-view`);
@@ -5563,11 +5640,13 @@
       // Check if video file is in content.txt
       const slideCfg = (window.currentContentData && window.currentContentData[`SLIDE_${slideId}`]) || {};
       if (slideCfg.video_file && !video.src) {
-        video.src = slideCfg.video_file;
+        loadFullVideoBuffer(slideId, slideCfg.video_file);
       }
 
       if (!video.__initialized) {
         video.__initialized = true;
+        let stallTimer = null;
+
         video.addEventListener('timeupdate', () => {
           if (playerPanel.classList.contains('controls-hidden')) return; // Skip DOM reflows when controls are hidden
           const curEl = document.getElementById(`video-cur-time-${slideId}`);
@@ -5596,9 +5675,15 @@
           if (icon) icon.textContent = '▶';
         });
         video.addEventListener('waiting', () => {
-          showStageNotification('⏳ Đang nạp bộ đệm video...', '#ffcc00');
+          clearTimeout(stallTimer);
+          // Debounce: Only notify if stalled for > 1.5s (silences micro-pause notifications)
+          stallTimer = setTimeout(() => {
+            if (video.paused || video.ended) return;
+            showStageNotification('⏳ Đang nạp thêm dữ liệu đệm...', '#ffcc00');
+          }, 1500);
         });
         video.addEventListener('playing', () => {
+          clearTimeout(stallTimer);
           const icon = document.getElementById(`video-play-icon-${slideId}`);
           if (icon) icon.textContent = '❚❚';
           if (standby) standby.style.display = 'none';
@@ -5607,7 +5692,13 @@
 
       if (video.src) {
         if (standby) standby.style.display = 'none';
-        video.play().catch(() => {});
+        if (video.readyState >= 3) {
+          video.play().catch(() => {});
+        } else {
+          video.addEventListener('canplay', () => {
+            video.play().catch(() => {});
+          }, { once: true });
+        }
       } else {
         if (standby) standby.style.display = 'flex';
       }
@@ -5702,16 +5793,7 @@
 
     function handlePerfVideoFileSelected(slideId, file) {
       if (!file) return;
-      const video = document.getElementById(`perf-video-${slideId}`);
-      const standby = document.getElementById(`video-standby-${slideId}`);
-      if (!video) return;
-
-      const url = URL.createObjectURL(file);
-      video.src = url;
-      if (standby) standby.style.display = 'none';
-      const notifColor = slideId === 2 ? '#39ff14' : (slideId === 14 ? '#ff0055' : '#ff0033');
-      showStageNotification(`🎬 BẮT ĐẦU PHÁT: ${file.name}`, notifColor);
-      video.play().catch(() => {});
+      loadFullVideoBuffer(slideId, file);
     }
 
     function toggleDramaVideoControls(slideId) {
@@ -6262,12 +6344,7 @@ tilt_y = -6.5
           const perfTag2 = s2.querySelector('#slide-2-performer-tag span');
           if (perfTag2 && data.SLIDE_2.performer) setTxt(perfTag2, data.SLIDE_2.performer);
           if (data.SLIDE_2.video_file) {
-            const video2 = document.getElementById('perf-video-2');
-            const standby2 = document.getElementById('video-standby-2');
-            if (video2 && !video2.src) {
-              video2.src = data.SLIDE_2.video_file;
-              if (standby2) standby2.style.display = 'none';
-            }
+            loadFullVideoBuffer(2, data.SLIDE_2.video_file);
           }
         }
       }
@@ -6318,12 +6395,7 @@ tilt_y = -6.5
           setTxt(s5.querySelector('.layout-isometric-labyrinth > p'), data.SLIDE_5.subtitle);
           setTxt(s5.querySelector('.hud-bracket-container p'), data.SLIDE_5.quote);
           if (data.SLIDE_5.video_file) {
-            const video5 = document.getElementById('perf-video-5');
-            const standby5 = document.getElementById('video-standby-5');
-            if (video5 && !video5.src) {
-              video5.src = data.SLIDE_5.video_file;
-              if (standby5) standby5.style.display = 'none';
-            }
+            loadFullVideoBuffer(5, data.SLIDE_5.video_file);
           }
         }
       }
@@ -6435,12 +6507,7 @@ tilt_y = -6.5
           const vTitle14 = document.getElementById('perf-video-title-14');
           if (vTitle14) setTxt(vTitle14, data.SLIDE_14.title || data.SLIDE_14.hero);
           if (data.SLIDE_14.video_file) {
-            const video14 = document.getElementById('perf-video-14');
-            const standby14 = document.getElementById('video-standby-14');
-            if (video14 && !video14.src) {
-              video14.src = data.SLIDE_14.video_file;
-              if (standby14) standby14.style.display = 'none';
-            }
+            loadFullVideoBuffer(14, data.SLIDE_14.video_file);
           }
         }
       }
