@@ -1498,7 +1498,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) translateZ(0);
       width: min(96vw, 1750px);
       height: min(88vh, 880px);
       background: #000000;
@@ -1512,6 +1512,8 @@
       overflow: hidden;
       z-index: 50;
       animation: playerPanelPop 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .video-viewport-wrapper {
@@ -1524,6 +1526,7 @@
       justify-content: center;
       background: #000000;
       cursor: pointer;
+      contain: strict; /* Isolate paint and layout computations to avoid reflows during playback */
     }
 
     .video-viewport-wrapper video {
@@ -1531,6 +1534,9 @@
       height: 100%;
       object-fit: contain; /* Preserves exact native video aspect ratio! */
       outline: none;
+      transform: translateZ(0); /* Promote to dedicated GPU overlay composition layer */
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .video-overlay-header {
@@ -2872,7 +2878,7 @@
 
           <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
           <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(2)">
-            <video id="perf-video-2" preload="metadata" playsinline></video>
+            <video id="perf-video-2" preload="auto" playsinline webkit-playsinline disablepictureinpicture></video>
 
             <!-- Standby screen if video not loaded yet -->
             <div class="video-standby-placeholder" id="video-standby-2" style="display: flex;">
@@ -3117,7 +3123,7 @@
 
           <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
           <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(5)">
-            <video id="perf-video-5" preload="metadata" playsinline></video>
+            <video id="perf-video-5" preload="auto" playsinline webkit-playsinline disablepictureinpicture></video>
 
             <!-- Standby screen if video not loaded yet -->
             <div class="video-standby-placeholder" id="video-standby-5" style="display: flex;">
@@ -3696,7 +3702,7 @@
 
           <!-- Video Viewport (Near edge-to-edge, preserves native aspect ratio via object-fit: contain) -->
           <div class="video-viewport-wrapper" onclick="toggleDramaVideoPlay(14)">
-            <video id="perf-video-14" preload="metadata" playsinline></video>
+            <video id="perf-video-14" preload="auto" playsinline webkit-playsinline disablepictureinpicture></video>
 
             <!-- Standby screen if video not loaded yet -->
             <div class="video-standby-placeholder" id="video-standby-14" style="display: flex;">
@@ -4740,6 +4746,11 @@
 
     function renderStageLoop() {
       requestAnimationFrame(renderStageLoop);
+      if (currentActiveMedia && currentActiveMedia.type === 'video') {
+        // High-performance bypass: Suspend Three.js 3D rendering & heavy CSS blur computations
+        // while video player is active. Frees 100% of GPU/CPU decoding pipelines for smooth playback!
+        return;
+      }
       const t = stageClock.getElapsedTime();
 
       // Multiharmonic Breathing
@@ -5534,6 +5545,16 @@
       playerPanel.style.display = 'flex';
       currentActiveMedia = { type: 'video', id: slideId };
 
+      // Performance Optimization: Flatten 3D perspective to enable Direct Hardware Overlay (MPO)
+      document.documentElement.style.setProperty('--cam-tilt-x', '0.00deg');
+      document.documentElement.style.setProperty('--cam-tilt-y', '0.00deg');
+      const canvasEl = document.getElementById('webgl-stage');
+      const photonEl = document.getElementById('ambient-photon-field');
+      const monolithEl = document.querySelector('.stage-glass-monolith');
+      if (canvasEl) canvasEl.style.visibility = 'hidden';
+      if (photonEl) photonEl.style.visibility = 'hidden';
+      if (monolithEl) monolithEl.style.visibility = 'hidden';
+
       // Duck / Pause background BGM
       if (stageAudio && stageAudio.bgmAudio) {
         stageAudio.bgmAudio.pause();
@@ -5548,6 +5569,7 @@
       if (!video.__initialized) {
         video.__initialized = true;
         video.addEventListener('timeupdate', () => {
+          if (playerPanel.classList.contains('controls-hidden')) return; // Skip DOM reflows when controls are hidden
           const curEl = document.getElementById(`video-cur-time-${slideId}`);
           const fillEl = document.getElementById(`video-slider-fill-${slideId}`);
           if (curEl) curEl.textContent = formatTime(video.currentTime);
@@ -5572,6 +5594,14 @@
         video.addEventListener('ended', () => {
           const icon = document.getElementById(`video-play-icon-${slideId}`);
           if (icon) icon.textContent = '▶';
+        });
+        video.addEventListener('waiting', () => {
+          showStageNotification('⏳ Đang nạp bộ đệm video...', '#ffcc00');
+        });
+        video.addEventListener('playing', () => {
+          const icon = document.getElementById(`video-play-icon-${slideId}`);
+          if (icon) icon.textContent = '❚❚';
+          if (standby) standby.style.display = 'none';
         });
       }
 
@@ -5604,6 +5634,17 @@
       }
       if (slideView) slideView.style.display = 'flex';
       currentActiveMedia = null;
+
+      // Restore background layers and 3D camera tilt
+      const canvasEl = document.getElementById('webgl-stage');
+      const photonEl = document.getElementById('ambient-photon-field');
+      const monolithEl = document.querySelector('.stage-glass-monolith');
+      if (canvasEl) canvasEl.style.visibility = '';
+      if (photonEl) photonEl.style.visibility = '';
+      if (monolithEl) monolithEl.style.visibility = '';
+      if (typeof applySlideTilt === 'function') {
+        applySlideTilt(currentSlideIdx);
+      }
 
       // Resume background BGM
       if (stageAudio && stageAudio.enabled) {
